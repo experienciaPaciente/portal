@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "xportal-paciente:build:production"
+              "buildTarget": "xportal-paciente:build:production"
             },
             "development": {
-              "browserTarget": "xportal-paciente:build:development"
+              "buildTarget": "xportal-paciente:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "xportal-paciente:build"
+            "buildTarget": "xportal-paciente:build"
           }
         },
         "test": {
