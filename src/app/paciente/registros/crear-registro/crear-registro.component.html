@@ -1,0 +1,77 @@
+<p>crear-registro works!</p>
+
+<zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+[formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+(camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+
+
+<div class="px-4 xl:px-0 w-full max-w-[600px] m-auto">
+  <form [formGroup]="form" (ngSubmit)="createRegistro()">
+    @if (qrResultString) {
+      <label for="paciente">Registro de esta consulta</label>
+      <textarea 
+        id="paciente"
+        formControlName="paciente">
+        {{ qrResultString }}
+      </textarea>
+      <button (click)="clearResult()">&times;</button>
+      }
+      <div>
+        <label for="categoria" class="block mb-2 text-sm font-medium"
+          >categoria</label
+        >
+        <input
+          type="text"
+          id="categoria"
+          class=""
+          placeholder="example@mail.com"
+          formControlName="categoria"
+        />
+      </div>
+      <div>
+        <label for="emisor" class="block mb-2 text-sm font-medium"
+          >emisor</label
+        >
+        <input
+          type="text"
+          id="emisor"
+          class=""
+          placeholder="+51 995123233"
+          formControlName="emisor"
+        />
+      </div>
+      <div>
+        <label for="descripcion" class="block mb-2 text-sm font-medium"
+          >Description (optional)</label
+        >
+        <textarea
+          rows="5"
+          type="text"
+          id="descripcion"
+          class=""
+          placeholder="Your description goes here"
+          formControlName="descripcion"
+        ></textarea>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <a
+          class=""
+          routerLink="/"
+        >
+          Back to dashboard
+        </a>
+
+        <button
+          class=""
+          type="submit"
+        >
+          @if (registroId) {
+            Edit your registro
+          } @else {
+            Create your registro
+          }
+        </button>
+      </div>
+    </form>
+  </div>

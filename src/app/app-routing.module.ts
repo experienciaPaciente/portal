@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { publicGuard } from '../app/core/guards/auth.guards';
+import { createRegistroComponent } from './paciente/registros/crear-registro/crear-registro.component';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./paciente/home/home.component')
+  },
+  {
+    path: 'registrar', component: createRegistroComponent
   },
   {
     path: 'auth',

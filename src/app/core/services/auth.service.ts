@@ -26,6 +26,7 @@ export class AuthService {
 
   signUpWithEmailAndPassword(credential: Credential): Promise<UserCredential> {
     return createUserWithEmailAndPassword(
+      // Agregar métodos para pushear a la DB
       this.auth,
       credential.email,
       credential.password
@@ -48,13 +49,11 @@ export class AuthService {
 
   signInWithGoogleProvider(): Promise<UserCredential> {
     const provider = new GoogleAuthProvider();
-
     return this.callPopUp(provider);
   }
 
   signInWithGithubProvider(): Promise<UserCredential> {
     const provider = new GithubAuthProvider();
-
     return this.callPopUp(provider);
   }
 
