@@ -1,0 +1,13 @@
+.nav__item--vertical {
+    flex-direction: column;
+    align-items: center;
+
+    i {
+    font-size: 12px;
+    }
+
+    .item__label {
+        font-size: 12px;
+    }
+
+}

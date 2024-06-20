@@ -1,0 +1,13 @@
+button {
+    width: 48px;
+    height: 48px;
+    padding: .5rem;
+    background-color: var(--tertiary);
+
+    &__type--fab {
+        --borderRadius: 50%;
+
+        position: absolute;
+        border-radius: var(--borderRadius);
+    }
+}
