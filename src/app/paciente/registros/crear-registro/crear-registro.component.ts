@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, inject } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -31,8 +31,12 @@ export interface RegistroForm {
   imports: [ReactiveFormsModule, RouterLink, ZXingScannerModule],
   
 })
-export class createRegistroComponent {
 
+export class createRegistroComponent implements OnInit{
+
+  ngOnInit(): void {
+    
+  }
 
   // Zxing  
   availableDevices: MediaDeviceInfo[] | undefined;
@@ -53,10 +57,6 @@ export class createRegistroComponent {
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;
-
-  onCodeResult(resultString: string) {
-    this.qrResultString = resultString;
-  }
 
   clearResult(): void {
     this.qrResultString = '';
@@ -104,7 +104,27 @@ export class createRegistroComponent {
     hora: this._formBuilder.control('')
   });
 
+  getPacienteControl() {
+    return this.form.get('paciente');
+  }
+
+  // Method to read the value of the 'paciente' control
+  getPacienteValue(): string | undefined {
+    return this.getPacienteControl()?.value;
+  }
+
+  // Method to update the value of the 'paciente' control
+  setPacienteValue(newValue: string): void {
+    this.getPacienteControl()?.setValue(newValue);
+  }
+
+  onCodeResult(resultString: string) {
+    this.qrResultString = resultString;
+    this.setPacienteValue(resultString);
+  }
+  
   async createRegistro() {
+
     if (this.form.invalid) return;
 
     try {
