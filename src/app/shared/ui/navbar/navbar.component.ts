@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { LabelComponent } from '../label/label.component';
 
@@ -11,5 +11,7 @@ import { LabelComponent } from '../label/label.component';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+  @Input() items:any = [];
 
 }

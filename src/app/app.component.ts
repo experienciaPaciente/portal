@@ -11,4 +11,23 @@ import { NavbarComponent } from './shared/ui/navbar/navbar.component';
 })
 export class AppComponent {
   title = 'portal-paciente';
+
+  buttons = [
+    {
+      icon: 'heart',
+      label: 'opcion A'
+    },
+    {
+      icon: 'user',
+      label: 'opcion B'
+    },
+    {
+      icon: 'file-pdf',
+      label: 'opcion C'
+    },
+    {
+      icon: 'file',
+      label: 'opcion D'
+    }
+  ]
 }

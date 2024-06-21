@@ -1,8 +1,10 @@
 <nav class="nav__wrapper">
-    <app-button [icon]="false" iconLabel="heart" [btnLabel]="'mdsdklsma'"></app-button>
+    <app-button [fab]="true" [icon]="false" [btnIconLabel]="'qrcode'" [btnLabel]="'QR'"></app-button>
     <ul class="nav__list--horizontal">
-        <li class="nav__item--vertical">
-            <app-label direction="vertical" [icon]="true" iconLabel="heart"></app-label>
-        </li>
+        @for (btn of items; track btn) {
+            <li class="nav__item--vertical">
+                <app-label direction="vertical" [icon]="true" iconLabel="{{ btn.icon }}" label="{{ btn.label }}"></app-label>
+            </li>
+        }
     </ul>
 </nav>

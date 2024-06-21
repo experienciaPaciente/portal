@@ -1,12 +1,23 @@
 nav {
-    .nav__wrapper {
-        position: relative;
+    &.nav__wrapper {
+        position: fixed;
+        bottom: 0;
         padding: 1rem;
-
+        height: var(--footer__height);
+        display: flex;
+        align-items: flex-end;
+        width: 100vw;
+        box-sizing: border-box;
+        background-color: lightgray;
+        
         .nav__list--horizontal {
             display: flex;
             flex-direction: row;
-
+            height: 72px;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            background-color: steelblue;
         }
 
      }

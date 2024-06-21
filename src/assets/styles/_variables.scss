@@ -1,187 +1,180 @@
 :root {
-    /* Colors */
-    --primary: #375B9F;
-    --secondary: #00EEFF;
-    --tertiary: #F993C4;
+  /* Colors */
+  --primary: #375B9F;
+  --secondary: #00EEFF;
+  --tertiary: #F993C4;
 
-    --neutral: #64748b;
-    --shadow: rgba(140, 140, 140, 0.5);
+  --neutral: #64748b;
+  --shadow: rgba(140, 140, 140, 0.5);
 
-    // Semanticos
-    --info: teal;
-    --info--light: #c9f0ff;
-    --warning: #ff9a00;
-    --warning--light: #fff1dc;
-    --success: green;
-    --success--light: lightgreen;
-    --danger--dark: #b82e76;
-    --danger: #ef5da8;
-    --danger--light: #ffe0f0;
-
-
-    /* Navbar */
-
-    
+  // Semanticos
+  --info: teal;
+  --info--light: #c9f0ff;
+  --warning: #ff9a00;
+  --warning--light: #fff1dc;
+  --success: green;
+  --success--light: lightgreen;
+  --danger--dark: #b82e76;
+  --danger: #ef5da8;
+  --danger--light: #ffe0f0;
 
 
+    /* Label */
+  --label__height: fit-content;
+  --label__padding: 1rem;
 
+  /* Page */
+  --page__body--padding: 2rem;
+  --page__body--height: calc(100vh - var(--header__height));
+  --page__body--background: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
+  --page__gap--vertical: 2.5rem;
+  --page__font-familiy: ui-sans-serif, system-ui, -apple-system, 'Open Sans', 'Helvetica Neue',
+    'Segoe UI', sans-serif;
 
+  --page__title--size: 1.75rem;
+  --page__title--color: var(--primary--darker);
+  --page__title--lineHeight: auto;
+  --page__title--underline: lightgray;
+  --page__title--weight: bolder;
+  --page__title--shadow: 0px 0px 4px var(--shadow);
+  --page__title--margin: 0.5rem 0;
 
+  --page__subtitle--size: 1.35rem;
+  --page__subtitle--color: var(--primary--darker);
+  --page__subtitle--lineHeight: auto;
+  --page__subtitle--underline: lightgray;
+  --page__subtitle--weight: normal;
+  --page__subtitle--margin: 0.5rem 0;
 
+  --page__prefix--size: 1.25rem;
+  --page__prefix--color: var(--primary--middle);
+  --page__prefix--lineHeight: auto;
+  --page__prefix--weight: normal;
+  --page__prefix--margin: 0.75rem 0;
 
+  --page__subfix--size: 1rem;
+  --page__subfix--color: gray;
+  --page__subfix--lineHeight: auto;
+  --page__subfix--weight: normal;
+  --page__subfix--margin: 0 0 1rem 0;
 
-    /* Page */
-    --page__body--padding: 2rem;
-    --page__body--height: calc(100vh - var(--header__height));
-    --page__body--background: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
-    --page__gap--vertical: 2.5rem;
-    --page__font-familiy: ui-sans-serif, system-ui, -apple-system, 'Open Sans', 'Helvetica Neue',
-      'Segoe UI', sans-serif;
-  
-    --page__title--size: 1.75rem;
-    --page__title--color: var(--primary--darker);
-    --page__title--lineHeight: auto;
-    --page__title--underline: lightgray;
-    --page__title--weight: bolder;
-    --page__title--shadow: 0px 0px 4px var(--shadow);
-    --page__title--margin: 0.5rem 0;
-  
-    --page__subtitle--size: 1.35rem;
-    --page__subtitle--color: var(--primary--darker);
-    --page__subtitle--lineHeight: auto;
-    --page__subtitle--underline: lightgray;
-    --page__subtitle--weight: normal;
-    --page__subtitle--margin: 0.5rem 0;
-  
-    --page__prefix--size: 1.25rem;
-    --page__prefix--color: var(--primary--middle);
-    --page__prefix--lineHeight: auto;
-    --page__prefix--weight: normal;
-    --page__prefix--margin: 0.75rem 0;
-  
-    --page__subfix--size: 1rem;
-    --page__subfix--color: gray;
-    --page__subfix--lineHeight: auto;
-    --page__subfix--weight: normal;
-    --page__subfix--margin: 0 0 1rem 0;
-  
-    /* Header */
-    --header__height: 65px;
-    --header__padding--vertical: 0.5rem;
-    --header__padding--horizontal: 2rem;
-    --header__item-padding--vertical: 0;
-    --header__item-padding--horizontal: 16px;
-  
-    /* Panel */
-    --panel__border--radius: 4px;
-    --panel__bg--color: white;
-  
-    --panel__padding: 2rem;
-    --panel__shadow--gray: 3px 4px 10px 3px var(--shadow);
-    --panel__width: 35vw;
-    --panel__height: fit-content;
-  
-    --panel__title--size: 1.35rem;
-    --panel__title--color: var(--primary--darker);
-    --panel__title--weight: bold;
-  
-    --panel__subtitle--size: 1.2rem;
-    --panel__subtitle--color: var(--primary--darker);
-    --panel__subtitle--weight: bold;
-  
-    --panel__prefix--size: 0.75rem;
-    --panel__prefix--color: var(--primary--middle);
-    --panel__prefix--weight: normal;
-  
-    --panel__subfix--size: 0.9rem;
-    --panel__subfix--color: gray;
-    --panel__subfix--weight: normal;
-    --panel__subfix--align: center;
-    --panel__subfix--margin: 0;
-  
-    /* Card */
-    --card__border--radius: 4px;
-    --card__bg--color: white;
-    --card__title--size: 1.35rem;
-    --card__title--color: var(--primary--darker);
-    --card__title--weight: bold;
-  
-    --card__subtitle--size: 1.2rem;
-    --card__subtitle--color: var(--primary--darker);
-    --card__subtitle--weight: bold;
-  
-    --card__prefix--size: 0.75rem;
-    --card__prefix--color: var(--primary--middle);
-    --card__prefix--weight: normal;
-  
-    --card__subfix--size: 0.9rem;
-    --card__subfix--color: gray;
-    --card__subfix--weight: normal;
-    --card__subfix--align: center;
-  
-    --card__padding: 0.5rem;
-    --card__shadow--gray: 3px 4px 10px 3px rgba(140, 140, 140, 0.5);
-    --card__width: 100%;
-  
-    /* Accordion */
-    --accordion__prefix--size: 0.75rem;
-    --accordion__prefix--color: var(--primary--middle);
-    --accordion__prefix--weight: normal;
-  
-    /* Button */
-    --button__padding--vertical: 0.6rem;
-    --button__padding--horizontal: 0.75rem;
-    --button__height: fit-content;
-    --button__width: fit-content;
-    --button__font--size: 0.75rem;
-    --button__border--radius: 4px;
-    --button__text--color: white;
-    --button__bg--color: transparent;
-    --button__opacity: 50%;
-    --button__icon--color: var(var(--primary--lighter)) /* Badge */ --badge__padding--vertical:
-      0.75rem;
-    --badge__padding--horizontal: 1rem;
-    --badge__font--size: 12px;
-    --badge__color--neutral: var(--neutral);
-    --badge__background--color: rgba(255, 255, 255, 0.75);
-  
-    /* Footer */
-    --footer__height: 65px;
-    --footer__text--sm: x-small;
-    --footer__text--color: gray;
-    --footer__text--align: center;
-  
-    /* Form */
-    --form__gap--horizontal: 16px;
-    --form__gap--vertical: 24px;
-    --form__label--size: 0.9rem;
-    --form__label--weight: bold;
-    --form__label--color: gray;
-    --form__label--marginBottom: 0.5rem;
-    --form__padding: 1rem 1rem var(--footer__height) 1rem;
-  
-    /* Divider */
-    --page__line--color: lightgray;
-    --page__line--width: 1px;
-  
-    /* List */
-    --list__line--color: lightgray;
-    --list__line--width: 1px;
-    --list__item--padding: 1rem;
-    --list__item--gap: 1rem;
-    --list__item--align: start;
-    --list__item--disabled: 0.5;
-    --list__title--size: 1rem;
-    --list__title--weight: bold;
-    --list__title--color: var(--primary--darker);
-    --list__prefix--size: 0.9rem;
-    --list__prefix--weight: normal;
-    --list__prefix--color: var(--primary--middle);
-    --list__subfix--size: 0.9rem;
-    --list__subfix--weight: normal;
-    --list__subfix--color: gray;
-  
-    /* Link */
-    --link__font--weight: bold;
-    --link__font--size: 0.9rem;
-  }
+  /* Header */
+  --header__height: 65px;
+  --header__padding--vertical: 0.5rem;
+  --header__padding--horizontal: 2rem;
+  --header__item-padding--vertical: 0;
+  --header__item-padding--horizontal: 16px;
+
+  /* Panel */
+  --panel__border--radius: 4px;
+  --panel__bg--color: white;
+
+  --panel__padding: 2rem;
+  --panel__shadow--gray: 3px 4px 10px 3px var(--shadow);
+  --panel__width: 35vw;
+  --panel__height: fit-content;
+
+  --panel__title--size: 1.35rem;
+  --panel__title--color: var(--primary--darker);
+  --panel__title--weight: bold;
+
+  --panel__subtitle--size: 1.2rem;
+  --panel__subtitle--color: var(--primary--darker);
+  --panel__subtitle--weight: bold;
+
+  --panel__prefix--size: 0.75rem;
+  --panel__prefix--color: var(--primary--middle);
+  --panel__prefix--weight: normal;
+
+  --panel__subfix--size: 0.9rem;
+  --panel__subfix--color: gray;
+  --panel__subfix--weight: normal;
+  --panel__subfix--align: center;
+  --panel__subfix--margin: 0;
+
+  /* Card */
+  --card__border--radius: 4px;
+  --card__bg--color: white;
+  --card__title--size: 1.35rem;
+  --card__title--color: var(--primary--darker);
+  --card__title--weight: bold;
+
+  --card__subtitle--size: 1.2rem;
+  --card__subtitle--color: var(--primary--darker);
+  --card__subtitle--weight: bold;
+
+  --card__prefix--size: 0.75rem;
+  --card__prefix--color: var(--primary--middle);
+  --card__prefix--weight: normal;
+
+  --card__subfix--size: 0.9rem;
+  --card__subfix--color: gray;
+  --card__subfix--weight: normal;
+  --card__subfix--align: center;
+
+  --card__padding: 0.5rem;
+  --card__shadow--gray: 3px 4px 10px 3px rgba(140, 140, 140, 0.5);
+  --card__width: 100%;
+
+  /* Accordion */
+  --accordion__prefix--size: 0.75rem;
+  --accordion__prefix--color: var(--primary--middle);
+  --accordion__prefix--weight: normal;
+
+  /* Button */
+  --button__padding--vertical: 0.6rem;
+  --button__padding--horizontal: 0.75rem;
+  --button__height: fit-content;
+  --button__width: fit-content;
+  --button__font--size: 0.75rem;
+  --button__border--radius: 4px;
+  --button__text--color: white;
+  --button__bg--color: transparent;
+  --button__opacity: 50%;
+  --button__icon--color: var(var(--primary--lighter)) /* Badge */ --badge__padding--vertical:
+    0.75rem;
+  --badge__padding--horizontal: 1rem;
+  --badge__font--size: 12px;
+  --badge__color--neutral: var(--neutral);
+  --badge__background--color: rgba(255, 255, 255, 0.75);
+
+  /* Footer */
+  --footer__height: 120px;
+  --footer__text--sm: x-small;
+  --footer__text--color: gray;
+  --footer__text--align: center;
+
+  /* Form */
+  --form__gap--horizontal: 16px;
+  --form__gap--vertical: 24px;
+  --form__label--size: 0.9rem;
+  --form__label--weight: bold;
+  --form__label--color: gray;
+  --form__label--marginBottom: 0.5rem;
+  --form__padding: 1rem 1rem var(--footer__height) 1rem;
+
+  /* Divider */
+  --page__line--color: lightgray;
+  --page__line--width: 1px;
+
+  /* List */
+  --list__line--color: lightgray;
+  --list__line--width: 1px;
+  --list__item--padding: 1rem;
+  --list__item--gap: 1rem;
+  --list__item--align: start;
+  --list__item--disabled: 0.5;
+  --list__title--size: 1rem;
+  --list__title--weight: bold;
+  --list__title--color: var(--primary--darker);
+  --list__prefix--size: 0.9rem;
+  --list__prefix--weight: normal;
+  --list__prefix--color: var(--primary--middle);
+  --list__subfix--size: 0.9rem;
+  --list__subfix--weight: normal;
+  --list__subfix--color: gray;
+
+  /* Link */
+  --link__font--weight: bold;
+  --link__font--size: 0.9rem;
+}

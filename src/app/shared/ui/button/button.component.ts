@@ -15,7 +15,7 @@ export class ButtonComponent {
 
   @Input() type?: 'primary' | 'secondary' | 'tertiary' = 'primary';
   @Input() icon? = false;
-  @Input() iconLabel?: String = '';
+  @Input() btnIconLabel = '';
   @Input() btnLabel = '';
   @Input() severity?: 'warning' | 'danger' | 'info' | 'success' = 'info';
   @Input() fab = false;

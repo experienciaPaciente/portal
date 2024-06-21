@@ -1,6 +1,10 @@
-.nav__item--vertical {
+.label__wrapper--vertical {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: var(--label__height);
+    // padding: var(--label__padding);
 
     i {
     font-size: 12px;
