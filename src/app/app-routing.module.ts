@@ -9,6 +9,10 @@ export const routes: Routes = [
     loadComponent: () => import('./paciente/home/home.component')
   },
   {
+    path: 'inicio',
+    loadComponent: () => import('./paciente/home/home.component')
+  },
+  {
     path: 'registrar', component: createRegistroComponent
   },
   {

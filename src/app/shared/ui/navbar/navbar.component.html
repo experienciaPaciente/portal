@@ -3,7 +3,7 @@
     <ul class="nav__list--horizontal">
         @for (btn of items; track btn) {
             <li class="nav__item--vertical">
-                <app-label direction="vertical" [icon]="true" iconLabel="{{ btn.icon }}" label="{{ btn.label }}"></app-label>
+                <app-label direction="vertical" [icon]="true" iconLabel="{{ btn.icon }}" label="{{ btn.label }}" routerLink="{{ btn.path }}"></app-label>
             </li>
         }
     </ul>
