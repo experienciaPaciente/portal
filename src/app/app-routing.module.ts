@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { publicGuard } from '../app/core/guards/auth.guards';
 import { createRegistroComponent } from './paciente/registros/crear-registro/crear-registro.component';
+import { ListComponent } from './paciente/registros/list/list.component';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,9 @@ export const routes: Routes = [
   },
   {
     path: 'registrar', component: createRegistroComponent
+  },
+  {
+    path: 'registros', component: ListComponent
   },
   {
     path: 'auth',

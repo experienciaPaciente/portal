@@ -29,12 +29,12 @@ export class AppComponent {
     {
       icon: 'file-pdf',
       label: 'opcion C',
-      path: 'sign-in'
+      path: 'auth/sign-in'
     },
     {
       icon: 'file',
       label: 'opcion D',
-      path: 'sign-up'
+      path: 'auth/sign-up'
     }
   ]
 }
