@@ -2,27 +2,27 @@
       <h1>Sign up</h1>
       <form [formGroup]="form" (ngSubmit)="signUp()">
         <div>
-            <label>Nombres</label>
-            <input name="names" />
+            <label for="nombre">Nombres</label>
+            <input formControlName="nombre" />
         </div>
   
         <div>
-            <label>Apellidos</label>
-            <input name="lastName" />
+            <label for="apellido">Apellidos</label>
+            <input formControlName="apellido" />
             <small>This field is required</small>
         </div>
         <div>
-            <label>Email</label>
-            <input name="email" />
-            <small *ngIf="isEmailValid as messsage">{{ messsage }}</small>
+            <label for="email">Email</label>
+            <input formControlName="email" />
+            <small *ngIf="isEmailValid as messsage">{{ messsage })</small>
         </div>
   
         <div>
-            <label>Enter your password</label>
+            <label for="password">Enter your password</label>
             <input
               
               [type]="hide ? 'password' : 'text'"
-              name="password"
+              formControlName="password"
             />
             <button
               (click)="hide = !hide"
@@ -38,11 +38,5 @@
           <button type="submit">Sign up</button>
         </div>
       </form>
-      <hr />
-      <span class="small-text providers">Have Google or GitHub?</span>
-      <app-btn-providers />
-      <span class="small-text log-in-redirect"
-        >Already have an account? <a routerLink="/auth/sign-in">Log in</a></span
-      >
   </div>
   

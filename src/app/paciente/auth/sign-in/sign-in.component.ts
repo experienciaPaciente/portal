@@ -8,9 +8,8 @@ import {
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-
 import { AuthService, Credential } from '../../../core/services/auth.service';
-import { ButtonProviders } from './../components/button/btn-providers';
+import { ButtonProviders } from '../components/button/btn-providers';
 
 interface LogInForm {
   email: FormControl<string>;
@@ -23,11 +22,10 @@ interface LogInForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
-    ButtonProviders,
   ],
-  selector: 'app-log-in',
+  selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  providers: [],
+  providers: [    ButtonProviders  ],
 })
 export default class LogInComponent {
   hide = true;
@@ -35,7 +33,7 @@ export default class LogInComponent {
   formBuilder = inject(FormBuilder);
 
   private authService = inject(AuthService);
-
+  private btnProviders = inject(ButtonProviders);
   private router = inject(Router);
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
@@ -73,8 +71,7 @@ export default class LogInComponent {
 
     try {
       await this.authService.logInWithEmailAndPassword(credential);
-      const snackBarRef = this.openSnackBar();
-      
+
       this.router.navigateByUrl('/');
 
     } catch (error) {

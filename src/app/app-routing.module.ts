@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { publicGuard } from '../app/core/guards/auth.guards';
+import { authGuard, publicGuard } from '../app/core/guards/auth.guards';
 import { createRegistroComponent } from './paciente/registros/crear-registro/crear-registro.component';
 import { ListComponent } from './paciente/registros/list/list.component';
+import HomeComponent from './paciente/home/home.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: '', canActivate: [authGuard],
     loadComponent: () => import('./paciente/home/home.component')
   },
   {
     path: 'inicio',
-    loadComponent: () => import('./paciente/home/home.component')
+    component: HomeComponent, canActivate: [authGuard]
   },
   {
     path: 'registrar', component: createRegistroComponent
@@ -19,6 +20,9 @@ export const routes: Routes = [
   {
     path: 'registros', component: ListComponent
   },
+  // {
+  //   path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
+  // },
   {
     path: 'auth',
     canActivate: [publicGuard],
