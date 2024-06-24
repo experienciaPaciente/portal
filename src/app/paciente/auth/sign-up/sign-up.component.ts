@@ -3,15 +3,14 @@ import { NgIf } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 
 
 import { Router, RouterModule } from '@angular/router';
 import { IPaciente } from 'src/app/models/paciente';
 import { PacienteService } from 'src/app/core/services/paciente.service';
+import { AuthService, Credential } from 'src/app/core/services/auth.service';
 
 interface SignUpForm {
   nombre: FormControl<string>;
@@ -41,6 +40,7 @@ export default class SignUpComponent {
   }
 
   formBuilder = inject(FormBuilder).nonNullable;
+  authService = inject(AuthService);
   pacienteService = inject(PacienteService);
 
   form = this.formBuilder.group<SignUpForm>({
@@ -50,27 +50,26 @@ export default class SignUpComponent {
     password: this.formBuilder.control(''),
   });
 
-
-  async signUp() {
+  async signUp(): Promise<void> {
     if (this.form.invalid) return;
 
+    const credential: Credential = {
+      email: this.form.value.email || '',
+      password: this.form.value.password || '',
+    };
+
     try {
-      const paciente = this.form.value as IPaciente;
-      !this.pacienteId
-        ? await this.pacienteService.createPaciente(paciente)
-        : await this.pacienteService.updatePaciente(this.pacienteId, paciente);
-      this.router.navigate(['/']);
+      await this.authService.signUpWithEmailAndPassword(credential);
+
+      this.router.navigateByUrl('/');
+ 
     } catch (error) {
-      // call some toast service to handle the error
-      console.log('Not able to create user!')
+      console.error(error);
     }
   }
 
   get isEmailValid(): string | boolean {
     const control = this.form.get('email');
-    
-    // Agregar lógica para checkeo de credenciales
-
     const isInvalid = control?.invalid && control.touched;
 
     if (isInvalid) {
