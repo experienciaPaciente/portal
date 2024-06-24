@@ -3,20 +3,18 @@ import { NgIf } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 
 
 import { Router, RouterModule } from '@angular/router';
-
-import { AuthService, Credential } from '../../../core/services/auth.service';
-import { ButtonProviders } from './../components/button/btn-providers';
+import { IPaciente } from 'src/app/models/paciente';
+import { PacienteService } from 'src/app/core/services/paciente.service';
+import { AuthService, Credential } from 'src/app/core/services/auth.service';
 
 interface SignUpForm {
-  names: FormControl<string>;
-  lastName: FormControl<string>;
+  nombre: FormControl<string>;
+  apellido: FormControl<string>;
   email: FormControl<string>;
   password: FormControl<string>;
 }
@@ -27,7 +25,6 @@ interface SignUpForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
-    ButtonProviders,
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -35,44 +32,23 @@ interface SignUpForm {
 })
 export default class SignUpComponent {
   hide = true;
+  private router = inject(Router);
+  private pacienteId = '';
 
-  formBuilder = inject(FormBuilder);
-
-  form: FormGroup<SignUpForm> = this.formBuilder.group({
-    names: this.formBuilder.control('', {
-      validators: Validators.required,
-      nonNullable: true,
-    }),
-    lastName: this.formBuilder.control('', {
-      validators: Validators.required,
-      nonNullable: true,
-    }),
-    email: this.formBuilder.control('', {
-      validators: [Validators.required, Validators.email],
-      nonNullable: true,
-    }),
-    password: this.formBuilder.control('', {
-      validators: Validators.required,
-      nonNullable: true,
-    }),
-  });
-
-  private authService = inject(AuthService);
-  private _router = inject(Router);
-
-  get isEmailValid(): string | boolean {
-    const control = this.form.get('email');
-
-    const isInvalid = control?.invalid && control.touched;
-
-    if (isInvalid) {
-      return control.hasError('required')
-        ? 'This field is required'
-        : 'Enter a valid email';
-    }
-
-    return false;
+  get _pacienteId(): string {
+    return this.pacienteId;
   }
+
+  formBuilder = inject(FormBuilder).nonNullable;
+  authService = inject(AuthService);
+  pacienteService = inject(PacienteService);
+
+  form = this.formBuilder.group<SignUpForm>({
+    nombre: this.formBuilder.control(''),
+    apellido: this.formBuilder.control(''),
+    email: this.formBuilder.control(''),
+    password: this.formBuilder.control(''),
+  });
 
   async signUp(): Promise<void> {
     if (this.form.invalid) return;
@@ -85,14 +61,23 @@ export default class SignUpComponent {
     try {
       await this.authService.signUpWithEmailAndPassword(credential);
 
-        this._router.navigateByUrl('/');
-
-      } catch (error) {
+      this.router.navigateByUrl('/');
+ 
+    } catch (error) {
       console.error(error);
     }
   }
 
-  openSnackBar() {
-    return alert('Succesfully Sign up 😀');
+  get isEmailValid(): string | boolean {
+    const control = this.form.get('email');
+    const isInvalid = control?.invalid && control.touched;
+
+    if (isInvalid) {
+      return control.hasError('required')
+        ? 'This field is required'
+        : 'Enter a valid email';
+    }
+
+    return false;
   }
 }

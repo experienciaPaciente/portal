@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/styles/variables';
+@import './assets/styles/normalize';
+
+// Components
+@import './app/shared/ui/header/header.component.scss';
+@import './app/shared/ui/navbar/navbar.component.scss';
+@import './app/shared/ui/label/label.component.scss';

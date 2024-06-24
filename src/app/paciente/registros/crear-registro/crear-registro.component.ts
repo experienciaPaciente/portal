@@ -11,6 +11,7 @@ import { Paciente, Registro } from './../../../models/registro';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BehaviorSubject } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -75,14 +76,12 @@ export class createRegistroComponent implements OnInit{
     this.torchAvailable$.next(isCompatible || false);
   }
 
-
   private _formBuilder = inject(FormBuilder).nonNullable;
-
   private _router = inject(Router);
-
   private _registrosService = inject(RegistrosService);
-
   private _registroId = '';
+  private auth: Auth = inject(Auth);
+
 
   get registroId(): string {
     return this._registroId;
@@ -124,17 +123,21 @@ export class createRegistroComponent implements OnInit{
   }
   
   async createRegistro() {
+    const user = await this.auth.currentUser;
 
-    if (this.form.invalid) return;
+      if (this.form.invalid) return;
 
-    try {
-      const registro = this.form.value as Registro;
-      !this.registroId
-        ? await this._registrosService.createRegistro(registro)
-        : await this._registrosService.updateRegistro(this.registroId, registro);
-      this._router.navigate(['/']);
-    } catch (error) {
-      // call some toast service to handle the error
+      try {
+        const registro = this.form.value as Registro;
+        if (user) {
+          registro.userId = user.uid;  // Add the user's UID to the registro object
+        }
+        !this.registroId
+          ? await this._registrosService.createRegistro(registro)
+          : await this._registrosService.updateRegistro(this.registroId, registro);
+        this._router.navigate(['/']);
+      } catch (error) {
+        // call some toast service to handle the error
     }
   }
 

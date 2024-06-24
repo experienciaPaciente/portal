@@ -6,6 +6,7 @@ export interface Paciente extends Registro {
   
 export interface Registro {
     // paciente: IPaciente,
+    userId?: string;
     paciente: string,
     descripcion: string,
     categoria: string,

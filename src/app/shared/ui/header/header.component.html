@@ -1,0 +1,12 @@
+<header id="main">
+    <section class="flex--row">
+      <img src="{{ imgBrand }}" alt="" width="45" height="45" />
+    </section>
+    <!-- Badges -->
+    <section class="header__wrapper--right">
+      @if (email) {
+        <span class="">{{ email }}</span>
+      }
+      <app-label [icon]="true" [iconLabel]="'user'"></app-label>
+    </section>
+</header>

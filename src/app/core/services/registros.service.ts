@@ -68,6 +68,11 @@ export class RegistrosService {
     return deleteDoc(this.document(id));
   }
 
+  getRegistrosByUserId(userId: string): Observable<Registro[]> {
+    const q = query(this._collection, where('userId', '==', userId));
+    return collectionData(q, { idField: 'id' }) as Observable<Registro[]>;
+  }
+
   private document(id: string) {
     return doc(this._firestore, `${PATH}/${id}`);
   }

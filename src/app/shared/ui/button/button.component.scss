@@ -1,0 +1,18 @@
+button {
+    --button__width: 60px;
+    --button__height: 60px;
+
+    width: var(--button__width);
+    height: var(--button__height);
+    padding: .5rem;
+    background-color: var(--tertiary);
+
+    &.button__position--fab {
+        --button__borderRadius: 50%;
+
+        position: absolute;
+        top: 0;
+        right: calc(100vw - 50% - var(--button__width) / 2);
+        border-radius: var(--button__borderRadius);
+    }
+}

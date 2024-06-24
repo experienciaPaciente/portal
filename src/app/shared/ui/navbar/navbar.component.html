@@ -1,0 +1,10 @@
+<nav class="nav__wrapper">
+    <app-button [fab]="true" [icon]="false" [btnIconLabel]="'qrcode'" [btnLabel]="'QR'"></app-button>
+    <ul class="nav__list--horizontal">
+        @for (btn of items; track btn) {
+            <li class="nav__item--vertical">
+                <app-label direction="vertical" [icon]="true" iconLabel="{{ btn.icon }}" label="{{ btn.label }}" routerLink="{{ btn.path }}"></app-label>
+            </li>
+        }
+    </ul>
+</nav>

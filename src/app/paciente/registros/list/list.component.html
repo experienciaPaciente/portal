@@ -1,0 +1,12 @@
+<ul *ngIf="registros$ | async as records; else noRecords">
+    @for (data of records; track data) {
+        <li>
+            <h3>{{ data.paciente }}</h3>
+            <small>{{ data.descripcion }}</small>
+            <app-label [icon]="true" [iconLabel]="'play'"></app-label>
+        </li>
+    }
+</ul>
+<ng-template #noRecords>
+    <h3>Sin registros</h3>
+</ng-template>
