@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LabelComponent } from '../label/label.component';
 
 @Component({
@@ -19,4 +19,5 @@ export class ButtonComponent {
   @Input() btnLabel = '';
   @Input() severity?: 'warning' | 'danger' | 'info' | 'success' = 'info';
   @Input() fab = false;
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'sm';
 }

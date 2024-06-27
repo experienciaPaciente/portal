@@ -10,8 +10,9 @@ import { Component, Input } from '@angular/core';
 export class LabelComponent {
   
   @Input() icon = false;
-  @Input() iconLabel: String = '';
-  @Input() label: String = '';
+  @Input() iconLabel!: String
+  @Input() label!: String
+  @Input() subtitle!: String
   @Input() direction: 'vertical' | 'horizontal' = 'vertical';
-
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'sm';
 }

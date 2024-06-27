@@ -6,7 +6,9 @@ header#main {
     background-color: var(--secondary);
     padding: var(--header__padding--vertical) var(--header__padding--horizontal);
     height: var(--header__height);
-    position: relative;
+    width: 100vw;
+    box-sizing: border-box;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 1;

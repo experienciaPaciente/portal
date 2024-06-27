@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Input } from '@angular/core';
 import { ItemComponent } from 'src/app/shared/ui/item/item.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RegistrosService } from 'src/app/core/services/registros.service';
@@ -21,6 +21,8 @@ export class ListComponent implements OnInit {
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
   
+  @Input() type?: 'flex' | 'grid' = 'flex';
+  @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
 
   constructor(private registroService: RegistrosService) {
   }

@@ -1,12 +1,12 @@
-<ul *ngIf="registros$ | async as records; else noRecords">
-    @for (data of records; track data) {
-        <li>
-            <h3>{{ data.paciente }}</h3>
-            <small>{{ data.descripcion }}</small>
-            <app-label [icon]="true" [iconLabel]="'play'"></app-label>
-        </li>
-    }
-</ul>
+<ng-container *ngIf="registros$ | async as records; else noRecords">
+    <ul class="list__wrapper--{{ type }}">
+        @for (data of records; track data) {
+            <li class="{{ direction == 'vertical' ? 'list__wrapper--vertical' : 'list__wrapper--horizontal' }}">
+                <app-label size="sm" [icon]=true label="{{ data.categoria }}" subtitle="{{ data.descripcion }}" iconLabel="user" direction="horizontal"></app-label>
+            </li>
+        }
+    </ul>
+</ng-container>
 <ng-template #noRecords>
     <h3>Sin registros</h3>
 </ng-template>

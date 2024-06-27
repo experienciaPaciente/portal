@@ -24,7 +24,7 @@
   --label__padding: 1rem;
 
   /* Page */
-  --page__body--padding: 2rem;
+  --page__body--padding: var(--header__height) 1rem 0 1rem;
   --page__body--height: calc(100vh - var(--header__height));
   --page__body--background: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
   --page__gap--vertical: 2.5rem;
@@ -96,11 +96,11 @@
   --card__border--radius: 4px;
   --card__bg--color: white;
   --card__title--size: 1.35rem;
-  --card__title--color: var(--primary--darker);
+  --card__title--color: var(--primary);
   --card__title--weight: bold;
 
   --card__subtitle--size: 1.2rem;
-  --card__subtitle--color: var(--primary--darker);
+  --card__subtitle--color: var(--primary);
   --card__subtitle--weight: bold;
 
   --card__prefix--size: 0.75rem;
@@ -166,7 +166,7 @@
   --list__item--disabled: 0.5;
   --list__title--size: 1rem;
   --list__title--weight: bold;
-  --list__title--color: var(--primary--darker);
+  --list__title--color: var(--primary);
   --list__prefix--size: 0.9rem;
   --list__prefix--weight: normal;
   --list__prefix--color: var(--primary--middle);

@@ -1,8 +1,8 @@
 nav {
     &.nav__wrapper {
-        position: fixed;
+        position: absolute;
         bottom: 0;
-        padding: 1rem;
+        left: 0;
         height: var(--footer__height);
         display: flex;
         align-items: flex-end;

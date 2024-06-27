@@ -1,6 +1,9 @@
 <div class="{{ direction == 'vertical' ? 'label__wrapper--vertical' : 'label__wrapper--horizontal' }}">
     @if (icon) {
-    <i class="label__icon fa-regular fa-{{ iconLabel }}"></i>
+    <i class="label__icon--{{ size }} fa-regular fa-{{ iconLabel }}"></i>
     }
-    <span class="label__text">{{ label }}</span>
+    <section class="">
+        <span class="label__text--{{ size }}">{{ label }}</span><br>
+        <small class="">{{ subtitle }}</small>
+    </section>
 </div>

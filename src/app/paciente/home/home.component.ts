@@ -2,12 +2,14 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { createRegistroComponent } from '../registros/crear-registro/crear-registro.component';
+import { ListComponent } from '../registros/list/list.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    createRegistroComponent
+    createRegistroComponent,
+    ListComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
