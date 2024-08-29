@@ -1,3 +1,17 @@
-<button class="{{ fab ? 'button__position--fab' : '' }}">
-    <app-label [size]="size" [icon]=true [label]="btnLabel" [iconLabel]="btnIconLabel"></app-label>
+<button 
+  class="button" 
+  [ngClass]="['button__type--' + type, size]" 
+  (click)="handleClick()">
+  
+  <app-label 
+    [icon]="icon" 
+    [iconLabel]="label" 
+    [label]="label" 
+    [subtitle]="subtitle" 
+    [prefix]="prefix" 
+    [direction]="direction"
+    size="md">
+  </app-label>
+  
+  <span *ngIf="badgeCount" class="button__badge">{{ badgeCount }}</span>
 </button>

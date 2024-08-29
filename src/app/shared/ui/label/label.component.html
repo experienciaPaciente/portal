@@ -1,9 +1,21 @@
-<div class="{{ direction == 'vertical' ? 'label__wrapper--vertical' : 'label__wrapper--horizontal' }}">
-    @if (icon) {
-    <i class="label__icon--{{ size }} fa-regular fa-{{ iconLabel }}"></i>
+<div class="label" [ngClass]="[size, direction]">
+    @if (prefix) {
+      <div class="label__prefix">{{ prefix }}</div>
     }
-    <section class="">
-        <span class="label__text--{{ size }}">{{ label }}</span><br>
-        <small class="">{{ subtitle }}</small>
-    </section>
+  
+    @if (icon) {
+      <div class="label__icon">
+        <i [class]="icon" [attr.aria-label]="iconLabel"></i>
+      </div>
+    }
+  
+    <div class="label__content">
+    @if (label) {
+        <div class="label__title">{{ label }}</div>
+    }
+
+    @if (subtitle) {
+        <div class="label__subtitle">{{ subtitle }}</div>
+    }
+    </div>
 </div>

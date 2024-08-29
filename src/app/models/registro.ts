@@ -8,6 +8,7 @@ export interface Registro {
     // paciente: IPaciente,
     userId?: string;
     paciente: string,
+    titulo: string,
     descripcion: string,
     categoria: string,
     validado: boolean,
@@ -15,4 +16,5 @@ export interface Registro {
     emisor: string,
     fecha: Date,
     hora: string,
+    adjuntos: string, // Array de imágenes
 }

@@ -7,6 +7,16 @@
       @if (email) {
         <span class="">{{ email }}</span>
       }
-      <app-label [icon]="true" [iconLabel]="'user'"></app-label>
+
+      <app-label 
+        icon="fa fa-user" 
+        iconLabel="user" 
+        label="label" 
+        subtitle="subtitle" 
+        prefix="prefix" 
+        direction="vertical"
+        size="md">
+      </app-label>
+  
     </section>
 </header>

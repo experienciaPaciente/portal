@@ -1,18 +1,19 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-label',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './label.component.html',
-  styleUrl: './label.component.scss'
+  styleUrls: ['./label.component.scss']
 })
 export class LabelComponent {
-  
-  @Input() icon = false;
-  @Input() iconLabel!: String
-  @Input() label!: String
-  @Input() subtitle!: String
-  @Input() direction: 'vertical' | 'horizontal' = 'vertical';
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'sm';
+  @Input() icon?: string;
+  @Input() iconLabel?: string;
+  @Input() label?: string;
+  @Input() subtitle?: string;
+  @Input() prefix?: string;
+  @Input() direction: 'horizontal' | 'vertical' = 'vertical';
+  @Input() size: 'sm' | 'md' | 'lg' | 'full' = 'md';
 }

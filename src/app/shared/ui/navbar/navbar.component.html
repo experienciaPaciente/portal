@@ -1,9 +1,27 @@
 <nav class="nav__wrapper">
-    <app-button [size]="'xs'" [fab]="true" [icon]="false" [btnIconLabel]="'qrcode'" [btnLabel]="'QR'"></app-button>
+    <app-button 
+        type="fill" 
+        size="md" 
+        [icon]="'fa fa-qrcode'" 
+        [label]="'QR'" 
+        [prefix]="'Action'" 
+        [subtitle]="'Click to submit your data'" 
+        (clickEvent)="onSubmit()">
+    </app-button>
     <ul class="nav__list--horizontal">
         @for (btn of items; track btn) {
             <li class="nav__item--vertical">
-                <app-label size="xs" direction="vertical" [icon]="true" iconLabel="{{ btn.icon }}" label="{{ btn.label }}" routerLink="{{ btn.path }}"></app-label>
+                <app-label 
+                icon="fa fa-heart" 
+                iconLabel="btn.icon" 
+                label="btn.label" 
+                subtitle="subtitle" 
+                prefix="prefix" 
+                direction="vertical"
+                size="sm"
+                routerLink="{{ btn.path }}"
+                >
+              </app-label>
             </li>
         }
     </ul>

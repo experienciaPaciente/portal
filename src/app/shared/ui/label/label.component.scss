@@ -1,72 +1,51 @@
-    
-%baseFlex {
+.label {
     display: flex;
-    height: var(--label__height);
-    column-gap: 1rem;
-    // padding: var(--label__padding);
+    flex-direction: column;
+  
+    &.horizontal {
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    &__icon {
+      margin-right: 0.5rem;
+      color: var(--button__icon--color);
+    }
+  
+    &__content {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    &__prefix {
+      font-size: var(--label__prefix--size);
+      color: var(--label__prefix--color);
+    }
+  
+    &__title {
+      font-size: var(--label__title--size);
+      color: var(--label__title--color);
+    }
+  
+    &__subtitle {
+      font-size: var(--label__subtitle--size);
+      color: var(--label__subtitle--color);
+    }
 }
 
-.label__wrapper {
-    
-    &--vertical {
-        @extend %baseFlex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    &--horizontal {
-        @extend %baseFlex;
-        flex-direction: row;
-        align-items: center;
-    }
-}
-
-
-$sizes: xs sm md lg xl;
+$sizes: sm md lg;
 $fontSizes: (
-    "xs": 12px,
-    "sm": 18px,
-    "md": 24px,
-    "lg": 36px,
-    "xl": 48px,
-);
+    "sm": 24px,
+    "md": 36px,
+    "lg": 56px,
+);  
 
 @each $size in $sizes {
     // $i: index($sizes);
-    .label__icon--#{$size} {
+    .label.#{$size} {
         font-size: map-get($fontSizes, $size);
     }
-    .label__text--#{$size} {
-        font-size: map-get($fontSizes, $size);
-    }
-    .label__subtitle--#{$size} {
-        font-size: map-get($fontSizes, $size);
-    }
+    // .label__text--#{$size} {
+    //     font-size: map-get($fontSizes, $size);
+    // }
 }
-
-
-// [class$='--xs'] {
-//     --button__font--size: 12px;
-//     font-size: var(--button__font--size);
-// }
-
-// [class$='--sm'] {
-//     --button__font--size: 24px;
-//     font-size: var(--button__font--size);
-// }
-
-// [class$='--md'] {
-//     --button__font--size: 36px;
-//     font-size: var(--button__font--size);
-// }
-
-// [class$='--lg'] {
-//     --button__font--size: 48px;
-//     font-size: var(--button__font--size);
-// }
-
-// [class$='--xl'] {
-//     --button__font--size: 60px;
-//     font-size: var(--button__font--size);
-// }

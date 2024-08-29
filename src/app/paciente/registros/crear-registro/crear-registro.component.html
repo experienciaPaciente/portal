@@ -6,29 +6,31 @@
 
 
 <form [formGroup]="form" (ngSubmit)="createRegistro()">
+  <div class="form__input--wrapper">
+    <label for="titulo"></label>
+    <input type="text" formControlName="titulo">
+  </div>
   @if (qrResultString) {
-    <label for="paciente">Registro de esta consulta</label>
-    <textarea 
-      id="paciente"
-      formControlName="paciente">
-      {{ qrResultString }}
-    </textarea>
-    <button (click)="clearResult()">&times;</button>
+    <div class="form__input--wrapper">
+      <label for="paciente">Registro de esta consulta</label>
+      <textarea 
+        id="paciente"
+        formControlName="paciente">
+        {{ qrResultString }}
+      </textarea>
+      <button (click)="clearResult()">&times;</button>
+    </div>
     }
-    <div>
-      <label for="categoria" class="block mb-2 text-sm font-medium"
+    <div class="form__input--wrapper">
+      <label for="categoria"
         >categoria</label
       >
-      <input
-        type="text"
-        id="categoria"
-        class=""
-        placeholder="example@mail.com"
-        formControlName="categoria"
-      />
+      <select name="" id="" formControlName="categoria">
+        <option value=""></option>
+      </select>
     </div>
-    <div>
-      <label for="emisor" class="block mb-2 text-sm font-medium"
+    <div class="form__input--wrapper">
+      <label for="emisor"
         >emisor</label
       >
       <input
@@ -39,8 +41,8 @@
         formControlName="emisor"
       />
     </div>
-    <div>
-    <label for="descripcion" class="block mb-2 text-sm font-medium"
+    <div class="form__input--wrapper">
+    <label for="descripcion"
       >Description (optional)</label
     >
     <textarea
@@ -53,7 +55,7 @@
     ></textarea>
   </div>
 
-  <div class="flex justify-between items-center">
+  <div>
     <a
       class=""
       routerLink="/"

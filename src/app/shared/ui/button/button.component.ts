@@ -1,23 +1,27 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { LabelComponent } from '../label/label.component';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [LabelComponent],
+  imports: [CommonModule, LabelComponent],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrls: ['./button.component.scss']
 })
-
 export class ButtonComponent {
+  @Input() type: 'fill' | 'outline' | 'link' | 'icon' = 'fill';
+  @Input() size: 'sm' | 'md' | 'lg' | 'full' = 'md';
+  @Input() icon?: string;
+  @Input() label?: string;
+  @Input() badgeCount?: number;
+  @Input() prefix?: string;
+  @Input() subtitle?: string;
+  @Input() direction: 'horizontal' | 'vertical' = 'vertical';
 
-  buttonLabel = '';
+  @Output() clickEvent = new EventEmitter<void>();
 
-  @Input() type?: 'primary' | 'secondary' | 'tertiary' = 'primary';
-  @Input() icon? = false;
-  @Input() btnIconLabel = '';
-  @Input() btnLabel = '';
-  @Input() severity?: 'warning' | 'danger' | 'info' | 'success' = 'info';
-  @Input() fab = false;
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'sm';
+  handleClick() {
+    this.clickEvent.emit();
+  }
 }

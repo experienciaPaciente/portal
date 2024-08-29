@@ -14,4 +14,9 @@ export class NavbarComponent {
 
   @Input() items:any = [];
 
+  onSubmit() {
+    console.log('Submit button clicked');
+  }
+
 }
+

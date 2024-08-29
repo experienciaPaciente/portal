@@ -1,4 +1,6 @@
+<app-header imgBrand="{{ imgSrc }}"></app-header>
 <div type="home">
     <button (click)="logOut()">Log-out!</button>
     <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>
 </div>
+<app-navbar [items]="buttons"></app-navbar>

@@ -16,6 +16,7 @@ import { Auth } from '@angular/fire/auth';
 export interface RegistroForm {
   paciente: FormControl<string>;
   descripcion: FormControl<string>;
+  titulo: FormControl<string>;
   categoria: FormControl<string>;
   validado: FormControl<boolean>;
   estado: FormControl<string>;
@@ -94,6 +95,7 @@ export class createRegistroComponent implements OnInit{
 
   form = this._formBuilder.group<RegistroForm>({
     paciente: this._formBuilder.control(''),
+    titulo: this._formBuilder.control(''),
     descripcion: this._formBuilder.control(''),
     categoria: this._formBuilder.control(''),
     validado: this._formBuilder.control(false),
@@ -137,7 +139,6 @@ export class createRegistroComponent implements OnInit{
           : await this._registrosService.updateRegistro(this.registroId, registro);
         this._router.navigate(['/']);
       } catch (error) {
-        // call some toast service to handle the error
     }
   }
 
@@ -147,6 +148,7 @@ export class createRegistroComponent implements OnInit{
       if (!registro) return;
       this.form.setValue({
         paciente: registro.paciente,
+        titulo: registro.descripcion,
         descripcion: registro.descripcion,
         categoria: registro.categoria,
         validado: registro.validado,
