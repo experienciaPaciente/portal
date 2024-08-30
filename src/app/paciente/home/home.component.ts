@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { createRegistroComponent } from '../registros/crear-registro/crear-registro.component';
 import { ListComponent } from '../registros/list/list.component';
@@ -20,6 +20,18 @@ import { HeaderComponent } from './../../shared/ui/header/header.component';
 export default class HomeComponent {
   title = 'portal-paciente';
   imgSrc = './assets/img/xp__picto.png'
+
+  isDetailView: boolean = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isDetailView = event.url.includes('/item/');
+      }
+    });
+  }
 
 
   buttons = [

@@ -1,0 +1,57 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    
+    &__navbar {
+      width: 100%;
+      height: 60px; // Adjust this value as needed
+      background-color: var(--primary);
+      box-shadow: 0 2px 4px var(--shadow);
+      z-index: 10; // Keeps the navbar on top
+    }
+  
+    &__content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+  
+    &__sidebar {
+      width: 420px;
+      background-color: var(--secondaryLight);
+      overflow-y: auto;
+      box-shadow: 2px 0 4px var(--shadow);
+      
+      // Hide sidebar on mobile
+      @media (max-width: 768px) {
+        position: absolute;
+        width: 100%;
+        z-index: 9; // Below navbar but above the main panel
+        transform: translateX(-100%); // Hide by default
+        transition: transform 0.3s ease;
+        
+        &.active {
+          transform: translateX(0); // Show sidebar when active
+        }
+      }
+    }
+  
+    &__main {
+      flex: 1;
+      background-color: var(--page__body--bg);
+      padding: var(--page__body--padding);
+      overflow-y: auto;
+  
+      // On mobile, make the main panel a separate page
+      @media (max-width: 768px) {
+        display: none;
+        
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+  

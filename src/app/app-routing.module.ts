@@ -4,11 +4,18 @@ import { authGuard, publicGuard } from '../app/core/guards/auth.guards';
 import { createRegistroComponent } from './paciente/registros/crear-registro/crear-registro.component';
 import { ListComponent } from './paciente/registros/list/list.component';
 import HomeComponent from './paciente/home/home.component';
+import { DetailComponent } from './paciente/registros/detail/detail.component';
 
 export const routes: Routes = [
   {
     path: '', canActivate: [authGuard],
-    loadComponent: () => import('./paciente/home/home.component')
+    loadComponent: () => import('./paciente/home/home.component'),
+    children: [
+      {
+        path: 'item/:id',
+        component: DetailComponent
+      }
+    ]
   },
   {
     path: 'inicio',

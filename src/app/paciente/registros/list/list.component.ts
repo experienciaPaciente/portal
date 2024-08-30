@@ -6,6 +6,7 @@ import { Registro } from 'src/app/models/registro';
 import { Auth, authState } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -24,7 +25,7 @@ export class ListComponent implements OnInit {
   @Input() type?: 'flex' | 'grid' = 'flex';
   @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
 
-  constructor(private registroService: RegistrosService) {
+  constructor(private registroService: RegistrosService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,5 +34,8 @@ export class ListComponent implements OnInit {
         this.registros$ = this.registroService.getRegistrosByUserId(user.uid);
       }
     });
+  }
+  onItemSelected(item: Registro): void {
+    this.router.navigate([`/item/${item.id}`]); // Adjust to your routing setup
   }
 }
