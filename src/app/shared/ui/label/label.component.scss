@@ -35,9 +35,9 @@
 
 $sizes: sm md lg;
 $fontSizes: (
-    "sm": 24px,
-    "md": 36px,
-    "lg": 56px,
+    "sm": 18px,
+    "md": 24px,
+    "lg": 48px,
 );  
 
 @each $size in $sizes {

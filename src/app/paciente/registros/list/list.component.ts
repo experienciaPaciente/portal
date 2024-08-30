@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
 
-  records!: Registro[];
+  registro!: Registro[];
   registros$!: Observable<Registro[]>;
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
@@ -36,6 +36,6 @@ export class ListComponent implements OnInit {
     });
   }
   onItemSelected(item: Registro): void {
-    this.router.navigate([`/item/${item.id}`]); // Adjust to your routing setup
+    this.router.navigate([`/item/${item.id}`]);
   }
 }

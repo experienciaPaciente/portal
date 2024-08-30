@@ -1,1 +1,13 @@
-<p>detail works!</p>
+<h1>Detail!</h1>
+@if (registro != null) {
+    <p>{{ registro?.userId }}</p>
+    <p>{{ registro?.fecha }}</p>
+    <p>{{ registro?.descripcion }}</p>
+    <p>{{ registro?.emisor }}</p>
+    <p>{{ registro?.validado }}</p>
+    <p>{{ registro?.estado }}</p>
+    <p>{{ registro?.paciente }}</p>
+    <p>{{ registro?.hora }}</p>
+} @else {
+    <p>Sin registros!</p>
+}

@@ -10,7 +10,7 @@ import { LabelComponent } from '../label/label.component';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-  @Input() type: 'fill' | 'outline' | 'link' | 'icon' = 'fill';
+  @Input() type: 'fill' | 'outline' | 'link' | 'fab' | 'icon' = 'fill';
   @Input() size: 'sm' | 'md' | 'lg' | 'full' = 'md';
   @Input() icon?: string;
   @Input() label?: string;

@@ -11,7 +11,7 @@ import { RegistrosService } from 'src/app/core/services/registros.service';
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent {
-  registro!: Registro;
+  registro!: Registro | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,9 +21,19 @@ export class DetailComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.registroService.getRegistrosByUserId(id).subscribe(data => {
-        this.registro = this.registro;
-      });
+      this.loadRegistro(id);
+    } else {
+      this.registro = null;
+    }
+  }
+
+  async loadRegistro(id: string): Promise<void> {
+    try {
+      const registro = await this.registroService.getRegistro(id);
+      this.registro = registro || null;
+    } catch (error) {
+      this.registro = null;
+      console.error('Error fetching registro:', error);
     }
   }
 }

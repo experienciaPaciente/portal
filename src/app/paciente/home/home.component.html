@@ -6,6 +6,7 @@
       <aside class="layout__sidebar">
         <button (click)="logOut()">Log-out!</button>
         <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
+        <app-navbar [items]="buttons"></app-navbar>
     </aside>
       <main class="layout__main">
         @if (isDetailView) {
@@ -14,6 +15,5 @@
             <app-crear-registro></app-crear-registro>
         }
         </main>
-      <app-navbar [items]="buttons"></app-navbar>
     </div>
   </div>
