@@ -3,11 +3,13 @@
 @import './assets/styles/forms';
 @import './assets/styles/layout';
 
+// Components
 @import './app/shared/ui/button/button.component.scss';
 @import './app/shared/ui/label/label.component.scss';
+@import './app/shared/ui/badge/badge.component.scss';
 
-// Components
+// Pages
 // @import './app/shared/ui/header/header.component.scss';
 // @import './app/shared/ui/navbar/navbar.component.scss';
-@import './app/shared/ui/label/label.component.scss';
 // @import './app/paciente/registros/list/list.component.scss';
+@import './app/paciente/registros/crear-registro/crear-registro.component.scss';

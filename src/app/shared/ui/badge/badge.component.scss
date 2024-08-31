@@ -1,0 +1,36 @@
+.badge__wrapper {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5em 1em;
+    border-radius: 12px;
+    font-weight: bold;
+  
+    &--xs {
+      font-size: var(--font-size-xs);
+      padding: 0.25em 0.5em;
+    }
+  
+    &--sm {
+      font-size: var(--font-size-sm);
+      padding: 0.4em 0.8em;
+    }
+  
+    &--md {
+      font-size: var(--font-size-md);
+    }
+  
+    &--lg {
+      font-size: var(--font-size-lg);
+      padding: 0.6em 1.2em;
+    }
+  
+    &--xl {
+      font-size: var(--font-size-xl);
+      padding: 0.75em 1.5em;
+    }
+  
+    i {
+      margin-right: 0.5em;
+    }
+  }
+  

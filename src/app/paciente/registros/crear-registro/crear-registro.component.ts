@@ -2,21 +2,22 @@ import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
-  ReactiveFormsModule,
-  Validators,
+  ReactiveFormsModule
 } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { RegistrosService,  } from './../../../core/services/registros.service';
-import { Paciente, Registro } from './../../../models/registro';
+import { Registro } from './../../../models/registro';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BehaviorSubject } from 'rxjs';
 import { Auth } from '@angular/fire/auth';
+import { LabelComponent } from 'src/app/shared/ui/label/label.component';
+import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
-  descripcion: FormControl<string>;
   titulo: FormControl<string>;
+  descripcion: FormControl<string>;
   categoria: FormControl<string>;
   validado: FormControl<boolean>;
   estado: FormControl<string>;
@@ -30,7 +31,13 @@ export interface RegistroForm {
   styleUrl: './crear-registro.component.scss',
   templateUrl: './crear-registro.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, ZXingScannerModule],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    ZXingScannerModule,
+    LabelComponent,
+    BadgeComponent
+  ],
   
 })
 
@@ -39,6 +46,9 @@ export class createRegistroComponent implements OnInit{
   ngOnInit(): void {
     
   }
+
+  editableTitle: string = 'titulo';
+  editableCategory: string = 'prefix';
 
   // Zxing  
   availableDevices: MediaDeviceInfo[] | undefined;

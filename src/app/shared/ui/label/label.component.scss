@@ -23,29 +23,45 @@
     }
   
     &__title {
-      font-size: var(--label__title--size);
       color: var(--label__title--color);
+
+      &--xs {
+      }
+
+      &--sm {
+      }
+
+      &--md {
+      }
+
+      &--lg {
+      }
+
+      &--xl {
+      }
     }
   
     &__subtitle {
       font-size: var(--label__subtitle--size);
       color: var(--label__subtitle--color);
     }
-}
-
-$sizes: sm md lg;
-$fontSizes: (
-    "sm": 18px,
-    "md": 24px,
-    "lg": 48px,
-);  
-
-@each $size in $sizes {
-    // $i: index($sizes);
-    .label.#{$size} {
-        font-size: map-get($fontSizes, $size);
-    }
-    // .label__text--#{$size} {
-    //     font-size: map-get($fontSizes, $size);
-    // }
-}
+  }
+  
+  $sizes: sm md lg;
+  $fontSizes: (
+      "xs": 16px,
+      "sm": 24px,
+      "md": 36px,
+      "lg": 48px,
+      "xl": 64px,
+  );  
+  
+  @each $size in $sizes {
+      // $i: index($sizes);
+      .label.#{$size} {
+          font-size: map-get($fontSizes, $size);
+      }
+      .label__text--#{$size} {
+          font-size: map-get($fontSizes, $size);
+      }
+  }

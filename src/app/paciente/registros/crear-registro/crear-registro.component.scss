@@ -1,3 +1,27 @@
-.qr {
-    width: 500px;
-}
+ .main__wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: auto;
+
+    .panel__wrapper--main {
+        padding: 2rem 6rem;
+
+        .panel__header--row {
+           display: flex;
+           flex-direction: row;
+           align-items: center;
+        }
+    }
+    
+    .panel__wrapper--aside {
+        width: 280px;
+        height: 100%;
+        padding: 2rem;
+
+        .qr {
+            width: 100%;
+            background-color: gray;
+        }
+     }
+ }

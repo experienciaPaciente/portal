@@ -1,34 +1,74 @@
-<p>crear-registro works!</p>
+  <form [formGroup]="form" class="main__wrapper" (ngSubmit)="createRegistro()">
+  
+    <div class="panel__wrapper--main">
 
-<zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
-[formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-(camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+      <header class="panel__header--row">
+        <app-label size="lg" label="{{ editableTitle }}" prefix="{{ editableCategory }}" icon="fa-regular fa-heart"></app-label>
+        <app-badge type="success" label="Registro guardado" size="md"></app-badge>
+      </header>
 
+      <div class="form__input--wrapper">
+        <label for="titulo"></label>
+        <input type="text" formControlName="titulo">
+      </div>
 
-<form [formGroup]="form" (ngSubmit)="createRegistro()">
-  <div class="form__input--wrapper">
-    <label for="titulo"></label>
-    <input type="text" formControlName="titulo">
-  </div>
-  @if (qrResultString) {
-    <div class="form__input--wrapper">
-      <label for="paciente">Registro de esta consulta</label>
-      <textarea 
-        id="paciente"
-        formControlName="paciente">
-        {{ qrResultString }}
-      </textarea>
-      <button (click)="clearResult()">&times;</button>
+      <div class="form__input--wrapper">
+        <label for="descripcion"
+          >Description (optional)</label
+        >
+        <textarea
+          rows="5"
+          type="text"
+          id="descripcion"
+          class=""
+          placeholder="Your description goes here"
+          formControlName="descripcion"
+        ></textarea>
+      </div>
+
+        @if (qrResultString) {
+          <div class="form__input--wrapper">
+            <label for="paciente">Registro de esta consulta</label>
+            <textarea 
+              id="paciente"
+              formControlName="paciente">
+              {{ qrResultString }}
+            </textarea>
+            <button (click)="clearResult()">&times;</button>
+          </div>
+          }
+
+        <div class="form__input--wrapper">
+          <label for="categoria"
+            >categoria</label
+          >
+          <select name="" id="" formControlName="categoria">
+            <option value=""></option>
+          </select>
+        </div>
+        <div>
+          <a
+            class=""
+            routerLink="/"
+          >
+            Back to dashboard
+          </a>
+  
+          <button
+            class=""
+            type="submit"
+          >
+            @if (registroId) {
+              Edit your registro
+            } @else {
+              Create your registro
+            }
+          </button>
+        </div>
     </div>
-    }
-    <div class="form__input--wrapper">
-      <label for="categoria"
-        >categoria</label
-      >
-      <select name="" id="" formControlName="categoria">
-        <option value=""></option>
-      </select>
-    </div>
+
+    <div class="panel__wrapper--aside">
+
     <div class="form__input--wrapper">
       <label for="emisor"
         >emisor</label
@@ -41,37 +81,11 @@
         formControlName="emisor"
       />
     </div>
-    <div class="form__input--wrapper">
-    <label for="descripcion"
-      >Description (optional)</label
-    >
-    <textarea
-      rows="5"
-      type="text"
-      id="descripcion"
-      class=""
-      placeholder="Your description goes here"
-      formControlName="descripcion"
-    ></textarea>
-  </div>
 
-  <div>
-    <a
-      class=""
-      routerLink="/"
-    >
-      Back to dashboard
-    </a>
+    
+      <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+      [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+      (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
 
-    <button
-      class=""
-      type="submit"
-    >
-      @if (registroId) {
-        Edit your registro
-      } @else {
-        Create your registro
-      }
-    </button>
-  </div>
-</form>
+    </div> 
+  </form>
