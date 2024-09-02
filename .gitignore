@@ -141,6 +141,9 @@ firebase-debug.log
 testem.log
 /typings
 
+# environments
+/environments/*
+
 # System files
 .DS_Store
 Thumbs.db

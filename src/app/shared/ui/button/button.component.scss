@@ -10,51 +10,74 @@
   
     &__type {
       &--fill {
-        background-color: var(--primary);
+        background-color: var(--button__bg--color);
         color: white;
+        border: none;
       }
   
       &--outline {
         background-color: transparent;
-        border-color: var(--primary);
-        color: var(--primary);
+        border-color: var(--label__title--color);
+        color: var(--label__title--color);
       }
   
       &--link {
         background-color: transparent;
-        color: var(--primary);
+        color: var(--label__title--color);
         border: none;
       }
   
       &--icon {
         background-color: transparent;
-        color: var(--primary);
+        color: var(--label__title--color);
         padding: 0.5rem;
       }
   
       &--fab {
         background-color: var(--tertiary);
-        color: var(--primary);
+        color: var(--label__title--color);
         position: absolute;
         top: -60px;
         left: calc(220px / 2);
       }
     }
-  
-    &.sm {
-      padding: 0.5rem 1rem;
+
+    &__severity {
+
+      &--success {
+        --button__bg--color: var(--success);
+        --label__title--color: white;
+      }
+      &--warning {
+
+      }
+      &--danger {
+
+      }
+      &--info {
+
+      }
+      &--neutral {
+
+      }
     }
-  
-    &.md {
-      padding: 0.75rem 1.25rem;
-    }
-  
-    &.lg {
-      padding: 1rem 1.5rem;
-    }
-  
-    &.full {
-      width: 100%;
+
+    &__size {
+      &--sm {
+        padding: 0.5rem 1rem;
+      }
+    
+      &--md {
+        padding: 0.75rem 1.25rem;
+      }
+    
+      &--lg {
+        padding: 1rem 1.5rem;
+      }
+    
+      &--full {
+        width: 100%;
+      }
     }
   
     &__badge {

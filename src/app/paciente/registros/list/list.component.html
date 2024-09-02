@@ -1,9 +1,16 @@
 <ng-container *ngIf="registros$ | async as records; else noRecords">
     <ul class="list__wrapper--{{ type }}">
-        @for (data of records; track data) {
+        @for (data of records; track trackByFn(data)) {
             <li class="{{ direction == 'vertical' ? 'list__wrapper--vertical' : 'list__wrapper--horizontal' }}" (click)="onItemSelected(data)">
                 <!-- simplificar valor icono pasando los prefijos de fontawesome a la logica -->
-               <app-label size="xs" icon="fa-regular fa-heart" label="{{ data.categoria }}" subtitle="{{ data.descripcion }}" direction="horizontal"></app-label>
+                <app-label
+                size="xs"
+                [label]="data.titulo"
+                [prefix]="data.categoria"
+                [icon]="'fa-solid fa-' + getIconForCategoria(data.categoria)"
+                [iconColor]="getColorForCategoria(data.categoria)"
+                direction="horizontal"
+                ></app-label>
             </li>
         }
     </ul>

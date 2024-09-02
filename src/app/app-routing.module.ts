@@ -5,6 +5,7 @@ import { createRegistroComponent } from './paciente/registros/crear-registro/cre
 import { ListComponent } from './paciente/registros/list/list.component';
 import HomeComponent from './paciente/home/home.component';
 import { DetailComponent } from './paciente/registros/detail/detail.component';
+import { ScanComponent } from './paciente/registros/scan/scan.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,9 @@ export const routes: Routes = [
   },
   {
     path: 'registrar', component: createRegistroComponent
+  },
+  {
+    path: 'scan', component: ScanComponent
   },
   {
     path: 'registros', component: ListComponent

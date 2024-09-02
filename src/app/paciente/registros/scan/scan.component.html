@@ -1,0 +1,15 @@
+<p>scan works!</p>
+    
+<zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice"
+[formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+(camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+
+
+<app-button 
+[type]="'fill'"
+[severity]="'success'"
+[size]="'xs'"
+[icon]="'fa-regular fa-heart'"
+[label]="'Submit'"
+[direction]="'horizontal'">
+</app-button>

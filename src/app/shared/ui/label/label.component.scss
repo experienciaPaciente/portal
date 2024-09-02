@@ -1,7 +1,12 @@
+// Consider usign @use or/and migrate this to a shared scss file
 %baseFlex {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+:host {
+  // --label__icon--color: #8189B0;
 }
 
 .label {

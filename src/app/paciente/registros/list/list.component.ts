@@ -25,6 +25,15 @@ export class ListComponent implements OnInit {
   @Input() type?: 'flex' | 'grid' = 'flex';
   @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
 
+  categoriaMap: { [key: string]: { icon: string; color: string } } = {
+    'Consulta general': { icon: 'user-md', color: 'blue' },
+    'Laboratorios': { icon: 'vial', color: 'purple' },
+    'Consulta pediátrica': { icon: 'baby', color: 'green' },
+    'Vacunación': { icon: 'syringe', color: 'orange' },
+    'Alergia e Inmunología': { icon: 'allergies', color: 'yellow' },
+    'Cardiología': { icon: 'heart', color: 'red' },
+  };
+
   constructor(private registroService: RegistrosService, private router: Router) {
   }
 
@@ -37,5 +46,18 @@ export class ListComponent implements OnInit {
   }
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
+  }
+
+
+  getIconForCategoria(categoria: string): string {
+    return this.categoriaMap[categoria]?.icon || 'question-circle'; // Default icon
+  }
+
+  getColorForCategoria(categoria: string): string {
+    return this.categoriaMap[categoria]?.color || 'gray'; // Default color
+  }
+
+  trackByFn(item: Registro): string {
+    return item.id; // Or another unique identifier
   }
 }

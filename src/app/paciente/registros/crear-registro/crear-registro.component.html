@@ -1,6 +1,6 @@
   <form [formGroup]="form" class="main__wrapper" (ngSubmit)="createRegistro()">
   
-    <div type="flex" class="panel__wrapper--main">
+    <section type="flex" class="panel__wrapper--main">
 
       <header class="panel__header--row">
           <app-label
@@ -76,10 +76,21 @@
             }
           </button>
         </div>
-    </div>
+    </section>
 
-    <div class="panel__wrapper--aside">
-
+    <section class="panel__wrapper--aside">
+      <div class="form__input--wrapper">
+        <label for="fecha"
+          >Fecha</label
+        >
+        <input
+          type="date"
+          id="fecha"
+          class=""
+          placeholder=""
+          formControlName="fecha"
+        />
+      </div>
     <div class="form__input--wrapper">
       <label for="emisor"
         >emisor</label
@@ -88,15 +99,16 @@
         type="text"
         id="emisor"
         class=""
-        placeholder="+51 995123233"
+        placeholder=""
         formControlName="emisor"
       />
     </div>
+    <div class="form__input--wrapper">
+      <label for="validado"
+        >Validado</label
+      >
+      <input type="checkbox" formControlName="validado">
+    </div>
 
-    
-      <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
-      [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-      (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
-
-    </div> 
+    </section> 
   </form>

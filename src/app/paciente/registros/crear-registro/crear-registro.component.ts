@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -76,12 +76,11 @@ export class createRegistroComponent{
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Consulta general': { icon: 'user-md', color: 'blue' },
     'Laboratorios': { icon: 'vial', color: 'purple' },
-    'Consulta pediátrica': { icon: 'child-reaching', color: 'green' },
+    'Consulta pediátrica': { icon: 'child', color: 'green' },
     'Vacunación': { icon: 'syringe', color: 'orange' },
     'Alergia e Inmunología': { icon: 'allergies', color: 'yellow' },
     'Cardiología': { icon: 'heart', color: 'red' },
   };
-
 
   // Properties for the Label component
   editableTitle: string = '';
