@@ -19,7 +19,7 @@ import { HeaderComponent } from './../../shared/ui/header/header.component';
 })
 export default class HomeComponent {
   title = 'portal-paciente';
-  imgSrc = './assets/img/xp__picto.png'
+  imgSrc = './assets/img/experienciaPaciente__logo--h.svg'
 
   isDetailView: boolean = false;
 

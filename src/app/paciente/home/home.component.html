@@ -1,19 +1,19 @@
 <div class="layout">
-    <nav class="layout__navbar">
-        <!-- <app-header imgBrand="{{ imgSrc }}"></app-header> -->
-    </nav>
-    <div class="layout__content">
-      <aside class="layout__sidebar">
+  <nav class="layout__navbar">
+      <app-header imgBrand="{{ imgSrc }}"></app-header>
+  </nav>
+  <div class="layout__content">
+    <aside class="layout__sidebar">
         <button (click)="logOut()">Log-out!</button>
         <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
-        <app-navbar [items]="buttons"></app-navbar>
+        <!-- <app-navbar [items]="buttons"></app-navbar> -->
     </aside>
-      <main class="layout__main">
-        @if (isDetailView) {
-            <router-outlet></router-outlet>
-        } @else {
-            <app-crear-registro></app-crear-registro>
-        }
-        </main>
-    </div>
+    <main class="layout__main">
+    @if (isDetailView) {
+        <router-outlet></router-outlet>
+    } @else {
+        <app-crear-registro></app-crear-registro>
+    }
+    </main>
   </div>
+</div>

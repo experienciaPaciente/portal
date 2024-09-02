@@ -1,3 +1,9 @@
+%baseFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .label {
     display: flex;
     flex-direction: column;
@@ -6,10 +12,46 @@
       flex-direction: row;
       align-items: center;
     }
-  
-    &__icon {
+        
+    &.xs {
+      --label__prefix--size: 14px;
+      --label__subtitle--size: 14px;
+      --label__icon--size: 18px;
+    }
+    
+    &.sm {
+      --label__prefix--size: 18px;
+      --label__subtitle--size: 18px;
+      --label__icon--size: 20px;
+    }
+    
+    &.md {
+      --label__prefix--size: 20px;
+      --label__subtitle--size: 20px;
+      --label__icon--size: 24px;
+    }
+    
+    &.lg {
+      --label__prefix--size: 24px;
+      --label__subtitle--size: 24px;
+      --label__icon--size: 56px;
+    }
+
+    &.xl {
+      --label__prefix--size: 36px;
+      --label__subtitle--size: 36px;
+      --label__icon--size: 64px;
+    }
+
+    &__icon { 
+      @extend %baseFlex;     
       margin-right: 0.5rem;
-      color: var(--button__icon--color);
+      padding: .5rem;
+      border: solid 2px var(--label__icon--color);
+      border-radius: 50%;
+      color: var(--label__icon--color);
+      width: var(--label__icon--size);
+      height: var(--label__icon--size);
     }
   
     &__content {
@@ -21,24 +63,9 @@
       font-size: var(--label__prefix--size);
       color: var(--label__prefix--color);
     }
-  
+    
     &__title {
       color: var(--label__title--color);
-
-      &--xs {
-      }
-
-      &--sm {
-      }
-
-      &--md {
-      }
-
-      &--lg {
-      }
-
-      &--xl {
-      }
     }
   
     &__subtitle {
@@ -47,7 +74,7 @@
     }
   }
   
-  $sizes: sm md lg;
+  $sizes: xs sm md lg xl;
   $fontSizes: (
       "xs": 16px,
       "sm": 24px,
@@ -61,7 +88,7 @@
       .label.#{$size} {
           font-size: map-get($fontSizes, $size);
       }
-      .label__text--#{$size} {
-          font-size: map-get($fontSizes, $size);
-      }
+      // .label__text--#{$size} {
+      //     font-size: map-get($fontSizes, $size);
+      // }
   }

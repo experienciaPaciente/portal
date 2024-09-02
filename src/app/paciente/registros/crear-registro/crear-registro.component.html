@@ -1,15 +1,22 @@
   <form [formGroup]="form" class="main__wrapper" (ngSubmit)="createRegistro()">
   
-    <div class="panel__wrapper--main">
+    <div type="flex" class="panel__wrapper--main">
 
       <header class="panel__header--row">
-        <app-label size="lg" label="{{ editableTitle }}" prefix="{{ editableCategory }}" icon="fa-regular fa-heart"></app-label>
+          <app-label
+          size="lg"
+          [label]="editableTitle"
+          [prefix]="editableCategory"
+          [icon]="'fa-solid fa-' + editableIcon"
+          [iconColor]="editableColor"
+          direction="horizontal"
+        ></app-label>
         <app-badge type="success" label="Registro guardado" size="md"></app-badge>
       </header>
 
       <div class="form__input--wrapper">
-        <label for="titulo"></label>
-        <input type="text" formControlName="titulo">
+        <label for="titulo">Titulo</label>
+        <input type="text" formControlName="titulo" (change)="onTitleChange()">
       </div>
 
       <div class="form__input--wrapper">
@@ -39,13 +46,17 @@
           }
 
         <div class="form__input--wrapper">
-          <label for="categoria"
-            >categoria</label
-          >
-          <select name="" id="" formControlName="categoria">
-            <option value=""></option>
+          <label for="categoria">Categoría</label>
+          <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
+            <option value="" disabled selected>Select a category</option>
+            @for (categoria of categorias; track categoria) {
+              <option [value]="categoria">
+                {{ categoria }}
+              </option>
+            }
           </select>
         </div>
+          
         <div>
           <a
             class=""

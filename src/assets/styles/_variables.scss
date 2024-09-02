@@ -3,7 +3,7 @@
   --primary: #375B9F;
   --secondary: #6CBCFC;
   --tertiary: #F5C451;
-  --neutral: #363636;
+  --neutral: #8189B0;
   --primaryLight: #ECF5FF;
   --primaryLighter: #D7F6FF;
   --secondaryLight: #C7E2FF;
@@ -14,24 +14,24 @@
   --gradient: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
 
   // Semantics
-  --info: teal;
-  --info--light: #c9f0ff;
+  --info: #6CBCFC;
+  --info--light: #EFF7FF;
   --warning: #ff9a00;
-  --warning--light: #fff1dc;
-  --success: green;
-  --success--light: lightgreen;
+  --warning--light: #FCEBD0;
+  --success: #27AE60;
+  --success--light: #DCFBD2;
   --danger--dark: #b82e76;
   --danger: #ef5da8;
-  --danger--light: #ffe0f0;
+  --danger--light: #FAE5E4;
 
     /* Label */
   --label__height: fit-content;
   --label__padding: 1rem;
   --label__prefix--size: 14px;
-  --label__prefix--color: lightgray;
+  --label__prefix--color: var(--neutral);
   --label__title--size: 18px;
-  --label__title--color: black;
-  --label__subtitle--size: 16px;
+  --label__title--color: var(--primary);
+  --label__subtitle--size: 12px;
   --label__subtitle--color: gray;
 
   /* Page */
@@ -70,7 +70,7 @@
   --page__subfix--margin: 0 0 1rem 0;
 
   /* Header */
-  --header__height: 75px;
+  --header__height: 60px;
   --header__bg--color: rgba(255, 255, 255, 0.5);
   --header__padding--vertical: 0.5rem;
   --header__padding--horizontal: 2rem;
@@ -163,7 +163,6 @@
   --button__text--color: var(--primary);
   --button__bg--color: transparent;
   --button__opacity: 50%;
-  --button__icon--color: var(--primaryLighter);
   
   /* Badge */ 
   --badge__padding--vertical:
@@ -174,7 +173,8 @@
   --badge__background--color: rgba(255, 255, 255, 0.75);
 
   /* Icons */
-  --icon--size: 1rem;
+  --label__icon--size: 1rem;
+  --label__icon--color: var(--primary);
 
   /* Footer */
   --footer__height: 120px;
@@ -185,11 +185,16 @@
   /* Form */
   --form__gap--horizontal: 16px;
   --form__gap--vertical: 24px;
-  --form__label--size: 0.9rem;
+  --form__label--size: 18px;
   --form__label--weight: bold;
-  --form__label--color: gray;
+  --form__label--color: var(--neutral);
   --form__label--marginBottom: 0.5rem;
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
+  --input__font--size: 21px;
+  --input__font--color: var(--neutral);
+  --input__padding: 1rem;
+  --input__border: solid 2px var(--form__label--color);
+  --input__border--radius: 8px;
 
   /* Divider */
   --page__line--color: lightgray;

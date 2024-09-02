@@ -14,7 +14,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { Registro, Paciente } from 'src/app/models/registro';
+import { Registro } from 'src/app/models/registro';
 
 const PATH = 'registros';
 

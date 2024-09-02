@@ -3,12 +3,13 @@ header#main {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--secondary);
+    background-color: white;
     padding: var(--header__padding--vertical) var(--header__padding--horizontal);
     height: var(--header__height);
     width: 100vw;
     box-sizing: border-box;
-    position: absolute;
+    box-shadow: var(--shadow);
+    // position: absolute;
     top: 0;
     left: 0;
     z-index: 1;

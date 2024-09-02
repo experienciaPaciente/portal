@@ -41,14 +41,59 @@ export interface RegistroForm {
   
 })
 
-export class createRegistroComponent implements OnInit{
+export class createRegistroComponent{
 
-  ngOnInit(): void {
-    
+
+  ngOnInit() {
+    this.onCategoryChange(); // Set initial icon and color
+    this.editableTitle = this.form.controls['titulo'].value;
   }
 
-  editableTitle: string = 'titulo';
-  editableCategory: string = 'prefix';
+  onTitleChange() {
+    this.editableTitle = this.form.controls['titulo'].value;
+  }
+
+  onCategoryChange() {
+    const categoria = this.form.controls['categoria'].value;
+    if (categoria) {
+      const { icon, color } = this.categoriaMap[categoria];
+      this.editableIcon = icon;
+      this.editableColor = color; // Assign color from the map
+      this.editableCategory = categoria;
+    }
+  }
+
+  // considerar utilizar un enum o crear una colección para especialidades
+  categorias: string[] = [
+    'Consulta general',
+    'Laboratorios',
+    'Consulta pediátrica',
+    'Vacunación',
+    'Alergia e Inmunología',
+    'Cardiología'
+  ];
+
+  categoriaMap: { [key: string]: { icon: string; color: string } } = {
+    'Consulta general': { icon: 'user-md', color: 'blue' },
+    'Laboratorios': { icon: 'vial', color: 'purple' },
+    'Consulta pediátrica': { icon: 'child-reaching', color: 'green' },
+    'Vacunación': { icon: 'syringe', color: 'orange' },
+    'Alergia e Inmunología': { icon: 'allergies', color: 'yellow' },
+    'Cardiología': { icon: 'heart', color: 'red' },
+  };
+
+
+  // Properties for the Label component
+  editableTitle: string = '';
+  editableCategory: string = '';
+  editableIcon: string = 'heart';
+  editableColor: string = 'primary';
+
+
+  categoriaOptions = Object.keys(this.categoriaMap).map((key) => ({
+    value: key,
+    label: key.replace(/([A-Z])/g, ' $1').trim(),
+  }));
 
   // Zxing  
   availableDevices: MediaDeviceInfo[] | undefined;
@@ -142,7 +187,7 @@ export class createRegistroComponent implements OnInit{
       try {
         const registro = this.form.value as Registro;
         if (user) {
-          registro.userId = user.uid;  // Add the user's UID to the registro object
+          registro.userId = user.uid;
         }
         !this.registroId
           ? await this._registrosService.createRegistro(registro)
@@ -157,15 +202,15 @@ export class createRegistroComponent implements OnInit{
       const registro = await this._registrosService.getRegistro(id);
       if (!registro) return;
       this.form.setValue({
-        paciente: registro.paciente,
-        titulo: registro.descripcion,
-        descripcion: registro.descripcion,
-        categoria: registro.categoria,
-        validado: registro.validado,
-        estado: registro.estado,
-        emisor: registro.emisor,
-        fecha: registro.fecha,
-        hora: registro.hora,
+        paciente: registro.paciente || '',
+        titulo: registro.titulo || '',
+        descripcion: registro.descripcion || '',
+        categoria: registro.categoria || '',
+        validado: registro.validado ?? false,
+        estado: registro.estado || '',
+        emisor: registro.emisor || '',
+        fecha: registro.fecha || new Date(),
+        hora: registro.hora || '',
       });
     } catch (error) {}
   }

@@ -14,8 +14,8 @@ export interface Registro {
     categoria: string,
     validado: boolean,
     estado: string,
-    emisor: string,
+    emisor?: string,
     fecha: Date,
     hora: string,
-    adjuntos: string, // Array de imágenes
+    adjuntos: string[],
 }

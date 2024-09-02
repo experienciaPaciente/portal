@@ -1,22 +1,18 @@
 <header id="main">
     <section class="flex--row">
-      <img src="{{ imgBrand }}" alt="" width="45" height="45" />
+      <img src="{{ imgBrand }}" alt="" width="200" height="45" />
     </section>
     <!-- Badges -->
     <section class="header__wrapper--right">
-      @if (email) {
-        <span class="">{{ email }}</span>
-      }
-
-      <app-label 
+      @if (loggedUser) {
+        <app-label 
         icon="fa fa-user" 
         iconLabel="user" 
-        label="label" 
-        subtitle="subtitle" 
-        prefix="prefix" 
-        direction="vertical"
-        size="md">
+        label="{{ name }}" 
+        subtitle="{{ email }}" 
+        direction="horizontal"
+        size="xs">
       </app-label>
-  
+      }  
     </section>
 </header>

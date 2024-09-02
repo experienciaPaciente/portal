@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   loggedUser = true;
   email: string | null = null;
+  name: string | null = null;
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
   @Input() imgBrand: String = '';
@@ -21,8 +22,10 @@ export class HeaderComponent implements OnInit {
     this.authState$.subscribe(user => {
       if (user) {
         this.email = user.email;
+        this.name = user.displayName;
       } else {
         this.email = null;
+        this.name = 'Usuario';
       }
     });
   }

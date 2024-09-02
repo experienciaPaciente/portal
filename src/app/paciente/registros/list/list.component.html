@@ -3,7 +3,7 @@
         @for (data of records; track data) {
             <li class="{{ direction == 'vertical' ? 'list__wrapper--vertical' : 'list__wrapper--horizontal' }}" (click)="onItemSelected(data)">
                 <!-- simplificar valor icono pasando los prefijos de fontawesome a la logica -->
-               <app-label size="sm" icon="fa-regular fa-heart" label="{{ data.categoria }}" subtitle="{{ data.descripcion }}" direction="horizontal"></app-label>
+               <app-label size="xs" icon="fa-regular fa-heart" label="{{ data.categoria }}" subtitle="{{ data.descripcion }}" direction="horizontal"></app-label>
             </li>
         }
     </ul>
