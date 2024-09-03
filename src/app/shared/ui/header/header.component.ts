@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { LabelComponent } from '../label/label.component';
+import { ButtonComponent } from '../button/button.component';
 import { Auth, authState } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [LabelComponent],
+  imports: [ButtonComponent, LabelComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

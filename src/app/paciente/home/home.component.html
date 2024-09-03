@@ -2,9 +2,15 @@
   <nav class="layout__navbar">
       <app-header imgBrand="{{ imgSrc }}"></app-header>
   </nav>
-  <div class="layout__content">
-    <aside class="layout__sidebar">
+  <div class="layout__content" >
+    <aside type="flex" class="layout__sidebar">
+      <section type="wrap">
+        <div class="form__input-wrapper--col">
+          <label for="titulo">Buscador</label>
+          <input type="text" class="input__size--sm">
+        </div>
         <button severity="neutral" (click)="logOut()">Log-out!</button>
+      </section>
         <nav class="form__input-wrapper--row">
           @for(btn of buttons; track btn) {
             <app-card size="xs" [selectable]="true" [type]="'fill'" [severity]="'danger'" [selected]="btn.selectable"

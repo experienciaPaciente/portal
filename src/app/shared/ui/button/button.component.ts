@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LabelComponent } from '../label/label.component';
 
@@ -11,7 +12,8 @@ import { LabelComponent } from '../label/label.component';
 })
 export class ButtonComponent{
   // Contemplar agregar inputs de posicionamiento para type=fab
-  @Input() type: 'fill' | 'outline' | 'link' | 'fab' | 'icon' = 'fill';
+  @Input() variant: 'fill' | 'outline' | 'link' | 'fab' | 'icon' = 'fill';
+  @Input() type?: 'submit';
   @Input() severity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' = 'info';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
   @Input() icon?: string;
@@ -19,14 +21,12 @@ export class ButtonComponent{
   @Input() badgeCount?: number;
   @Input() prefix?: string;
   @Input() subtitle?: string;
+  @Input() path?: string;
 
-  @Output() clickEvent = new EventEmitter<void>();
+  constructor(private router: Router) {}
 
-
-  public buttonStyle: { [key: string]: string } = {};
-  public buttonIconClass: string = 'fa-regular fa-heart';
-
-  handleClick() {
-    this.clickEvent.emit();
+  navigatePath() {
+    this.router.navigate([this.path]);
   }
+
 }

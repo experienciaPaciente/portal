@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,28 +11,45 @@ import { CommonModule } from '@angular/common';
 export class LabelComponent implements OnChanges{
   @Input() icon?: string;
   @Input() iconLabel?: string;
-  @Input() iconColor: 'primary' | 'secondary' | 'tertiary' | 'neutral' | string = 'neutral';
+  @Input() severity: 'primary' | 'secondary' | 'tertiary' | 'neutral' | string = 'neutral';
   @Input() label?: string;
   @Input() subtitle?: string;
   @Input() prefix?: string;
   @Input() direction: 'horizontal' | 'vertical' = 'vertical';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
 
-  constructor(private elRef: ElementRef, private renderer: Renderer2) {}
+  @ViewChild('labelColor', { static: true }) labelColor!: ElementRef;
+
+
+  constructor() {}
+  
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['iconColor']) {
+    if (changes['severity']) {
       this.updateIconColor();
     }
   }
 
-  // Reveer: aplica color a todos los iconos presentes en la pantalla > Checkear card y uso de ElementRef
+  // Reveer: aplica severity a todos los iconos presentes en la pantalla > Checkear card y uso de ElementRef
   private updateIconColor() {
-    if (typeof this.iconColor === 'string') {
-      if (['primary', 'secondary', 'tertiary', 'neutral'].includes(this.iconColor)) {
-        document.documentElement.style.setProperty('--label__icon--color', `var(--${this.iconColor})`);
+    if (typeof this.severity === 'string') {
+      if (['primary', 'secondary', 'tertiary', 'neutral'].includes(this.severity)) {
+        this.labelColor.nativeElement.style.setProperty('--label__icon--color', `var(--${this.severity})`);
       } else {
-        document.documentElement.style.setProperty('--label__icon--color', this.iconColor);
+        this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.severity);
       }
     }
   }
+
+// Posible solución
+//   ngOnChanges() {
+//     if (this.severity && this.severity.length > 0) {
+//         this.labelColor.nativeElement.style.setProperty('--label__icon--color', `var(--${this.severity})`y);
+//     }
+
+//     if (this.severity && this.severity.length > 0 && this.custom === 'outlined') {
+//         this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.severity + '25');
+//     }
+// }
+
+
 }

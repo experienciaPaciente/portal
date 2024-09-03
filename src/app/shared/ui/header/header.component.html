@@ -6,13 +6,15 @@
     <section class="header__wrapper--right">
       @if (loggedUser) {
         <app-label 
-        icon="fa fa-user" 
-        iconLabel="user" 
-        label="{{ name }}" 
-        subtitle="{{ email }}" 
-        direction="horizontal"
-        size="xs">
-      </app-label>
+          icon="user" 
+          iconLabel="user" 
+          label="Nombre usuario" 
+          subtitle="{{ email }}" 
+          direction="horizontal"
+          size="xs">
+        </app-label>
+        <app-button [path]="'scan'" label="scan" size="xs" variant="link" icon="" severity="success">
+        </app-button>
       }  
     </section>
 </header>

@@ -1,7 +1,6 @@
-
 form,
 fieldset,
-section, div {
+section,aside, div {
   // considerar hacer un header / footer internos
   &[type='flex'] {
     display: flex;
@@ -27,20 +26,19 @@ section, div {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 
-  .form__input-wrapper {
+  .form__input-wrapper--col {
     display: flex;
     flex-direction: column;
     row-gap: var(--form__label--marginBottom);
-    flex-grow: 1;
-
-    &.form__signature {
-      max-width: 300px;
-    }
   }
 
   .form__input-wrapper--row {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    overflow-x: scroll;
+    gap: var(--card__gap);
   }
 
   fieldset {
@@ -74,11 +72,18 @@ section, div {
     
     ~ input, ~ textarea, ~ select {
       font-size: var(--input__font--size);
-      width: 100%;
+      // width: 100%;
+      flex: 1;
       color: var(--input__font--color);
       padding: var(--input__padding);
       border: var(--input__border);
       border-radius: var(--input__border--radius);
+
+      &.input__size--sm {
+        --input__font--size: 16px;
+        --input__padding: .5rem;
+        --input__border--radius: 4px;
+      }
     }
   }
 

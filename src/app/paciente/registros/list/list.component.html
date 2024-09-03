@@ -2,13 +2,12 @@
     <ul class="list__wrapper--{{ type }}">
         @for (data of records; track trackByFn(data)) {
             <li class="{{ direction == 'vertical' ? 'list__wrapper--vertical' : 'list__wrapper--horizontal' }}" (click)="onItemSelected(data)">
-                <!-- simplificar valor icono pasando los prefijos de fontawesome a la logica -->
                 <app-label
                 size="xs"
                 [label]="data.titulo"
                 [prefix]="data.categoria"
-                [icon]="'fa-solid fa-' + getIconForCategoria(data.categoria)"
-                [iconColor]="getColorForCategoria(data.categoria)"
+                [icon]="getIconForCategoria(data.categoria)"
+                [severity]="getColorForCategoria(data.categoria)"
                 direction="horizontal"
                 ></app-label>
             </li>

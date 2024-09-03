@@ -12,24 +12,11 @@ export const routes: Routes = [
     path: '', canActivate: [authGuard],
     loadComponent: () => import('./paciente/home/home.component'),
     children: [
-      {
-        path: 'item/:id',
-        component: DetailComponent
-      }
+      { path: 'item/:id', component: DetailComponent },
+      { path: 'registrar', component: createRegistroComponent },
+      { path: 'scan', component: ScanComponent },
+      { path: 'registros', component: ListComponent }
     ]
-  },
-  {
-    path: 'inicio',
-    component: HomeComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'registrar', component: createRegistroComponent
-  },
-  {
-    path: 'scan', component: ScanComponent
-  },
-  {
-    path: 'registros', component: ListComponent
   },
   // {
   //   path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)

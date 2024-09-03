@@ -93,7 +93,8 @@
       color: var(--label__subtitle--color);
       text-overflow: ellipsis;
       line-break: pre;
-      text-wrap: nowrap;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
   

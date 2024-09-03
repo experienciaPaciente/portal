@@ -47,14 +47,17 @@ app-button {
   }
     
   &[class*=__outline] {
-    --button__bg--color: none!important;
-    --button__border--color: var(--button__text--color);
-    border: solid 2px var(--button__border--color);
+    --button__border--color: var(--button__bg--color);
+    background: transparent!important;
+    border: solid 2px var(--button__bg--color);
+    color: var(--button__bg--color)!important;
   }
   
   &[class*=__link] {
-    --button__border--color: none!important;
-    --button__bg--color: none!important;
+    --button__border--color: var(--button__bg--color);
+    background: transparent!important;
+    border: none!important;
+    color: var(--button__bg--color)!important;
   }
 
   &[class*=__fab] {

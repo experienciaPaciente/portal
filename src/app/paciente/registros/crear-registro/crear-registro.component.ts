@@ -13,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Auth } from '@angular/fire/auth';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
+import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -36,7 +37,8 @@ export interface RegistroForm {
     RouterLink,
     ZXingScannerModule,
     LabelComponent,
-    BadgeComponent
+    BadgeComponent,
+    ButtonComponent
   ],
   
 })
@@ -86,7 +88,7 @@ export class createRegistroComponent{
   editableTitle: string = '';
   editableCategory: string = '';
   editableIcon: string = 'heart';
-  editableColor: string = 'primary';
+  editableColor: string = '';
 
 
   categoriaOptions = Object.keys(this.categoriaMap).map((key) => ({

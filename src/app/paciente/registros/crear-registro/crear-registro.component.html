@@ -7,19 +7,19 @@
           size="lg"
           [label]="editableTitle"
           [prefix]="editableCategory"
-          [icon]="'fa-solid fa-' + editableIcon"
-          [iconColor]="editableColor"
+          [icon]="editableIcon"
+          [severity]="editableColor"
           direction="horizontal"
         ></app-label>
         <app-badge type="success" label="Registro guardado" size="md"></app-badge>
       </header>
 
-      <div class="form__input--wrapper">
+      <div class="form__input-wrapper--col">
         <label for="titulo">Titulo</label>
-        <input type="text" formControlName="titulo" (change)="onTitleChange()">
+        <input type="text" formControlName="titulo" (keyup)="onTitleChange()">
       </div>
 
-      <div class="form__input--wrapper">
+      <div class="form__input-wrapper--col">
         <label for="descripcion"
           >Description (optional)</label
         >
@@ -34,7 +34,7 @@
       </div>
 
         @if (qrResultString) {
-          <div class="form__input--wrapper">
+          <div class="form__input-wrapper--col">
             <label for="paciente">Registro de esta consulta</label>
             <textarea 
               id="paciente"
@@ -45,7 +45,7 @@
           </div>
           }
 
-        <div class="form__input--wrapper">
+        <div class="form__input-wrapper--col">
           <label for="categoria">Categoría</label>
           <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
             <option value="" disabled selected>Select a category</option>
@@ -65,21 +65,24 @@
             Back to dashboard
           </a>
   
-          <button
-            class=""
+          <app-button
+            severity="success"
             type="submit"
+            label="Guardar registro"
+            size="xs"
+
           >
             @if (registroId) {
               Edit your registro
             } @else {
               Create your registro
             }
-          </button>
+          </app-button>
         </div>
     </section>
 
     <section class="panel__wrapper--aside">
-      <div class="form__input--wrapper">
+      <div class="form__input-wrapper--col">
         <label for="fecha"
           >Fecha</label
         >
@@ -91,7 +94,7 @@
           formControlName="fecha"
         />
       </div>
-    <div class="form__input--wrapper">
+    <div class="form__input-wrapper--col">
       <label for="emisor"
         >emisor</label
       >
@@ -103,12 +106,16 @@
         formControlName="emisor"
       />
     </div>
-    <div class="form__input--wrapper">
+    <div class="form__input-wrapper--col">
       <label for="validado"
         >Validado</label
       >
       <input type="checkbox" formControlName="validado">
     </div>
-
+    
+    <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+    [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+    
     </section> 
   </form>

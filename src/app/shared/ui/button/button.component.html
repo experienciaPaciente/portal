@@ -1,16 +1,13 @@
 <button 
-  [ngClass]="['button__' + type + '--' + severity]" 
-  (click)="handleClick()">
-  
-  <app-label 
-    [icon]="buttonIconClass"
-    [iconColor]="'white'"
-    [label]="label"
-    [subtitle]="subtitle" 
-    [prefix]="prefix" 
-    [direction]="'horizontal'"
-    [size]="size">
-  </app-label>
-  
+  type="{{ type }}" [ngClass]="['button__' + variant + '--' + severity]" (click)="navigatePath()">
+    <app-label 
+      [icon]="icon"
+      [severity]="severity"
+      [label]="label"
+      [subtitle]="subtitle" 
+      [prefix]="prefix" 
+      [direction]="'horizontal'"
+      [size]="size">
+    </app-label>
   <span *ngIf="badgeCount" class="button__badge">{{ badgeCount }}</span>
 </button>

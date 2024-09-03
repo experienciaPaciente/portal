@@ -87,6 +87,48 @@ app-card {
           border: solid 2px var(--card__border--color);     
         }
       }
+
+      // Severity
+      &--success {
+        --card__border--color: var(--success);
+        border: solid 2px var(--card__border--color);
+        
+        &:hover {
+          --card__bg--color: var(--success-light);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--success);     
+        }
+      }
+      
+      &--warning {
+        --card__border--color: var(--warning);
+        
+        &:hover {
+          --card__bg--color: var(--warning--light);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+      
+      &--danger {
+        --card__border--color: var(--danger);
+        --label__icon--color: var(--danger);
+        
+        &:hover {
+          --card__bg--color: var(--danger--light);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
     }
     // Types
     &.card__outline {
