@@ -10,47 +10,62 @@
 }
 
 .label {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
   
-    &.horizontal {
-      flex-direction: row;
+  // Direccionalidad
+  &.horizontal {
+    flex-direction: row;
+    align-items: center;
+
+    .label__icon {
+      margin-right: 0.5rem;
+    }
+  }
+  
+  &.vertical {
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
         
     &.xs {
-      --label__prefix--size: 14px;
-      --label__subtitle--size: 14px;
-      --label__icon--size: 18px;
+      --label__prefix--size: 10px;
+      --label__title--size: 12px;
+      --label__subtitle--size: 10px;
+      --label__icon--size: 16px;
     }
     
     &.sm {
-      --label__prefix--size: 18px;
-      --label__subtitle--size: 18px;
+      --label__prefix--size: 12px;
+      --label__title--size: 14px;
+      --label__subtitle--size: 12px;
       --label__icon--size: 20px;
     }
     
     &.md {
-      --label__prefix--size: 20px;
-      --label__subtitle--size: 20px;
+      --label__prefix--size: 14px;
+      --label__title--size: 16px;
+      --label__subtitle--size: 14px;
       --label__icon--size: 24px;
     }
     
     &.lg {
-      --label__prefix--size: 24px;
-      --label__subtitle--size: 24px;
+      --label__prefix--size: 16px;
+      --label__title--size: 20px;
+      --label__subtitle--size: 16px;
       --label__icon--size: 56px;
     }
-
+    
     &.xl {
-      --label__prefix--size: 36px;
-      --label__subtitle--size: 36px;
+      --label__prefix--size: 20px;
+      --label__title--size: 24px;
+      --label__subtitle--size: 20px;
       --label__icon--size: 64px;
     }
 
     &__icon { 
       @extend %baseFlex;     
-      margin-right: 0.5rem;
       padding: .5rem;
       border: solid 2px var(--label__icon--color);
       border-radius: 50%;
@@ -76,6 +91,9 @@
     &__subtitle {
       font-size: var(--label__subtitle--size);
       color: var(--label__subtitle--color);
+      text-overflow: ellipsis;
+      line-break: pre;
+      text-wrap: nowrap;
     }
   }
   

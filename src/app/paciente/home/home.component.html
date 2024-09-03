@@ -4,7 +4,18 @@
   </nav>
   <div class="layout__content">
     <aside class="layout__sidebar">
-        <button (click)="logOut()">Log-out!</button>
+        <button severity="neutral" (click)="logOut()">Log-out!</button>
+        <nav class="form__input-wrapper--row">
+          @for(btn of buttons; track btn) {
+            <app-card size="xs" [selectable]="true" [type]="'fill'" [severity]="'danger'" [selected]="btn.selectable"
+              (click)="btn.selectable = !btn.selectable">
+                <!-- <app-badge [type]="'warning'">Badge</app-badge> -->
+                <app-label size="xs" [label]="btn.label" [subtitle]="btn.path" [icon]="btn.icon"></app-label>
+                <!-- <app-button severity="warning" [label]="'test'"></app-button> -->
+            </app-card>
+          }
+        </nav>
+
         <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
         <!-- <app-navbar [items]="buttons"></app-navbar> -->
     </aside>

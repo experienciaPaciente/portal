@@ -25,11 +25,11 @@ export class LabelComponent implements OnChanges{
     }
   }
 
-  // Reveer: aplica color a todos los iconos presentes en la pantalla
+  // Reveer: aplica color a todos los iconos presentes en la pantalla > Checkear card y uso de ElementRef
   private updateIconColor() {
     if (typeof this.iconColor === 'string') {
       if (['primary', 'secondary', 'tertiary', 'neutral'].includes(this.iconColor)) {
-        document.documentElement.style.setProperty('--label__icon--color', `var(--icon-${this.iconColor})`);
+        document.documentElement.style.setProperty('--label__icon--color', `var(--${this.iconColor})`);
       } else {
         document.documentElement.style.setProperty('--label__icon--color', this.iconColor);
       }

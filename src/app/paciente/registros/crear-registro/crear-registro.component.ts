@@ -74,7 +74,7 @@ export class createRegistroComponent{
   ];
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
-    'Consulta general': { icon: 'user-md', color: 'blue' },
+    'Consulta general': { icon: 'user', color: 'blue' },
     'Laboratorios': { icon: 'vial', color: 'purple' },
     'Consulta pediátrica': { icon: 'child', color: 'green' },
     'Vacunación': { icon: 'syringe', color: 'orange' },

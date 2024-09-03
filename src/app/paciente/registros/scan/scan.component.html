@@ -4,12 +4,36 @@
 [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
 (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
 
+<section class="btn__wrapper">
 
-<app-button 
-[type]="'fill'"
-[severity]="'success'"
-[size]="'xs'"
-[icon]="'fa-regular fa-heart'"
-[label]="'Submit'"
-[direction]="'horizontal'">
-</app-button>
+    <app-button 
+    [type]="'fill'"
+    [severity]="'success'"
+    [size]="'xs'"
+    [icon]="'heart'"
+    [label]="'Submit'">
+    </app-button>
+    <app-button 
+    [type]="'link'"
+    [severity]="'danger'"
+    [size]="'xs'"
+    [icon]="'heart'"
+    [label]="'Submit'">
+    </app-button>
+    <app-button 
+    [type]="'fill'"
+    [severity]="'info'"
+    [size]="'xs'"
+    [icon]="'heart'"
+    [label]="'Submit'">
+    </app-button>
+    <app-button 
+    [type]="'outline'"
+    [severity]="'warning'"
+    [size]="'xs'"
+    [icon]="'heart'"
+    [label]="'Submit'">
+    </app-button>
+
+    
+</section>

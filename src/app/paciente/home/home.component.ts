@@ -5,6 +5,10 @@ import { createRegistroComponent } from '../registros/crear-registro/crear-regis
 import { ListComponent } from '../registros/list/list.component';
 import { NavbarComponent } from './../../shared/ui/navbar/navbar.component';
 import { HeaderComponent } from './../../shared/ui/header/header.component';
+import { LabelComponent } from 'src/app/shared/ui/label/label.component';
+import { CardComponent } from 'src/app/shared/ui/card/card.component';
+import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
+import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +16,18 @@ import { HeaderComponent } from './../../shared/ui/header/header.component';
   imports: [
     createRegistroComponent,
     ListComponent,
-    RouterOutlet, HeaderComponent, NavbarComponent
+    RouterOutlet, HeaderComponent, NavbarComponent,
+    CardComponent,
+    LabelComponent,
+    ButtonComponent,
+    BadgeComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export default class HomeComponent {
   title = 'portal-paciente';
-  imgSrc = './assets/img/experienciaPaciente__logo--h.svg'
+  imgSrc = './assets/img/experienciaPaciente__logo--h.svg';
 
   isDetailView: boolean = false;
 
@@ -38,22 +46,34 @@ export default class HomeComponent {
     {
       icon: 'heart',
       label: 'opcion A',
-      path: 'inicio'
+      path: 'inicio',
+      severity: 'info',
+      type: 'fill',
+      selectable: false
     },
     {
       icon: 'user',
       label: 'opcion B',
-      path: 'registrar'
+      path: 'registrar',
+      severity: 'warning',
+      type: 'outline',
+      selectable: true
     },
     {
       icon: 'file-pdf',
       label: 'opcion C',
-      path: '/auth/sign-in'
+      path: '/auth/sign-in',
+      severity: 'danger',
+      type: 'fill',
+      selectable: true
     },
     {
       icon: 'file',
       label: 'opcion D',
-      path: '/auth/sign-up'
+      path: '/auth/sign-up',
+      severity: 'neutral',
+      type: 'fill',
+      selectable: true
     }
   ]
 

@@ -1,12 +1,14 @@
+@import './assets/styles/mixins';
 @import './assets/styles/variables';
 @import './assets/styles/normalize';
 @import './assets/styles/forms';
 @import './assets/styles/layout';
 
 // Components
-@import './app/shared/ui/button/button.component.scss';
-@import './app/shared/ui/label/label.component.scss';
 @import './app/shared/ui/badge/badge.component.scss';
+@import './app/shared/ui/button/button.component.scss';
+@import './app/shared/ui/card/card.component.scss';
+@import './app/shared/ui/label/label.component.scss';
 
 // Pages
 // @import './app/shared/ui/header/header.component.scss';

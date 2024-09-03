@@ -2,7 +2,7 @@
 <div class="label" [ngClass]="[size, direction, iconColor]">
   @if (icon) {
     <div class="label__icon">
-      <i [class]="icon" [attr.aria-label]="iconLabel"></i>
+      <i class="fa-solid fa-{{ icon }}" [attr.aria-label]="iconLabel"></i>
     </div>
   }
   <div class="label__content">

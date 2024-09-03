@@ -1,94 +1,143 @@
-.button {
-    padding: var(--button__padding);
-    font-size: var(--button__font--size);
-    border-radius: var(--button__border--radius);
-    border: var(--button__border);
-    cursor: pointer;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-  
-    &__type {
-      &--fill {
-        background-color: var(--button__bg--color);
-        color: white;
-        border: none;
-      }
-  
-      &--outline {
-        background-color: transparent;
-        border-color: var(--label__title--color);
-        color: var(--label__title--color);
-      }
-  
-      &--link {
-        background-color: transparent;
-        color: var(--label__title--color);
-        border: none;
-      }
-  
-      &--icon {
-        background-color: transparent;
-        color: var(--label__title--color);
-        padding: 0.5rem;
-      }
-  
-      &--fab {
-        background-color: var(--tertiary);
-        color: var(--label__title--color);
-        position: absolute;
-        top: -60px;
-        left: calc(220px / 2);
-      }
+// Considerar mover a layout.scss
+.btn__wrapper {
+  --panel__direction: row;
+  --list__item--gap: .5rem;
+  display: flex;
+  flex-direction: var(--panel__direction);
+  // justify-content: space-between;
+  gap: var(--list__item--gap);
+}   
+
+app-button {
+
+  %baseBtn {
+      // display: flex;
+      // flex-direction: row;
+      padding: var(--button__padding);
+      background: var(--button__bg--color);
+      font-size: var(--button__font--size);
+      color: var(--button__text--color);
+      text-align: center;
+      // border: none;
+      border-radius: var(--button__border--radius)
+  }
+
+  > button {
+    --button__padding: .75rem 1.25rem;
+    --button__font--size: 14px;
+    @extend %baseBtn;
+    
+    &:hover {
+        // background: darken(rgba(122, 122, 122, .2), 10%);
+        filter: brightness(120%);
+        cursor: pointer;
+    }
+    
+    &:active {
+        // background: darken(rgba(122, 122, 122, .2), 10%);
+        filter: brightness(95%);
+        cursor: grab;
     }
 
-    &__severity {
-
-      &--success {
-        --button__bg--color: var(--success);
-        --label__title--color: white;
-      }
-      &--warning {
-
-      }
-      &--danger {
-
-      }
-      &--info {
-
-      }
-      &--neutral {
-
-      }
-    }
-
-    &__size {
-      &--sm {
-        padding: 0.5rem 1rem;
-      }
+  // Types
+  &[class*=__fill] {
+    --button__border--color: transparent!important;
+    border: solid 2px var(--button__border--color);
+    --button__border--color: none!important;
+  }
     
-      &--md {
-        padding: 0.75rem 1.25rem;
-      }
-    
-      &--lg {
-        padding: 1rem 1.5rem;
-      }
-    
-      &--full {
-        width: 100%;
-      }
-    }
+  &[class*=__outline] {
+    --button__bg--color: none!important;
+    --button__border--color: var(--button__text--color);
+    border: solid 2px var(--button__border--color);
+  }
   
-    &__badge {
-      background-color: var(--danger);
-      color: white;
-      border-radius: 50%;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-      position: absolute;
-      top: -0.25rem;
-      right: -0.25rem;
+  &[class*=__link] {
+    --button__border--color: none!important;
+    --button__bg--color: none!important;
+  }
+
+  &[class*=__fab] {
+    background-color: var(--tertiary);
+    color: var(--label__title--color);
+    position: absolute;
+    top: -60px;
+    left: calc(220px / 2);
+  }
+
+  &[class*=__icon] {
+    background-color: transparent;
+    color: var(--label__title--color);
+    padding: 0.5rem;
+  }
+
+  // Severities
+  &[class$=--primary] {
+      --button__text--color: inherit;
+      --button__border--color: var(--primary);
+      --button__bg--color: var(--primary);
+    }
+    
+    &[class$=--secondary] {
+      --button__text--color: inherit;
+      --button__border--color: var(--secondary);
+      --button__bg--color: var(--secondary);
+    }
+    
+    &[class$=--tertiary] {
+      --button__text--color: inherit;
+      --button__border--color: var(--tertiary);
+      --button__bg--color: var(--tertiary);
+  }
+
+  &[class$=--success] {
+      --button__text--color: inherit;
+      --button__bg--color: var(--success);
+  }
+
+  &[class$=--warning] {
+    --button__text--color: inherit;
+    --button__bg--color: var(--warning);
+  }
+
+  &[class$=--danger] {
+    --button__text--color: inherit;
+    --button__bg--color: var(--danger);
+  }
+
+  &[class$=--info] {
+    --button__text--color: inherit;
+    --button__bg--color: var(--info);
+  }
+
+  &[class$=--neutral] {
+    --button__text--color: inherit;
+    --button__bg--color: var(--neutral);
+  }
+
+  // Sizes: el label interno dicta el tamaño del botón
+  &__size {
+
+    &--xs {
+      
+    }
+
+    &--sm {
+
+    }
+
+    &--md {
+
+    }
+
+    &--lg {
+
+    }
+
+    &--xl {
+
     }
   }
+  }
+}
   

@@ -1,6 +1,5 @@
 <button 
-  class="button" 
-  [ngClass]="['button__type--' + type, 'button__severity--' + severity, 'button__size--' + size]" 
+  [ngClass]="['button__' + type + '--' + severity]" 
   (click)="handleClick()">
   
   <app-label 
@@ -9,7 +8,7 @@
     [label]="label"
     [subtitle]="subtitle" 
     [prefix]="prefix" 
-    [direction]="direction"
+    [direction]="'horizontal'"
     [size]="size">
   </app-label>
   
