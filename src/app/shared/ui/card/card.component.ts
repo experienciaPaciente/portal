@@ -16,7 +16,7 @@ export class CardComponent implements OnChanges, AfterViewInit {
   @Input() selectable = false;
   @Input() align: 'start' | 'end' | 'center' = 'center';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'block' = 'md';
-  @Input() severity: 'info' | 'success' | 'warning' | 'danger' | 'neutral' = 'neutral';
+  @Input() severity: 'info' | 'success' | 'warning' | 'danger' | 'neutral' | 'custom' = 'neutral';
   @Input() type: 'fill' | 'outline' = 'outline';
   @Input() direction: 'column' | 'row' = 'column';
   @Input() color = '';
@@ -34,17 +34,22 @@ export class CardComponent implements OnChanges, AfterViewInit {
     if (this.label) {
       this.label.direction = this.direction;
     }
+    if (this.severity === 'custom' && this.color) {
+      this.applyCustomColor();
+    }
   }
 
+  private applyCustomColor(): void {
+    this.cardColor.nativeElement.style.setProperty('--card__border--color', this.color);
+    this.cardColor.nativeElement.style.setProperty('--card__bg--color', `${this.color}25`);
+    
+    if (this.label) {
+      this.label.severity = this.color;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.color) {
-      this.cardColor.nativeElement.style.setProperty('--card__bg--color', this.color);
 
-      if (this.type === 'outline') {
-        this.cardColor.nativeElement.style.setProperty('--card__bg--color', `${this.color}25`);
-      }
-    }
     // Util para comportamietno mobile o sidebar retráctil 
     if (changes['direction'] && this.label) {
       this.label.direction = this.direction;

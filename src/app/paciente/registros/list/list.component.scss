@@ -20,10 +20,10 @@ ul {
         // padding: var(--list__item--padding);
         width: 100%;
         box-sizing: border-box;
-        height: fit-content;
+        height: 72px;
         // box-shadow: 0px 2px 4px 2px lightgray;
-        // border-radius: 6px;
-        border-bottom: solid 1px var(--primary);
+        border-radius: var(--card__border--radius);
+        border-bottom: solid 1px var(--primaryLight);
     }
 
     &.list__item--horizontal {

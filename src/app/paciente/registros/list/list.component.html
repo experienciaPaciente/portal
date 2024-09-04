@@ -3,7 +3,7 @@
     <ul class="list__wrapper--{{ type }}">
         @for (data of records; track trackByFn(data)) {
             <li (click)="onItemSelected(data)">
-                <app-card direction="row" [selectable]="true" [type]="'fill'">
+                <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
                     <app-label
                     size="xs"
                     [label]="data.titulo"

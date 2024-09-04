@@ -29,12 +29,12 @@ export class ListComponent implements OnInit {
   @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
-    'Consulta general': { icon: 'user-md', color: 'blue' },
-    'Laboratorios': { icon: 'vial', color: 'purple' },
-    'Consulta pediátrica': { icon: 'baby', color: 'green' },
-    'Vacunación': { icon: 'syringe', color: 'orange' },
-    'Alergia e Inmunología': { icon: 'allergies', color: 'yellow' },
-    'Cardiología': { icon: 'heart', color: 'red' },
+    'Consulta general': { icon: 'user-md', color: '#FD5B71' },
+    'Laboratorios': { icon: 'vial', color: '#6DDDFC' },
+    'Consulta pediátrica': { icon: 'baby', color: '#A2BDFF' },
+    'Vacunación': { icon: 'syringe', color: '#FF9110' },
+    'Alergia e Inmunología': { icon: 'allergies', color: '#208AF2' },
+    'Cardiología': { icon: 'heart', color: '#1BC5DD' },
   };
 
   constructor(private registroService: RegistrosService, private router: Router) {

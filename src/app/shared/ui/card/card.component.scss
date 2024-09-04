@@ -8,7 +8,7 @@ app-card {
     flex-direction: var(--card__direction);
     justify-content: var(--card__wrapper--justify);
     align-items: var(--card__wrapper--align);
-    background-color: var(--card__bg--color);
+    background-color: transparent;
     // box-shadow: var(--card__shadow);
     padding: var(--card__padding);
     gap: var(--card__gap);
@@ -16,7 +16,7 @@ app-card {
     border-radius: var(--card__border--radius);
     box-sizing: border-box;
     width: 100%;
-    // height: var(--card__height);
+    height: var(--card__height);
   }
   
   .card {
@@ -27,25 +27,38 @@ app-card {
       --card__wrapper--justify: space-between;
       --card__text--align: left;
 
-    .card__inner-wrapper {
+      .card__inner-wrapper {
 
-      &--left {
-        width: 180px;
+        &--left {
+          width: 180px;
+        }
+
+        &--right {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+          width: fit-content;
+        }
       }
-
-      &--right {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        width: fit-content;
+      
+      &__wrapper--column {
+        --card__direction: column;
       }
     }
-    
-    &__wrapper--column {
-      --card__direction: column;
-    }
 
-
+    // Custom    
+    &.card__fill--custom, &.card__outline--custom {
+      --card__bg--color: var(--customColor);
+      --card__border--color: var(--customColor);
+      
+      &:hover {
+        background-color: var(--card__bg--color);
+      }
+  
+      &:focus {
+        border: solid 2px var(--customColor);
+      }
     }
 
     // Types
@@ -267,15 +280,14 @@ app-card {
           border: solid 2px var(--card__border--color);     
         }
       }
-
-
-      &.card--selected {
-        box-shadow: inset 0 0 0 2px var(--color-baseDarker);
-        border: solid 2px var(--card__border--color);     
-        background-color: var(--card__bg--color);
-      }
     }
     
+  &.card--selected {
+    // box-shadow: inset 0 0 0 1px var(--card__border--color);
+    border: solid 2px var(--card__border--color);     
+    background-color: var(--card__bg--color);
+  }
+
   &--selectable {
     cursor: pointer;
   }
