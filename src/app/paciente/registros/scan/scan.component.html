@@ -1,39 +1,5 @@
-<p>scan works!</p>
     
-<zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice"
-[formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-(camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
-
-<section class="btn__wrapper">
-
-    <app-button 
-    [variant]="'fill'"
-    [severity]="'success'"
-    [size]="'xs'"
-    [icon]="'heart'"
-    [label]="'Submit'">
-    </app-button>
-    <app-button 
-    [variant]="'link'"
-    [severity]="'danger'"
-    [size]="'xs'"
-    [icon]="'heart'"
-    [label]="'Submit'">
-    </app-button>
-    <app-button 
-    [variant]="'fill'"
-    [severity]="'info'"
-    [size]="'xs'"
-    [icon]="'heart'"
-    [label]="'Submit'">
-    </app-button>
-    <app-button 
-    [variant]="'outline'"
-    [severity]="'warning'"
-    [size]="'xs'"
-    [icon]="'heart'"
-    [label]="'Submit'">
-    </app-button>
-
+    <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+    [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
     
-</section>

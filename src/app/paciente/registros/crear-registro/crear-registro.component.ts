@@ -1,10 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   ReactiveFormsModule
 } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { RegistrosService,  } from './../../../core/services/registros.service';
 import { Registro } from './../../../models/registro';
 import { BarcodeFormat } from '@zxing/library';
@@ -40,15 +40,26 @@ export interface RegistroForm {
     BadgeComponent,
     ButtonComponent
   ],
-  
 })
 
-export class createRegistroComponent{
+export class createRegistroComponent implements OnInit{
+  qrData: string | null = null;
 
+  constructor(
+    private route: ActivatedRoute,
+    // private auth: Auth
+  ) {}
 
   ngOnInit() {
     this.onCategoryChange(); // Set initial icon and color
     this.editableTitle = this.form.controls['titulo'].value;
+
+    this.route.queryParams.subscribe(params => {
+      const qrData = params['qrData'];
+      if (qrData) {
+        this.form.get('paciente')?.setValue(qrData);
+      }
+    });
   }
 
   onTitleChange() {

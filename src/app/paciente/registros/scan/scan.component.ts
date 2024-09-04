@@ -1,25 +1,31 @@
 import { Component } from '@angular/core';
+import {
+  ReactiveFormsModule
+} from '@angular/forms';
+import { RouterLink, Router } from '@angular/router';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BehaviorSubject } from 'rxjs';
-import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
+import { LabelComponent } from 'src/app/shared/ui/label/label.component';
+import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
+import { ButtonComponent } from 'src/app/shared/ui/button/button.component'
 
 @Component({
   selector: 'app-scan',
+  templateUrl: './scan.component.html',
+  styleUrls: ['./scan.component.scss'],
   standalone: true,
-  imports: [    
-    // ReactiveFormsModule,
-    // RouterLink,
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
     ZXingScannerModule,
-    // LabelComponent,
+    LabelComponent,
+    BadgeComponent,
     ButtonComponent
   ],
-  templateUrl: './scan.component.html',
-  styleUrl: './scan.component.scss'
 })
-export class ScanComponent {
 
-  // Zxing  
+export class ScanComponent {
   availableDevices: MediaDeviceInfo[] | undefined;
   currentDevice: MediaDeviceInfo | any = null;
   
@@ -33,16 +39,20 @@ export class ScanComponent {
   hasDevices: boolean | undefined;
   hasPermission: boolean | undefined;
 
-  qrResultString: string | undefined;
+  qrResultString: string | null = null;
+  // qrResultString!: string;
 
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
-  tryHarder = false;
+  tryHarder = false;  
 
-  clearResult(): void {
-    this.qrResultString = '';
+  constructor(private router: Router) {}
+
+  onCodeResult(resultString: string): void {
+    this.qrResultString = resultString;
+    this.router.navigate(['/registrar'], { queryParams: { qrData: this.qrResultString } });
   }
-  
+
   onHasPermission(has: boolean) {
     this.hasPermission = has;
   }

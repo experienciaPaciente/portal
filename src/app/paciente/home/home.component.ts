@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { createRegistroComponent } from '../registros/crear-registro/crear-registro.component';
+import { ScanComponent } from '../registros/scan/scan.component';
 import { ListComponent } from '../registros/list/list.component';
 import { NavbarComponent } from './../../shared/ui/navbar/navbar.component';
 import { HeaderComponent } from './../../shared/ui/header/header.component';
@@ -16,6 +17,7 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
   imports: [
     createRegistroComponent,
     ListComponent,
+    ScanComponent,
     RouterOutlet, HeaderComponent, NavbarComponent,
     CardComponent,
     LabelComponent,
