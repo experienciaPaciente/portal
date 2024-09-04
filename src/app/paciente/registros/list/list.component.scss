@@ -1,8 +1,6 @@
 ul {
     width: 100%;
-    // padding: 1rem;
     box-sizing: border-box;
-    gap: 1rem;
 
     &.list__wrapper--flex {
         display: flex;
@@ -18,12 +16,14 @@ ul {
     li {
         display: flex;
         row-gap: var(--list__item--gap);
-        padding: var(--list__item--padding);
+        column-gap: var(--list__item--gap);
+        // padding: var(--list__item--padding);
         width: 100%;
         box-sizing: border-box;
         height: fit-content;
-        box-shadow: 0px 2px 4px 2px lightgray;
-        border-radius: 6px;
+        // box-shadow: 0px 2px 4px 2px lightgray;
+        // border-radius: 6px;
+        border-bottom: solid 1px var(--primary);
     }
 
     &.list__item--horizontal {

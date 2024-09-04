@@ -21,9 +21,10 @@
       height: var(--page__body--height);
       width: 380px;
       padding: var(--panel__padding);
-      background-color: var(--secondaryLight);
+      background-color: white;
       overflow-y: auto;
       box-shadow: 2px 0 4px var(--shadow);
+      z-index: 0;
     }
   
     &__main {

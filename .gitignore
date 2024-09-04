@@ -142,7 +142,13 @@ testem.log
 /typings
 
 # environments
+/environments/environment.prod.ts
+/environments/environment.ts
 /environments/*
+/environments
+environments/
+environments
+*.prod.ts
 
 # System files
 .DS_Store

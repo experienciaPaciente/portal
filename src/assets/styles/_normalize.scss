@@ -21,11 +21,13 @@ html {
  */
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', 'Montserrat', sans-serif;
 	margin: 0;
 	// height: var(--page__body--height);
 	padding: var(--page__body--padding);
 	gap: var(--page__gap--vertical);
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 /**

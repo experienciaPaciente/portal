@@ -7,11 +7,14 @@ import { Auth, authState } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CardComponent } from 'src/app/shared/ui/card/card.component';
+import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
+import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ItemComponent, LabelComponent, CommonModule],
+  imports: [ItemComponent, LabelComponent, CommonModule, CardComponent, BadgeComponent, ButtonComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
@@ -47,7 +50,6 @@ export class ListComponent implements OnInit {
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
   }
-
 
   getIconForCategoria(categoria: string): string {
     return this.categoriaMap[categoria]?.icon || 'question-circle'; // Default icon

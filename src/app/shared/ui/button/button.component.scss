@@ -1,4 +1,4 @@
-// Considerar mover a layout.scss
+// Checkear uso y considerar mover a layout.scss
 .btn__wrapper {
   --panel__direction: row;
   --list__item--gap: .5rem;
@@ -11,14 +11,11 @@
 app-button {
 
   %baseBtn {
-      // display: flex;
-      // flex-direction: row;
       padding: var(--button__padding);
       background: var(--button__bg--color);
       font-size: var(--button__font--size);
       color: var(--button__text--color);
       text-align: center;
-      // border: none;
       border-radius: var(--button__border--radius)
   }
 
@@ -55,6 +52,7 @@ app-button {
   
   &[class*=__link] {
     --button__border--color: var(--button__bg--color);
+    --button__padding: 0;
     background: transparent!important;
     border: none!important;
     color: var(--button__bg--color)!important;

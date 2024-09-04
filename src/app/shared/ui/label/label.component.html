@@ -1,7 +1,7 @@
 <!-- Unificar criterios de anidación de clases utilizando BEM -->
 <div #labelColor class="label" [ngClass]="[size, direction, severity]">
   @if (icon) {
-    <div class="label__icon">
+    <div class="label__icon" [ngClass]="label ? '' : 'icon__border--none'">
       <i class="fa-solid fa-{{ icon }}" [attr.aria-label]="iconLabel"></i>
     </div>
   }

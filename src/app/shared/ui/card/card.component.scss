@@ -1,24 +1,52 @@
 @import './../../../../assets/styles/mixins';
+
 app-card {
+  width: 100%;
 
   %baseCard {
     display: flex;
     flex-direction: var(--card__direction);
-    justify-content: center;
-    align-items: center;
+    justify-content: var(--card__wrapper--justify);
+    align-items: var(--card__wrapper--align);
     background-color: var(--card__bg--color);
-    box-shadow: var(--card__shadow);
+    // box-shadow: var(--card__shadow);
     padding: var(--card__padding);
     gap: var(--card__gap);
     text-align: var(--card__text--align);
     border-radius: var(--card__border--radius);
     box-sizing: border-box;
+    width: 100%;
     // height: var(--card__height);
   }
   
   .card {
-    
     @extend %baseCard;
+
+    &__wrapper--row {
+      --card__direction: row;
+      --card__wrapper--justify: space-between;
+      --card__text--align: left;
+
+    .card__inner-wrapper {
+
+      &--left {
+        width: 180px;
+      }
+
+      &--right {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: fit-content;
+      }
+    }
+    
+    &__wrapper--column {
+      --card__direction: column;
+    }
+
+
+    }
 
     // Types
     &.card__fill {
@@ -252,26 +280,25 @@ app-card {
     cursor: pointer;
   }
 
-
     // Sizes
     &--xs {
-      --card__padding: 0.2rem 1.2rem;
+      --card__padding: 0.2rem;
     }
 
     &--sm {
-      --card__padding: 0.3rem 1.5rem;
+      --card__padding: 0.35rem;
     }
 
     &--md {
-      --card__padding: 1rem 1.5rem;
+      --card__padding: .75rem 0 .75rem .5rem;
     }
 
     &--lg {
-      --card__padding: 1.5rem;
+      --card__padding: 1rem;
     }
 
     &--xl {
-      --card__padding: 1.75rem;
+      --card__padding: 1.25rem;
     }
 
     // Images

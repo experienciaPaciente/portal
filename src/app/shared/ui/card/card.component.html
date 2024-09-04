@@ -1,18 +1,11 @@
-<div tabindex="0" #cardColor class="card card__{{ type }}--{{ severity }} card--{{ size }}" 
+<div tabindex="0" #cardColor class="card card__{{ type }}--{{ severity }} card--{{ size }}" [ngClass]="cssDirection"
     [class.card--selectable]="selectable" [class.card--selected]="selected" 
     (click)="onCardClick()">
-        <ng-content select="img"></ng-content>
-        <!-- <ng-content select="app-icon"></ng-content> -->
-    <div class="card__align" ngClass="cssAlign">
-        <ng-content select="app-badge"></ng-content>
-    </div>
-    <div class="card__align card__label card__text-{{ aligned }}" ngClass="cssAlign">
+    <section class="card__inner-wrapper--left">
         <ng-content select="app-label"></ng-content>
-    </div>
-    <div class="card__align card__content">
-        <ng-content></ng-content>
-    </div>
-    <div class="card__align card__button">
+    </section>
+    <section class="card__inner-wrapper--right">
+        <ng-content select="app-badge"></ng-content>
         <ng-content select="app-button"></ng-content>
-    </div>
+    </section>
 </div>

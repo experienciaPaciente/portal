@@ -11,13 +11,12 @@
         </div>
         <button severity="neutral" (click)="logOut()">Log-out!</button>
       </section>
-        <nav class="form__input-wrapper--row">
+      <!-- Considerar hacer un componente carousel -->
+        <nav class="nav__wrapper--row">
           @for(btn of buttons; track btn) {
-            <app-card size="xs" [selectable]="true" [type]="'fill'" [severity]="'danger'" [selected]="btn.selectable"
+            <app-card size="xs" direction="column" [selectable]="true" [type]="'fill'" [severity]="'danger'" [selected]="btn.selectable"
               (click)="btn.selectable = !btn.selectable">
-                <!-- <app-badge [type]="'warning'">Badge</app-badge> -->
                 <app-label size="xs" [label]="btn.label" [subtitle]="btn.path" [icon]="btn.icon"></app-label>
-                <!-- <app-button severity="warning" [label]="'test'"></app-button> -->
             </app-card>
           }
         </nav>

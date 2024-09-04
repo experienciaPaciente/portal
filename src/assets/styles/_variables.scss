@@ -1,5 +1,5 @@
 :root {
-  /* Colors */
+  // Colors 
   --primary: #375B9F;
   --secondary: #6CBCFC;
   --tertiary: #F5C451;
@@ -24,7 +24,7 @@
   --danger: #ef5da8;
   --danger--light: #FAE5E4;
 
-    /* Label */
+    // Label 
   --label__height: fit-content;
   --label__padding: 1rem;
   --label__prefix--size: 14px;
@@ -34,7 +34,7 @@
   --label__subtitle--size: 12px;
   --label__subtitle--color: gray;
 
-  /* Page */
+  // Page 
   --page__body--padding: 0;
   --page__body--height: calc(100vh - var(--header__height));
   --page__body--bg: white;
@@ -69,7 +69,7 @@
   --page__subfix--weight: normal;
   --page__subfix--margin: 0 0 1rem 0;
 
-  /* Header */
+  // Header 
   --header__height: 60px;
   --header__bg--color: rgba(255, 255, 255, 0.5);
   --header__padding--vertical: 0.5rem;
@@ -78,7 +78,7 @@
   --header__item-padding--horizontal: 16px;
   --header__gap--horizontal: 12px;
 
-  /* Panel */
+  // Panel 
   --panel__border--radius: 6px;
   --panel__bg--color: white;
   --panel__img--size: 30vw;
@@ -113,12 +113,14 @@
   --panel__height: 25%;
   --panel__direction: column;
 
-  /* Card */
+  // Card 
   --card__border--radius: 6px;
   --card__bg--color: white;
   --card__img--size: 100%;
   --card__text--align: center;
   --card__gap: 24px;
+  --card__wrapper--justify: center;
+  --card__wrapper--align: center;
   
   --card__title--size: 1.5rem;
   --card__title--color: var(--primary);
@@ -145,12 +147,12 @@
   --card__height: fit-content;
   --card__direction: column;
 
-  /* Accordion */
+  // Accordion 
   --accordion__prefix--size: 0.75rem;
   --accordion__prefix--color: var(--primaryLight);
   --accordion__prefix--weight: normal;
 
-  /* Button */
+  // Button 
   --button__padding--vertical: .5rem;
   --button__padding--horizontal: .9rem;
   --button__padding: var(--button__padding--vertical) var(--button__padding--horizontal);
@@ -165,7 +167,7 @@
   --button__opacity: 50%;
   --button__icon--color: inherit; // Reveer
   
-  /* Badge */ 
+  // Badge  
   --badge__padding--vertical:
     0.75rem;
   --badge__padding--horizontal: 1rem;
@@ -173,17 +175,18 @@
   --badge__color--neutral: var(--neutral);
   --badge__background--color: rgba(255, 255, 255, 0.75);
 
-  /* Icons */
+  // Icons 
   --label__icon--size: 1rem;
   --label__icon--color: var(--primary);
+  --label__icon--border: solid 2px var(--label__icon--color);
 
-  /* Footer */
+  // Footer 
   --footer__height: 120px;
   --footer__text--sm: x-small;
   --footer__text--color: gray;
   --footer__text--align: center;
 
-  /* Form */
+  // Form 
   --form__gap--horizontal: 16px;
   --form__gap--vertical: 24px;
   --form__label--size: 18px;
@@ -191,21 +194,28 @@
   --form__label--color: var(--neutral);
   --form__label--marginBottom: 0.5rem;
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
+
+  // Input
   --input__font--size: 21px;
   --input__font--color: var(--neutral);
   --input__padding: 1rem;
   --input__border: solid 2px var(--form__label--color);
   --input__border--radius: 8px;
+  
+  // Wrapper
+  --wrapper__gap: .5rem;
+  --wrapper__gap--row: .5rem;
+  --wrapper__gap--col: .5rem;
 
-  /* Divider */
+  // Divider 
   --page__line--color: lightgray;
   --page__line--width: 1px;
 
-  /* List */
+  // List 
   --list__line--color: lightgray;
   --list__line--width: 1px;
   --list__item--padding: 1rem;
-  --list__item--gap: 1rem;
+  --list__item--gap: .5rem;
   --list__item--align: start;
   --list__item--disabled: 0.5;
   --list__title--size: 1rem;
@@ -218,11 +228,11 @@
   --list__subfix--weight: normal;
   --list__subfix--color: gray;
 
-  /* Link */
+  // Link 
   --link__font--weight: bold;
   --link__font--size: 0.9rem;
 
-  /* Decorative */
+  // Decorative 
   --circle__width: 100px;
   --circle__height: 100px;
   --circle__radius: calc(var(--circle__width) / 2);
@@ -230,7 +240,7 @@
   --circle__position--left: 100px;
   --circle__position--right: 100px;
   
-  /* Carousel */
+  // Carousel 
   --carousel__width: 100%;
   --carousel__height: calc(var(--card__height) + .5rem);
   --carousel__margin: .5rem;

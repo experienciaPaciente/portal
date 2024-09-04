@@ -38,7 +38,7 @@ section,aside, div {
     width: 100%;
     height: fit-content;
     overflow-x: scroll;
-    gap: var(--card__gap);
+    gap: var(--wrapper__gap);
   }
 
   fieldset {

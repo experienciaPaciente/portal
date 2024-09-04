@@ -1,4 +1,11 @@
 nav {
+
+    &.nav__wrapper--row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    // Corroborar uso
     &.nav__wrapper {
         position: absolute;
         bottom: 0;

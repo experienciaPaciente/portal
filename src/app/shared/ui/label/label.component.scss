@@ -14,16 +14,17 @@
   flex-direction: column;
   
   // Direccionalidad
-  &.horizontal {
+  &.row {
     flex-direction: row;
     align-items: center;
+    column-gap: .65rem;
 
-    .label__icon {
-      margin-right: 0.5rem;
-    }
+    // .label__icon {
+    //   margin-right: 0.5rem;
+    // }
   }
   
-  &.vertical {
+  &.column {
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -72,6 +73,10 @@
       color: var(--label__icon--color);
       width: var(--label__icon--size);
       height: var(--label__icon--size);
+
+      &.icon__border--none {
+        border: none;
+      }
     }
   
     &__content {

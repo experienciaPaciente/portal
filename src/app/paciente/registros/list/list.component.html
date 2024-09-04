@@ -1,15 +1,20 @@
 <ng-container *ngIf="registros$ | async as records; else noRecords">
+    <!-- Considerar hacer un app-wrapper -->
     <ul class="list__wrapper--{{ type }}">
         @for (data of records; track trackByFn(data)) {
-            <li class="{{ direction == 'vertical' ? 'list__wrapper--vertical' : 'list__wrapper--horizontal' }}" (click)="onItemSelected(data)">
-                <app-label
-                size="xs"
-                [label]="data.titulo"
-                [prefix]="data.categoria"
-                [icon]="getIconForCategoria(data.categoria)"
-                [severity]="getColorForCategoria(data.categoria)"
-                direction="horizontal"
-                ></app-label>
+            <li (click)="onItemSelected(data)">
+                <app-card direction="row" [selectable]="true" [type]="'fill'">
+                    <app-label
+                    size="xs"
+                    [label]="data.titulo"
+                    [prefix]="data.categoria"
+                    [icon]="getIconForCategoria(data.categoria)"
+                    [severity]="getColorForCategoria(data.categoria)"
+                    direction="row"
+                    ></app-label>
+                    <app-badge type="success" label="Validado" size="xs"></app-badge>
+                    <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral"></app-button>
+                </app-card>
             </li>
         }
     </ul>

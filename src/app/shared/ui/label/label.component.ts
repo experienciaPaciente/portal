@@ -10,16 +10,16 @@ import { CommonModule } from '@angular/common';
 })
 export class LabelComponent implements OnChanges{
   @Input() icon?: string;
+  @Input() img?: string;
   @Input() iconLabel?: string;
   @Input() severity: 'primary' | 'secondary' | 'tertiary' | 'neutral' | string = 'neutral';
   @Input() label?: string;
   @Input() subtitle?: string;
   @Input() prefix?: string;
-  @Input() direction: 'horizontal' | 'vertical' = 'vertical';
+  @Input() direction: 'row' | 'column' = 'column';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
 
   @ViewChild('labelColor', { static: true }) labelColor!: ElementRef;
-
 
   constructor() {}
   
@@ -29,7 +29,6 @@ export class LabelComponent implements OnChanges{
     }
   }
 
-  // Reveer: aplica severity a todos los iconos presentes en la pantalla > Checkear card y uso de ElementRef
   private updateIconColor() {
     if (typeof this.severity === 'string') {
       if (['primary', 'secondary', 'tertiary', 'neutral'].includes(this.severity)) {
@@ -39,17 +38,4 @@ export class LabelComponent implements OnChanges{
       }
     }
   }
-
-// Posible solución
-//   ngOnChanges() {
-//     if (this.severity && this.severity.length > 0) {
-//         this.labelColor.nativeElement.style.setProperty('--label__icon--color', `var(--${this.severity})`y);
-//     }
-
-//     if (this.severity && this.severity.length > 0 && this.custom === 'outlined') {
-//         this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.severity + '25');
-//     }
-// }
-
-
 }
