@@ -43,6 +43,7 @@ export default class HomeComponent {
     });
   }
 
+// Reemplazar por categorías especialidades
 
   buttons = [
     {

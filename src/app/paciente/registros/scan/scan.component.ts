@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component'
+import { QrService } from 'src/app/core/services/qr.service';
 
 @Component({
   selector: 'app-scan',
@@ -39,18 +40,22 @@ export class ScanComponent {
   hasDevices: boolean | undefined;
   hasPermission: boolean | undefined;
 
-  qrResultString: string | null = null;
+  qrResultString!: string;
   // qrResultString!: string;
 
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;  
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private QrService: QrService
+  ) {}
 
   onCodeResult(resultString: string): void {
     this.qrResultString = resultString;
-    this.router.navigate(['/registrar'], { queryParams: { qrData: this.qrResultString } });
+    this.QrService.setQRData(this.qrResultString);
+    this.router.navigate(['/registrar']);
   }
 
   onHasPermission(has: boolean) {

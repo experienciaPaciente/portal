@@ -14,6 +14,8 @@ import { Auth } from '@angular/fire/auth';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
+import { QrService } from 'src/app/core/services/qr.service';
+import { Subscription } from 'rxjs';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -43,10 +45,12 @@ export interface RegistroForm {
 })
 
 export class createRegistroComponent implements OnInit{
-  qrData: string | null = null;
+
+  qrResultString: string | null = null;
+  private subscription: Subscription = new Subscription();
 
   constructor(
-    private route: ActivatedRoute,
+    private QrService: QrService
     // private auth: Auth
   ) {}
 
@@ -54,12 +58,14 @@ export class createRegistroComponent implements OnInit{
     this.onCategoryChange(); // Set initial icon and color
     this.editableTitle = this.form.controls['titulo'].value;
 
-    this.route.queryParams.subscribe(params => {
-      const qrData = params['qrData'];
-      if (qrData) {
-        this.form.get('paciente')?.setValue(qrData);
-      }
-    });
+    this.subscription = this.QrService.qrData$.subscribe((data) => {
+        this.qrResultString = data;
+        this.setPacienteValue(data ?? '');
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); // Clean up subscription
   }
 
   onTitleChange() {
@@ -101,47 +107,13 @@ export class createRegistroComponent implements OnInit{
   editableIcon: string = 'heart';
   editableColor: string = '';
 
-
   categoriaOptions = Object.keys(this.categoriaMap).map((key) => ({
     value: key,
     label: key.replace(/([A-Z])/g, ' $1').trim(),
   }));
 
-  // Zxing  
-  availableDevices: MediaDeviceInfo[] | undefined;
-  currentDevice: MediaDeviceInfo | any = null;
-  
-  formatsEnabled: BarcodeFormat[] = [
-    BarcodeFormat.CODE_128,
-    BarcodeFormat.DATA_MATRIX,
-    BarcodeFormat.EAN_13,
-    BarcodeFormat.QR_CODE,
-  ];
-
-  hasDevices: boolean | undefined;
-  hasPermission: boolean | undefined;
-
-  qrResultString: string | undefined;
-
-  torchEnabled = false;
-  torchAvailable$ = new BehaviorSubject<boolean>(false);
-  tryHarder = false;
-
   clearResult(): void {
     this.qrResultString = '';
-  }
-  
-  onHasPermission(has: boolean) {
-    this.hasPermission = has;
-  }
-
-  onCamerasFound(devices: MediaDeviceInfo[] | any): void {
-    this.availableDevices = devices;
-    this.hasDevices = Boolean(devices && devices.length);
-  }
-
-  onTorchCompatible(isCompatible: boolean ): void {
-    this.torchAvailable$.next(isCompatible || false);
   }
 
   private _formBuilder = inject(FormBuilder).nonNullable;
@@ -185,7 +157,7 @@ export class createRegistroComponent implements OnInit{
   setPacienteValue(newValue: string): void {
     this.getPacienteControl()?.setValue(newValue);
   }
-
+  
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
     this.setPacienteValue(resultString);
