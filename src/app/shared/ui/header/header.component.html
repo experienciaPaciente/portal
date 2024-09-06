@@ -18,9 +18,14 @@
         </app-label>
         <app-button *ngIf="isMobile" size="xs" variant="link" icon="share-from-square" (click)="logOut()"></app-button>
         <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button>
+        <app-dropdown
+          [items]="menuItems"
+          [position]="dropdownPosition"
+          buttonLabel="Menu"
+          buttonIcon="bars"
+        ></app-dropdown>
         <app-button size="xs" variant="link" icon="bars" severity="neutral">
         </app-button>
-
       }  
     </section>
 </header>

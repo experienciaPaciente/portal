@@ -1,5 +1,5 @@
 <button 
-  type="{{ type }}" [ngClass]="['button__' + variant + '--' + severity]" (click)="navigatePath()">
+  type="{{ type }}" [ngClass]="['button__' + variant + '--' + severity]" (click)="handleClick()">
     <app-label 
       [icon]="icon"
       [severity]="severity"

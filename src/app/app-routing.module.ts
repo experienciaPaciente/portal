@@ -15,12 +15,11 @@ export const routes: Routes = [
       { path: 'registrar', component: createRegistroComponent },
       { path: 'scan', component: ScanComponent },
       { path: 'registros', component: ListComponent },
-      { path: '**', redirectTo: '' }
     ]
   },
-  // {
-  //   path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
-  // },
+  {
+    path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
+  },
   {
     path: 'auth',
     canActivate: [publicGuard],

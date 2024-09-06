@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LabelComponent } from '../label/label.component';
@@ -22,11 +22,19 @@ export class ButtonComponent{
   @Input() prefix?: string;
   @Input() subtitle?: string;
   @Input() path?: string;
+  @Output() clickEvent = new EventEmitter<void>();
 
   constructor(private router: Router) {}
 
-  navigatePath() {
-    this.router.navigate([this.path]);
-  }
+  // Method to emit the event
+  handleClick() {
+    this.clickEvent.emit();
 
+    // If path is defined, handle navigation
+    if (this.path) {
+      this.router.navigate([this.path]).catch((error) => {
+        console.error('Navigation error:', error);
+      });
+    }
+  }
 }

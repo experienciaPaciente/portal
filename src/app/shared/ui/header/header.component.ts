@@ -6,11 +6,12 @@ import { Auth, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent, LabelComponent, CommonModule],
+  imports: [ButtonComponent, LabelComponent, CommonModule, DropdownComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -24,6 +25,19 @@ export class HeaderComponent implements OnInit {
   name: string | null = null;
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
+  private _router = inject(Router);
+  private authservice = inject(AuthService);
+
+  menuItems = [
+    { label: 'Item 1', icon: 'user', route: '/path-to-item1' },
+    { label: 'Item 2', icon: 'user', route: '/path-to-item2' },
+    { label: 'Item 3', icon: 'user', subItems: [
+        { label: 'Sub-item 1', route: '/path-to-subitem1' },
+        { label: 'Sub-item 2', route: '/path-to-subitem2' }
+    ]}
+  ];
+
+  dropdownPosition = { top: '50px', left: '0' };
 
   constructor(  
     private router: Router,
@@ -53,9 +67,6 @@ export class HeaderComponent implements OnInit {
   checkIfMobile(width: number): void {
     this.isMobile = width < 768; 
   }
-  
-  private _router = inject(Router);
-  private authservice = inject(AuthService);
 
   async logOut(): Promise<void> {
     try {
