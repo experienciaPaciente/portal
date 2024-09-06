@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { createRegistroComponent } from '../registros/crear-registro/crear-registro.component';
 import { ScanComponent } from '../registros/scan/scan.component';
 import { ListComponent } from '../registros/list/list.component';
@@ -22,7 +22,8 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
     CardComponent,
     LabelComponent,
     ButtonComponent,
-    BadgeComponent
+    BadgeComponent,
+    CommonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -30,67 +31,45 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 export default class HomeComponent {
   title = 'portal-paciente';
   imgSrc = './assets/img/experienciaPaciente__logo--h.svg';
-
+  isMobile! : boolean;
   isDetailView: boolean = false;
+  isRegistroView: boolean = false;
+  isScanView  : boolean = false;
 
   constructor(private router: Router) {}
 
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkIfMobile(event.target.innerWidth);
+  }
+
   ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.isDetailView = event.url.includes('/item/');
-      }
-    });
+    
+  // Subscribe to routing events
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      const url = event.url;
+      
+      this.isDetailView = url.includes('/item/');
+      
+      this.isRegistroView = url.includes('/registrar');
+      
+      this.isScanView = url.includes('/scan');
+    }
+  });
+    this.checkIfMobile(window.innerWidth);
   }
 
-// Reemplazar por categorías especialidades
-
-  buttons = [
-    {
-      icon: 'heart',
-      label: 'opcion A',
-      path: 'inicio',
-      severity: 'info',
-      type: 'fill',
-      selectable: false
-    },
-    {
-      icon: 'user',
-      label: 'opcion B',
-      path: 'registrar',
-      severity: 'warning',
-      type: 'outline',
-      selectable: true
-    },
-    {
-      icon: 'file-pdf',
-      label: 'opcion C',
-      path: '/auth/sign-in',
-      severity: 'danger',
-      type: 'fill',
-      selectable: true
-    },
-    {
-      icon: 'file',
-      label: 'opcion D',
-      path: '/auth/sign-up',
-      severity: 'neutral',
-      type: 'fill',
-      selectable: true
-    }
-  ]
-
-  private _router = inject(Router);
-
-  private authservice = inject(AuthService);
-
-  async logOut(): Promise<void> {
-    try {
-      await this.authservice.logOut();
-      this._router.navigateByUrl('/auth/sign-in');
-    } catch (error) {
-      console.log(error);
-    }
+  checkIfMobile(width: number): void {
+    this.isMobile = width < 768;
+    this.updateViewState(this.router.url);
   }
-  
+
+  // Checkear funcionamiento
+  updateViewState(url: string): void {
+    this.isDetailView = url.includes('/item/');
+    this.isRegistroView = url.includes('/registrar');
+    this.isScanView = url.includes('/scan');
+  }
 }

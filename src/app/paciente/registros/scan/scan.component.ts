@@ -41,7 +41,6 @@ export class ScanComponent {
   hasPermission: boolean | undefined;
 
   qrResultString!: string;
-  // qrResultString!: string;
 
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);

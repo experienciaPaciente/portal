@@ -3,6 +3,8 @@ nav {
     &.nav__wrapper--row {
         display: flex;
         flex-direction: row;
+        width: 100%;
+        overflow-x: scroll;
     }
 
     // Corroborar uso

@@ -51,11 +51,10 @@ export class createRegistroComponent implements OnInit{
 
   constructor(
     private QrService: QrService
-    // private auth: Auth
   ) {}
 
   ngOnInit() {
-    this.onCategoryChange(); // Set initial icon and color
+    this.onCategoryChange();
     this.editableTitle = this.form.controls['titulo'].value;
 
     this.subscription = this.QrService.qrData$.subscribe((data) => {
@@ -65,7 +64,7 @@ export class createRegistroComponent implements OnInit{
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe(); // Clean up subscription
+    this.subscription.unsubscribe();
   }
 
   onTitleChange() {
@@ -77,7 +76,7 @@ export class createRegistroComponent implements OnInit{
     if (categoria) {
       const { icon, color } = this.categoriaMap[categoria];
       this.editableIcon = icon;
-      this.editableColor = color; // Assign color from the map
+      this.editableColor = color;
       this.editableCategory = categoria;
     }
   }

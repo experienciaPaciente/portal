@@ -1,3 +1,11 @@
+<section type="wrap">
+    <div class="form__input-wrapper--col">
+      <label for="titulo">Buscador</label>
+      <input type="text" class="input__size--sm">
+    </div>
+  </section>
+<!-- Considerar hacer un componente carousel -->
+<app-navbar [items]="categoriaItems"></app-navbar>
 <ng-container *ngIf="registros$ | async as records; else noRecords">
     <!-- Considerar hacer un app-wrapper -->
     <ul class="list__wrapper--{{ type }}">

@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
+import { NavbarComponent } from 'src/app/shared/ui/navbar/navbar.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ItemComponent, LabelComponent, CommonModule, CardComponent, BadgeComponent, ButtonComponent],
+  imports: [ItemComponent, LabelComponent, CommonModule, CardComponent, BadgeComponent, ButtonComponent, NavbarComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
@@ -37,6 +38,16 @@ export class ListComponent implements OnInit {
     'Cardiología': { icon: 'heart', color: '#1BC5DD' },
   };
 
+  categoriaItems = Object.keys(this.categoriaMap).map(key => {
+    return {
+      label: key,
+      icon: this.categoriaMap[key].icon,
+      color: this.categoriaMap[key].color,
+      path: `/categories/${key}`, // Assuming you want to have a path associated with each item
+      selectable: false, // Default selectable state
+    };
+  });
+
   constructor(private registroService: RegistrosService, private router: Router) {
   }
 
@@ -49,6 +60,7 @@ export class ListComponent implements OnInit {
   }
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
+    // Utilizar behavior subject para enviar el enviar el valor actualizado de isMobile
   }
 
   getIconForCategoria(categoria: string): string {

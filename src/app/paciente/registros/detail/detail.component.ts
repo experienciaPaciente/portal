@@ -12,6 +12,7 @@ import { RegistrosService } from 'src/app/core/services/registros.service';
 })
 export class DetailComponent {
   registro!: Registro | null;
+  id!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +20,13 @@ export class DetailComponent {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.fetchDetails(this.id);
+    });
+  }
+
+  fetchDetails(id: string) {
     if (id) {
       this.loadRegistro(id);
     } else {

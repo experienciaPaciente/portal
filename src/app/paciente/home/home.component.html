@@ -1,36 +1,19 @@
 <div class="layout">
   <nav class="layout__navbar">
-      <app-header imgBrand="{{ imgSrc }}"></app-header>
+      <app-header imgBrand="{{ imgSrc }}"></app-header>    
   </nav>
-  <div class="layout__content" >
+  <div class="layout__content">
     <aside type="flex" class="layout__sidebar">
-      <section type="wrap">
-        <div class="form__input-wrapper--col">
-          <label for="titulo">Buscador</label>
-          <input type="text" class="input__size--sm">
-        </div>
-        <button severity="neutral" (click)="logOut()">Log-out!</button>
-      </section>
-      <!-- Considerar hacer un componente carousel -->
-        <nav class="nav__wrapper--row">
-          @for(btn of buttons; track btn) {
-            <app-card size="xs" direction="column" [selectable]="true" [type]="'fill'" [severity]="'danger'" [selected]="btn.selectable"
-              (click)="btn.selectable = !btn.selectable">
-                <app-label size="xs" [label]="btn.label" [subtitle]="btn.path" [icon]="btn.icon"></app-label>
-            </app-card>
-          }
-        </nav>
-
-        <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
-        <!-- <app-navbar [items]="buttons"></app-navbar> -->
+      <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
     </aside>
+  
     <main class="layout__main">
-    @if (isDetailView) {
-        <router-outlet></router-outlet>
-    } @else {
-        <app-scan></app-scan>
-        <app-crear-registro></app-crear-registro>
-    }
+      <router-outlet *ngIf="isDetailView"></router-outlet>
+  
+      <ng-container *ngIf="!isDetailView">
+        <app-crear-registro *ngIf="isRegistroView"></app-crear-registro>
+        <app-scan *ngIf="isScanView"></app-scan>
+      </ng-container>
     </main>
   </div>
 </div>

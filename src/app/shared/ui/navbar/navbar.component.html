@@ -1,28 +1,22 @@
-<nav class="nav__wrapper">
-    <app-button 
-        
-        size="sm" 
-        [icon]="'fa fa-qrcode'" 
-        [label]="'QR'" 
-        [prefix]="'Action'" 
-        [subtitle]="'Click to submit your data'" 
-        (clickEvent)="onSubmit()">
-    </app-button>
-    <ul class="nav__list--horizontal">
-        @for (btn of items; track btn) {
-            <li class="nav__item--vertical">
-                <app-label 
-                icon="fa fa-heart" 
-                iconLabel="btn.icon" 
-                label="btn.label" 
-                subtitle="subtitle" 
-                prefix="prefix" 
-                direction="column"
-                size="sm"
-                routerLink="{{ btn.path }}"
-                >
-              </app-label>
-            </li>
-        }
-    </ul>
-</nav>
+<nav class="nav__wrapper--row">
+    <ng-container *ngFor="let item of items; trackBy: trackByFn">
+      <app-card
+        size="xs"
+        direction="column"
+        [selectable]="true"
+        [type]="'fill'"
+        [severity]="'custom'"
+        [color]="item.color"
+        [selected]="item.selectable"
+        (click)="toggleSelectable(item)"
+      >
+        <app-label
+          size="xs"
+          [label]="item.label"
+          [subtitle]="item.path"
+          [icon]="item.icon"
+        ></app-label>
+      </app-card>
+    </ng-container>
+  </nav>
+  
