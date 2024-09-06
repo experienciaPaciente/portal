@@ -35,6 +35,7 @@ export default class HomeComponent {
   isDetailView: boolean = false;
   isRegistroView: boolean = false;
   isScanView  : boolean = false;
+  currentView: 'list' | 'detail' | 'register' | 'scan' = 'list';
 
   constructor(private router: Router) {}
 
@@ -50,12 +51,17 @@ export default class HomeComponent {
   this.router.events.subscribe(event => {
     if (event instanceof NavigationEnd) {
       const url = event.url;
-      
-      this.isDetailView = url.includes('/item/');
-      
-      this.isRegistroView = url.includes('/registrar');
-      
-      this.isScanView = url.includes('/scan');
+
+        // Determine the current view based on the URL (works like a enum?)
+        if (url.includes('/item/')) {
+          this.currentView = 'detail';
+        } else if (url.includes('/registrar')) {
+          this.currentView = 'register';
+        } else if (url.includes('/scan')) {
+          this.currentView = 'scan';
+        } else {
+          this.currentView = 'list';
+        }
     }
   });
     this.checkIfMobile(window.innerWidth);
@@ -64,6 +70,15 @@ export default class HomeComponent {
   checkIfMobile(width: number): void {
     this.isMobile = width < 768;
     this.updateViewState(this.router.url);
+  }
+
+  shouldShowPanel(panel: 'list' | 'detail' | 'register' | 'scan'): boolean {
+
+    if (this.isMobile) {
+      return this.currentView === panel;
+    }
+
+    return true;
   }
 
   // Checkear funcionamiento

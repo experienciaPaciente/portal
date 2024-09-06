@@ -14,7 +14,8 @@ export const routes: Routes = [
       { path: 'item/:id', component: DetailComponent },
       { path: 'registrar', component: createRegistroComponent },
       { path: 'scan', component: ScanComponent },
-      { path: 'registros', component: ListComponent }
+      { path: 'registros', component: ListComponent },
+      { path: '**', redirectTo: '' }
     ]
   },
   // {

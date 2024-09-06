@@ -5,6 +5,7 @@ import { ButtonComponent } from '../button/button.component';
 import { Auth, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -15,15 +16,20 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() imgBrand: String = '';
+
   isMobile = false;
   loggedUser = true;
   email: string | null = null;
   name: string | null = null;
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
-  @Input() imgBrand: String = '';
-  location: any;
 
+  constructor(  
+    private router: Router,
+    private location: Location
+  ) {}
+ 
   // Listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -60,8 +66,13 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.location.back(); // Angular's Location service to navigate back
+  goBack(): void {
+    console.log('History length:', window.history.length);
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    } 
   }
   
 }

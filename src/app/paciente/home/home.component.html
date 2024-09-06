@@ -3,15 +3,17 @@
       <app-header imgBrand="{{ imgSrc }}"></app-header>    
   </nav>
   <div class="layout__content">
-    <aside type="flex" class="layout__sidebar">
+    <aside type="flex" class="layout__sidebar" *ngIf="shouldShowPanel('list')">
       <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
     </aside>
   
     <main class="layout__main">
-      <router-outlet *ngIf="isDetailView"></router-outlet>
+      <router-outlet *ngIf="shouldShowPanel('detail')"></router-outlet>
   
-      <ng-container *ngIf="!isDetailView">
+      <ng-container *ngIf="shouldShowPanel('register')">
         <app-crear-registro *ngIf="isRegistroView"></app-crear-registro>
+      </ng-container>
+      <ng-container *ngIf="shouldShowPanel('scan')">
         <app-scan *ngIf="isScanView"></app-scan>
       </ng-container>
     </main>

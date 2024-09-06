@@ -58,6 +58,7 @@ export class ListComponent implements OnInit {
       }
     });
   }
+  
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
     // Utilizar behavior subject para enviar el enviar el valor actualizado de isMobile
