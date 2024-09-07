@@ -30,8 +30,34 @@
     &__main {
       flex: 1;
       background-color: var(--page__body--bg);
-      padding: var(--page__body--padding);
+      padding: var(--page__main--padding);
       overflow-y: auto;
+
+      .header__wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+
+        .header__wrapper--right {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap; // Re-evaluar
+          align-items: center;
+          justify-content: space-between;
+          width: fit-content;
+          gap: var(--wrapper__gap);
+        }
+      }
+
+      .panel__header--row, .panel__footer--row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+     }
 
       .main__wrapper {
         display: flex;
@@ -41,13 +67,6 @@
         .panel__wrapper--main {
           padding: 2rem 4rem;
           width: 100%;
-    
-            .panel__header--row {
-               display: flex;
-               flex-direction: row;
-               align-items: center;
-               justify-content: space-between;
-            }
         }
         
         .panel__wrapper--aside {

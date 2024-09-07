@@ -1,13 +1,42 @@
-<h1>Detail!</h1>
 @if (registro != null) {
-    <p>{{ registro.userId }}</p>
-    <p>{{ registro.fecha }}</p>
-    <p>{{ registro.descripcion }}</p>
-    <p>{{ registro.emisor }}</p>
-    <p>{{ registro.validado }}</p>
-    <p>{{ registro.estado }}</p>
-    <p>{{ registro.paciente }}</p>
-    <p>{{ registro.hora }}</p>
+<section type="flex">
+    <header class="header__wrapper">
+        <app-label
+            size="md"
+            [label]="registro.titulo"
+            [prefix]="registro.categoria"
+            [icon]="editableIcon"
+            [severity]="editableColor"
+            direction="row">
+        </app-label>
+        <div class="header__wrapper--right">
+            <app-badge type="neutral" label="{{ registro.fecha }} | {{ registro.hora }}" size="xs"></app-badge>
+            <app-badge type="info" label="{{ registro.emisor }}" size="xs"></app-badge>
+            <app-badge type="success" label="{{ registro.validado }}" size="xs"></app-badge>
+            <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral"></app-button>
+        </div>            
+    </header>
+    <article>
+        <p>{{ registro.descripcion }}</p>
+        <p>{{ registro.paciente }}</p>
+    </article>
+    <footer class="panel__footer--row">
+        <app-button
+            size="xs"
+            [severity]="'danger'"
+            [variant]="'link'"
+            [icon]="'pencil'"
+            [label]="'Editar'"
+        ></app-button>
+        <app-button
+            size="xs"
+            [severity]="'success'"
+            [variant]="'fill'"
+            [icon]="'trash'"
+            [label]="'Compartir'"
+        ></app-button>
+    </footer>
+</section>
 } @else {
     <p>Sin registros!</p>
 }

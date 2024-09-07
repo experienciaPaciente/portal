@@ -1,6 +1,6 @@
 form,
 fieldset,
-section,aside, div {
+section,aside, div, header {
   // considerar hacer un header / footer internos
   &[type='flex'] {
     display: flex;

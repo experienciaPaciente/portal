@@ -19,31 +19,32 @@
         <input type="text" formControlName="titulo" (keyup)="onTitleChange()">
       </div>
 
+      @if (!qrResultString) {
       <div class="form__input-wrapper--col">
         <label for="descripcion"
-          >Description (optional)</label
-        >
-        <textarea
-          rows="5"
-          type="text"
-          id="descripcion"
-          class=""
-          placeholder="Your description goes here"
-          formControlName="descripcion"
-        ></textarea>
-      </div>
+          >Description (optional)</label>
+          <textarea
+            rows="5"
+            type="text"
+            id="descripcion"
+            class=""
+            placeholder="Your description goes here"
+            formControlName="descripcion"
+          ></textarea>
+        </div>
+      }
 
-        @if (qrResultString) {
-          <div class="form__input-wrapper--col">
-            <label for="paciente">Registro de esta consulta</label>
-            <textarea 
-              id="paciente"
-              formControlName="paciente">
-              {{ qrResultString }}
-            </textarea>
-            <button (click)="clearResult()">&times;</button>
-          </div>
-          }
+      @if (qrResultString) {
+        <div class="form__input-wrapper--col">
+          <label for="paciente">Registro de esta consulta</label>
+          <textarea 
+            id="paciente"
+            formControlName="paciente">
+            {{ qrResultString }}
+          </textarea>
+          <button (click)="clearResult()">&times;</button>
+        </div>
+        }
 
         <div class="form__input-wrapper--col">
           <label for="categoria">Categoría</label>
