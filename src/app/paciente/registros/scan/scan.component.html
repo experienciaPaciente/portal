@@ -1,13 +1,42 @@
-    <div class="layout__main">
-        <section class="main__wrapper">
-            <aside class="panel__wrapper--aside">
-        
-                <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
-                [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-                (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
-                
-            </aside>
-        </section>
-
-    </div>
-    
+<section class="panel__inner--aside">
+    <header class="panel__header">
+        <app-label
+            size="md"
+            [label]="'Scanea el QR
+            de la consulta'"
+            [prefix]="'Hola Claudio'"
+            severity="neutral"
+            direction="column">
+        </app-label>
+        <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+                    [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+                    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+                    
+        <app-label
+        size="sm"
+        [label]="'Enfoca'"
+        [icon]="'hand'"
+        severity="neutral"
+        direction="row">
+            <app-badge type="success" label="Scaneo exitoso" size="xs"></app-badge>
+            <app-badge type="warning" label="No pudimos escanear" size="xs"></app-badge>
+        </app-label>
+    </header>
+    <!-- Crear componente Footer -->
+    <footer class="panel__footer">
+        <app-button
+            size="xs"
+            severity="danger"
+            [variant]="'outline'"
+            [icon]="'pencil'"
+            [label]="'Cancelar'"
+        ></app-button>
+        <app-button
+            size="xs"
+            severity="info"
+            [variant]="'fill'"
+            [icon]="'trash'"
+            [label]="'Compartir'"
+        ></app-button>
+    </footer>
+</section>

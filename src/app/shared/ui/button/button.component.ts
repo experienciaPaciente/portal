@@ -22,6 +22,7 @@ export class ButtonComponent{
   @Input() prefix?: string;
   @Input() subtitle?: string;
   @Input() path?: string;
+  @Input() direction: 'row' | 'column' | 'none' = 'column';
   @Output() clickEvent = new EventEmitter<void>();
 
   constructor(private router: Router) {}

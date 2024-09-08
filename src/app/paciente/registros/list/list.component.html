@@ -1,11 +1,14 @@
-<section type="wrap">
-    <div class="form__input-wrapper--col">
-      <label for="titulo">Buscador</label>
-      <input type="text" class="input__size--sm">
+<section class="sidebar__header">
+    <div class="input__group">
+        <span class="input__wrapper ">
+          <label for="titulo">Buscador</label>
+          <input type="text" class="input__size--sm">
+        </span>
+        <app-button icon="plus" size="xs" variant="fill" severity="warning" direction="none" path="/registrar"></app-button>
     </div>
-  </section>
-<!-- Considerar hacer un componente carousel -->
-<app-navbar [items]="categoriaItems"></app-navbar>
+    <!-- Considerar hacer un componente carousel -->
+    <app-navbar [items]="categoriaItems"></app-navbar>
+</section>
 <ng-container *ngIf="registros$ | async as records; else noRecords">
     <!-- Considerar hacer un app-wrapper -->
     <ul class="list__wrapper--{{ type }}">
@@ -13,15 +16,15 @@
             <li (click)="onItemSelected(data)">
                 <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
                     <app-label
-                    size="xs"
+                    size="sm"
                     [label]="data.titulo"
                     [prefix]="data.categoria"
                     [icon]="getIconForCategoria(data.categoria)"
                     [severity]="getColorForCategoria(data.categoria)"
-                    direction="row"
-                    ></app-label>
+                    direction="row">
                     <app-badge type="success" label="Validado" size="xs"></app-badge>
                     <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral"></app-button>
+                    </app-label>
                 </app-card>
             </li>
         }

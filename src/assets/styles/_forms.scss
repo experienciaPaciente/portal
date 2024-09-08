@@ -1,3 +1,10 @@
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wrapper__gap--column);
+  flex: 1;
+}
+
 form,
 fieldset,
 section,aside, div, header {
@@ -29,7 +36,7 @@ section,aside, div, header {
   .form__input-wrapper--col {
     display: flex;
     flex-direction: column;
-    row-gap: var(--form__label--marginBottom);
+    row-gap: var(--wrapper__gap--row);
   }
 
   .form__input-wrapper--row {

@@ -4,112 +4,109 @@
   align-items: center;
   justify-content: center;
 }
-
-:host {
-  // --label__icon--color: #8189B0;
-}
-
-.label {
-  display: flex;
-  flex-direction: column;
-  
-  // Direccionalidad
-  &.row {
-    flex-direction: row;
-    align-items: center;
-    column-gap: .65rem;
-
-    // .label__icon {
-    //   margin-right: 0.5rem;
-    // }
-  }
-  
-  &.column {
-      flex-direction: column;
+app-label {
+  width: 100%;
+  .label {
+    display: flex;
+    flex-direction: column;
+    
+    // Direccionalidad
+    &.row {
+      flex-direction: row;
       align-items: center;
-      justify-content: center;
-    }
-        
-    &.xs {
-      --label__prefix--size: 10px;
-      --label__title--size: 12px;
-      --label__subtitle--size: 10px;
-      --label__icon--size: 16px;
+      column-gap: .65rem;
     }
     
-    &.sm {
-      --label__prefix--size: 12px;
-      --label__title--size: 14px;
-      --label__subtitle--size: 12px;
-      --label__icon--size: 20px;
-    }
+    &.column {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: var(--label__gap);
+      }
+          
+      &.xs {
+        --label__prefix--size: 9px;
+        --label__subtitle--size: 9px;
+        --label__icon--size: 14px;
+      }
+      
+      &.sm {
+        --label__prefix--size: 10px;
+        --label__subtitle--size: 10px;
+        --label__icon--size: 16px;
+      }
+      
+      &.md {
+        --label__prefix--size: 14px;
+        --label__subtitle--size: 14px;
+        --label__icon--size: 36px;
+      }
+      
+      &.lg {
+        --label__prefix--size: 16px;
+        --label__subtitle--size: 16px;
+        --label__icon--size: 56px;
+      }
+      
+      &.xl {
+        --label__prefix--size: 20px;
+        --label__subtitle--size: 20px;
+        --label__icon--size: 64px;
+      }
+  
+      &__icon { 
+        @extend %baseFlex;     
+        padding: .5rem;
+        border: solid 2px var(--label__icon--color);
+        border-radius: 50%;
+        color: var(--label__icon--color);
+        width: var(--label__icon--size);
+        height: var(--label__icon--size);
+        align-self: var(--label__icon--align);
+  
+        &.icon__border--none {
+          border: none;
+        }
+      }
+  
+      &.column {
+        .label__icon {
+          --label__icon--align: center;
+        }
+      }
     
-    &.md {
-      --label__prefix--size: 14px;
-      --label__title--size: 16px;
-      --label__subtitle--size: 14px;
-      --label__icon--size: 24px;
-    }
+      &__content {
+        display: flex;
+        flex-direction: column;
+      }
     
-    &.lg {
-      --label__prefix--size: 16px;
-      --label__title--size: 20px;
-      --label__subtitle--size: 16px;
-      --label__icon--size: 56px;
-    }
+      &__prefix {
+        font-size: var(--label__prefix--size);
+        color: var(--label__prefix--color);
+      }
+      
+      &__title {
+        color: var(--label__title--color);
+      }
     
-    &.xl {
-      --label__prefix--size: 20px;
-      --label__title--size: 24px;
-      --label__subtitle--size: 20px;
-      --label__icon--size: 64px;
-    }
-
-    &__icon { 
-      @extend %baseFlex;     
-      padding: .5rem;
-      border: solid 2px var(--label__icon--color);
-      border-radius: 50%;
-      color: var(--label__icon--color);
-      width: var(--label__icon--size);
-      height: var(--label__icon--size);
-
-      &.icon__border--none {
-        border: none;
+      &__subtitle {
+        font-size: var(--label__subtitle--size);
+        color: var(--label__subtitle--color);
+        text-overflow: ellipsis;
+        line-break: pre;
+        white-space: pre-line;
+        overflow: ellipsis;
       }
     }
-  
-    &__content {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    &__prefix {
-      font-size: var(--label__prefix--size);
-      color: var(--label__prefix--color);
-    }
-    
-    &__title {
-      color: var(--label__title--color);
-    }
-  
-    &__subtitle {
-      font-size: var(--label__subtitle--size);
-      color: var(--label__subtitle--color);
-      text-overflow: ellipsis;
-      line-break: pre;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
+}
   
   $sizes: xs sm md lg xl;
   $fontSizes: (
-      "xs": 16px,
-      "sm": 24px,
-      "md": 36px,
-      "lg": 48px,
-      "xl": 64px,
+      "xs": 12px,
+      "sm": 16px,
+      "md": 20px,
+      "lg": 24px,
+      "xl": 36px,
   );  
   
   @each $size in $sizes {

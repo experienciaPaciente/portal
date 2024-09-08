@@ -16,7 +16,7 @@ export class LabelComponent implements OnChanges{
   @Input() label?: string;
   @Input() subtitle?: string;
   @Input() prefix?: string;
-  @Input() direction: 'row' | 'column' = 'column';
+  @Input() direction: 'row' | 'column' | 'none' = 'column';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
 
   @ViewChild('labelColor', { static: true }) labelColor!: ElementRef;

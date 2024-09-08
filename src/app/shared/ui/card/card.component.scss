@@ -41,10 +41,11 @@ app-card {
           width: fit-content;
         }
       }
-      
-      &__wrapper--column {
-        --card__direction: column;
-      }
+    }
+
+    &__wrapper--column {
+      --card__wrapper--justify: flex-start;
+      --card__direction: column;
     }
 
     // Custom    
@@ -294,11 +295,12 @@ app-card {
 
     // Sizes
     &--xs {
-      --card__padding: 0.2rem;
+      --card__padding: 0.5rem;
+      width: 120px;
     }
 
     &--sm {
-      --card__padding: 0.35rem;
+      --card__padding: 0.65rem;
     }
 
     &--md {
@@ -310,7 +312,7 @@ app-card {
     }
 
     &--xl {
-      --card__padding: 1.25rem;
+      --card__padding: 1.15rem;
     }
 
     // Images

@@ -5,7 +5,7 @@ import {
 import { RouterLink, Router } from '@angular/router';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, timeout } from 'rxjs';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component'
@@ -54,6 +54,7 @@ export class ScanComponent {
   onCodeResult(resultString: string): void {
     this.qrResultString = resultString;
     this.QrService.setQRData(this.qrResultString);
+    // setTimeout()
     this.router.navigate(['/registrar']);
   }
 

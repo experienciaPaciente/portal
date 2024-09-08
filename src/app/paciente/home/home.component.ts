@@ -52,7 +52,7 @@ export default class HomeComponent {
     if (event instanceof NavigationEnd) {
       const url = event.url;
 
-        // Determine the current view based on the URL (works like a enum?)
+        // Determine the current view based on the URL (works like an enum?)
         if (url.includes('/item/')) {
           this.currentView = 'detail';
         } else if (url.includes('/registrar')) {
@@ -77,7 +77,16 @@ export default class HomeComponent {
     if (this.isMobile) {
       return this.currentView === panel;
     }
+    return true;
+  }
 
+  // Determines if the <main> panel should be shown
+  shouldShowMainPanel(): boolean {
+    // On mobile, only show the main panel if it's not in the 'list' view
+    if (this.isMobile) {
+      return this.currentView !== 'list';
+    }
+    // On desktop, always show the main panel
     return true;
   }
 

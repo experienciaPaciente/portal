@@ -33,6 +33,7 @@
   --label__title--color: var(--primary);
   --label__subtitle--size: 12px;
   --label__subtitle--color: gray;
+  --label__gap: 12px;
 
   // Page 
   --page__body--padding: 0;
@@ -77,41 +78,26 @@
   --header__padding--horizontal: 2rem;
   --header__item-padding--vertical: 0;
   --header__item-padding--horizontal: 16px;
-  --header__gap--horizontal: 12px;
+  --header__gap--horizontal: 12px; // Unificar los gaps
 
   // Panel 
   --panel__border--radius: 6px;
   --panel__bg--color: white;
-  --panel__img--size: 30vw;
+  --panel__img--size: 30vw; // reveer para adjuntos
   --panel__img--radius: 50%;
   --panel__align: center;
   --panel__justify: space-between;
   --panel__text--align: center;
-  --panel__gap: 48px;
-  
-  --panel__title--size: 1.25rem;
-  --panel__title--color: var(--primary);
-  --panel__title--weight: 500;
-  
-  --panel__subtitle--size: 0.85rem;
-  --panel__subtitle--color: var(--neutral);
-  --panel__subtitle--weight: light;
-
-  --panel__lineHeight: 1.25rem;
-
-  --panel__prefix--size: 0.75rem;
-  --panel__prefix--color: var(--primaryLight);
-  --panel__prefix--weight: normal;
-
-  --panel__subfix--size: 0.9rem;
-  --panel__subfix--color: gray;
-  --panel__subfix--weight: normal;
-  --panel__subfix--align: center;
+  --panel__font--size: 21px;
+  --panel__line--height: 1.5;
+  --panel__gap: 16px;
+  --panel__gap--row: 16px;
+  --panel__gap--col: 24px;
 
   --panel__padding: 2rem;
   --panel__shadow: 2px 2px 4px 0px rgba(180, 180, 180, 0.5);
   --panel__width: 100%;
-  --panel__height: 25%;
+  --panel__height: 100%;
   --panel__direction: column;
 
   // Card 
@@ -162,7 +148,7 @@
   --button__font--size: 14px;
   --button__border--color: var(--button__text--color);
   --button__border: solid 2px var(--button__border--color);
-  --button__border--radius: 12px;
+  --button__border--radius: 6px;
   --button__text--color: var(--primary);
   --button__bg--color: transparent;
   --button__opacity: 50%;
@@ -180,7 +166,8 @@
   --label__icon--size: 1rem;
   --label__icon--color: var(--primary);
   --label__icon--border: solid 2px var(--label__icon--color);
-
+  --label__icon--align: flex-start;
+  
   // Footer 
   --footer__height: 120px;
   --footer__text--sm: x-small;
@@ -193,7 +180,7 @@
   --form__label--size: 18px;
   --form__label--weight: bold;
   --form__label--color: var(--neutral);
-  --form__label--marginBottom: 0.5rem;
+  // --form__label--marginBottom: 0.5rem;
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
 
   // Input
@@ -203,10 +190,10 @@
   --input__border: solid 2px var(--form__label--color);
   --input__border--radius: 8px;
   
-  // Wrapper
-  --wrapper__gap: .5rem;
-  --wrapper__gap--row: .5rem;
-  --wrapper__gap--col: .5rem;
+  // Wrapper | Group
+  --wrapper__gap: 16px;
+  --wrapper__gap--row: 24px;
+  --wrapper__gap--col: 12px;
 
   // Divider 
   --page__line--color: lightgray;

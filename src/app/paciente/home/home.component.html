@@ -1,21 +1,23 @@
-<div class="layout">
-  <nav class="layout__navbar">
+<div class="page">
+  <nav class="page__navbar">
       <app-header imgBrand="{{ imgSrc }}"></app-header>    
   </nav>
-  <div class="layout__content">
-    <aside type="flex" class="layout__sidebar" *ngIf="shouldShowPanel('list')">
+  <div class="page__body">
+    <aside type="flex" class="page__panel--sidebar" *ngIf="shouldShowPanel('list')">
       <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
     </aside>
-  
-    <main class="layout__main">
-      <router-outlet *ngIf="shouldShowPanel('detail')"></router-outlet>
-  
-      <ng-container *ngIf="shouldShowPanel('register')">
-        <app-crear-registro *ngIf="isRegistroView"></app-crear-registro>
-      </ng-container>
-      <ng-container *ngIf="shouldShowPanel('scan')">
-        <app-scan *ngIf="isScanView"></app-scan>
-      </ng-container>
+    <main class="page__panel--main" *ngIf="shouldShowMainPanel()">
+      <section class="page__inner--left">
+        <router-outlet *ngIf="shouldShowPanel('detail')"></router-outlet>
+        <ng-container *ngIf="shouldShowPanel('register')">
+          <app-crear-registro *ngIf="isRegistroView"></app-crear-registro>
+        </ng-container>
+      </section>
+      <section class="page__inner--right">
+        <ng-container *ngIf="shouldShowPanel('scan')">
+          <app-scan *ngIf="isScanView"></app-scan>
+        </ng-container>
+      </section>
     </main>
   </div>
 </div>

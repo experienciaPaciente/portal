@@ -1,12 +1,12 @@
 <button 
-  type="{{ type }}" [ngClass]="['button__' + variant + '--' + severity]" (click)="handleClick()">
+  type="{{ type }}" [ngClass]="['button__size--' + size + ' ' + 'button__' + variant + '--' + severity]" (click)="handleClick()">
     <app-label 
       [icon]="icon"
       [severity]="severity"
       [label]="label"
       [subtitle]="subtitle" 
       [prefix]="prefix" 
-      [direction]="'row'"
+      [direction]="direction"
       [size]="size">
     </app-label>
   <span *ngIf="badgeCount" class="button__badge">{{ badgeCount }}</span>
