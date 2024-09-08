@@ -13,7 +13,7 @@ export class LabelComponent implements OnChanges{
   @Input() img?: string;
   @Input() iconLabel?: string;
   @Input() severity: 'primary' | 'secondary' | 'tertiary' | 'neutral' | string = 'neutral';
-  @Input() label?: string;
+  @Input() label?: string | Date;
   @Input() subtitle?: string;
   @Input() prefix?: string;
   @Input() direction: 'row' | 'column' | 'none' = 'column';

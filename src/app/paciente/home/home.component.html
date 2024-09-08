@@ -7,17 +7,15 @@
       <app-list [type]="'flex'" [direction]="'horizontal'"></app-list>      
     </aside>
     <main class="page__panel--main" *ngIf="shouldShowMainPanel()">
-      <section class="page__inner--left">
+      <!-- <section class="page__inner--left"> -->
         <router-outlet *ngIf="shouldShowPanel('detail')"></router-outlet>
         <ng-container *ngIf="shouldShowPanel('register')">
           <app-crear-registro *ngIf="isRegistroView"></app-crear-registro>
         </ng-container>
-      </section>
-      <section class="page__inner--right">
         <ng-container *ngIf="shouldShowPanel('scan')">
           <app-scan *ngIf="isScanView"></app-scan>
         </ng-container>
-      </section>
+      <!-- </section> -->
     </main>
   </div>
 </div>

@@ -6,11 +6,15 @@
 }
 app-label {
   width: 100%;
+
   .label {
     display: flex;
     flex-direction: column;
-    
+    width: fit-content;
+    // buen caso para container-queries
     // Direccionalidad
+    max-width: 240px;
+
     &.row {
       flex-direction: row;
       align-items: center;
@@ -110,11 +114,7 @@ app-label {
   );  
   
   @each $size in $sizes {
-      // $i: index($sizes);
       .label.#{$size} {
           font-size: map-get($fontSizes, $size);
       }
-      // .label__text--#{$size} {
-      //     font-size: map-get($fontSizes, $size);
-      // }
   }

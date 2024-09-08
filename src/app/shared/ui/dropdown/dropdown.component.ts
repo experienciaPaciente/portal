@@ -17,6 +17,7 @@ export class DropdownComponent {
   @Input() position?: { top: string, left: string };
   @Input() buttonLabel: string = 'Dropdown';
   @Input() buttonIcon?: string;
+  // agregar propiedad variant
   @Output() itemSelected = new EventEmitter<any>();
 
   constructor(private router: Router) {}

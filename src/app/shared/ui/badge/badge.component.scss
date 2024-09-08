@@ -1,9 +1,11 @@
 .badge__group {
   --panel__direction: row;
   display: flex;
-  flex-direction: var(--panel__direction);
-  flex-wrap: wrap;
-  gap: var(--wrapper__gap)
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  column-gap: var(--wrapper__gap--col);
+  width: fit-content;
 }
 
 app-badge {

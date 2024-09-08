@@ -6,8 +6,8 @@
     <!-- Badges -->
     <section class="header__wrapper--right">
       @if (loggedUser) {
-        <app-button [path]="'scan'" label="scan" size="xs" variant="link" icon="" severity="success">
-        </app-button>
+        <app-button [path]="'scan'" label="scanear" size="xs" variant="link" icon="" severity="success"></app-button>
+        <app-button [path]="'registrar'" label="registrar" size="xs" variant="link" icon="" severity="success"></app-button>
         <app-label 
           icon="user" 
           iconLabel="user" 
@@ -21,11 +21,9 @@
         <app-dropdown
           [items]="menuItems"
           [position]="dropdownPosition"
-          buttonLabel="Menu"
+          buttonLabel=""
           buttonIcon="bars"
         ></app-dropdown>
-        <app-button size="xs" variant="link" icon="bars" severity="neutral">
-        </app-button>
       }  
     </section>
 </header>

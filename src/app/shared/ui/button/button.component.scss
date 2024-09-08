@@ -121,27 +121,27 @@ app-button {
   &.button__size {
 
     &--xs {
-      --button__padding: .25rem;
-      --button__font--size: 10px;    
+      --button__padding: .25rem .5rem;
+      --button__font--size: 10px;
     }
 
     &--sm {
-      --button__padding: .35rem;
+      --button__padding: .35rem .7rem;
       --button__font--size: 12px;
     }
 
     &--md {
-      --button__padding: .5rem;
+      --button__padding: .5rem 1rem;
       --button__font--size: 14px;
     }
 
     &--lg {
-      --button__padding: 0.65rem;
+      --button__padding: 0.65rem 1.25rem;
       --button__font--size: 16px;
     }
 
     &--xl {
-      --button__padding: 0.9rem;
+      --button__padding: 0.9rem 1.5rem;
       --button__font--size: 18px;
     }
   }

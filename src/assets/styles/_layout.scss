@@ -30,7 +30,7 @@
       aside.page__panel--sidebar {
         height: var(--panel__height);
         flex: 1;
-        min-width: 380px;
+        min-width: 420px;
         // max-width: 100vw;
         box-sizing: border-box;
         padding: var(--panel__padding);
@@ -50,8 +50,7 @@
           position: sticky;
           display: flex;
           flex-direction: column;
-          column-gap: var(--wrapper__gap--row);
-          height: 100%;
+          row-gap: var(--wrapper__gap--row);
           justify-content: space-between;
 
           .input__group {
@@ -74,34 +73,60 @@
         background-color: var(--panel__bg--color);
         overflow-y: auto;
 
-        .page__inner--left { 
+        app-crear-registro, app-scan, app-detail {
+          display: flex;
           width: 100%;
         }
 
-        .panel__inner--main {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+        .panel__main {
+          display: grid;
+          grid-template-columns: 1fr 180px;
+          grid-template-rows: auto 60px;
+          width: 100%;
+          height: 100%;
           padding: var(--panel__padding);
-          gap: var(--panel__gap--col);
-          height: -webkit-fill-available;
+          box-sizing: border-box;
+          gap: 48px;
 
-          article {
-            padding-left: var(--label__icon--size); // Asociar con props label
-            font-size: var(--panel__font--size);
-          }
-        }
-        
-        // QR
-        .panel__inner--aside {
-            width: 280px;
-            height: 100%;
-            padding: var(--panel__padding);
-            background-color: antiquewhite;
-            .qr {
-                width: 100%;
-                background-color: lightgray;
+          .panel__inner--main {
+            grid-column: 1;
+            grid-row: 1;
+            display: flex;
+            flex-direction: column;
+            // justify-content: space-between;
+            gap: var(--panel__gap--col);
+            // height: -webkit-fill-available;
+  
+            article {
+              padding-left: var(--label__icon--size); // Asociar con props label
+              font-size: var(--panel__font--size);
+              word-break: break-all;
             }
+          }
+          
+          // QR
+          .panel__inner--aside {
+            grid-column: 2;
+            grid-row: 1;
+            display: flex;
+            flex-direction: column;
+            row-gap: var(--wrapper__gap--row);
+            width: 180px;
+            height: 100%;
+
+            .panel__qr--aside {
+                width: 100%;
+                // height: 240px;
+                background-color: white;
+            }
+          }
+          
+          footer {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            width: 100%;
+          }
+
         }
       }
 

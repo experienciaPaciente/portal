@@ -1,45 +1,58 @@
 @if (registro != null) {
-<section class="panel__inner--main">
-    <header>
-        <app-label
-            size="md"
-            [label]="registro.titulo"
-            [prefix]="registro.categoria"
-            [icon]="editableIcon"
-            [severity]="editableColor"
-            direction="row">
-            <app-badge type="neutral" label="{{ registro.fecha }} | {{ registro.hora }}" size="xs"></app-badge>
-            <app-badge type="info" label="{{ registro.emisor }}" size="xs"></app-badge>
-            <app-badge type="success" label="{{ registro.validado }}" size="xs"></app-badge>
-            <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral"></app-button>
-        </app-label>
-    </header>
+<section class="panel__main">
     <div class="panel__inner--main">
+        <header>
+            <app-label
+                size="md"
+                [label]="registro.titulo"
+                [prefix]="registro.categoria"
+                [icon]="editableIcon"
+                [severity]="editableColor"
+                direction="row">
+                <app-badge type="neutral" label="{{ registro.fecha }} | {{ registro.hora }}" size="xs"></app-badge>
+                <app-badge type="info" label="{{ registro.emisor }}" size="xs"></app-badge>
+                <app-badge type="success" label="{{ registro.validado }}" size="xs"></app-badge>
+                <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral" direction="none"></app-button>
+            </app-label>
+        </header>
         <article>
             {{ registro.descripcion }}
             {{ registro.paciente }}
         </article>
+        <!-- Resolver funcionalidad adjuntos / componente carousel -->
         <template>
             <img src="" alt="">
         </template>
     </div>
+    <div class="panel__inner--aside">
+        <app-label
+            size="sm"
+            [label]="registro.fecha"
+            [prefix]="'fecha'"
+            direction="row">
+        </app-label>
+        <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
+    </div>
     <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">
         <app-button
-            size="xs"
-            [severity]="'danger'"
-            [variant]="'link'"
-            [icon]="'pencil'"
-            [label]="'Editar'"
+        size="xs"
+        [severity]="'danger'"
+        [variant]="'link'"
+        [icon]="'pencil'"
+        [direction]="'row'"
+        [label]="'Editar'"
         ></app-button>
         <app-button
-            size="xs"
-            [severity]="'success'"
-            [variant]="'fill'"
-            [icon]="'trash'"
-            [label]="'Compartir'"
+        size="xs"
+        [severity]="'success'"
+        [variant]="'fill'"
+        [icon]="'trash'"
+        [direction]="'row'"
+        [label]="'Compartir'"
         ></app-button>
     </footer>
+
 </section>
 } @else {
     <p>Sin registros!</p>
