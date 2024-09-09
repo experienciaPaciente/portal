@@ -10,6 +10,7 @@
   --secondaryLighter: #ECF5FF;
   --tertiaryLight: #FFF4E3;
   --tertiaryLighter: #E6E6FA;
+  --neutralLight: #e0e0e0;
   --shadow: rgba(140, 140, 140, 0.5);
   --gradient: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
 
@@ -88,7 +89,7 @@
   --panel__align: center;
   --panel__justify: space-between;
   --panel__text--align: center;
-  --panel__font--size: 21px;
+  --panel__font--size: 19px;
   --panel__line--height: 1.5;
   --panel__gap: 16px;
   --panel__gap--row: 16px;
@@ -97,6 +98,7 @@
   --panel__padding: 2rem;
   --panel__shadow: 2px 2px 4px 0px rgba(180, 180, 180, 0.5);
   --panel__width: 100%;
+  --panel__width--sidebar: 420px;
   --panel__height: 100%;
   --panel__direction: column;
 

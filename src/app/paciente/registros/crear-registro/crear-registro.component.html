@@ -1,6 +1,6 @@
-  <form [formGroup]="form" class="main__wrapper" (ngSubmit)="createRegistro()">
+  <form [formGroup]="form" class="panel__main" (ngSubmit)="createRegistro()">
   
-    <section type="flex" class="panel__inner--main">
+    <section class="panel__inner--main">
 
       <header class="panel__header--row">
           <app-label
@@ -57,28 +57,59 @@
             }
           </select>
         </div>
-          
-        <div>
-          <a
-            class=""
-            routerLink="/"
-          >
-            Back to dashboard
-          </a>
-  
-          <app-button
-            severity="success"
-            type="submit"
-            label="Guardar registro"
-            size="xs"
-
-          >
-            @if (registroId) {
-              Edit your registro
-            } @else {
-              Create your registro
-            }
-          </app-button>
-        </div>
     </section>
+    <section class="panel__inner--aside">
+        <app-label
+            size="md"
+            [label]="'registro.fecha'"
+            [prefix]="'fecha'">
+        </app-label>
+        <app-label
+            size="md"
+            [label]="'registro.emisor'"
+            [prefix]="'emisor'">
+        </app-label>
+        <app-switcher
+            [on]="true"
+            size="lg"
+            onLabel="Validado"
+            offLabel="No validado"
+            colorOn="green"
+            colorOff="red"
+            labelPosition="right"
+        ></app-switcher>
+        <!-- Integración QR con portal-profesional -->
+        <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
+        <app-label
+            [size]="'sm'"
+            [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
+            [direction]="'row'"
+            [severity]="'neutral'"
+            [icon]="'info-circle'"
+        >
+        </app-label>
+    </section>
+       <!-- Desacoplar footer en componente -->
+       <footer class="panel__footer">
+        <app-button
+        size="xs"
+        [severity]="'danger'"
+        [variant]="'link'"
+        [icon]="'pencil'"
+        [direction]="'row'"
+        [label]="'Editar'"
+        ></app-button>
+        <app-button
+        severity="success"
+        type="submit"
+        label="Guardar registro"
+        size="xs"
+      >
+        @if (registroId) {
+          Editar registro
+        } @else {
+          Crearr registro
+        }
+      </app-button>
+    </footer>
   </form>

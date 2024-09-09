@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
 }
+
 app-label {
   width: 100%;
 
@@ -11,10 +12,8 @@ app-label {
     display: flex;
     flex-direction: column;
     width: fit-content;
-    // buen caso para container-queries
+   
     // Direccionalidad
-    max-width: 240px;
-
     &.row {
       flex-direction: row;
       align-items: center;
@@ -29,14 +28,14 @@ app-label {
       }
           
       &.xs {
-        --label__prefix--size: 9px;
-        --label__subtitle--size: 9px;
+        --label__prefix--size: 10px;
+        --label__subtitle--size: 10px;
         --label__icon--size: 14px;
       }
       
       &.sm {
-        --label__prefix--size: 10px;
-        --label__subtitle--size: 10px;
+        --label__prefix--size: 12px;
+        --label__subtitle--size: 12px;
         --label__icon--size: 16px;
       }
       
@@ -91,6 +90,7 @@ app-label {
       
       &__title {
         color: var(--label__title--color);
+        font-weight: 600;
       }
     
       &__subtitle {
@@ -109,8 +109,8 @@ app-label {
       "xs": 12px,
       "sm": 16px,
       "md": 20px,
-      "lg": 24px,
-      "xl": 36px,
+      "lg": 30px,
+      "xl": 40px,
   );  
   
   @each $size in $sizes {

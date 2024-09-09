@@ -30,7 +30,7 @@
       aside.page__panel--sidebar {
         height: var(--panel__height);
         flex: 1;
-        min-width: 420px;
+        min-width: var(--panel__width--sidebar);
         // max-width: 100vw;
         box-sizing: border-box;
         padding: var(--panel__padding);
@@ -69,9 +69,10 @@
         flex-direction: row;
         justify-content: space-between;
         height: var(--page__body--height);
-        flex: 1;
+        // flex: 1;
         background-color: var(--panel__bg--color);
         overflow-y: auto;
+        width: calc(100% - var(--panel__width--sidebar));
 
         app-crear-registro, app-scan, app-detail {
           display: flex;
@@ -84,9 +85,9 @@
           grid-template-rows: auto 60px;
           width: 100%;
           height: 100%;
-          padding: var(--panel__padding);
+          padding: 2rem 4rem;
           box-sizing: border-box;
-          gap: 48px;
+          column-gap: 140px;
 
           .panel__inner--main {
             grid-column: 1;
@@ -100,6 +101,7 @@
             article {
               padding-left: var(--label__icon--size); // Asociar con props label
               font-size: var(--panel__font--size);
+              line-height: var(--panel__line--height);
               word-break: break-all;
             }
           }

@@ -3,13 +3,12 @@
     <div class="panel__inner--main">
         <header>
             <app-label
-                size="md"
+                size="lg"
                 [label]="registro.titulo"
                 [prefix]="registro.categoria"
                 [icon]="editableIcon"
                 [severity]="editableColor"
                 direction="row">
-                <app-badge type="neutral" label="{{ registro.fecha }} | {{ registro.hora }}" size="xs"></app-badge>
                 <app-badge type="info" label="{{ registro.emisor }}" size="xs"></app-badge>
                 <app-badge type="success" label="{{ registro.validado }}" size="xs"></app-badge>
                 <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral" direction="none"></app-button>
@@ -26,12 +25,34 @@
     </div>
     <div class="panel__inner--aside">
         <app-label
-            size="sm"
+            size="md"
             [label]="registro.fecha"
-            [prefix]="'fecha'"
-            direction="row">
+            [prefix]="'fecha'">
         </app-label>
+        <app-label
+            size="md"
+            [label]="registro.emisor"
+            [prefix]="'emisor'">
+        </app-label>
+        <app-switcher
+            [on]="true"
+            size="lg"
+            onLabel="Validado"
+            offLabel="No validado"
+            colorOn="green"
+            colorOff="red"
+            labelPosition="right"
+        ></app-switcher>
+        <!-- Integración QR con portal-profesional -->
         <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
+        <app-label
+            [size]="'sm'"
+            [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
+            [direction]="'row'"
+            [severity]="'neutral'"
+            [icon]="'info-circle'"
+        >
+        </app-label>
     </div>
     <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">

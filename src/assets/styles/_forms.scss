@@ -36,7 +36,7 @@ section,aside, div, header {
   .form__input-wrapper--col {
     display: flex;
     flex-direction: column;
-    row-gap: var(--wrapper__gap--row);
+    row-gap: var(--wrapper__gap--col);
   }
 
   .form__input-wrapper--row {

@@ -5,11 +5,12 @@ import { RegistrosService } from 'src/app/core/services/registros.service';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
+import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [BadgeComponent, ButtonComponent, LabelComponent],
+  imports: [BadgeComponent, ButtonComponent, LabelComponent, SwitcherComponent],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })

@@ -93,7 +93,6 @@ export default class HomeComponent {
   // Checkear funcionamiento
   updateViewState(url: string): void {
     this.isDetailView = url.includes('/item/');
-    this.isRegistroView = url.includes('/registrar');
     this.isScanView = url.includes('/scan');
   }
 }

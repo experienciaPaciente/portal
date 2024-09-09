@@ -1,4 +1,10 @@
 <section class="sidebar__header">
+    <app-label
+        size="md"
+        [label]="'Estos son tus registros'"
+        [prefix]="'Hola usuario'"
+        direction="row">
+    </app-label>
     <div class="input__group">
         <span class="input__wrapper ">
           <label for="titulo">Buscador</label>
@@ -22,7 +28,7 @@
                     [icon]="getIconForCategoria(data.categoria)"
                     [severity]="getColorForCategoria(data.categoria)"
                     direction="row">
-                    <app-badge type="success" label="Validado" size="xs"></app-badge>
+                    <app-badge type="success" label="" size="xs"></app-badge>
                     <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral" direction="none"></app-button>
                     </app-label>
                 </app-card>

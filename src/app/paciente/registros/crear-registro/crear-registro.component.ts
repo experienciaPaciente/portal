@@ -16,6 +16,7 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { QrService } from 'src/app/core/services/qr.service';
 import { Subscription } from 'rxjs';
+import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -40,7 +41,9 @@ export interface RegistroForm {
     ZXingScannerModule,
     LabelComponent,
     BadgeComponent,
-    ButtonComponent
+    ButtonComponent,
+    LabelComponent,
+    SwitcherComponent
   ],
 })
 
