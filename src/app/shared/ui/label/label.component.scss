@@ -11,7 +11,7 @@ app-label {
   .label {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    // width: 70%;
    
     // Direccionalidad
     &.row {
@@ -81,6 +81,7 @@ app-label {
       &__content {
         display: flex;
         flex-direction: column;
+        // width: calc(100% - var(--button__group--width));
       }
     
       &__prefix {
@@ -97,9 +98,7 @@ app-label {
         font-size: var(--label__subtitle--size);
         color: var(--label__subtitle--color);
         text-overflow: ellipsis;
-        line-break: pre;
-        white-space: pre-line;
-        overflow: ellipsis;
+        word-break: break-all;
       }
     }
 }

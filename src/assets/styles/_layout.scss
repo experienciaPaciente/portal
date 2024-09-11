@@ -31,7 +31,6 @@
         height: var(--panel__height);
         flex: 1;
         min-width: var(--panel__width--sidebar);
-        // max-width: 100vw;
         box-sizing: border-box;
         padding: var(--panel__padding);
         background-color: white;
@@ -80,9 +79,8 @@
         }
 
         .panel__main {
-          display: grid;
-          grid-template-columns: 1fr 180px;
-          grid-template-rows: auto 60px;
+          display: flex;
+          flex-wrap: wrap;
           width: 100%;
           height: 100%;
           padding: 2rem 4rem;
@@ -90,13 +88,10 @@
           column-gap: 140px;
 
           .panel__inner--main {
-            grid-column: 1;
-            grid-row: 1;
+            flex: 1 1 auto;
             display: flex;
             flex-direction: column;
-            // justify-content: space-between;
             gap: var(--panel__gap--col);
-            // height: -webkit-fill-available;
   
             article {
               padding-left: var(--label__icon--size); // Asociar con props label
@@ -104,20 +99,32 @@
               line-height: var(--panel__line--height);
               word-break: break-all;
             }
+            
+            .img__wrapper--grid {
+              padding-left: var(--label__icon--size); // Asociar con props label
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+              gap: var(--wrapper__gap--row);
+
+              img {
+                width: 100%;
+                height: 120px;
+                background-color: var(--neutralLight);
+              }
+            }
           }
           
           // QR
           .panel__inner--aside {
-            grid-column: 2;
-            grid-row: 1;
             display: flex;
             flex-direction: column;
             row-gap: var(--wrapper__gap--row);
-            width: 180px;
+            flex: 1 0 180px; 
             height: 100%;
 
             .panel__qr--aside {
                 width: 100%;
+                max-width: 180px;
                 // height: 240px;
                 background-color: white;
             }

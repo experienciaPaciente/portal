@@ -1,11 +1,13 @@
 // Checkear uso y considerar mover a layout.scss
 .button__group {
   --panel__direction: row;
-  --list__item--gap: .5rem;
   display: flex;
-  flex-direction: var(--panel__direction);
-  // justify-content: space-between;
-  gap: var(--wrapper__gap);
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  column-gap: var(--wrapper__gap--col);
+  max-width: var(--button__group--width);
+  // min-width: fit-content;
 }   
 
 app-button {

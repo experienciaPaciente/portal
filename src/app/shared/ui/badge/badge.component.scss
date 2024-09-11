@@ -1,13 +1,3 @@
-.badge__group {
-  --panel__direction: row;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: end;
-  column-gap: var(--wrapper__gap--col);
-  width: fit-content;
-}
-
 app-badge {
   [class^="badge__wrapper"] {
       display: inline-flex;

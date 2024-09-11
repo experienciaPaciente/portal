@@ -5,10 +5,10 @@
       <header class="panel__header--row">
           <app-label
           size="lg"
-          [label]="editableTitle"
-          [prefix]="editableCategory"
-          [icon]="editableIcon"
-          [severity]="editableColor"
+          [label]="'Nuevo registro de salud'"
+          [prefix]="'Autoregistro'"
+          subtitle="Completa los campos requeridos (*)"
+          [severity]="'info'"
           direction="row"
         ></app-label>
         <app-badge type="success" label="Registro guardado" size="md"></app-badge>
@@ -48,7 +48,7 @@
 
         <div class="form__input-wrapper--col">
           <label for="categoria">Categoría</label>
-          <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
+           <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
             <option value="" disabled selected>Select a category</option>
             @for (categoria of categorias; track categoria) {
               <option [value]="categoria">
@@ -59,25 +59,28 @@
         </div>
     </section>
     <section class="panel__inner--aside">
-        <app-label
-            size="md"
-            [label]="'registro.fecha'"
-            [prefix]="'fecha'">
-        </app-label>
-        <app-label
-            size="md"
-            [label]="'registro.emisor'"
-            [prefix]="'emisor'">
-        </app-label>
+      <div class="form__input-wrapper--col">
+        <label for="fecha">Fecha</label>
+        <input type="date" formControlName="fecha">
+      </div>
+      <div class="form__input-wrapper--col">
+        <label for="hora">Hora</label>
+        <input type="time" formControlName="hora">
+      </div>
         <app-switcher
-            [on]="true"
-            size="lg"
+            [on]="validado"
+            size="md"
             onLabel="Validado"
             offLabel="No validado"
-            colorOn="green"
-            colorOff="red"
             labelPosition="right"
+            (toggle)="validateRecord()"
         ></app-switcher>
+        @if (validado) {
+          <div class="form__input-wrapper--col">
+            <label for="emisor">Institución/Profesional</label>
+            <input type="text" formControlName="emisor">
+          </div>
+        }
         <!-- Integración QR con portal-profesional -->
         <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
         <app-label
@@ -102,8 +105,9 @@
         <app-button
         severity="success"
         type="submit"
-        label="Guardar registro"
-        size="xs"
+        variant="icon"
+        icon="check"
+        size="md"
       >
         @if (registroId) {
           Editar registro

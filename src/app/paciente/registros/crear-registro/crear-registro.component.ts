@@ -2,14 +2,12 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  Validators
 } from '@angular/forms';
-import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { RegistrosService,  } from './../../../core/services/registros.service';
 import { Registro } from './../../../models/registro';
-import { BarcodeFormat } from '@zxing/library';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { BehaviorSubject } from 'rxjs';
 import { Auth } from '@angular/fire/auth';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
@@ -38,7 +36,6 @@ export interface RegistroForm {
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    ZXingScannerModule,
     LabelComponent,
     BadgeComponent,
     ButtonComponent,
@@ -51,6 +48,7 @@ export class createRegistroComponent implements OnInit{
 
   qrResultString: string | null = null;
   private subscription: Subscription = new Subscription();
+  validado = true;
 
   constructor(
     private QrService: QrService
@@ -64,6 +62,17 @@ export class createRegistroComponent implements OnInit{
         this.qrResultString = data;
         this.setPacienteValue(data ?? '');
       });
+
+    // Fecha y hra
+    const today = new Date();
+
+    const formattedDate: any = today.toISOString().split('T')[0];
+    this.form.controls['fecha'].setValue(formattedDate);  
+  
+    const hours = today.getHours().toString().padStart(2, '0');  
+    const minutes = today.getMinutes().toString().padStart(2, '0');  
+    const formattedTime = `${hours}:${minutes}`;  
+    this.form.controls['hora'].setValue(formattedTime);  
   }
 
   ngOnDestroy(): void {
@@ -72,6 +81,11 @@ export class createRegistroComponent implements OnInit{
 
   onTitleChange() {
     this.editableTitle = this.form.controls['titulo'].value;
+  }
+
+  validateRecord() {
+    this.validado = !this.validado;
+    this.form.controls['validado'].setValue(this.validado);
   }
 
   onCategoryChange() {

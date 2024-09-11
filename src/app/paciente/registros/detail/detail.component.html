@@ -9,7 +9,6 @@
                 [icon]="editableIcon"
                 [severity]="editableColor"
                 direction="row">
-                <app-badge type="info" label="{{ registro.emisor }}" size="xs"></app-badge>
                 <app-badge type="success" label="{{ registro.validado }}" size="xs"></app-badge>
                 <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral" direction="none"></app-button>
             </app-label>
@@ -19,9 +18,20 @@
             {{ registro.paciente }}
         </article>
         <!-- Resolver funcionalidad adjuntos / componente carousel -->
-        <template>
+        <section role="navigation" class="img__wrapper--grid">
             <img src="" alt="">
-        </template>
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+        </section>
     </div>
     <div class="panel__inner--aside">
         <app-label
@@ -35,13 +45,14 @@
             [prefix]="'emisor'">
         </app-label>
         <app-switcher
-            [on]="true"
+            [on]="registro.validado"
             size="lg"
             onLabel="Validado"
             offLabel="No validado"
             colorOn="green"
             colorOff="red"
             labelPosition="right"
+            [disabled]="true"
         ></app-switcher>
         <!-- Integración QR con portal-profesional -->
         <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
