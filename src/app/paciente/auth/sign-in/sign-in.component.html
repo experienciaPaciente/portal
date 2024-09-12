@@ -1,32 +1,64 @@
-<div class="form">
-      <h1>Log in</h1>
-      <form [formGroup]="form" (ngSubmit)="logIn()">
-        <div>
-            <label>Email</label>
+<section id="login" class="page__body">
+  <main class="page__panel--main">
+    <img class="img--hero" src="./assets/img/login__bg--desktop.jpg">
+  </main>
+  <aside class="page__panel--sidebar">
+      <form type="flex" [formGroup]="form" (ngSubmit)="logIn()">
+          <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
+          <app-label
+          size="lg"
+          [prefix]="'Ingreso'"
+          [label]="'Bienvenido'"
+          subtitle="Aquí comienza tu historia de Salud"
+          [direction]="'column'"
+        ></app-label>
+        <div class="form__input-wrapper--col">
+          <label>Email</label>
             <input type="email" formControlName="email" />
             <small *ngIf="isEmailValid as messsage">{{ messsage }}</small>
         </div>
+        <div class="form__input-wrapper--col">
+          <label>Enter your password</label>
+          <input
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <app-button
+            size="xs"
+            [severity]="'info'"
+            [variant]="'link'"
+            [icon]="'eye'"
+            [direction]="'row'"
+            [label]="'Editar'"
+            (click)="hide = !hide"
+          >
+        </app-button>
+          <i>{{ hide ? "Ocultar contraseña" : "Mostrar contraseña" }}</i>
+          <small>Campo requerido</small>
+      </div>
   
-        <div>
-            <label>Enter your password</label>
-            <input
-              [type]="hide ? 'password' : 'text'"
-              formControlName="password"
-            />
-            <button
-              (click)="hide = !hide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide"
-            >
-              <i>{{ hide ? "visibility_off" : "visibility" }}</i>
-            </button>
-            <small>This field is required</small>
-        </div>
-  
-        <div>
-          <button type="submit">Log in</button>
-        </div>
+        <footer class="panel__footer">
+          <app-button
+            size="xs"
+            [severity]="'info'"
+            [variant]="'fill'"
+            [icon]="'user'"
+            [direction]="'row'"
+            [label]="'Registrarme'"
+            [path]="'/auth/sign-up'"
+            ></app-button>
+
+            <app-button
+            severity="success"
+            type="submit"
+            variant="fill"
+            [icon]="'check'"
+            [direction]="'row'"
+            [label]="'Ingresar'"
+            size="xs">
+          </app-button>
+        </footer>
       </form>
-      <span>Don’t have an account yet?<a routerLink="/auth/sign-up">Sign up</a></span>
-  </div>
-  
+      <span>Don’t have an account yet?<a >Sign up</a></span>
+  </aside>
+</section>

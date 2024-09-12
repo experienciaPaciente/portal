@@ -9,7 +9,7 @@
       height: fit-content;
       background-color: white;
       box-shadow: 0 2px 4px var(--shadow);
-      z-index: 1;
+      z-index: 2;
     }
   
     // Posiblemente el grid
@@ -35,8 +35,8 @@
         padding: var(--panel__padding);
         background-color: white;
         overflow-y: auto;
-        box-shadow: 2px 0 4px var(--shadow);
-        z-index: 0;
+        box-shadow: var(--box-shadow);
+        z-index: 1;
 
         app-list {
           display: flex;
@@ -63,15 +63,15 @@
         }
       }
     
-      .page__panel--main {
+      main.page__panel--main {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         height: var(--page__body--height);
-        // flex: 1;
         background-color: var(--panel__bg--color);
-        overflow-y: auto;
-        width: calc(100% - var(--panel__width--sidebar));
+        overflow-y: scroll;
+        position: relative;
+        z-index: 0;
 
         app-crear-registro, app-scan, app-detail {
           display: flex;
@@ -88,7 +88,7 @@
           column-gap: 140px;
 
           .panel__inner--main {
-            flex: 1 1 auto;
+            flex: 1 1 420px;
             display: flex;
             flex-direction: column;
             gap: var(--panel__gap--col);
@@ -130,21 +130,31 @@
             }
           }
           
-          footer {
-            grid-column: 1 / -1;
-            grid-row: 2;
+          footer.panel__footer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
             width: 100%;
+            height: 84px;
+            box-sizing: border-box;
+            padding: var(--panel__padding);
+            background-color: var(--panel__bg--color);
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            box-shadow: 0 -1px 0px 0px var(--shadow);
+
+            .panel__footer--right {
+              
+            }
+            .panel__footer--left {
+            
+            }
           }
 
         }
-      }
-
-        .panel__footer {
-          display: flex;
-          // flex-direction: row;
-          flex-flow: wrap;
-          align-items: center;
-          justify-content: space-between;
       }
     }
   }

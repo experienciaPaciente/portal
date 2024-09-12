@@ -11,7 +11,10 @@ app-label {
   .label {
     display: flex;
     flex-direction: column;
-    // width: 70%;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    // gap: 16px;
    
     // Direccionalidad
     &.row {
@@ -25,6 +28,7 @@ app-label {
         align-items: center;
         justify-content: center;
         row-gap: var(--label__gap);
+        text-align: center;
       }
           
       &.xs {
@@ -81,6 +85,8 @@ app-label {
       &__content {
         display: flex;
         flex-direction: column;
+        flex: 1;
+        line-height: var(--panel__line--height);
         // width: calc(100% - var(--button__group--width));
       }
     
@@ -102,6 +108,19 @@ app-label {
       }
     }
 }
+
+  // Checkear uso y considerar mover a layout.scss
+  .button__group {
+    --panel__direction: row;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: var(--wrapper__gap--col);
+    // margin-left: calc(var(--label__icon--size) * 2 + 0.5rem);
+    width: 100%;
+  }   
+
   
   $sizes: xs sm md lg xl;
   $fontSizes: (

@@ -9,7 +9,8 @@ import {
 import { NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
-import { ButtonProviders } from '../components/button/btn-providers';
+import { LabelComponent } from 'src/app/shared/ui/label/label.component';
+import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 
 interface LogInForm {
   email: FormControl<string>;
@@ -22,10 +23,11 @@ interface LogInForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
+    LabelComponent,
+    ButtonComponent
   ],
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  providers: [    ButtonProviders  ],
 })
 export default class LogInComponent {
   hide = true;
@@ -33,7 +35,6 @@ export default class LogInComponent {
   formBuilder = inject(FormBuilder);
 
   private authService = inject(AuthService);
-  private btnProviders = inject(ButtonProviders);
   private router = inject(Router);
 
   form: FormGroup<LogInForm> = this.formBuilder.group({

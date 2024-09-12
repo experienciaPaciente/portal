@@ -14,7 +14,7 @@ export class ButtonComponent{
   // Contemplar agregar inputs de posicionamiento para type=fab
   @Input() variant: 'fill' | 'outline' | 'link' | 'fab' | 'icon' = 'fill';
   @Input() type?: 'submit';
-  @Input() severity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' = 'info';
+  @Input() severity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' | 'primary' | 'secondary' | 'tertiary' = 'info';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
   @Input() icon?: string;
   @Input() label?: string;
@@ -23,6 +23,11 @@ export class ButtonComponent{
   @Input() subtitle?: string;
   @Input() path?: string;
   @Input() direction: 'row' | 'column' | 'none' = 'column';
+  @Input() top?: string;
+  @Input() right?: string;
+  @Input() bottom?: string;
+  @Input() left?: string;
+  
   @Output() clickEvent = new EventEmitter<void>();
 
   constructor(private router: Router) {}
@@ -37,5 +42,21 @@ export class ButtonComponent{
         console.error('Navigation error:', error);
       });
     }
+  }
+
+  setButtonClass(): string {
+    return `button__size--${this.size} button__${this.variant}--${this.severity}`;
+  }
+
+  setFabPositionStyles(): { [key: string]: string | undefined } {
+    return this.variant === 'fab'
+      ? {
+          position: 'absolute',
+          top: this.top,
+          right: this.right,
+          bottom: this.bottom,
+          left: this.left
+        }
+      : {};
   }
 }

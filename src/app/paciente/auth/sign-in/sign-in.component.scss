@@ -1,0 +1,15 @@
+#login {
+    --box-shadow: -2px 0 4px var(--shadow);
+    --page__body--height: 100vh;
+
+    // Mover a archivo _img.scss
+    .img--hero {
+        flex: 1;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .panel__img--center {
+        align-self: center;
+    }
+}

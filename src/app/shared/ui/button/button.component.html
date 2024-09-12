@@ -1,5 +1,8 @@
 <button 
-  type="{{ type }}" [ngClass]="['button__size--' + size + ' ' + 'button__' + variant + '--' + severity]" (click)="handleClick()">
+  type="{{ type }}" 
+  [ngClass]="['button__size--' + size + ' ' + 'button__' + variant + '--' + severity]" 
+  [ngStyle]="setFabPositionStyles()"
+  (click)="handleClick()">
     <app-label 
       [icon]="icon"
       [severity]="severity"
@@ -11,3 +14,16 @@
     </app-label>
   <span *ngIf="badgeCount" class="button__badge">{{ badgeCount }}</span>
 </button>
+
+
+<!-- 
+
+[ngClass]="['text' + property + 'text']" 
+
+ngClass="{{ }}"
+
+ngClass="setClass()"
+
+[ngClass]="'className'"
+
+-->

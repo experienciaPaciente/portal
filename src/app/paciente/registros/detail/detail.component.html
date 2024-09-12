@@ -9,7 +9,7 @@
                 [icon]="editableIcon"
                 [severity]="editableColor"
                 direction="row">
-                <app-badge type="success" label="{{ registro.validado }}" size="xs"></app-badge>
+                <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
                 <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral" direction="none"></app-button>
             </app-label>
         </header>
@@ -37,12 +37,16 @@
         <app-label
             size="md"
             [label]="registro.fecha"
-            [prefix]="'fecha'">
+            [prefix]="'fecha'"
+            [direction]="'row'"
+            >
         </app-label>
         <app-label
             size="md"
             [label]="registro.emisor"
-            [prefix]="'emisor'">
+            [prefix]="'emisor'"
+            [direction]="'row'"
+            >
         </app-label>
         <app-switcher
             [on]="registro.validado"
@@ -81,7 +85,7 @@
         [variant]="'fill'"
         [icon]="'trash'"
         [direction]="'row'"
-        [label]="'Compartir'"
+        [label]="'editar'"
         ></app-button>
     </footer>
 

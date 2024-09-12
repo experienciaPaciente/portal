@@ -12,10 +12,11 @@ section,aside, div, header {
   &[type='flex'] {
     display: flex;
     flex-direction: column;
-    column-gap: var(--form__gap--horizontal);
+    column-gap: var(--form__gap--row);
     row-gap: var(--form__gap--vertical);
     padding: var(--form__padding);
-
+    box-sizing: border-box;
+    
     div.form__input-wrapper ~ button {
       align-self: flex-end;
       width: 100%;
@@ -25,7 +26,7 @@ section,aside, div, header {
   &[type='wrap'] {
     display: flex;
     flex-flow: wrap !important;
-    column-gap: var(--form__gap--horizontal);
+    column-gap: var(--form__gap--row);
   }
 
   &[type='grid'] {
@@ -53,7 +54,7 @@ section,aside, div, header {
     padding: 1.25rem;
   }
 
-  .btn-group--horizontal {
+  .btn-group--row {
     align-items: flex-end;
 
     button {
@@ -68,9 +69,9 @@ section,aside, div, header {
   }
 
   label {
-    // font-weight: var(--form__label--weight);
-    font-size: var(--form__label--size);
-    color: var(--form__label--color);
+    // font-weight: var(--input__label--weight);
+    font-size: var(--input__label--size);
+    color: var(--input__label--color);
     
     ~ span.required {
       color: var(--danger--dark);

@@ -4,15 +4,12 @@ header#main {
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    padding: var(--header__padding--vertical) var(--header__padding--horizontal);
+    padding: var(--header__padding--vertical) var(--header__padding--row);
     height: var(--header__height);
     width: 100vw;
     box-sizing: border-box;
     box-shadow: var(--shadow);
-    // position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
+    // z-index: 2;
   
     > section > img {
       &:hover {

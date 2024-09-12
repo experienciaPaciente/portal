@@ -13,6 +13,7 @@
   --neutralLight: #e0e0e0;
   --shadow: rgba(140, 140, 140, 0.5);
   --gradient: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
+  --box-shadow: 2px 0 4px var(--shadow);
 
   // Semantics
   --info: #6CBCFC;
@@ -73,13 +74,13 @@
   --page__subfix--margin: 0 0 1rem 0;
 
   // Header 
-  --header__height: 60px;
+  --header__height: 72px;
   --header__bg--color: rgba(255, 255, 255, 0.5);
   --header__padding--vertical: 0.5rem;
-  --header__padding--horizontal: 2rem;
+  --header__padding--row: 2rem;
   --header__item-padding--vertical: 0;
-  --header__item-padding--horizontal: 16px;
-  --header__gap--horizontal: 12px; // Unificar los gaps
+  --header__item-padding--row: 16px;
+  --header__gap--row: 12px; // Unificar los gaps
 
   // Panel 
   --panel__border--radius: 6px;
@@ -130,7 +131,7 @@
   --card__subfix--weight: normal;
   --card__subfix--align: center;
 
-  --card__padding: 0.5rem 2rem;
+  --card__padding: 16px;
   --card__shadow: 2px 2px 4px 0px rgba(180, 180, 180, 0.5);
   --card__width: 100%;
   --card__height: 100%;
@@ -143,8 +144,8 @@
 
   // Button 
   --button__padding--vertical: .5rem;
-  --button__padding--horizontal: .9rem;
-  --button__padding: var(--button__padding--vertical) var(--button__padding--horizontal);
+  --button__padding--row: .9rem;
+  --button__padding: var(--button__padding--vertical) var(--button__padding--row);
   --button__height: fit-content;
   --button__width: fit-content;
   --button__font--size: 14px;
@@ -160,7 +161,7 @@
   // Badge  
   --badge__padding--vertical:
     0.75rem;
-  --badge__padding--horizontal: 1rem;
+  --badge__padding--row: 1rem;
   --badge__font--size: 12px;
   --badge__color--neutral: var(--neutral);
   --badge__background--color: rgba(255, 255, 255, 0.75);
@@ -178,19 +179,19 @@
   --footer__text--align: center;
 
   // Form 
-  --form__gap--horizontal: 16px;
+  --form__gap--row: 16px;
   --form__gap--vertical: 24px;
-  --form__label--size: 14px;
-  --form__label--weight: bold;
-  --form__label--color: var(--neutral);
   // --form__label--marginBottom: 0.5rem;
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
 
   // Input
-  --input__font--size: 21px;
+  --input__font--size: 18px;
+  --input__label--size: 16px;
+  --input__label--weight: bold;
+  --input__label--color: var(--neutral);
   --input__font--color: var(--neutral);
-  --input__padding: 1rem;
-  --input__border: solid 2px var(--form__label--color);
+  --input__padding: 12px 14px;
+  --input__border: solid 2px var(--input__label--color);
   --input__border--radius: 8px;
   
   // Wrapper | Group
@@ -206,7 +207,7 @@
   --list__line--color: lightgray;
   --list__line--width: 1px;
   --list__item--padding: 0;
-  --list__item--gap: .5rem;
+  --list__item--gap: 16px;
   --list__item--align: start;
   --list__item--disabled: 0.5;
   --list__title--size: 1rem;

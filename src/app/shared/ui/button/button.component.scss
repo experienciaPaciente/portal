@@ -1,15 +1,3 @@
-// Checkear uso y considerar mover a layout.scss
-.button__group {
-  --panel__direction: row;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: end;
-  column-gap: var(--wrapper__gap--col);
-  max-width: var(--button__group--width);
-  // min-width: fit-content;
-}   
-
 app-button {
 
   %baseBtn {
@@ -18,7 +6,8 @@ app-button {
       font-size: var(--button__font--size);
       color: var(--button__text--color);
       text-align: center;
-      border-radius: var(--button__border--radius)
+      border-radius: var(--button__border--radius);
+      width: min-content;
   }
 
   > button {
@@ -43,7 +32,6 @@ app-button {
     --label__title--color: white;
     --button__border--color: transparent!important;
     border: solid 2px var(--button__border--color);
-    --button__border--color: none!important;
   }
     
   &[class*=__outline] {
@@ -62,11 +50,11 @@ app-button {
   }
 
   &[class*=__fab] {
-    background-color: var(--tertiary);
-    color: var(--label__title--color);
-    position: absolute;
-    top: -60px;
-    left: calc(220px / 2);
+    --button__text--color: white!important;
+    --label__title--color: white;
+    --button__border--color: transparent!important;
+    border: solid 2px var(--button__border--color);
+    border-radius: 50%;
   }
 
   &[class*=__icon] {
@@ -123,7 +111,7 @@ app-button {
   &.button__size {
 
     &--xs {
-      --button__padding: .25rem .5rem;
+      --button__padding: .2rem .25rem;
       --button__font--size: 10px;
     }
 

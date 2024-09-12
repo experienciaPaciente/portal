@@ -295,24 +295,23 @@ app-card {
 
     // Sizes
     &--xs {
-      --card__padding: 0.5rem;
       width: 120px;
     }
 
     &--sm {
-      --card__padding: 0.65rem;
+      --card__padding: 14px;
     }
 
     &--md {
-      --card__padding: .75rem 0 .75rem .5rem;
+      --card__padding: var(--list__item--gap);
     }
 
     &--lg {
-      --card__padding: 1rem;
+      --card__padding: 18px;
     }
 
     &--xl {
-      --card__padding: 1.15rem;
+      --card__padding: 24px;
     }
 
     // Images

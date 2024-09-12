@@ -7,6 +7,8 @@ app-badge {
       font-weight: normal;
       font-size: var(--badge__font--size);
       align-self: center;
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
     
       // &--xs {
       //   padding: 0.25em 0.5em;

@@ -20,13 +20,13 @@ ul {
         padding: var(--list__item--padding);
         width: 100%;
         box-sizing: border-box;
-        height: 72px;
-        max-height: 96px;
+        height: fit-content;
+        min-height: 120px;
         border-radius: var(--card__border--radius);
         border-bottom: solid 1px var(--primaryLight);
     }
 
-    &.list__item--horizontal {
+    &.list__item--row {
         flex-direction: row;
     }
 

@@ -1,62 +1,60 @@
-  <form [formGroup]="form" class="panel__main" (ngSubmit)="createRegistro()">
-  
-    <section class="panel__inner--main">
+<form [formGroup]="form" class="panel__main" (ngSubmit)="createRegistro()">
+  <section class="panel__inner--main">
+    <header class="panel__header--row">
+        <app-label
+        size="lg"
+        [label]="'Nuevo registro de salud'"
+        [prefix]="'Autoregistro'"
+        subtitle="Completa los campos requeridos (*)"
+        [severity]="'info'"
+        direction="row"
+      ></app-label>
+      <app-badge severity="success" label="Registro guardado" size="md"></app-badge>
+    </header>
 
-      <header class="panel__header--row">
-          <app-label
-          size="lg"
-          [label]="'Nuevo registro de salud'"
-          [prefix]="'Autoregistro'"
-          subtitle="Completa los campos requeridos (*)"
-          [severity]="'info'"
-          direction="row"
-        ></app-label>
-        <app-badge type="success" label="Registro guardado" size="md"></app-badge>
-      </header>
+    <div class="form__input-wrapper--col">
+      <label for="titulo">Titulo</label>
+      <input type="text" formControlName="titulo" (keyup)="onTitleChange()">
+    </div>
 
-      <div class="form__input-wrapper--col">
-        <label for="titulo">Titulo</label>
-        <input type="text" formControlName="titulo" (keyup)="onTitleChange()">
+    @if (!qrResultString) {
+    <div class="form__input-wrapper--col">
+      <label for="descripcion"
+        >Description (optional)</label>
+        <textarea
+          rows="5"
+          type="text"
+          id="descripcion"
+          class=""
+          placeholder="Your description goes here"
+          formControlName="descripcion"
+        ></textarea>
       </div>
+    }
 
-      @if (!qrResultString) {
+    @if (qrResultString) {
       <div class="form__input-wrapper--col">
-        <label for="descripcion"
-          >Description (optional)</label>
-          <textarea
-            rows="5"
-            type="text"
-            id="descripcion"
-            class=""
-            placeholder="Your description goes here"
-            formControlName="descripcion"
-          ></textarea>
-        </div>
+        <label for="paciente">Registro de esta consulta</label>
+        <textarea 
+          id="paciente"
+          formControlName="paciente">
+          {{ qrResultString }}
+        </textarea>
+        <button (click)="clearResult()">&times;</button>
+      </div>
       }
 
-      @if (qrResultString) {
-        <div class="form__input-wrapper--col">
-          <label for="paciente">Registro de esta consulta</label>
-          <textarea 
-            id="paciente"
-            formControlName="paciente">
-            {{ qrResultString }}
-          </textarea>
-          <button (click)="clearResult()">&times;</button>
-        </div>
-        }
-
-        <div class="form__input-wrapper--col">
-          <label for="categoria">Categoría</label>
-           <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
-            <option value="" disabled selected>Select a category</option>
-            @for (categoria of categorias; track categoria) {
-              <option [value]="categoria">
-                {{ categoria }}
-              </option>
-            }
-          </select>
-        </div>
+      <div class="form__input-wrapper--col">
+        <label for="categoria">Categoría</label>
+          <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
+          <option value="" disabled selected>Select a category</option>
+          @for (categoria of categorias; track categoria) {
+            <option [value]="categoria">
+              {{ categoria }}
+            </option>
+          }
+        </select>
+      </div>
     </section>
     <section class="panel__inner--aside">
       <div class="form__input-wrapper--col">
@@ -93,27 +91,25 @@
         </app-label>
     </section>
        <!-- Desacoplar footer en componente -->
-       <footer class="panel__footer">
-        <app-button
-        size="xs"
-        [severity]="'danger'"
-        [variant]="'link'"
-        [icon]="'pencil'"
-        [direction]="'row'"
-        [label]="'Editar'"
-        ></app-button>
-        <app-button
-        severity="success"
-        type="submit"
-        variant="icon"
-        icon="check"
-        size="md"
-      >
-        @if (registroId) {
-          Editar registro
-        } @else {
-          Crearr registro
-        }
-      </app-button>
-    </footer>
-  </form>
+    <footer class="panel__footer">
+      <app-button
+      size="xs"
+      [severity]="'danger'"
+      [variant]="'link'"
+      [icon]="'pencil'"
+      [direction]="'row'"
+      [label]="'Editar'"
+      ></app-button>
+      
+      <app-button
+      [severity]="'success'"
+      type="submit"
+      [variant]="'fill'"
+      [label]="'registroId' ? 'Registrar' : 'Editar'"
+      [direction]="'row'"
+      icon="check"
+      size="xs"
+    >
+    </app-button>
+  </footer>
+</form>
