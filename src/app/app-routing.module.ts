@@ -5,6 +5,7 @@ import { createRegistroComponent } from './paciente/registros/crear-registro/cre
 import { ListComponent } from './paciente/registros/list/list.component';
 import { DetailComponent } from './paciente/registros/detail/detail.component';
 import { ScanComponent } from './paciente/registros/scan/scan.component';
+import SignUpComponent from './paciente/auth/sign-up/sign-up.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
       { path: 'registros', component: ListComponent },
     ]
   },
+  { path: 'registrarse', component: SignUpComponent },
   {
     path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
   },

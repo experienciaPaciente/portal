@@ -1,6 +1,30 @@
-#login {
+#signIn, #signUp {
     --box-shadow: -2px 0 4px var(--shadow);
     --page__body--height: 100vh;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+
+    .page__body--bg {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        object-fit: cover;
+        filter: blur(5px) grayscale(75%);
+    }
+
+    .page__panel--float {
+        position: absolute;
+        left: 30%;
+        top: 2rem;
+        width: var(--panel__width--sidebar);
+        height: fit-content;
+        padding: var(--panel__padding);
+        background-color: white;
+        overflow-y: scroll;
+        box-shadow: var(--box-shadow);
+        z-index: 1;
+    }
 
     // Mover a archivo _img.scss
     .img--hero {
@@ -11,5 +35,15 @@
 
     .panel__img--center {
         align-self: center;
+    }
+
+    .shape__circle--quarter {
+        width: 219px; // Variables | procurar proporción
+        height: 198px;
+        // background-image: './assets/img/shape__circle--quarter.svg';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
     }
 }

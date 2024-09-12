@@ -30,7 +30,7 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 })
 export default class HomeComponent {
   title = 'portal-paciente';
-  imgSrc = './assets/img/experienciaPaciente__logo--h.svg';
+  imgSrc = './assets/img/ep__marca--row.svg';
   isMobile! : boolean;
   isDetailView: boolean = false;
   isRegistroView: boolean = false;
@@ -94,5 +94,6 @@ export default class HomeComponent {
   updateViewState(url: string): void {
     this.isDetailView = url.includes('/item/');
     this.isScanView = url.includes('/scan');
+    this.isScanView = url.includes('/register');
   }
 }

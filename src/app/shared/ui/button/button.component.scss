@@ -53,8 +53,11 @@ app-button {
     --button__text--color: white!important;
     --label__title--color: white;
     --button__border--color: transparent!important;
+    width: calc(var(--button__font--size) * 7.5);
+    height: calc(var(--button__font--size) * 7.5);
     border: solid 2px var(--button__border--color);
     border-radius: 50%;
+    z-index: 3;
   }
 
   &[class*=__icon] {

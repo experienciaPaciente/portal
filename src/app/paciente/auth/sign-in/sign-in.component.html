@@ -1,12 +1,13 @@
-<section id="login" class="page__body">
+<section id="signIn" class="page__body">
   <main class="page__panel--main">
     <img class="img--hero" src="./assets/img/login__bg--desktop.jpg">
   </main>
   <aside class="page__panel--sidebar">
+    <img src="./assets/img/shape__circle--quarter.svg" alt="" class="shape__circle--quarter">
       <form type="flex" [formGroup]="form" (ngSubmit)="logIn()">
-          <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
+          <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.svg" alt="logo experiencia paciente">
           <app-label
-          size="lg"
+          size="md"
           [prefix]="'Ingreso'"
           [label]="'Bienvenido'"
           subtitle="Aquí comienza tu historia de Salud"
@@ -35,8 +36,8 @@
         </app-button>
           <i>{{ hide ? "Ocultar contraseña" : "Mostrar contraseña" }}</i>
           <small>Campo requerido</small>
-      </div>
-  
+        </div>
+    
         <footer class="panel__footer">
           <app-button
             size="xs"
@@ -45,20 +46,20 @@
             [icon]="'user'"
             [direction]="'row'"
             [label]="'Registrarme'"
-            [path]="'/auth/sign-up'"
+            [path]="'registrarse'"
             ></app-button>
 
             <app-button
             severity="success"
             type="submit"
-            variant="fill"
-            [icon]="'check'"
-            [direction]="'row'"
+            variant="fab"
+            [bottom]="'24px'"
+            [right]="'24px'"
+            [direction]="'column'"
             [label]="'Ingresar'"
-            size="xs">
+            size="sm">
           </app-button>
         </footer>
       </form>
-      <span>Don’t have an account yet?<a >Sign up</a></span>
   </aside>
 </section>

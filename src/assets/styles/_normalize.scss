@@ -67,7 +67,11 @@ p {
 hr {
 	box-sizing: content-box;
 	height: 0;
-	overflow: visible;
+	overflow: hidden;
+	border: solid 0.5px var(--secondaryLight);
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /**

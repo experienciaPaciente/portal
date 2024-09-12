@@ -1,7 +1,7 @@
 <header id="main">
     <section class="flex--row">
-      <img *ngIf="!isMobile" src="{{ imgBrand }}" alt="" width="200" height="45" />
-      <img *ngIf="isMobile" src="./assets/img/ep__marca--sqr.png" alt="" width="45" height="45" />
+      <img *ngIf="!isMobile" src="{{ brandDesktop }}" alt="" width="234" height="37" />
+      <img *ngIf="isMobile" src="{{ brandMobile }}" alt="" width="45" height="45" />
     </section>
     <!-- Badges -->
     <section class="header__wrapper--right">
@@ -16,6 +16,7 @@
           direction="row"
           size="xs">
         </app-label>
+        <app-button size="xs" variant="link" icon="share-from-square" label="Cerrar sesión" (click)="logOut()"></app-button>
         <app-button *ngIf="isMobile" size="xs" variant="link" icon="share-from-square" (click)="logOut()"></app-button>
         <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button>
         <app-dropdown

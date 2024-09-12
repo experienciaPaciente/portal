@@ -17,7 +17,8 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() imgBrand: String = '';
+  @Input() brandDesktop: String = '';
+  @Input() brandMobile: String = './assets/img/ep__marca--sqr.svg';
 
   isMobile = false;
   loggedUser = true;

@@ -86,7 +86,8 @@ app-label {
         display: flex;
         flex-direction: column;
         flex: 1;
-        line-height: var(--panel__line--height);
+        row-gap: var(--label__gap);
+        // line-height: var(--panel__line--height);
         // width: calc(100% - var(--button__group--width));
       }
     

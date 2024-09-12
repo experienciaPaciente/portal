@@ -5,12 +5,11 @@ import {
   FormControl,
   ReactiveFormsModule,
 } from '@angular/forms';
-
-
 import { Router, RouterModule } from '@angular/router';
-import { IPaciente } from 'src/app/models/paciente';
 import { PacienteService } from 'src/app/core/services/paciente.service';
 import { AuthService, Credential } from 'src/app/core/services/auth.service';
+import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
+import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 
 interface SignUpForm {
   nombre: FormControl<string>;
@@ -25,6 +24,8 @@ interface SignUpForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
+    ButtonComponent,
+    LabelComponent
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',

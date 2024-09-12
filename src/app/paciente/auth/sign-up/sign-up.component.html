@@ -1,42 +1,75 @@
-<div class="form">
-      <h1>Sign up</h1>
+<section id="signUp">
+  <img class="page__body--bg" src="./assets/img/login__bg--desktop.jpg" alt="">
+  <main class="page__panel--float">
+    <div class="form">
       <form [formGroup]="form" (ngSubmit)="signUp()">
-        <div>
+        <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.svg" alt="logo experiencia paciente">
+        <app-label
+        size="md"
+        [prefix]="'Ingreso'"
+        [label]="'Bienvenido'"
+        subtitle="Aquí comienza tu historia de Salud"
+        [direction]="'column'"
+      ></app-label>
+
+        <div class="form__input-wrapper--col">
             <label for="nombre">Nombres</label>
             <input formControlName="nombre" />
         </div>
   
-        <div>
+        <div class="form__input-wrapper--col">
             <label for="apellido">Apellidos</label>
             <input formControlName="apellido" />
             <small>This field is required</small>
         </div>
-        <div>
+        <div class="form__input-wrapper--col">
             <label for="email">Email</label>
             <input formControlName="email" />
             <small *ngIf="isEmailValid as messsage">{{ messsage })</small>
         </div>
   
-        <div>
-            <label for="password">Enter your password</label>
-            <input
-              
-              [type]="hide ? 'password' : 'text'"
-              formControlName="password"
-            />
-            <button
-              (click)="hide = !hide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide"
-            >
-              <i>{{ hide ? "visibility_off" : "visibility" }}</i>
-            </button>
-            <small>This field is required</small>
-        </div>
-  
-        <div>
-          <button type="submit">Sign up</button>
-        </div>
+        <div class="form__input-wrapper--col">
+          <label>Enter your password</label>
+          <input
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <app-button
+            size="xs"
+            [severity]="'info'"
+            [variant]="'link'"
+            [icon]="'eye'"
+            [direction]="'row'"
+            [label]="'Editar'"
+            (click)="hide = !hide"
+          >
+        </app-button>
+          <i>{{ hide ? "Ocultar contraseña" : "Mostrar contraseña" }}</i>
+          <small>Campo requerido</small>
+        </div>    
+
+        <footer class="panel__footer">
+          <app-button
+            size="xs"
+            [severity]="'info'"
+            [variant]="'fill'"
+            [icon]="'trash'"
+            [direction]="'row'"
+            [label]="'Volver'"
+            [path]="'auth/sign-in'"
+            ></app-button>
+
+            <app-button
+            severity="success"
+            type="submit"
+            variant="fill"
+            [icon]="'check'"
+            [direction]="'row'"
+            [label]="'Registrarme'"
+            size="xs">
+          </app-button>
+        </footer>
       </form>
-  </div>
-  
+    </div>
+  </main>
+</section>
