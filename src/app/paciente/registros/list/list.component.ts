@@ -11,11 +11,21 @@ import { CardComponent } from 'src/app/shared/ui/card/card.component';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { NavbarComponent } from 'src/app/shared/ui/navbar/navbar.component';
+import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ItemComponent, LabelComponent, CommonModule, CardComponent, BadgeComponent, ButtonComponent, NavbarComponent],
+  imports: [
+    ItemComponent,
+    LabelComponent,
+    CommonModule,
+    CardComponent,
+    BadgeComponent,
+    ButtonComponent,
+    NavbarComponent,
+    DropdownComponent
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
@@ -37,6 +47,17 @@ export class ListComponent implements OnInit {
     'Alergia e Inmunología': { icon: 'allergies', color: '#208AF2' },
     'Cardiología': { icon: 'heart', color: '#1BC5DD' },
   };
+
+  menuItems = [
+    { label: 'Item 1', icon: 'user', route: '/path-to-item1' },
+    { label: 'Item 2', icon: 'user', route: '/path-to-item2' },
+    { label: 'Cerrar sesión', icon: 'user', route: '/auth/sign-in', subItems: [
+        { label: 'Sub-item 1', route: '/path-to-subitem1' },
+        { label: 'Sub-item 2', route: '/path-to-subitem2' }
+    ]}
+  ];
+
+  dropdownPosition = { top: '35px', left: '-90px' };
 
   categoriaItems = Object.keys(this.categoriaMap).map(key => {
     return {

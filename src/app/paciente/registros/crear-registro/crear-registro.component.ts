@@ -15,6 +15,8 @@ import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { QrService } from 'src/app/core/services/qr.service';
 import { Subscription } from 'rxjs';
 import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -26,6 +28,7 @@ export interface RegistroForm {
   emisor: FormControl<string>;
   fecha: FormControl<Date>;
   hora: FormControl<string>;
+  adjuntos: FormControl<Array<string>>;
 }
 
 @Component({
@@ -51,8 +54,49 @@ export class createRegistroComponent implements OnInit{
   validado = true;
 
   constructor(
-    private QrService: QrService
+    private QrService: QrService,
+    private storage: Storage, 
+    private firestore: Firestore
   ) {}
+
+  // Uploads
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    if (!file) return; 
+  
+    const filePath = `images/${Date.now()}_${file.name}`;
+    const storageRef = ref(this.storage, filePath);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+  
+    uploadTask.on('state_changed', {
+      next: (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+      },
+      error: (error) => console.error('Upload error:', error),
+      complete: async () => {
+        try {
+          const downloadURL = await getDownloadURL(storageRef);
+          // this.saveImageMetadata(downloadURL, filePath);
+          const currentAdjuntos = this.form.get('adjuntos')?.value || [];
+          this.form.get('adjuntos')?.setValue([...currentAdjuntos, downloadURL]);
+  
+        } catch (error) {
+          console.error('Error getting download URL:', error);
+        }
+      }
+    });
+  }  
+
+  // Include if needed...
+  async saveImageMetadata(downloadURL: string, fileName: string) {
+    const imagesCollection = collection(this.firestore, 'images');
+    await addDoc(imagesCollection, {
+      url: downloadURL,
+      name: fileName,
+      uploadedAt: new Date()
+    });
+  }
 
   ngOnInit() {
     this.onCategoryChange();
@@ -63,7 +107,7 @@ export class createRegistroComponent implements OnInit{
         this.setPacienteValue(data ?? '');
       });
 
-    // Fecha y hra
+    // Fecha y hora
     const today = new Date();
 
     const formattedDate: any = today.toISOString().split('T')[0];
@@ -157,7 +201,8 @@ export class createRegistroComponent implements OnInit{
     estado: this._formBuilder.control(''),
     emisor: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date),
-    hora: this._formBuilder.control('')
+    hora: this._formBuilder.control(''),
+    adjuntos: this._formBuilder.control<string[]>([]), // Initialize as empty array
   });
 
   getPacienteControl() {
@@ -181,21 +226,38 @@ export class createRegistroComponent implements OnInit{
   
   async createRegistro() {
     const user = await this.auth.currentUser;
-
-      if (this.form.invalid) return;
-
-      try {
-        const registro = this.form.value as Registro;
-        if (user) {
-          registro.userId = user.uid;
-        }
-        !this.registroId
-          ? await this._registrosService.createRegistro(registro)
-          : await this._registrosService.updateRegistro(this.registroId, registro);
-        this._router.navigate(['/']);
-      } catch (error) {
+  
+    if (this.form.invalid) return;
+  
+    try {
+      const registro = this.form.value as Registro;
+  
+      // Filter the adjuntos array to remove any invalid entries
+      registro.adjuntos = registro.adjuntos.filter((url) => this.isValidUrl(url));
+  
+      if (user) {
+        registro.userId = user.uid;
+      }
+  
+      if (!this.registroId) {
+        await this._registrosService.createRegistro(registro);
+      } else {
+        await this._registrosService.updateRegistro(this.registroId, registro);
+      }
+      this._router.navigate(['/']);
+    } catch (error) {
+      console.error('Error saving record:', error);
     }
   }
+  
+  isValidUrl(url: string): boolean {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }  
 
   async setFormValues(id: string) {
     try {
@@ -211,6 +273,7 @@ export class createRegistroComponent implements OnInit{
         emisor: registro.emisor || '',
         fecha: registro.fecha || new Date(),
         hora: registro.hora || '',
+        adjuntos: registro.adjuntos || []
       });
     } catch (error) {}
   }

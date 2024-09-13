@@ -6,8 +6,10 @@
     <!-- Badges -->
     <section class="header__wrapper--right">
       @if (loggedUser) {
-        <app-button [path]="'scan'" label="scanear" size="xs" variant="link" icon="" severity="success"></app-button>
-        <app-button [path]="'registrar'" label="registrar" size="xs" variant="link" icon="" severity="success"></app-button>
+        <app-button [path]="'scan'" label="scanear" size="xs" variant="link" direction="row"  icon="code" severity="primary"></app-button>
+        <app-button [path]="'registrar'" label="registrar" size="xs" variant="link" direction="row" icon="plus" severity="primary"></app-button>
+        <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button>
+        <app-button size="xs" variant="link" icon="share-from-square" variant="link" direction="row" label="Cerrar sesión" severity="primary" (click)="logOut()"></app-button>
         <app-label 
           icon="user" 
           iconLabel="user" 
@@ -16,9 +18,6 @@
           direction="row"
           size="xs">
         </app-label>
-        <app-button size="xs" variant="link" icon="share-from-square" label="Cerrar sesión" (click)="logOut()"></app-button>
-        <app-button *ngIf="isMobile" size="xs" variant="link" icon="share-from-square" (click)="logOut()"></app-button>
-        <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button>
         <app-dropdown
           [items]="menuItems"
           [position]="dropdownPosition"

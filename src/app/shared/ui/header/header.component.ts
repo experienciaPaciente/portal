@@ -29,16 +29,17 @@ export class HeaderComponent implements OnInit {
   private _router = inject(Router);
   private authservice = inject(AuthService);
 
+  // Agregar posibilidad de disabled
   menuItems = [
     { label: 'Item 1', icon: 'user', route: '/path-to-item1' },
     { label: 'Item 2', icon: 'user', route: '/path-to-item2' },
-    { label: 'Item 3', icon: 'user', subItems: [
+    { label: 'Cerrar sesión', icon: 'user', route: '/auth/sign-in', subItems: [
         { label: 'Sub-item 1', route: '/path-to-subitem1' },
         { label: 'Sub-item 2', route: '/path-to-subitem2' }
     ]}
   ];
 
-  dropdownPosition = { top: '50px', left: '0' };
+  dropdownPosition = { top: '45px', left: '-75px' };
 
   constructor(  
     private router: Router,

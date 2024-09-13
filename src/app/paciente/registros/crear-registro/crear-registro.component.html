@@ -56,8 +56,8 @@
         </select>
       </div>
       <div class="form__input-wrapper--col">
-        <label for="adjunto">Adjuntar archivo</label>
-        <input type="file" id="adjunto" name="adjunto">
+        <label for="adjuntos">Adjuntar archivo</label>
+        <input type="file" id="adjuntos" formControlName="adjuntos" (change)="uploadFile($event)">
       </div>
     </section>
     <section class="panel__inner--aside">

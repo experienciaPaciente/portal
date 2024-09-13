@@ -8,6 +8,7 @@ app-button {
       text-align: center;
       border-radius: var(--button__border--radius);
       width: min-content;
+      text-transform: capitalize;
   }
 
   > button {
@@ -53,8 +54,8 @@ app-button {
     --button__text--color: white!important;
     --label__title--color: white;
     --button__border--color: transparent!important;
-    width: calc(var(--button__font--size) * 7.5);
-    height: calc(var(--button__font--size) * 7.5);
+    width: calc(var(--button__font--size) * 7.5); // Reveer calc
+    height: calc(var(--button__font--size) * 7.5); // Reveer calc
     border: solid 2px var(--button__border--color);
     border-radius: 50%;
     z-index: 3;
