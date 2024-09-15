@@ -10,28 +10,23 @@
                 [severity]="editableColor"
                 direction="row">
                 <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
-                <app-button icon="ellipsis-vertical" size="xs" variant="link" severity="neutral" direction="none"></app-button>
+                <app-button icon="ellipsis-vertical" size="md" variant="link" severity="neutral" direction="none"></app-button>
             </app-label>
         </header>
         <article>
             {{ registro.descripcion }}
             {{ registro.paciente }}
         </article>
-        <!-- Resolver funcionalidad adjuntos / componente carousel -->
-        <section role="navigation" class="img__wrapper--grid">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-        </section>
+        @if (registro.adjuntos) {
+            <section role="navigation" class="img__wrapper--grid">
+              @for (file of registro.adjuntos; track file) {
+                <figure class=""> 
+                    <img [src]="file" alt="Uploaded Image">
+                    <figcaption>{{ file }}</figcaption>
+                </figure>
+              }
+            </section>
+          }
     </div>
     <div class="panel__inner--aside">
         <app-label

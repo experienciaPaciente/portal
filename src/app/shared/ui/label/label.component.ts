@@ -12,7 +12,8 @@ export class LabelComponent implements OnChanges{
   @Input() icon?: string;
   @Input() img?: string;
   @Input() iconLabel?: string;
-  @Input() severity: 'primary' | 'secondary' | 'tertiary' | 'neutral' | string = 'neutral';
+  @Input() severity: 'primary' | 'secondary' | 'tertiary' | 'neutral' | 'custom' | string = 'neutral';
+  @Input() color?: string;
   @Input() label?: string | Date;
   @Input() subtitle?: string;
   @Input() prefix?: string;
@@ -29,12 +30,13 @@ export class LabelComponent implements OnChanges{
     }
   }
 
+  // Reveer color icono
   private updateIconColor() {
     if (typeof this.severity === 'string') {
       if (['primary', 'secondary', 'tertiary', 'neutral'].includes(this.severity)) {
         this.labelColor.nativeElement.style.setProperty('--label__icon--color', `var(--${this.severity})`);
       } else {
-        this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.severity);
+        this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.color);
       }
     }
   }

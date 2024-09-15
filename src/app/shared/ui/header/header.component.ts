@@ -7,11 +7,19 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent, LabelComponent, CommonModule, DropdownComponent],
+  imports: [
+    ButtonComponent,
+    LabelComponent,
+    CommonModule,
+    DropdownComponent,
+    ModalComponent,
+    ButtonComponent
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -24,21 +32,24 @@ export class HeaderComponent implements OnInit {
   loggedUser = true;
   email: string | null = null;
   name: string | null = null;
+  isModalOpen: boolean = false;
+
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
   private _router = inject(Router);
   private authservice = inject(AuthService);
 
+  // Agregar posibilidad de disabled y funciones/métodos
   menuItems = [
     { label: 'Item 1', icon: 'user', route: '/path-to-item1' },
     { label: 'Item 2', icon: 'user', route: '/path-to-item2' },
-    { label: 'Item 3', icon: 'user', subItems: [
+    { label: 'Cerrar sesión', icon: 'user', route: '/auth/sign-in', subItems: [
         { label: 'Sub-item 1', route: '/path-to-subitem1' },
         { label: 'Sub-item 2', route: '/path-to-subitem2' }
     ]}
   ];
 
-  dropdownPosition = { top: '50px', left: '0' };
+  dropdownPosition = { top: '45px', left: '-75px' };
 
   constructor(  
     private router: Router,
@@ -69,6 +80,18 @@ export class HeaderComponent implements OnInit {
     this.isMobile = width < 768; 
   }
 
+
+  // Open the modal for confirmation
+  openModal(): void {
+    this.isModalOpen = !this.isModalOpen;
+    console.log(this.isModalOpen);
+  }
+
+  onConfirm() {
+    this.isModalOpen = false;
+    this.logOut();
+  }
+
   async logOut(): Promise<void> {
     try {
       await this.authservice.logOut();
@@ -86,5 +109,6 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/']);
     } 
   }
+
   
 }
