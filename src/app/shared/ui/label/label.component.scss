@@ -22,6 +22,10 @@ app-label {
       flex-direction: row;
       align-items: center;
       column-gap: .65rem;
+
+      > .label__icon {
+        --label__icon--align: center;
+      }
     }
     
     &.column {

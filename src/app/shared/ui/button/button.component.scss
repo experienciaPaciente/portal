@@ -36,10 +36,11 @@ app-button {
   }
     
   &[class*=__outline] {
+    --label__title--color: var(--button__bg--color);
     --button__border--color: var(--button__bg--color);
     background: transparent!important;
     border: solid 2px var(--button__bg--color);
-    color: var(--button__bg--color)!important;
+    color: var(--label__title--color);
   }
   
   &[class*=__link] {

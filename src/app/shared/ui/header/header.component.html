@@ -9,7 +9,7 @@
         <app-button [path]="'scan'" label="scanear" size="xs" variant="link" direction="row"  icon="code" severity="primary"></app-button>
         <app-button [path]="'registrar'" label="registrar" size="xs" variant="link" direction="row" icon="plus" severity="primary"></app-button>
         <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button>
-        <app-button size="xs" variant="link" icon="share-from-square" variant="link" direction="row" label="Cerrar sesión" severity="primary" (click)="logOut()"></app-button>
+        <app-button size="xs" variant="link" icon="share-from-square" variant="link" direction="row" label="Cerrar sesión" severity="primary" (click)="openModal()"></app-button>
         <app-label 
           icon="user" 
           iconLabel="user" 
@@ -27,3 +27,19 @@
       }  
     </section>
 </header>
+@if (isModalOpen) {
+  <app-modal
+    [prefix]="'Cerrar sesión'"
+    [title]="'Modal Title'"
+    [subtitle]="'Modal Subtitle'"
+    icon="info-circle"
+    [img]="'./assets/img/login__bg--desktop.jpg'"
+    [caption]="'This is the image caption.'"
+    [closeable]="true"
+    (closeModal)="isModalOpen = false"
+  >
+    <!-- Footer buttons using app-button -->
+    <app-button direction="none" size="sm" label="Cancel" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
+    <app-button direction="none" size="sm" label="Confirm" variant="fill" severity="success" (click)="onConfirm()"></app-button>
+  </app-modal>
+}
