@@ -6,8 +6,9 @@
                 size="lg"
                 [label]="registro.titulo"
                 [prefix]="registro.categoria"
-                [icon]="editableIcon"
-                [severity]="editableColor"
+                [icon]="getIconForCategoria(registro.categoria)"
+                [severity]="'custom'"
+                [color]="getColorForCategoria(registro.categoria)"
                 direction="row">
                 <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
                 <app-button icon="ellipsis-vertical" size="md" variant="link" severity="neutral" direction="none"></app-button>
@@ -19,7 +20,7 @@
         </article>
         @if (registro.adjuntos) {
             <section role="navigation" class="img__wrapper--grid">
-              @for (file of registro.adjuntos; track file) {
+              @for (file of registro.adjuntos; track trackByFn(file)) {
                 <figure class=""> 
                     <img [src]="file" alt="Uploaded Image">
                     <figcaption>{{ file }}</figcaption>

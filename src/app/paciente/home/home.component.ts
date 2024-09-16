@@ -95,5 +95,6 @@ export default class HomeComponent {
     this.isDetailView = url.includes('/item/');
     this.isScanView = url.includes('/scan');
     this.isScanView = url.includes('/register');
+    this.isScanView = url.includes('/list');
   }
 }

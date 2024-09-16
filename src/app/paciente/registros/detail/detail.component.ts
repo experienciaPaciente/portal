@@ -10,15 +10,20 @@ import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [BadgeComponent, ButtonComponent, LabelComponent, SwitcherComponent],
+  imports: [
+    BadgeComponent,
+    ButtonComponent,
+    LabelComponent,
+    SwitcherComponent
+  ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent {
   registro!: Registro | null;
   id!: string;
-  editableIcon: string = 'heart';
-  editableColor: string = '';
+  editableIcon!: string;
+  editableColor!: string;
   qrCodeUrl?: string;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
@@ -39,7 +44,6 @@ export class DetailComponent {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.fetchDetails(this.id);
-      this.getCategory(this.id);
     });
   }
 
@@ -74,12 +78,15 @@ export class DetailComponent {
     }
   }
 
-  getCategory(id: string) {
-    const categoria = this.registro?.categoria;
-    if (categoria) {
-      const { icon, color } = this.categoriaMap[categoria];
-      this.editableIcon = icon;
-      this.editableColor = color;
-    }
+  getIconForCategoria(categoria: string): string {
+    return this.categoriaMap[categoria]?.icon || 'question-circle'; // Default icon
+  }
+
+  getColorForCategoria(categoria: string): string {
+    return this.categoriaMap[categoria]?.color || 'gray'; // Default color
+  }
+
+  trackByFn(item: any): any {
+    return item.id;
   }
 }

@@ -13,7 +13,7 @@ export class LabelComponent implements OnChanges{
   @Input() img?: string;
   @Input() iconLabel?: string;
   @Input() severity: 'primary' | 'secondary' | 'tertiary' | 'neutral' | 'custom' | string = 'neutral';
-  @Input() color?: string;
+  @Input() color!: string;
   @Input() label?: string | Date;
   @Input() subtitle?: string;
   @Input() prefix?: string;
@@ -25,7 +25,7 @@ export class LabelComponent implements OnChanges{
   constructor() {}
   
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['severity']) {
+    if (changes['severity'], ['color']) {
       this.updateIconColor();
     }
   }
