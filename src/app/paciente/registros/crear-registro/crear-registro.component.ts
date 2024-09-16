@@ -88,7 +88,6 @@ export class createRegistroComponent implements OnInit{
     });
   }  
 
-  // Include if needed...
   async saveImageMetadata(downloadURL: string, fileName: string) {
     const imagesCollection = collection(this.firestore, 'images');
     await addDoc(imagesCollection, {
@@ -107,7 +106,7 @@ export class createRegistroComponent implements OnInit{
         this.setPacienteValue(data ?? '');
       });
 
-    // Fecha y hora
+    // Date
     const today = new Date();
 
     const formattedDate: any = today.toISOString().split('T')[0];
@@ -209,12 +208,10 @@ export class createRegistroComponent implements OnInit{
     return this.form.get('paciente');
   }
 
-  // Method to read the value of the 'paciente' control
   getPacienteValue(): string | undefined {
     return this.getPacienteControl()?.value;
   }
 
-  // Method to update the value of the 'paciente' control
   setPacienteValue(newValue: string): void {
     this.getPacienteControl()?.setValue(newValue);
   }
@@ -232,7 +229,7 @@ export class createRegistroComponent implements OnInit{
     try {
       const registro = this.form.value as Registro;
   
-      // Filter the adjuntos array to remove any invalid entries
+      // Adjuntos array (removes any invalid entries)
       registro.adjuntos = registro.adjuntos.filter((url) => this.isValidUrl(url));
   
       if (user) {

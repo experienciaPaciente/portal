@@ -54,7 +54,9 @@
             [disabled]="true"
         ></app-switcher>
         <!-- Integración QR con portal-profesional -->
-        <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
+         @if (qrCodeUrl) {
+             <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
+         }
         <app-label
             [size]="'sm'"
             [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"

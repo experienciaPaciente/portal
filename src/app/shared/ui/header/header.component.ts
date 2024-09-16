@@ -26,7 +26,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class HeaderComponent implements OnInit {
 
   @Input() brandDesktop: String = '';
-  @Input() brandMobile: String = './assets/img/ep__marca--sqr.svg';
+  @Input() brandMobile: String = './assets/img/ep__marca--sqr.png';
 
   isMobile = false;
   loggedUser = true;
