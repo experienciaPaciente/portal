@@ -41,6 +41,7 @@ export class ScanComponent {
   hasPermission: boolean | undefined;
 
   qrResultString!: string;
+  noPermissions = false;
 
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
@@ -50,6 +51,20 @@ export class ScanComponent {
     private router: Router,
     private QrService: QrService
   ) {}
+
+  ngOnInit() {
+    this.checkCameraPermissions();
+  }
+
+  checkCameraPermissions() {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(() => {
+        this.noPermissions = false;
+      })
+      .catch(() => {
+        this.noPermissions = true;
+      });
+  }
 
   onCodeResult(resultString: string): void {
     this.qrResultString = resultString;
