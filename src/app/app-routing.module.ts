@@ -16,6 +16,7 @@ export const routes: Routes = [
       { path: 'registrar', component: createRegistroComponent },
       { path: 'scan', component: ScanComponent },
       { path: 'registros', component: ListComponent },
+      { path: 'actualizar/:id', component: createRegistroComponent },
     ]
   },
   { path: 'registrarse', component: SignUpComponent },

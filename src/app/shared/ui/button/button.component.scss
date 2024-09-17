@@ -5,9 +5,9 @@ app-button {
       background: var(--button__bg--color);
       font-size: var(--button__font--size);
       color: var(--button__text--color);
-      text-align: center;
+      text-align: var(--button__text--align);
       border-radius: var(--button__border--radius);
-      width: min-content;
+      width: var(--button__width);
       text-transform: capitalize;
   }
 

@@ -1,4 +1,4 @@
-<section class="panel__inner--aside">
+<section class="panel__main--center">
     <header class="panel__header">
         <app-label
             size="md"
@@ -8,35 +8,46 @@
             severity="neutral"
             direction="column">
         </app-label>
-        <zxing-scanner class="qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+    </header>
+    @if (noPermissions) {
+        <app-badge severity="danger" label="Cámara no habilitada" size="xs"></app-badge>
+    }
+    @if (!noPermissions) {
+        <zxing-scanner class="inner__wrapper--qr" [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
                     [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-                    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
-                    
+                    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)">
+        </zxing-scanner>
+        @if (qrResultString) {
+            <app-badge severity="success" label="Scaneo exitoso" size="xs"></app-badge>
+        } @else {
+            <app-badge severity="warning" label="No se pudo leer el código" size="xs"></app-badge>
+        }
+    }
         <app-label
         size="sm"
         [label]="'Enfoca'"
+        [subtitle]="'Pronto te reenviaremos al detalle de la consulta.'"
         [icon]="'hand'"
         severity="neutral"
-        direction="row">
-            <app-badge severity="success" label="Scaneo exitoso" size="xs"></app-badge>
-            <app-badge type="warning" label="No pudimos escanear" size="xs"></app-badge>
+        direction="column">
         </app-label>
-    </header>
     <!-- Crear componente Footer -->
     <footer class="panel__footer">
         <app-button
             size="xs"
             severity="danger"
             [variant]="'outline'"
-            [icon]="'pencil'"
+            [direction]="'row'"
+            [icon]="'close'"
             [label]="'Cancelar'"
-        ></app-button>
-        <app-button
+            ></app-button>
+            <app-button
             size="xs"
-            severity="info"
+            severity="success"
             [variant]="'fill'"
-            [icon]="'trash'"
-            [label]="'Compartir'"
+            [direction]="'row'"
+            [icon]="'code'"
+            [label]="'Scanear'"
         ></app-button>
     </footer>
 </section>

@@ -3,7 +3,7 @@
     <header class="panel__header--row">
         <app-label
         size="lg"
-        [label]="'Nuevo registro de salud'"
+        [label]="registroId ? setTitle() : 'Nuevo registro de Salud'"
         [prefix]="'Autoregistro'"
         subtitle="Completa los campos requeridos (*)"
         [severity]="'info'"
@@ -60,60 +60,84 @@
         <input type="file" id="adjuntos" formControlName="adjuntos" (change)="uploadFile($event)">
       </div>
     </section>
-    <section class="panel__inner--aside">
-      <div class="form__input-wrapper--col">
-        <label for="fecha">Fecha</label>
-        <input type="date" formControlName="fecha">
-      </div>
-      <div class="form__input-wrapper--col">
-        <label for="hora">Hora</label>
-        <input type="time" formControlName="hora">
-      </div>
-        <app-switcher
-            [on]="validado"
-            size="md"
-            onLabel="Validado"
-            offLabel="No validado"
-            labelPosition="right"
-            (toggle)="validateRecord()"
-        ></app-switcher>
-        @if (validado) {
-          <div class="form__input-wrapper--col">
-            <label for="emisor">Institución/Profesional</label>
-            <input type="text" formControlName="emisor">
-          </div>
-        }
-        <!-- Integración QR con portal-profesional -->
-        <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
-        <app-label
-            [size]="'sm'"
-            [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
-            [direction]="'row'"
-            [severity]="'neutral'"
-            [icon]="'info-circle'"
-        >
-        </app-label>
-    </section>
+
+    @if (!qrRegister) {
+      <section class="panel__inner--aside">
+        <div class="form__input-wrapper--col">
+          <label for="fecha">Fecha</label>
+          <input type="date" formControlName="fecha">
+        </div>
+        <div class="form__input-wrapper--col">
+          <label for="hora">Hora</label>
+          <input type="time" formControlName="hora">
+        </div>
+          <app-switcher
+              [on]="validado"
+              size="md"
+              onLabel="Validado"
+              offLabel="No validado"
+              labelPosition="right"
+              (toggle)="validateRecord()"
+          ></app-switcher>
+          @if (validado) {
+            <div class="form__input-wrapper--col">
+              <label for="emisor">Institución/Profesional</label>
+              <input type="text" formControlName="emisor">
+            </div>
+          }
+          <!-- Integración QR con portal-profesional -->
+          <img class="panel__qr--aside" src="" alt="">
+          <app-label
+              [size]="'sm'"
+              [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
+              [direction]="'row'"
+              [severity]="'neutral'"
+              [icon]="'info-circle'"
+          >
+          </app-label>
+      </section>
+    }
+
+    @if (qrRegister) {
+      <section class="panel__inner--aside">
+        <app-scan></app-scan>
+      </section>
+    }
        <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">
-      <app-button
-      size="xs"
-      [severity]="'danger'"
-      [variant]="'link'"
-      [icon]="'pencil'"
-      [direction]="'row'"
-      [label]="'Editar'"
-      ></app-button>
-      
-      <app-button
-      [severity]="'success'"
-      type="submit"
-      [variant]="'fill'"
-      [label]="'registroId' ? 'Registrar' : 'Editar'"
-      [direction]="'row'"
-      icon="check"
-      size="xs"
-    >
-    </app-button>
+      <div class="panel__footer--right">
+        <app-button
+        size="xs"
+        [severity]="'danger'"
+        [variant]="'link'"
+        [icon]="'pencil'"
+        [direction]="'row'"
+        [label]="registroId ? 'Cancelar' : 'Reset'"
+        [type]="registroId ? 'button' : 'reset'"
+        (clickEvent)="cancel()"
+        ></app-button>
+        
+        <app-button
+        size="xs"
+        [severity]="'primary'"
+        [variant]="'link'"
+        [icon]="'code'"
+        [direction]="'row'"
+        [label]="'Registrar desde un QR'"
+        (clickEvent)="showQrRegister()"
+        ></app-button>
+      </div>
+      <div class="panel__footer--left">
+        <app-button
+        [severity]="'success'"
+        type="submit"
+        [variant]="'fill'"
+        [label]="'registroId' ? 'Registrar' : 'Confirmar'"
+        [direction]="'row'"
+        [icon]="'registroId' ? 'pencil' : 'check'"
+        size="xs"
+      >
+      </app-button>
+      </div>
   </footer>
 </form>

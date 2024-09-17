@@ -6,8 +6,9 @@
                 size="lg"
                 [label]="registro.titulo"
                 [prefix]="registro.categoria"
-                [icon]="editableIcon"
-                [severity]="editableColor"
+                [icon]="getIconForCategoria(registro.categoria)"
+                [severity]="'custom'"
+                [color]="getColorForCategoria(registro.categoria)"
                 direction="row">
                 <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
                 <app-button icon="ellipsis-vertical" size="md" variant="link" severity="neutral" direction="none"></app-button>
@@ -19,7 +20,7 @@
         </article>
         @if (registro.adjuntos) {
             <section role="navigation" class="img__wrapper--grid">
-              @for (file of registro.adjuntos; track file) {
+              @for (file of registro.adjuntos; track trackByFn(file)) {
                 <figure class=""> 
                     <img [src]="file" alt="Uploaded Image">
                     <figcaption>{{ file }}</figcaption>
@@ -54,7 +55,9 @@
             [disabled]="true"
         ></app-switcher>
         <!-- Integración QR con portal-profesional -->
-        <img class="panel__qr--aside" src="./assets/img/panel__qr--aside.png" alt="">
+         @if (qrCodeUrl) {
+             <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
+         }
         <app-label
             [size]="'sm'"
             [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
@@ -73,6 +76,7 @@
         [icon]="'pencil'"
         [direction]="'row'"
         [label]="'Editar'"
+        [path]="'actualizar/' + id"
         ></app-button>
         <app-button
         size="xs"

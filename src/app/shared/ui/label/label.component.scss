@@ -15,7 +15,6 @@ app-label {
     justify-content: space-between;
     width: 100%;
     height: fit-content;
-    // gap: 16px;
    
     // Direccionalidad
     &.row {
@@ -29,6 +28,7 @@ app-label {
     }
     
     &.column {
+        --button__text--align: center;
         flex-direction: column;
         align-items: center;
         justify-content: center;
