@@ -49,12 +49,11 @@ export class ListComponent implements OnInit {
   };
 
   menuItems = [
-    { label: 'Item 1', icon: 'user', route: '/path-to-item1' },
-    { label: 'Item 2', icon: 'user', route: '/path-to-item2' },
-    { label: 'Cerrar sesión', icon: 'user', route: '/auth/sign-in', subItems: [
-        { label: 'Sub-item 1', route: '/path-to-subitem1' },
-        { label: 'Sub-item 2', route: '/path-to-subitem2' }
-    ]}
+    { label: 'Editar', icon: 'user', action: this.navigateToEdit.bind(this) },
+    { label: 'Destacar', icon: 'star', route: '/path-to-item2' },
+    { label: 'Gestionar permisos', icon: 'star', route: '/path-to-item2' },
+    { label: 'Asociar a registro', icon: 'star', route: '/path-to-item2' },
+    { label: 'Eliminar', icon: 'trash', action: this.navigateToDelete.bind(this)}
   ];
 
   dropdownPosition = { top: '35px', left: '-90px' };
@@ -79,10 +78,25 @@ export class ListComponent implements OnInit {
       }
     });
   }
-  
+
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
-    // Utilizar behavior subject para enviar el enviar el valor actualizado de isMobile
+  }
+
+  navigateToEdit(item: Registro): void {
+    this.router.navigate([`/actualizar/${item.id}`]);
+  }
+
+  async navigateToDelete(item: Registro): Promise<void> {
+    try {
+      await this.registroService.deleteRegistro(item.id);
+      console.log('Registro deleted successfully');
+      // Optionally, update the UI or navigate away
+     this.router.navigate(['/']);
+    } catch (error) {
+      console.error('Error deleting registro', error);
+      // Optionally, show an error message to the user
+    }
   }
 
   getIconForCategoria(categoria: string): string {

@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { RegistrosService,  } from './../../../core/services/registros.service';
 import { Registro } from './../../../models/registro';
 import { Auth } from '@angular/fire/auth';
@@ -17,6 +17,8 @@ import { Subscription } from 'rxjs';
 import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { ScanComponent } from '../scan/scan.component';
+import { Location } from '@angular/common';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -43,20 +45,27 @@ export interface RegistroForm {
     BadgeComponent,
     ButtonComponent,
     LabelComponent,
-    SwitcherComponent
+    SwitcherComponent,
+    ScanComponent,
   ],
 })
 
 export class createRegistroComponent implements OnInit{
 
   qrResultString: string | null = null;
+  qrRegister = false;
   private subscription: Subscription = new Subscription();
   validado = true;
+  registroId: string | null = null;
+  registro?: Registro;
 
   constructor(
     private QrService: QrService,
     private storage: Storage, 
-    private firestore: Firestore
+    private firestore: Firestore,
+    private _activatedRoute: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {}
 
   // Uploads
@@ -80,7 +89,8 @@ export class createRegistroComponent implements OnInit{
           // this.saveImageMetadata(downloadURL, filePath);
           const currentAdjuntos = this.form.get('adjuntos')?.value || [];
           this.form.get('adjuntos')?.setValue([...currentAdjuntos, downloadURL]);
-  
+          event.target.value = ''; // This is allowed
+
         } catch (error) {
           console.error('Error getting download URL:', error);
         }
@@ -88,6 +98,7 @@ export class createRegistroComponent implements OnInit{
     });
   }  
 
+  // Reveer uso
   async saveImageMetadata(downloadURL: string, fileName: string) {
     const imagesCollection = collection(this.firestore, 'images');
     await addDoc(imagesCollection, {
@@ -98,8 +109,14 @@ export class createRegistroComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.registroId = this._activatedRoute.snapshot.paramMap.get('id');
+    
+    if (this.registroId) {
+      this.loadRegistroData(this.registroId);
+    }
+
+    this.setTitle();
     this.onCategoryChange();
-    this.editableTitle = this.form.controls['titulo'].value;
 
     this.subscription = this.QrService.qrData$.subscribe((data) => {
         this.qrResultString = data;
@@ -124,6 +141,10 @@ export class createRegistroComponent implements OnInit{
 
   onTitleChange() {
     this.editableTitle = this.form.controls['titulo'].value;
+  }
+
+  setTitle() {
+    return this.form.controls['titulo'].value;
   }
 
   validateRecord() {
@@ -178,18 +199,7 @@ export class createRegistroComponent implements OnInit{
   private _formBuilder = inject(FormBuilder).nonNullable;
   private _router = inject(Router);
   private _registrosService = inject(RegistrosService);
-  private _registroId = '';
   private auth: Auth = inject(Auth);
-
-
-  get registroId(): string {
-    return this._registroId;
-  }
-
-  @Input() set registroId(value: string) {
-    this._registroId = value;
-    this.setFormValues(this._registroId);
-  }
 
   form = this._formBuilder.group<RegistroForm>({
     paciente: this._formBuilder.control(''),
@@ -201,7 +211,7 @@ export class createRegistroComponent implements OnInit{
     emisor: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date),
     hora: this._formBuilder.control(''),
-    adjuntos: this._formBuilder.control<string[]>([]), // Initialize as empty array
+    adjuntos: this._formBuilder.control<string[]>([]),
   });
 
   getPacienteControl() {
@@ -219,6 +229,28 @@ export class createRegistroComponent implements OnInit{
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
     this.setPacienteValue(resultString);
+  }
+
+  async loadRegistroData(id: string) {
+    try {
+      const registro = await this._registrosService.getRegistro(id);
+      if (registro) {
+        this.form.patchValue({
+          paciente: registro.paciente,
+          titulo: registro.titulo,
+          descripcion: registro.descripcion,
+          categoria: registro.categoria,
+          validado: registro.validado,
+          estado: registro.estado,
+          emisor: registro.emisor,
+          fecha: registro.fecha,
+          hora: registro.hora,
+          adjuntos: registro.adjuntos || []
+        });
+      }
+    } catch (error) {
+      console.error('Error loading registro:', error);
+    }
   }
   
   async createRegistro() {
@@ -273,5 +305,25 @@ export class createRegistroComponent implements OnInit{
         adjuntos: registro.adjuntos || []
       });
     } catch (error) {}
+  }
+
+  showQrRegister() {
+    this._router.navigate(['/scan']);
+  }
+
+  goBack(): void {
+    console.log('Historial:', window.history.length);
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    } 
+  }
+
+  cancel() {
+    if (this.form) {
+      this.form.reset();
+    }
+    this.router.navigate(['/']);
   }
 }

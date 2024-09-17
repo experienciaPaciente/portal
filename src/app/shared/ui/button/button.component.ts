@@ -13,7 +13,7 @@ import { LabelComponent } from '../label/label.component';
 export class ButtonComponent{
   // Contemplar agregar inputs de posicionamiento para type=fab
   @Input() variant: 'fill' | 'outline' | 'link' | 'fab' | 'icon' = 'fill';
-  @Input() type?: 'submit';
+  @Input() type?: 'submit' | 'button' | 'reset';
   @Input() severity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' | 'primary' | 'secondary' | 'tertiary' = 'info';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
   @Input() icon?: string;

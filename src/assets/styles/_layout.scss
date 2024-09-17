@@ -195,9 +195,15 @@
     box-shadow: 0 -1px 0px 0px var(--shadow);
 
     .panel__footer--right {
-      
+      display: flex;
+      justify-content: flex-start;
+      column-gap: var(--wrapper__gap--col);
+      flex: 1;
     }
     .panel__footer--left {
-    
+      display: flex;
+      justify-content: flex-end;
+      column-gap: var(--wrapper__gap--col);
+      flex: 1;
     }
   }

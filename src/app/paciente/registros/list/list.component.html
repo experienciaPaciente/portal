@@ -19,7 +19,7 @@
     <!-- Considerar hacer un app-wrapper -->
     <ul class="list__wrapper--{{ type }}">
         @for (data of records; track trackByFn(data)) {
-            <li (click)="onItemSelected(data)">
+            <li (click)="onItemSelected(data); $event.stopPropagation()">
                 <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
                         <app-label
                         size="sm"
@@ -32,6 +32,7 @@
                         direction="row">
                         <app-badge [severity]="data.validado ? 'success' : 'info'" [label]="data.validado ? 'Validado' : 'Auto-registro'" size="xs"></app-badge>
                         <app-badge severity="info" [label]="data.emisor" size="xs" icon="user"></app-badge>
+                        <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
                         <app-dropdown
                         [items]="menuItems"
                         [position]="dropdownPosition"

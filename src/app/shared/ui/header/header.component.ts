@@ -5,7 +5,6 @@ import { ButtonComponent } from '../button/button.component';
 import { Auth, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Location } from '@angular/common';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -51,11 +50,6 @@ export class HeaderComponent implements OnInit {
 
   dropdownPosition = { top: '45px', left: '-75px' };
 
-  constructor(  
-    private router: Router,
-    private location: Location
-  ) {}
- 
   // Listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -99,16 +93,5 @@ export class HeaderComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  goBack(): void {
-    console.log('History length:', window.history.length);
-    if (window.history.length > 1) {
-      this.location.back();
-    } else {
-      this.router.navigate(['/']);
-    } 
-  }
-
-  
+  }  
 }
