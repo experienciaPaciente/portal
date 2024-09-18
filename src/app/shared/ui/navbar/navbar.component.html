@@ -11,9 +11,11 @@
         (click)="toggleSelectable(item)"
       >
         <app-label
-          size="xs"
+          size="xxs"
+          [severity]="'custom'"
           [label]="item.label"
           [icon]="item.icon"
+          [color]="item.color"
         ></app-label>
       </app-card>
     </ng-container>

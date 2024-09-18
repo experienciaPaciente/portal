@@ -29,8 +29,9 @@
       // Componente panel
       aside.page__panel--sidebar {
         height: var(--panel__height);
-        flex: 1;
-        min-width: var(--panel__width--sidebar);
+        width: 100vw;
+        // flex: 1;
+        // min-width: var(--panel__width--sidebar);
         box-sizing: border-box;
         padding: var(--panel__padding);
         background-color: white;

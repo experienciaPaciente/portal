@@ -11,7 +11,7 @@
         <!-- <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button> -->
         <app-button *ngIf="!isMobile" size="xs" variant="link" icon="share-from-square" variant="link" direction="row" label="Cerrar sesión" severity="primary" (click)="openModal()"></app-button>
         <app-label 
-          icon="user" 
+          [icon]="isMobile ? '' : 'user'" 
           iconLabel="user" 
           label="Nombre usuario" 
           subtitle="{{ email }}" 
@@ -19,7 +19,6 @@
           size="xs">
         </app-label>
         <app-dropdown
-          *ngIf="isMobile"
           [items]="menuItems"
           [position]="dropdownPosition"
           buttonLabel=""

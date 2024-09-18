@@ -33,6 +33,8 @@ export class ListComponent implements OnInit {
 
   registro!: Registro[];
   registros$!: Observable<Registro[]>;
+  isMobile! : boolean;
+
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
   
@@ -63,8 +65,8 @@ export class ListComponent implements OnInit {
       label: key,
       icon: this.categoriaMap[key].icon,
       color: this.categoriaMap[key].color,
-      path: `/categories/${key}`, // Assuming you want to have a path associated with each item
-      selectable: false, // Default selectable state
+      path: `/categories/${key}`,
+      selectable: false,
     };
   });
 
@@ -91,11 +93,9 @@ export class ListComponent implements OnInit {
     try {
       await this.registroService.deleteRegistro(item.id);
       console.log('Registro deleted successfully');
-      // Optionally, update the UI or navigate away
      this.router.navigate(['/']);
     } catch (error) {
       console.error('Error deleting registro', error);
-      // Optionally, show an error message to the user
     }
   }
 

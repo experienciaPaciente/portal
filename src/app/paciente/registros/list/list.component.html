@@ -21,11 +21,11 @@
         @for (data of records; track trackByFn(data)) {
             <li (click)="onItemSelected(data); $event.stopPropagation()">
                 <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
-                        <app-label
-                        size="sm"
+                    <app-label
+                        [size]="'isMobile' ? 'xs' : 'sm'"
                         [label]="data.titulo"
                         [prefix]="data.categoria"
-                        [subtitle]="data.descripcion"
+                        [subtitle]="'isMobile' ? '' : 'data.descripcion'"
                         [icon]="getIconForCategoria(data.categoria)"
                         [severity]="'custom'"
                         [color]="getColorForCategoria(data.categoria)"

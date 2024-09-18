@@ -21,7 +21,7 @@ export class NavbarComponent {
   }
 
   trackByFn(index: number, item: any): string {
-    return item.label; // or any unique identifier for your items
+    return item.label;
   }
 }
 

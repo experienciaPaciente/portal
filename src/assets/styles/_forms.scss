@@ -13,7 +13,7 @@ section,aside, div, header {
     display: flex;
     flex-direction: column;
     column-gap: var(--form__gap--row);
-    row-gap: var(--form__gap--vertical);
+    row-gap: var(--form__gap--col);
     padding: var(--form__padding);
     box-sizing: border-box;
     

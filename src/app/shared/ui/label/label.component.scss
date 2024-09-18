@@ -36,9 +36,15 @@ app-label {
         text-align: center;
       }
           
+      &.xxs {
+        --label__prefix--size: 8px;
+        --label__subtitle--size: 8px;
+        --label__icon--size: 12px;
+      }
+          
       &.xs {
-        --label__prefix--size: 10px;
-        --label__subtitle--size: 10px;
+        --label__prefix--size: 11px;
+        --label__subtitle--size: 11px;
         --label__icon--size: 14px;
       }
       
@@ -92,6 +98,7 @@ app-label {
         flex-direction: column;
         flex: 1;
         line-height: 1.35;
+        overflow-x: hidden;
         // width: calc(100% - var(--button__group--width));
       }
     
@@ -130,9 +137,10 @@ app-label {
   }   
 
   
-  $sizes: xs sm md lg xl;
+  $sizes: xxs xs sm md lg xl;
   $fontSizes: (
-      "xs": 12px,
+      "xxs": 12px,
+      "xs": 14px,
       "sm": 16px,
       "md": 20px,
       "lg": 30px,

@@ -1,5 +1,19 @@
 @media screen and (min-width: 980px) {
+    
     .page__panel--sidebar {
+        --panel__padding: 24px;
+        --wrapper__gap--row: 24px;
         max-width: 420px;
+        padding: var(--panel__padding);
+    }
+
+    // Generics
+    form,
+    fieldset,
+    section,aside, div, header {
+    // considerar hacer un header / footer internos
+    &[type='flex'] {
+        --form__gap--colum: 24px;
+        }
     }
 }

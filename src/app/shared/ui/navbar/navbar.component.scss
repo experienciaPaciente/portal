@@ -5,6 +5,7 @@ nav {
         flex-direction: row;
         width: 100%;
         overflow-x: scroll;
+        column-gap: var(--wrapper__gap--col);
     }
 
     // Corroborar uso

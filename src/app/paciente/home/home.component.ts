@@ -51,24 +51,23 @@ export default class HomeComponent {
   this.router.events.subscribe(event => {
     if (event instanceof NavigationEnd) {
       const url = event.url;
-
-        // Determine the current view based on the URL (works like an enum?)
-        if (url.includes('/item/')) {
-          this.currentView = 'detail';
-        } else if (url.includes('/registrar')) {
-          this.currentView = 'register';
-        } else if (url.includes('/scan')) {
-          this.currentView = 'scan';
-        } else {
-          this.currentView = 'list';
-        }
+      // Determine the current view based on the URL (works like an enum?)
+      if (url.includes('/item/')) {
+        this.currentView = 'detail';
+      } else if (url.includes('/registrar')) {
+        this.currentView = 'register';
+      } else if (url.includes('/scan')) {
+        this.currentView = 'scan';
+      } else {
+        this.currentView = 'list';
+      }
     }
   });
     this.checkIfMobile(window.innerWidth);
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 768;
+    this.isMobile = width < 980;
     this.updateViewState(this.router.url);
   }
 
