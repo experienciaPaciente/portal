@@ -5,44 +5,47 @@
         [prefix]="'Hola usuario'"
         direction="row">
     </app-label>
-    <div class="input__group">
+    <form class="input__group">
         <span class="input__wrapper ">
           <label for="titulo">Buscador</label>
-          <input type="text" class="input__size--sm">
+          <input type="text" placeholder="Busca por título del registro" class="input__size--sm"
+          [formControl]="searchControl">
         </span>
-        <app-button icon="plus" size="xs" variant="fill" severity="success" direction="none" path="/registrar"></app-button>
-    </div>
+        <app-button icon="plus" size="xs" variant="fill" severity="success" direction="none" [path]="'/registrar'"></app-button>
+    </form>
     <!-- Considerar hacer un componente carousel -->
-    <app-navbar [items]="categoriaItems"></app-navbar>
+    <app-navbar [items]="categoriaItems" (categorySelected)="onCategorySelected($event)"
+    ></app-navbar>
+    <hr>
 </section>
 <ng-container *ngIf="registros$ | async as records; else noRecords">
     <!-- Considerar hacer un app-wrapper -->
     <ul class="list__wrapper--{{ type }}">
-        @for (data of records; track trackByFn(data)) {
-            <li (click)="onItemSelected(data); $event.stopPropagation()">
-                <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
+        <!-- @for (data of records; track trackByFn(data)) { -->
+        <li *ngFor="let data of (filteredRegistros$ | async); trackBy: trackByFn" (click)="onItemSelected(data); $event.stopPropagation()">
+            <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
                     <app-label
-                        [size]="'isMobile' ? 'xs' : 'sm'"
-                        [label]="data.titulo"
-                        [prefix]="data.categoria"
-                        [subtitle]="'isMobile' ? '' : 'data.descripcion'"
-                        [icon]="getIconForCategoria(data.categoria)"
-                        [severity]="'custom'"
-                        [color]="getColorForCategoria(data.categoria)"
-                        direction="row">
-                        <app-badge [severity]="data.validado ? 'success' : 'info'" [label]="data.validado ? 'Validado' : 'Auto-registro'" size="xs"></app-badge>
-                        <app-badge severity="info" [label]="data.emisor" size="xs" icon="user"></app-badge>
-                        <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
-                        <app-dropdown
-                        [items]="menuItems"
-                        [position]="dropdownPosition"
-                        buttonLabel=""
-                        buttonIcon="ellipsis-vertical"
-                    ></app-dropdown>
-                    </app-label>
-                </app-card>
-            </li>
-        }
+                    size="sm"
+                    [label]="data.titulo"
+                    [prefix]="data.categoria"
+                    [subtitle]="data.descripcion"
+                    [icon]="getIconForCategoria(data.categoria)"
+                    [severity]="'custom'"
+                    [color]="getColorForCategoria(data.categoria)"
+                    direction="row">
+                    <app-badge [severity]="data.validado ? 'success' : 'info'" [label]="data.validado ? 'Validado' : 'Auto-registro'" size="xs"></app-badge>
+                    <app-badge severity="info" [label]="data.emisor" size="xs" icon="user"></app-badge>
+                    <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
+                    <app-dropdown
+                    [items]="menuItems"
+                    [position]="dropdownPosition"
+                    buttonLabel=""
+                    buttonIcon="ellipsis-vertical"
+                ></app-dropdown>
+                </app-label>
+            </app-card>
+        </li>
+        <!-- } -->
     </ul>
 </ng-container>
 <ng-template #noRecords>
