@@ -1,10 +1,10 @@
-import { Component, OnInit, inject, Input } from '@angular/core';
+import { Component, OnInit, inject, Input, HostListener } from '@angular/core';
 import { ItemComponent } from 'src/app/shared/ui/item/item.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RegistrosService } from 'src/app/core/services/registros.service';
 import { Registro } from 'src/app/models/registro';
 import { Auth, authState } from '@angular/fire/auth';
-import { Observable, debounceTime, distinctUntilChanged, switchMap, map, tap } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, switchMap, map, startWith, combineLatest } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
@@ -36,6 +36,7 @@ export class ListComponent implements OnInit {
 
   registro!: Registro[];
   registros$!: Observable<Registro[]>;
+  isMobile!: boolean;
 
   filteredRegistros$!: Observable<Registro[]>;
   searchControl = new FormControl('');
@@ -80,23 +81,41 @@ export class ListComponent implements OnInit {
   constructor(
     private registroService: RegistrosService, 
     private router: Router
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
     this.authState$.subscribe(user => {
       if (user) {
         this.registros$ = this.registroService.getRegistrosByUserId(user.uid);
-                
-        this.filteredRegistros$ = this.searchControl.valueChanges.pipe(
-          debounceTime(300),
-          distinctUntilChanged(),
-          switchMap(searchTerm => this.filterRegistros(searchTerm ?? '', this.selectedCategory))
+        
+        this.filteredRegistros$ = combineLatest([
+          this.searchControl.valueChanges.pipe(startWith('')),
+          this.registros$,
+        ]).pipe(
+          map(([searchTerm, registros]) =>
+            registros.filter(registro =>
+              registro.titulo.toLowerCase().includes((searchTerm ?? '').toLowerCase()) &&
+              (this.selectedCategory === '' || registro.categoria === this.selectedCategory)
+            )
+          )
         );
       }
-    });
+    }
+  );
+
+    this.checkIfMobile(window.innerWidth)
   }
+
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkIfMobile(event.target.innerWidth);
+  }
+
+  checkIfMobile(width: number): void {
+    this.isMobile = width < 980; 
+  }
+
 
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
@@ -120,26 +139,26 @@ export class ListComponent implements OnInit {
  // Search & filter
  onCategorySelected(category: string): void {
   this.selectedCategory = category;
-  this.filteredRegistros$ = this.filterRegistros(this.searchControl.value ?? '', category);
+  this.filteredRegistros$ = this.filterRegistros(this.searchControl.value || '', this.selectedCategory);
+
 }
 
-private filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
-  const term = searchTerm || '';
+filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
+  const term = searchTerm.toLowerCase() || '';
   return this.registros$.pipe(
-    map(registros => registros.filter(registro => 
-      registro.titulo.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    map(registros => registros.filter(registro =>
+      registro.titulo.toLowerCase().includes(term) &&
       (category === '' || registro.categoria === category)
     ))
   );
 }
 
-  // Dinamically change icons/colors
   getIconForCategoria(categoria: string): string {
-    return this.categoriaMap[categoria]?.icon || 'question-circle'; // Default icon
+    return this.categoriaMap[categoria]?.icon || 'question-circle';
   }
 
   getColorForCategoria(categoria: string): string {
-    return this.categoriaMap[categoria]?.color || 'gray'; // Default color
+    return this.categoriaMap[categoria]?.color || 'gray';
   }
 
   trackByFn(index: number, item: Registro): string {

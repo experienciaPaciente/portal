@@ -25,10 +25,10 @@
         <li *ngFor="let data of (filteredRegistros$ | async); trackBy: trackByFn" (click)="onItemSelected(data); $event.stopPropagation()">
             <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
                     <app-label
-                    size="sm"
+                    [size]="isMobile ? 'xxs' : 'xs'"
                     [label]="data.titulo"
                     [prefix]="data.categoria"
-                    [subtitle]="data.descripcion"
+                    [subtitle]="isMobile ? '' : data.descripcion"
                     [icon]="getIconForCategoria(data.categoria)"
                     [severity]="'custom'"
                     [color]="getColorForCategoria(data.categoria)"
