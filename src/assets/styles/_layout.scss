@@ -93,7 +93,7 @@
             --label__prefix--color: var(--secondary);
             --label__title--color: white;
             --label__subtitle--color: white;
-            --footer__bg--color: var(--primary);
+            --footer__bg--color: var(--primaryDarker);
 
             display: flex;
             flex-direction: column;
@@ -104,7 +104,7 @@
             padding: var(--panel__padding);
             box-sizing: border-box;
             row-gap: var(--wrapper__gap--row);
-            background-color: var(--primary);
+            background-color: var(--neutral);
   
             .inner__wrapper--qr {
               height: 200px;
