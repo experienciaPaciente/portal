@@ -21,7 +21,7 @@ export class ButtonComponent{
   @Input() badgeCount?: number;
   @Input() prefix?: string;
   @Input() subtitle?: string;
-  @Input() path!: string;
+  @Input() path?: string;
   @Input() direction: 'row' | 'column' | 'none' = 'column';
   @Input() top?: string;
   @Input() right?: string;

@@ -1,7 +1,7 @@
 .input__wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--wrapper__gap--col);
+  row-gap: var(--wrapper__gap--col);
   flex: 1;
 }
 
@@ -69,6 +69,7 @@ section,aside, div, header {
   }
 
   label {
+    --input__label--size: 14px;
     // font-weight: var(--input__label--weight);
     font-size: var(--input__label--size);
     color: var(--input__label--color);

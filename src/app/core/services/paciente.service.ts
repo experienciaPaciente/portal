@@ -36,7 +36,6 @@ export class PacienteService {
       const snapshot = await getDoc(this.document(id));
       return snapshot.data() as IPaciente;
     } catch (error) {
-      //catch error
       return undefined;
     }
   }

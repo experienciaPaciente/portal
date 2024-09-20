@@ -68,7 +68,7 @@ export default class HomeComponent {
 
   checkIfMobile(width: number): void {
     this.isMobile = width < 980;
-    // this.updateViewState(this.router.url);
+    this.updateViewState(this.router.url);
   }
 
   shouldShowPanel(panel: 'list' | 'detail' | 'register' | 'scan'): boolean {
@@ -90,9 +90,9 @@ export default class HomeComponent {
   }
 
   // Checkear funcionamiento
-  // updateViewState(url: string): void {
-  //   this.isDetailView = url.includes('/item/');
-  //   this.isScanView = url.includes('/scan');
-  //   this.isRegistroView = url.includes('/register');
-  // }
+  updateViewState(url: string): void {
+    this.isDetailView = url.includes('/item/');
+    this.isScanView = url.includes('/scan');
+    this.isRegistroView = url.includes('/register');
+  }
 }

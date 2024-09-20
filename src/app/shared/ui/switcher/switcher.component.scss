@@ -1,22 +1,26 @@
 .switcher {
     --switcher--color-on: var(--color-on, --success);
     --switcher--color-off: var(--color-off, --neutralLight);
+    --switcher__height: 36px;
+    --switcher__width: 60px;
+
 
     position: relative;
     width: 100%;
     height: 200px;
     display: flex;
     justify-content: space-between;
+    column-gap: var(--panel__gap--col);
     align-items: center;
-    width: 130px; // Variables
-    height: 34px; // Variables
+    width: 100%;
+    max-width: max-content;
+    height: var(--switcher__height);
+    margin: calc(var(--panel__gap--col) / 2) 0;
     
     > input { 
         opacity: 0;
-        width: 0;
-        height: 0;
-        width: 100px; // Variables
-        height: 34px; // Variables
+        width: calc(var(--switcher__width) + 20px);
+        height: var(--switcher__height);
         z-index: 1;
 
         & + .slider {
@@ -30,8 +34,8 @@
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 34px;
-            width: 60px;
-            height: 34px;
+            width: var(--switcher__width);
+            height: var(--switcher__height);
             
             &:before {
             position: absolute;
@@ -51,7 +55,7 @@
             background-color: var(--primary);
             
             &.round {
-                border-radius: 34px;
+                border-radius: var(--switcher__height);
             }
             
             &.round:before {
@@ -73,25 +77,13 @@
     &--disabled {
       cursor: not-allowed;
       pointer-events: none;
-      opacity: 0.6;
+      opacity: 0.5;
     }
-  
-    // &__label {
-    //   margin-right: 0.5rem;
-    //   font-size: 1rem;
-    // }
-  
-    // &--on &__slider {
-    //   background-color: var(--switcher--color-on);
-    // }
-  
-    // &--on &.round::before {
-    //   transform: translateX(20px);
-    // }
-  
-    // &--xs &__slider { width: 30px; height: 16px; }
-    // &--sm &__slider { width: 35px; height: 18px; }
-    // &--lg &__slider { width: 50px; height: 26px; }
-    // &--xl &__slider { width: 60px; height: 30px; }
+
+    // Label
+    &__label {
+        font-size: var(--input__label--size);
+        line-height: var(--input__label--lineHeight);
+    }
   }
   

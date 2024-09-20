@@ -59,6 +59,7 @@ export class createRegistroComponent implements OnInit{
   validado = true;
   registroId: string | null = null;
   registro?: Registro;
+  hasChange: boolean = false;
 
   constructor(
     private QrService: QrService,
@@ -87,7 +88,7 @@ export class createRegistroComponent implements OnInit{
       complete: async () => {
         try {
           const downloadURL = await getDownloadURL(storageRef);
-          // this.saveImageMetadata(downloadURL, filePath);
+          this.saveImageMetadata(downloadURL, filePath);
           const currentAdjuntos = this.form.get('adjuntos')?.value || [];
           this.form.get('adjuntos')?.setValue([...currentAdjuntos, downloadURL]);
           event.target.value = ''; // This is allowed
@@ -141,7 +142,8 @@ export class createRegistroComponent implements OnInit{
   }
 
   onTitleChange() {
-    this.editableTitle = this.form.controls['titulo'].value;
+    // this.editableTitle = this.form.controls['titulo'].value;
+    return this.hasChange = true;
   }
 
   setTitle() {
@@ -161,6 +163,7 @@ export class createRegistroComponent implements OnInit{
       this.editableColor = color;
       this.editableCategory = categoria;
     }
+    this.hasChange = true;
   }
 
   // considerar utilizar un enum o crear una colección para especialidades

@@ -5,26 +5,23 @@
     </section>
     <!-- Badges -->
     <section class="header__wrapper--right">
-      @if (loggedUser) {
-        <app-button *ngIf="!isMobile" [path]="'scan'" label="scanear" size="xxs" variant="link" direction="row"  icon="code" severity="primary"></app-button>
-        <app-button *ngIf="!isMobile" [path]="'registrar'" label="registrar" size="xxs" variant="link" direction="row" icon="plus" severity="primary"></app-button>
-        <!-- <app-button *ngIf="isMobile" size="xs" variant="link" icon="trash-can" (click)="goBack()">Back</app-button> -->
-        <app-button *ngIf="!isMobile" size="xxs" variant="link" icon="share-from-square" variant="link" direction="row" label="Cerrar sesión" severity="primary" (click)="openModal()"></app-button>
+      @if (loggedUser && !isMobile) {
+        <!-- Mostrar iniciales en mobile -->
         <app-label 
           [icon]="isMobile ? '' : 'user'" 
           iconLabel="user" 
-          label="Nombre usuario" 
+          label="JS"
           subtitle="{{ email }}" 
           direction="row"
           size="xxs">
         </app-label>
-        <app-dropdown
-          [items]="menuItems"
-          [position]="dropdownPosition"
-          buttonLabel=""
-          buttonIcon="bars"
-        ></app-dropdown>
-      }  
+      }
+      <app-dropdown
+        [items]="getMenuItems()"
+        [position]="dropdownPosition"
+        buttonLabel=""
+        buttonIcon="bars"
+      ></app-dropdown>
     </section>
 </header>
 @if (isModalOpen) {

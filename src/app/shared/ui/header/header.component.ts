@@ -38,17 +38,17 @@ export class HeaderComponent implements OnInit {
   private _router = inject(Router);
   private authservice = inject(AuthService);
 
-  // Agregar posibilidad de disabled y funciones/métodos
-  menuItems = [
-    { label: 'Item 1', icon: 'user', route: '/path-to-item1' },
-    { label: 'Item 2', icon: 'user', route: '/path-to-item2' },
-    { label: 'Cerrar sesión', icon: 'user', route: '/auth/sign-in', subItems: [
-        { label: 'Sub-item 1', route: '/path-to-subitem1' },
-        { label: 'Sub-item 2', route: '/path-to-subitem2' }
-    ]}
-  ];
+  getMenuItems(item: void): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
+    return [
+      { label: 'Mi cuenta', icon: 'user', path: '/path-to-item1', disabled: false },
+      { label: 'Nuevo registro', icon: 'user', path: '/registrar', disabled: false },
+      { label: 'Gestionar permisos', icon: 'user', path: '/path-to-item2', disabled: true },
+      { label: 'Delegar cuenta', icon: 'user', path: '/path-to-item2', disabled: true },
+      { label: 'Cerrar sesión', icon: 'user', path: '/auth/sign-in', disabled: false }
+    ]
+  }
 
-  dropdownPosition = { top: '45px', left: '-75px' };
+  dropdownPosition = { top: '45px', left: '-185px' };
 
   // Listen for window resize events
   @HostListener('window:resize', ['$event'])

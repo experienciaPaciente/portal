@@ -30,8 +30,6 @@
       aside.page__panel--sidebar {
         height: var(--panel__height);
         width: 100vw;
-        // flex: 1;
-        // min-width: var(--panel__width--sidebar);
         box-sizing: border-box;
         padding: var(--panel__padding);
         background-color: white;
@@ -55,7 +53,7 @@
 
           .input__group {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
             align-items: end;
             justify-content: space-between;
             column-gap: var(--wrapper__gap--col);
@@ -84,12 +82,11 @@
           flex-wrap: wrap;
           width: 100%;
           height: 100%;
-          padding: 2rem 4rem;
+          padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
           box-sizing: border-box;
-          column-gap: 140px;
           row-gap: var(--wrapper__gap--row);
 
-          // Dark mode
+          // Dark mode | Scan page
           &--center {
             --label__prefix--color: var(--secondary);
             --label__title--color: white;
@@ -117,21 +114,21 @@
           }
 
           .panel__inner--main {
-            flex: 1 1 420px;
+            flex: 1 1 320px;
             display: flex;
             flex-direction: column;
-            gap: var(--panel__gap--col);
+            row-gap: var(--panel__gap--col);
   
-            article {
-              padding-left: var(--label__icon--size); // Asociar con props label
+            article.panel__text--article {
+              --label__icon--size: 14px;
+              --panel__font--size: 16px;
+              --panel__line--height: 24px;
               font-size: var(--panel__font--size);
               line-height: var(--panel__line--height);
               word-break: break-all;
             }
             
-            // Componente carousel
             .img__wrapper--grid {
-              padding-left: var(--label__icon--size); // Asociar con props label
               display: grid;
               grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
               gap: var(--wrapper__gap--row);
@@ -152,26 +149,51 @@
                 }
   
                 figcaption {
-                  width: 100%;
-                  word-break: break-all!important;
+                  display: block;
+                  height: 50px;
+                  text-overflow: ellipsis;
+                  word-break: keep-all;
+                  overflow: hidden;
+                  font-size: 14px;
                 }
               }
             }
           }
+        }
           
           // QR
           .panel__inner--aside {
             display: flex;
             flex-direction: row-reverse;
-            column-gap: var(--wrapper__gap--col);
+            row-gap: var(--panel__gap--col);
             flex: 1; 
             height: max-content;
 
             .panel__inner--left {
-              display: flex;
-              flex-direction: column;
-              row-gap: var(--wrapper__gap--row);
+              --wrapper__gap: 24px;
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+              gap: var(--wrapper__gap);
               width: 100%;
+
+              figure {
+                grid-row: span 3;
+                display: flex;
+                flex-direction: column;
+                row-gap: var(--wrapper__gap--row);
+
+                &.panel__qr--wrapper {
+                  padding: var(--wrapper__gap);
+                  border: solid 1px var(--neutral);
+                  border-radius: var(--card__border--radius);
+
+                  .panel__qr--aside {
+                    width: 100%;
+                    background-color: white;
+                    border: solid 1px var(--neutral);
+                  }
+                }
+              }
             }
             
             .panel__inner--right {
@@ -179,21 +201,13 @@
               flex-direction: column;
               align-items: center;
               width: 100%;
-  
-              .panel__qr--aside {
-                  width: 100%;
-                  max-width: 180px;
-                  background-color: white;
-                  // flex: 1;
-              }
             }
           }
-          
-          
         }
       }
     }
-  }
+ 
+  // Desacoplar en componente
   footer.panel__footer {
     display: flex;
     flex-direction: row;

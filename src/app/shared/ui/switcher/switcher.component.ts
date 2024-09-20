@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './switcher.component.scss'
 })
 export class SwitcherComponent {
-  @Input() on: boolean = false;
+  @Input() on!: boolean;
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
   @Input() onLabel: string = 'On';
   @Input() offLabel: string = 'Off';

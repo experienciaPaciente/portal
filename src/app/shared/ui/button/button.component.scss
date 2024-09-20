@@ -9,6 +9,7 @@ app-button {
       border-radius: var(--button__border--radius);
       width: var(--button__width);
       text-transform: capitalize;
+      text-wrap: nowrap;
   }
 
   > button {
@@ -22,7 +23,7 @@ app-button {
     }
     
     &:active {
-        // background: darken(rgba(122, 122, 122, .2), 10%);
+        background-color: var(--secondary);
         filter: brightness(95%);
         cursor: grab;
     }

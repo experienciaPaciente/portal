@@ -8,7 +8,9 @@
        [severity]="'info'"
        direction="row"
      ></app-label>
-     <app-badge severity="success" label="Registro guardado" size="md"></app-badge>
+     <!-- Integrar con validators -->
+       <app-badge severity="warning" label="Tienes cambios sin guardar" size="md"></app-badge>
+       <app-badge severity="success" label="Registro guardado" size="md"></app-badge>
    </header>
   <section class="panel__inner--main">
     <div class="form__input-wrapper--col">
@@ -71,33 +73,23 @@
           <input type="time" formControlName="hora">
         </div>
         <div class="form__input-wrapper--col">
-          <label for="lugar">Establecimiento</label>
+          <label for="lugar">Establecimiento de Salud</label>
           <input type="text" formControlName="lugar">
         </div>
           <app-switcher
               [on]="validado"
               size="md"
-              onLabel="Validado"
-              offLabel="No validado"
+              [onLabel]="'Validado por equipo de Salud'"
+              offLabel="No validado por equipo de Salud"
               labelPosition="right"
               (toggle)="validateRecord()"
           ></app-switcher>
           @if (validado) {
             <div class="form__input-wrapper--col">
-              <label for="validador">Personal a cargo</label>
+              <label for="validador">Miembro equipo de Salud</label>
               <input type="text" formControlName="validador">
             </div>
           }
-          <!-- Integración QR con portal-profesional -->
-          <img class="panel__qr--aside" src="" alt="">
-          <app-label
-              [size]="'sm'"
-              [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
-              [direction]="'row'"
-              [severity]="'neutral'"
-              [icon]="'info-circle'"
-          >
-          </app-label>
         </section>
       }
 
@@ -140,7 +132,7 @@
           [variant]="'link'"
           [icon]="'mobile-screen-button'"
           [direction]="'row'"
-          [label]="'Registrar con un QR'"
+          [label]="'Registro QR'"
           (clickEvent)="showQrRegister()"
           ></app-button>
         }
