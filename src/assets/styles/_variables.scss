@@ -42,7 +42,7 @@
   --page__body--padding: 0;
   --page__body--height: calc(100vh - var(--header__height));
   --page__body--bg: white;
-  --page__main--padding: 12px;
+  --page__main--padding: 2rem 4rem;
   --page__gap--vertical: 2.5rem;
   --page__font-familiy: ui-sans-serif, system-ui, -apple-system, 'Open Sans', 'Helvetica Neue',
     'Segoe UI', sans-serif;
@@ -121,8 +121,6 @@
   --card__subtitle--color: var(--neutral);
   --card__subtitle--weight: light;
   
-  --card__lineHeight: 1rem;
-
   --card__prefix--size: 0.75rem;
   --card__prefix--color: var(--primaryLight);
   --card__prefix--weight: normal;
@@ -148,7 +146,7 @@
   --button__padding--row: .9rem;
   --button__padding: var(--button__padding--vertical) var(--button__padding--row);
   --button__height: fit-content;
-  --button__width: fit-content;
+  --button__width: max-content;
   --button__font--size: 14px;
   --button__border--color: var(--button__text--color);
   --button__border: solid 2px var(--button__border--color);
@@ -180,6 +178,7 @@
   --footer__text--color: gray;
   --footer__text--align: center;
   --footer__bg--color: white;
+  --footer__padding: 24px 0;
 
   // Form 
   --form__gap--row: 16px;
@@ -191,6 +190,7 @@
   --input__font--size: 18px;
   --input__label--size: 16px;
   --input__label--weight: bold;
+  --input__label--lineHeight: 1.25;
   --input__label--color: var(--neutral);
   --input__font--color: var(--neutral);
   --input__padding: 12px 14px;
@@ -200,7 +200,7 @@
   // Wrapper | Group
   --wrapper__gap: 16px;
   --wrapper__gap--row: 16px;
-  --wrapper__gap--col: 12px;
+  --wrapper__gap--col: 8px;
 
   // Divider 
   --page__line--color: lightgray;

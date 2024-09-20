@@ -25,9 +25,10 @@ export interface RegistroForm {
   titulo: FormControl<string>;
   descripcion: FormControl<string>;
   categoria: FormControl<string>;
-  validado: FormControl<boolean>;
   estado: FormControl<string>;
-  emisor: FormControl<string>;
+  validado: FormControl<boolean>;
+  lugar: FormControl<string>;
+  validador: FormControl<string>;
   fecha: FormControl<Date>;
   hora: FormControl<string>;
   adjuntos: FormControl<Array<string>>;
@@ -53,11 +54,12 @@ export interface RegistroForm {
 export class createRegistroComponent implements OnInit{
 
   qrResultString: string | null = null;
-  qrRegister = false;
+  qrRegister!: boolean;
   private subscription: Subscription = new Subscription();
   validado = true;
   registroId: string | null = null;
   registro?: Registro;
+  hasChange: boolean = false;
 
   constructor(
     private QrService: QrService,
@@ -86,7 +88,7 @@ export class createRegistroComponent implements OnInit{
       complete: async () => {
         try {
           const downloadURL = await getDownloadURL(storageRef);
-          // this.saveImageMetadata(downloadURL, filePath);
+          this.saveImageMetadata(downloadURL, filePath);
           const currentAdjuntos = this.form.get('adjuntos')?.value || [];
           this.form.get('adjuntos')?.setValue([...currentAdjuntos, downloadURL]);
           event.target.value = ''; // This is allowed
@@ -140,7 +142,8 @@ export class createRegistroComponent implements OnInit{
   }
 
   onTitleChange() {
-    this.editableTitle = this.form.controls['titulo'].value;
+    // this.editableTitle = this.form.controls['titulo'].value;
+    return this.hasChange = true;
   }
 
   setTitle() {
@@ -160,6 +163,7 @@ export class createRegistroComponent implements OnInit{
       this.editableColor = color;
       this.editableCategory = categoria;
     }
+    this.hasChange = true;
   }
 
   // considerar utilizar un enum o crear una colección para especialidades
@@ -206,9 +210,10 @@ export class createRegistroComponent implements OnInit{
     titulo: this._formBuilder.control(''),
     descripcion: this._formBuilder.control(''),
     categoria: this._formBuilder.control(''),
-    validado: this._formBuilder.control(false),
     estado: this._formBuilder.control(''),
-    emisor: this._formBuilder.control(''),
+    validado: this._formBuilder.control(false),
+    lugar: this._formBuilder.control(''),
+    validador: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date),
     hora: this._formBuilder.control(''),
     adjuntos: this._formBuilder.control<string[]>([]),
@@ -242,7 +247,7 @@ export class createRegistroComponent implements OnInit{
           categoria: registro.categoria,
           validado: registro.validado,
           estado: registro.estado,
-          emisor: registro.emisor,
+          validador: registro.validador,
           fecha: registro.fecha,
           hora: registro.hora,
           adjuntos: registro.adjuntos || []
@@ -297,9 +302,10 @@ export class createRegistroComponent implements OnInit{
         titulo: registro.titulo || '',
         descripcion: registro.descripcion || '',
         categoria: registro.categoria || '',
-        validado: registro.validado ?? false,
         estado: registro.estado || '',
-        emisor: registro.emisor || '',
+        validado: registro.validado ?? false,
+        lugar: registro.validador || '',
+        validador: registro.validador || '',
         fecha: registro.fecha || new Date(),
         hora: registro.hora || '',
         adjuntos: registro.adjuntos || []
@@ -308,7 +314,7 @@ export class createRegistroComponent implements OnInit{
   }
 
   showQrRegister() {
-    this._router.navigate(['/scan']);
+    this.qrRegister = !this.qrRegister;
   }
 
   goBack(): void {
@@ -324,6 +330,6 @@ export class createRegistroComponent implements OnInit{
     if (this.form) {
       this.form.reset();
     }
-    this.router.navigate(['/']);
+    this.goBack();
   }
 }

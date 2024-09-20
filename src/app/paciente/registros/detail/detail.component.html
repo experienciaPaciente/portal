@@ -1,91 +1,129 @@
 @if (registro != null) {
 <section class="panel__main">
+    <header class="panel__header--row">
+        <app-label
+            [size]="isMobile ? 'md' : 'lg'"
+            [label]="registro.titulo"
+            [prefix]="registro.categoria"
+            [icon]="getIconForCategoria(registro.categoria)"
+            [severity]="'custom'"
+            [color]="getColorForCategoria(registro.categoria)"
+            direction="row">
+            <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
+            <app-dropdown
+                [items]="getMenuItems(registro)"
+                [position]="dropdownPosition"
+                buttonLabel=""
+                buttonIcon="ellipsis-vertical"
+            ></app-dropdown>        
+    </app-label>
+    </header>
     <div class="panel__inner--main">
-        <header>
-            <app-label
-                size="lg"
-                [label]="registro.titulo"
-                [prefix]="registro.categoria"
-                [icon]="getIconForCategoria(registro.categoria)"
-                [severity]="'custom'"
-                [color]="getColorForCategoria(registro.categoria)"
-                direction="row">
-                <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
-                <app-button icon="ellipsis-vertical" size="md" variant="link" severity="neutral" direction="none"></app-button>
-            </app-label>
-        </header>
-        <article>
+        <article class="panel__text--article">
             {{ registro.descripcion }}
             {{ registro.paciente }}
         </article>
-        @if (registro.adjuntos) {
-            <section role="navigation" class="img__wrapper--grid">
-              @for (file of registro.adjuntos; track trackByFn(file)) {
-                <figure class=""> 
-                    <img [src]="file" alt="Uploaded Image">
-                    <figcaption>{{ file }}</figcaption>
-                </figure>
-              }
-            </section>
-          }
+        @if (registro.adjuntos.length > 0) {
+            <app-label
+                prefix="Adjuntos"
+                label="Mis archivos"
+                [size]="isMobile ? 'sm' : 'md'"
+                direction="row"
+            >
+        </app-label>
+        <hr>
+        <section role="navigation" class="img__wrapper--grid">
+            @for (file of registro.adjuntos; track trackByFn(file)) {
+            <figure class=""> 
+                <img [src]="file" alt="Uploaded Image">
+                <figcaption>{{ file }}</figcaption>
+            </figure>
+            }
+        </section>
+        }
     </div>
+    @if (isMobile) {
+        <hr>
+    }
     <div class="panel__inner--aside">
-        <app-label
-            size="md"
-            [label]="registro.fecha"
-            [prefix]="'fecha'"
-            [direction]="'row'"
-            >
-        </app-label>
-        <app-label
-            size="md"
-            [label]="registro.emisor"
-            [prefix]="'emisor'"
-            [direction]="'row'"
-            >
-        </app-label>
-        <app-switcher
-            [on]="registro.validado"
-            size="lg"
-            onLabel="Validado"
-            offLabel="No validado"
-            colorOn="green"
-            colorOff="red"
-            labelPosition="right"
-            [disabled]="true"
-        ></app-switcher>
-        <!-- Integración QR con portal-profesional -->
-         @if (qrCodeUrl) {
-             <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
-         }
-        <app-label
-            [size]="'sm'"
-            [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
-            [direction]="'row'"
-            [severity]="'neutral'"
-            [icon]="'info-circle'"
-        >
-        </app-label>
+        <article class="panel__inner--left">
+            <figure class="panel__qr--wrapper">
+                <!-- Integración QR con portal-profesional -->
+                 @if (qrCodeUrl) {
+                     <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
+                 }
+                <app-label
+                    [size]="'sm'"
+                    [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
+                    [direction]="'row'"
+                    [severity]="'neutral'"
+                    [icon]="'info-circle'"
+                >
+                </app-label>
+            </figure>
+            <app-label
+                size="md"
+                [label]="registro.fecha"
+                [prefix]="'Fecha del registro'"
+                [direction]="'row'"
+                >
+            </app-label>
+            @if (registro.lugar) {
+                <app-label
+                size="md"
+                [label]="registro.lugar"
+                [prefix]="'Establecimiento de Salud'"
+                [direction]="'row'"
+                >
+            </app-label>
+            }
+            <app-switcher
+                [on]="registro.validado"
+                size="lg"
+                onLabel="Validado"
+                offLabel="No validado"
+                colorOn="green"
+                colorOff="red"
+                labelPosition="right"
+                [disabled]="true"
+            ></app-switcher>
+            @if (registro.validador) {
+                <app-label
+                    size="md"
+                    [label]="registro.validador"
+                    [prefix]="'Miembro equipo de Salud'"
+                    [direction]="'row'"
+                    >
+                </app-label>
+            }
+        </article>
     </div>
     <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">
-        <app-button
-        size="xs"
-        [severity]="'danger'"
-        [variant]="'link'"
-        [icon]="'pencil'"
-        [direction]="'row'"
-        [label]="'Editar'"
-        [path]="'actualizar/' + id"
-        ></app-button>
-        <app-button
-        size="xs"
-        [severity]="'success'"
-        [variant]="'fill'"
-        [icon]="'trash'"
-        [direction]="'row'"
-        [label]="'editar'"
-        ></app-button>
+        <div class="panel__footer--left">
+            <app-button
+            size="xs"
+            [severity]="'primary'"
+            [variant]="'link'"
+            [icon]="'arrow-left'"
+            [direction]="'row'"
+            [label]="'volver'"
+            [disabled]="false"
+            (clickEvent)="goBack()"
+            ></app-button>
+        </div>
+        <div class="panel__footer--right">
+            <app-button
+            size="xs"
+            [severity]="'warning'"
+            [variant]="'fill'"
+            [icon]="'pencil'"
+            [direction]="'row'"
+            [label]="'Editar'"
+            [path]="'actualizar/' + id"
+            [disabled]="false"
+            ></app-button>
+        </div>
     </footer>
 
 </section>

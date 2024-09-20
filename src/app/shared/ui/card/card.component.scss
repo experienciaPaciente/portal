@@ -305,7 +305,11 @@ app-card {
     }
 
     &--md {
-      --card__padding: 8px 16px;
+      --card__padding: 0 0 0 12px;
+
+      .label__content {
+        row-gap: 4px;
+      }
     }
 
     &--lg {

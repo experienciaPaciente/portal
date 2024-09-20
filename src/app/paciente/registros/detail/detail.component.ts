@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Registro } from 'src/app/models/registro';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegistrosService } from 'src/app/core/services/registros.service';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
+import { Location } from '@angular/common';
+import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-detail',
@@ -14,7 +16,8 @@ import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component
     BadgeComponent,
     ButtonComponent,
     LabelComponent,
-    SwitcherComponent
+    SwitcherComponent,
+    DropdownComponent
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
@@ -25,6 +28,8 @@ export class DetailComponent {
   editableIcon!: string;
   editableColor!: string;
   qrCodeUrl?: string;
+  disabled = false;
+  isMobile!: boolean;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Consulta general': { icon: 'user-md', color: '#FD5B71' },
@@ -35,9 +40,22 @@ export class DetailComponent {
     'Cardiología': { icon: 'heart', color: '#1BC5DD' },
   };
 
+  // Función que devuelve un array en lugar del array per-sé
+  getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
+    return [
+      { label: 'Editar', icon: 'user', disabled: false, callback: () => this.navigateToEdit(data) },
+      { label: 'Gestionar permisos', icon: 'star', disabled: true },
+      { label: 'Eliminar', icon: 'trash', disabled: false, callback: () => this.navigateToDelete(data)  }
+    ]
+  }
+
+  dropdownPosition = { top: '35px', left: '-190px' };
+
   constructor(
     private route: ActivatedRoute,
-    private registroService: RegistrosService
+    private registroService: RegistrosService,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -45,12 +63,23 @@ export class DetailComponent {
       this.id = params['id'];
       this.fetchDetails(this.id);
     });
+    this.checkIfMobile(window.innerWidth)
+  }
+
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkIfMobile(event.target.innerWidth);
+  }
+
+  checkIfMobile(width: number): void {
+    this.isMobile = width < 980; 
   }
 
   generateQRCode(data: any) {
     if (data) {
       const formattedData = 
-      `Título: ${data.titulo}\nDescripción: ${data.descripcion}\nFecha: ${data.fecha}\nHora: ${data.hora}\nCategoria: ${data.categoria}\nValidado: ${data.validado}\nEstado: ${data.estado}\nEmisor: ${data.emisor}\nAdjuntos: ${data.adjuntos}`;
+      `Título: ${data.titulo}\nDescripción: ${data.descripcion}\nFecha: ${data.fecha}\nHora: ${data.hora}\nCategoria: ${data.categoria}\nValidado: ${data.validado}\nEstado: ${data.estado}\nEmisor: ${data.validador}\nAdjuntos: ${data.adjuntos}`;
       const encodedData = encodeURIComponent(formattedData);
       this.qrCodeUrl = `https://quickchart.io/qr?text=${encodedData}`;
     }
@@ -89,4 +118,29 @@ export class DetailComponent {
   trackByFn(item: any): any {
     return item.id;
   }
+
+  goBack(): void {
+    console.log('Historial:', window.history.length);
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    } 
+  }
+
+  navigateToEdit(item: Registro): void {
+    this.router.navigate([`/actualizar/${item.id}`]);
+  }
+
+  async navigateToDelete(item: Registro): Promise<void> {
+      console.log('emitting!');
+    try {
+      await this.registroService.deleteRegistro(item.id);
+      console.log('Registro deleted successfully');
+     this.router.navigate(['/']);
+    } catch (error) {
+      console.error('Error deleting registro', error);
+    }
+  }
+
 }

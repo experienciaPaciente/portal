@@ -1,7 +1,7 @@
 .input__wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--wrapper__gap--col);
+  row-gap: var(--wrapper__gap--col);
   flex: 1;
 }
 
@@ -69,6 +69,7 @@ section,aside, div, header {
   }
 
   label {
+    --input__label--size: 14px;
     // font-weight: var(--input__label--weight);
     font-size: var(--input__label--size);
     color: var(--input__label--color);
@@ -95,6 +96,17 @@ section,aside, div, header {
     }
   }
 
+  select {
+    &.form__select--custom {
+      appearance: none;
+      background-image: url('./../img/chevron-down-solid.svg');
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: calc(100% - 10px) center;
+      padding-right: 30px;
+    }
+  }
+  
   td > span.required {
     color: var(--danger--dark);
     font-weight: bold;

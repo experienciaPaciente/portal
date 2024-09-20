@@ -37,8 +37,8 @@ app-label {
       }
           
       &.xxs {
-        --label__prefix--size: 8px;
-        --label__subtitle--size: 8px;
+        --label__prefix--size: 9px;
+        --label__subtitle--size: 10px;
         --label__icon--size: 12px;
       }
           
@@ -97,9 +97,8 @@ app-label {
         display: flex;
         flex-direction: column;
         flex: 1;
-        line-height: 1.35;
-        overflow-x: hidden;
-        // width: calc(100% - var(--button__group--width));
+        overflow: hidden;
+        line-height: 1.5;
       }
     
       &__prefix {
@@ -110,6 +109,7 @@ app-label {
       &__title {
         color: var(--label__title--color);
         font-weight: 600;
+        line-height: 1.25;
       }
     
       &__subtitle {

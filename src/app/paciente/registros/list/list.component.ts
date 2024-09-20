@@ -4,7 +4,7 @@ import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RegistrosService } from 'src/app/core/services/registros.service';
 import { Registro } from 'src/app/models/registro';
 import { Auth, authState } from '@angular/fire/auth';
-import { Observable, debounceTime, distinctUntilChanged, switchMap, map, startWith, combineLatest } from 'rxjs';
+import { Observable, map, startWith, combineLatest } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
@@ -41,13 +41,13 @@ export class ListComponent implements OnInit {
   filteredRegistros$!: Observable<Registro[]>;
   searchControl = new FormControl('');
   selectedCategory: string = '';
+  medCategories!: boolean;
 
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
   
   @Input() type?: 'flex' | 'grid' = 'flex';
   @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
-
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Consulta general': { icon: 'user-md', color: '#FD5B71' },
@@ -58,15 +58,27 @@ export class ListComponent implements OnInit {
     'Cardiología': { icon: 'heart', color: '#1BC5DD' },
   };
 
-  menuItems = [
-    { label: 'Editar', icon: 'user', action: this.navigateToEdit.bind(this) },
-    { label: 'Destacar', icon: 'star', route: '/path-to-item2' },
-    { label: 'Gestionar permisos', icon: 'star', route: '/path-to-item2' },
-    { label: 'Asociar a registro', icon: 'star', route: '/path-to-item2' },
-    { label: 'Eliminar', icon: 'trash', action: this.navigateToDelete.bind(this)}
-  ];
+  // Función que devuelve un array en lugar del array per-sé
+  getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
+    return [
+      { label: 'Ver detalle', icon: 'file-lines', disabled: false, callback: () => this.onItemSelected(data) },
+      { label: 'Editar', icon: 'file-pen', disabled: false, callback: () => this.navigateToEdit(data) },
+      { label: 'Destacar', icon: 'star', disabled: true },
+      { label: 'Gestionar permisos', icon: 'user-lock', disabled: true },
+      { label: 'Asociar a registro', icon: 'link', disabled: true },
+      { label: 'Eliminar', icon: 'trash', disabled: false, callback: () => this.navigateToDelete(data)  }
+    ]
+  }
 
-  dropdownPosition = { top: '35px', left: '-90px' };
+  getRegistroOptions(item: void): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
+    return [
+      { label: 'Registro manual', icon: 'file-lines', path: '/registrar', disabled: false },
+      { label: 'Registro QR', icon: 'qrcode', path: '/scan', disabled: false },
+    ]
+  }
+  
+  dropdownPosition = { top: '35px', left: '-170px' };
+  splitButtonPosition = { top: '45px', left: '-160px' };
 
   categoriaItems = Object.keys(this.categoriaMap).map(key => {
     return {
@@ -102,7 +114,6 @@ export class ListComponent implements OnInit {
       }
     }
   );
-
     this.checkIfMobile(window.innerWidth)
   }
 
@@ -116,7 +127,6 @@ export class ListComponent implements OnInit {
     this.isMobile = width < 980; 
   }
 
-
   onItemSelected(item: Registro): void {
     this.router.navigate([`/item/${item.id}`]);
   }
@@ -126,6 +136,7 @@ export class ListComponent implements OnInit {
   }
 
   async navigateToDelete(item: Registro): Promise<void> {
+      console.log('emitting!');
     try {
       await this.registroService.deleteRegistro(item.id);
       console.log('Registro deleted successfully');
@@ -135,12 +146,10 @@ export class ListComponent implements OnInit {
     }
   }
 
-
  // Search & filter
  onCategorySelected(category: string): void {
   this.selectedCategory = category;
   this.filteredRegistros$ = this.filterRegistros(this.searchControl.value || '', this.selectedCategory);
-
 }
 
 filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
@@ -163,5 +172,9 @@ filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
 
   trackByFn(index: number, item: Registro): string {
     return item.id;
+  }
+
+  showMedCategories(event: any) {
+    this.medCategories = !this.medCategories;
   }
 }
