@@ -1,5 +1,6 @@
 <button 
-  type="{{ type }}" 
+  type="{{ type }}"
+  [disabled]="disabled"
   [ngClass]="['button__size--' + size + ' ' + 'button__' + variant + '--' + severity]" 
   [ngStyle]="setFabPositionStyles()"
   (click)="handleClick()">

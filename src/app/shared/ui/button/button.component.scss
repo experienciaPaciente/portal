@@ -27,6 +27,12 @@ app-button {
         cursor: grab;
     }
 
+    &[disabled] {
+      pointer-events: none;
+      opacity: .5;
+      user-select: none;
+    }
+
   // Types
   &[class*=__fill] {
     --button__text--color: white!important;
@@ -114,6 +120,11 @@ app-button {
 
   // Sizes: el label interno dicta el tamaño del botón
   &.button__size {
+
+    &--xxs {
+      --button__padding: .1rem .2rem;
+      --button__font--size: 8px;
+    }
 
     &--xs {
       --button__padding: .2rem .25rem;

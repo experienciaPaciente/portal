@@ -15,18 +15,19 @@ export class ButtonComponent{
   @Input() variant: 'fill' | 'outline' | 'link' | 'fab' | 'icon' = 'fill';
   @Input() type?: 'submit' | 'button' | 'reset';
   @Input() severity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' | 'primary' | 'secondary' | 'tertiary' = 'info';
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
+  @Input() size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
   @Input() icon?: string;
   @Input() label?: string;
   @Input() badgeCount?: number;
   @Input() prefix?: string;
   @Input() subtitle?: string;
-  @Input() path?: string;
+  @Input() path!: string;
   @Input() direction: 'row' | 'column' | 'none' = 'column';
   @Input() top?: string;
   @Input() right?: string;
   @Input() bottom?: string;
   @Input() left?: string;
+  @Input() disabled!: boolean;
   
   @Output() clickEvent = new EventEmitter<void>();
 
@@ -36,7 +37,6 @@ export class ButtonComponent{
   handleClick() {
     this.clickEvent.emit();
 
-    // If path is defined, handle navigation
     if (this.path) {
       this.router.navigate([this.path]).catch((error) => {
         console.error('Navigation error:', error);

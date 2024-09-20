@@ -1,19 +1,19 @@
 @if (registro != null) {
 <section class="panel__main">
+    <header class="panel__header--row">
+        <app-label
+            size="lg"
+            [label]="registro.titulo"
+            [prefix]="registro.categoria"
+            [icon]="getIconForCategoria(registro.categoria)"
+            [severity]="'custom'"
+            [color]="getColorForCategoria(registro.categoria)"
+            direction="row">
+            <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
+            <app-button icon="ellipsis-vertical" size="md" variant="link" severity="neutral" direction="none"></app-button>
+        </app-label>
+    </header>
     <div class="panel__inner--main">
-        <header>
-            <app-label
-                size="lg"
-                [label]="registro.titulo"
-                [prefix]="registro.categoria"
-                [icon]="getIconForCategoria(registro.categoria)"
-                [severity]="'custom'"
-                [color]="getColorForCategoria(registro.categoria)"
-                direction="row">
-                <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
-                <app-button icon="ellipsis-vertical" size="md" variant="link" severity="neutral" direction="none"></app-button>
-            </app-label>
-        </header>
         <article>
             {{ registro.descripcion }}
             {{ registro.paciente }}
@@ -30,62 +30,90 @@
           }
     </div>
     <div class="panel__inner--aside">
-        <app-label
+        <article class="panel__inner--left">
+            <app-label
+                size="md"
+                [label]="registro.fecha"
+                [prefix]="'fecha'"
+                [direction]="'row'"
+                >
+            </app-label>
+            <app-label
             size="md"
-            [label]="registro.fecha"
-            [prefix]="'fecha'"
+            [label]="registro.lugar"
+            [prefix]="'Establecimiento'"
             [direction]="'row'"
             >
         </app-label>
-        <app-label
-            size="md"
-            [label]="registro.emisor"
-            [prefix]="'emisor'"
-            [direction]="'row'"
+            <app-switcher
+                [on]="registro.validado"
+                size="lg"
+                onLabel="Validado"
+                offLabel="No validado"
+                colorOn="green"
+                colorOff="red"
+                labelPosition="right"
+                [disabled]="true"
+            ></app-switcher>
+            <app-label
+                size="md"
+                [label]="registro.validador"
+                [prefix]="'Personal a cargo'"
+                [direction]="'row'"
+                >
+            </app-label>
+        </article>
+        <figure class="panel__inner--right">
+            <!-- Integración QR con portal-profesional -->
+             @if (qrCodeUrl) {
+                 <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
+             }
+            <app-label
+                [size]="'sm'"
+                [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
+                [direction]="'row'"
+                [severity]="'neutral'"
+                [icon]="'info-circle'"
             >
-        </app-label>
-        <app-switcher
-            [on]="registro.validado"
-            size="lg"
-            onLabel="Validado"
-            offLabel="No validado"
-            colorOn="green"
-            colorOff="red"
-            labelPosition="right"
-            [disabled]="true"
-        ></app-switcher>
-        <!-- Integración QR con portal-profesional -->
-         @if (qrCodeUrl) {
-             <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
-         }
-        <app-label
-            [size]="'sm'"
-            [prefix]="'Para escanear el código, accede a tu cuenta experienciaPaciente.org.'"
-            [direction]="'row'"
-            [severity]="'neutral'"
-            [icon]="'info-circle'"
-        >
-        </app-label>
+            </app-label>
+        </figure>
     </div>
     <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">
-        <app-button
-        size="xs"
-        [severity]="'danger'"
-        [variant]="'link'"
-        [icon]="'pencil'"
-        [direction]="'row'"
-        [label]="'Editar'"
-        [path]="'actualizar/' + id"
-        ></app-button>
-        <app-button
-        size="xs"
-        [severity]="'success'"
-        [variant]="'fill'"
-        [icon]="'trash'"
-        [direction]="'row'"
-        [label]="'editar'"
-        ></app-button>
+        <div class="panel__footer--left">
+            <app-button
+            size="xs"
+            [severity]="'primary'"
+            [variant]="'link'"
+            [icon]="'arrow-left'"
+            [direction]="'row'"
+            [label]="'volver'"
+            [disabled]="false"
+            (clickEvent)="goBack()"
+            ></app-button>
+            <app-button
+            size="xs"
+            [severity]="'danger'"
+            [variant]="'outline'"
+            [icon]="'trash-can'"
+            [direction]="'row'"
+            [label]="'Borrar'"
+            [path]="'actualizar/' + id"
+            [disabled]="true"
+            ></app-button>
+        </div>
+        <div class="panel__footer--right">
+            <app-button
+            size="xs"
+            [severity]="'warning'"
+            [variant]="'fill'"
+            [icon]="'pencil'"
+            [direction]="'row'"
+            [label]="'Editar'"
+            [path]="'actualizar/' + id"
+            [disabled]="false"
+            ></app-button>
+        </div>
     </footer>
 
 </section>

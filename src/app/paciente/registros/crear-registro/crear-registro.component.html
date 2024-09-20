@@ -1,17 +1,16 @@
-<form [formGroup]="form" class="panel__main" (ngSubmit)="createRegistro()">
+ <form [formGroup]="form" class="panel__main" (ngSubmit)="createRegistro()">
+   <header class="panel__header--row">
+       <app-label
+       size="lg"
+       [label]="registroId ? setTitle() : 'Nuevo registro de Salud'"
+       [prefix]="'Autoregistro'"
+       subtitle="Completa los campos requeridos (*)"
+       [severity]="'info'"
+       direction="row"
+     ></app-label>
+     <app-badge severity="success" label="Registro guardado" size="md"></app-badge>
+   </header>
   <section class="panel__inner--main">
-    <header class="panel__header--row">
-        <app-label
-        size="lg"
-        [label]="registroId ? setTitle() : 'Nuevo registro de Salud'"
-        [prefix]="'Autoregistro'"
-        subtitle="Completa los campos requeridos (*)"
-        [severity]="'info'"
-        direction="row"
-      ></app-label>
-      <app-badge severity="success" label="Registro guardado" size="md"></app-badge>
-    </header>
-
     <div class="form__input-wrapper--col">
       <label for="titulo">Titulo</label>
       <input type="text" formControlName="titulo" (keyup)="onTitleChange()">
@@ -46,7 +45,7 @@
 
       <div class="form__input-wrapper--col">
         <label for="categoria">Categoría</label>
-          <select id="categoria" formControlName="categoria" (change)="onCategoryChange()">
+          <select class="form__select--custom" id="categoria" formControlName="categoria" (change)="onCategoryChange()">
           <option value="" disabled selected>Select a category</option>
           @for (categoria of categorias; track categoria) {
             <option [value]="categoria">
@@ -62,7 +61,7 @@
     </section>
 
     @if (!qrRegister) {
-      <section class="panel__inner--aside">
+    <section class="panel__inner--aside">
         <div class="form__input-wrapper--col">
           <label for="fecha">Fecha</label>
           <input type="date" formControlName="fecha">
@@ -70,6 +69,10 @@
         <div class="form__input-wrapper--col">
           <label for="hora">Hora</label>
           <input type="time" formControlName="hora">
+        </div>
+        <div class="form__input-wrapper--col">
+          <label for="lugar">Establecimiento</label>
+          <input type="text" formControlName="lugar">
         </div>
           <app-switcher
               [on]="validado"
@@ -81,8 +84,8 @@
           ></app-switcher>
           @if (validado) {
             <div class="form__input-wrapper--col">
-              <label for="emisor">Institución/Profesional</label>
-              <input type="text" formControlName="emisor">
+              <label for="validador">Personal a cargo</label>
+              <input type="text" formControlName="validador">
             </div>
           }
           <!-- Integración QR con portal-profesional -->
@@ -95,46 +98,60 @@
               [icon]="'info-circle'"
           >
           </app-label>
-      </section>
-    }
+        </section>
+      }
 
-    @if (qrRegister) {
-      <section class="panel__inner--aside">
-        <app-scan></app-scan>
-      </section>
-    }
+      @if (qrRegister) {
+        <section class="panel__inner--aside">
+          <app-scan></app-scan>
+        </section>
+      }
+
        <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">
-      <div class="panel__footer--right">
-        <app-button
-        size="xs"
-        [severity]="'danger'"
-        [variant]="'outline'"
-        [icon]="'pencil'"
-        [direction]="'row'"
-        [label]="registroId ? 'Cancelar' : 'Reset'"
-        [type]="registroId ? 'button' : 'reset'"
-        (clickEvent)="cancel()"
-        ></app-button>
-        
-        <app-button
-        size="xs"
-        [severity]="'primary'"
-        [variant]="'link'"
-        [icon]="'code'"
-        [direction]="'row'"
-        [label]="'Registrar desde un QR'"
-        (clickEvent)="showQrRegister()"
-        ></app-button>
-      </div>
       <div class="panel__footer--left">
+        <app-button
+          size="xs"
+          [severity]="'danger'"
+          [variant]="'outline'"
+          [icon]="'xmark'"
+          [direction]="'row'"
+          [label]="'Cancelar'"
+          [type]="'button'"
+          (clickEvent)="cancel()"
+        ></app-button>
+        @if (!registroId) {
+        <app-button
+          size="xs"
+          [severity]="'warning'"
+          [variant]="'outline'"
+          [icon]="'arrows-rotate'"
+          [direction]="'row'"
+          [label]="'Reset'"
+          [type]="'reset'"
+        ></app-button>
+        }
+      </div>
+      <div class="panel__footer--right">
+        @if (!registroId) {
+          <app-button
+          size="xs"
+          [severity]="'primary'"
+          [variant]="'link'"
+          [icon]="'mobile-screen-button'"
+          [direction]="'row'"
+          [label]="'Registrar con un QR'"
+          (clickEvent)="showQrRegister()"
+          ></app-button>
+        }
         <app-button
         [severity]="'success'"
         type="submit"
         [variant]="'fill'"
-        [label]="'registroId' ? 'Registrar' : 'Confirmar'"
+        [label]="'registroId' ? 'Guardar cambios' : 'Registrar'"
         [direction]="'row'"
-        [icon]="'registroId' ? 'pencil' : 'check'"
+        [icon]="'registroId' ? 'floppy-disk' : 'file-lines'"
+        [disabled]="false"
         size="xs"
       >
       </app-button>

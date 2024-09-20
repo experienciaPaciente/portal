@@ -7,6 +7,34 @@
         padding: var(--panel__padding);
     }
 
+    .page__body {
+        .page__panel--main {
+
+            .panel__main {
+
+                .panel__inner--aside {
+                    flex-direction: column!important;
+                    row-gap: var(--wrapper__gap--row);
+                    flex: 0 1 180px!important;
+                    height: 100%;
+                    align-items: center;
+
+                    .panel__inner--right {
+                        row-gap: var(--wrapper__gap--row);
+
+                        .panel__qr--aside {
+                            width: 100%;
+                            max-width: 100%!important;
+                            background-color: white;
+                            border: solid 1px var(--neutral);
+                            // flex: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Generics
     form,
     fieldset,

@@ -95,6 +95,17 @@ section,aside, div, header {
     }
   }
 
+  select {
+    &.form__select--custom {
+      appearance: none;
+      background-image: url('./../img/chevron-down-solid.svg');
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: calc(100% - 10px) center;
+      padding-right: 30px;
+    }
+  }
+  
   td > span.required {
     color: var(--danger--dark);
     font-weight: bold;

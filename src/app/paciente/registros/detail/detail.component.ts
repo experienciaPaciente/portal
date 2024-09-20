@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Registro } from 'src/app/models/registro';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegistrosService } from 'src/app/core/services/registros.service';
 import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail',
@@ -25,6 +26,7 @@ export class DetailComponent {
   editableIcon!: string;
   editableColor!: string;
   qrCodeUrl?: string;
+  disabled = false;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Consulta general': { icon: 'user-md', color: '#FD5B71' },
@@ -37,7 +39,9 @@ export class DetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private registroService: RegistrosService
+    private registroService: RegistrosService,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +54,7 @@ export class DetailComponent {
   generateQRCode(data: any) {
     if (data) {
       const formattedData = 
-      `Título: ${data.titulo}\nDescripción: ${data.descripcion}\nFecha: ${data.fecha}\nHora: ${data.hora}\nCategoria: ${data.categoria}\nValidado: ${data.validado}\nEstado: ${data.estado}\nEmisor: ${data.emisor}\nAdjuntos: ${data.adjuntos}`;
+      `Título: ${data.titulo}\nDescripción: ${data.descripcion}\nFecha: ${data.fecha}\nHora: ${data.hora}\nCategoria: ${data.categoria}\nValidado: ${data.validado}\nEstado: ${data.estado}\nEmisor: ${data.validador}\nAdjuntos: ${data.adjuntos}`;
       const encodedData = encodeURIComponent(formattedData);
       this.qrCodeUrl = `https://quickchart.io/qr?text=${encodedData}`;
     }
@@ -88,5 +92,14 @@ export class DetailComponent {
 
   trackByFn(item: any): any {
     return item.id;
+  }
+
+  goBack(): void {
+    console.log('Historial:', window.history.length);
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    } 
   }
 }

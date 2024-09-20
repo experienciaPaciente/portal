@@ -11,7 +11,7 @@
           <input type="text" placeholder="Busca por título del registro" class="input__size--sm"
           [formControl]="searchControl">
         </span>
-        <app-button icon="plus" size="xs" variant="fill" severity="success" direction="none" [path]="'/registrar'"></app-button>
+        <app-button icon="plus" size="xs" variant="fill" severity="success" direction="none" [path]="'registrar'"></app-button>
     </form>
     <!-- Considerar hacer un componente carousel -->
     <app-navbar [items]="categoriaItems" (categorySelected)="onCategorySelected($event)"
@@ -34,7 +34,7 @@
                     [color]="getColorForCategoria(data.categoria)"
                     direction="row">
                     <app-badge [severity]="data.validado ? 'success' : 'info'" [label]="data.validado ? 'Validado' : 'Auto-registro'" size="xs"></app-badge>
-                    <app-badge severity="info" [label]="data.emisor" size="xs" icon="user"></app-badge>
+                    <app-badge severity="info" [label]="data.validador" size="xs" icon="user"></app-badge>
                     <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
                     <app-dropdown
                     [items]="menuItems"
