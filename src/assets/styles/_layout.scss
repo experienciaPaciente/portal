@@ -51,17 +51,18 @@
           row-gap: var(--wrapper__gap--row);
           justify-content: space-between;
 
-          .input__group {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: end;
-            justify-content: space-between;
-            column-gap: var(--wrapper__gap--col);
-            width: 100%;
-          }
         }
       }
-    
+      
+      .input__group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        justify-content: space-between;
+        column-gap: var(--wrapper__gap--col);
+        width: 100%;
+      }
+      
       main.page__panel--main {
         display: flex;
         flex-direction: row;

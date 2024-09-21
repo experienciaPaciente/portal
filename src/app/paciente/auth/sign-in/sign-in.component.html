@@ -14,9 +14,9 @@
           [direction]="'column'"
         ></app-label>
         <div class="form__input-wrapper--col">
-          <label>Email</label>
+            <app-required [label]="'Email'" [control]="'email'"></app-required>
             <input type="email" formControlName="email" />
-            <small *ngIf="isEmailValid as messsage">{{ messsage }}</small>
+            <small class="required" *ngIf="isEmailValid as messsage">{{ messsage }}</small>
         </div>
         <div class="form__input-wrapper--col">
           <label>Enter your password</label>
@@ -24,6 +24,7 @@
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
           />
+          <small class="required">Campo requerido</small>
           <app-button
             size="xs"
             [severity]="'info'"
@@ -35,7 +36,6 @@
           >
         </app-button>
           <i>{{ hide ? "Ocultar contraseña" : "Mostrar contraseña" }}</i>
-          <small>Campo requerido</small>
         </div>
     
         <footer class="panel__footer">
@@ -48,7 +48,6 @@
             [label]="'Registrarme'"
             [path]="'registrarse'"
             ></app-button>
-
             <app-button
             severity="success"
             type="submit"

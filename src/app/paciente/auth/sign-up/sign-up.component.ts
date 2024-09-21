@@ -4,12 +4,14 @@ import {
   FormBuilder,
   FormControl,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { PacienteService } from 'src/app/core/services/paciente.service';
 import { AuthService, Credential } from 'src/app/core/services/auth.service';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
+import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 
 interface SignUpForm {
   nombre: FormControl<string>;
@@ -18,6 +20,7 @@ interface SignUpForm {
   password: FormControl<string>;
 }
 
+
 @Component({
   standalone: true,
   imports: [
@@ -25,7 +28,8 @@ interface SignUpForm {
     RouterModule,
     NgIf,
     ButtonComponent,
-    LabelComponent
+    LabelComponent,
+    RequiredComponent
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -33,6 +37,7 @@ interface SignUpForm {
 })
 export default class SignUpComponent {
   hide = true;
+
   private router = inject(Router);
   private pacienteId = '';
 
@@ -45,10 +50,10 @@ export default class SignUpComponent {
   pacienteService = inject(PacienteService);
 
   form = this.formBuilder.group<SignUpForm>({
-    nombre: this.formBuilder.control(''),
-    apellido: this.formBuilder.control(''),
-    email: this.formBuilder.control(''),
-    password: this.formBuilder.control(''),
+    nombre: this.formBuilder.control('', Validators.required),
+    apellido: this.formBuilder.control('', Validators.required),
+    email: this.formBuilder.control('', Validators.email),
+    password: this.formBuilder.control('', Validators.required),
   });
 
   async signUp(): Promise<void> {

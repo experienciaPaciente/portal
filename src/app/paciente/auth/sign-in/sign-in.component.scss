@@ -1,3 +1,9 @@
+@mixin baseFlex {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--form__gap--row);
+  }
+
 #signIn, #signUp {
     --box-shadow: -2px 0 4px var(--shadow);
     --page__body--height: 100vh;
@@ -10,10 +16,12 @@
         width: 100vw;
         overflow: hidden;
         object-fit: cover;
-        filter: blur(5px) grayscale(75%);
+        filter: blur(20px) grayscale(100%);
     }
 
     .page__panel--float {
+        --panel__padding: 48px;
+        @extend %baseFlex;
         position: absolute;
         left: 30%;
         top: 2rem;
@@ -21,8 +29,9 @@
         height: fit-content;
         padding: var(--panel__padding);
         background-color: white;
-        overflow-y: scroll;
+        // overflow-y: scroll;
         box-shadow: var(--box-shadow);
+        border-radius: var(--panel__border--radius);
         z-index: 1;
     }
 
@@ -38,8 +47,8 @@
     }
 
     .shape__circle--quarter {
-        width: 219px; // Variables | procurar proporción
-        height: 198px;
+        width: 200px; // Variables | procurar proporción
+        height: 170px;
         // background-image: './assets/img/shape__circle--quarter.svg';
         position: absolute;
         bottom: 0;

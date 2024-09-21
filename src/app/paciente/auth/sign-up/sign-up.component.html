@@ -1,75 +1,90 @@
 <section id="signUp">
   <img class="page__body--bg" src="./assets/img/login__bg--desktop.jpg" alt="">
   <main class="page__panel--float">
-    <div class="form">
-      <form [formGroup]="form" (ngSubmit)="signUp()">
+      <form type="flex" [formGroup]="form" (ngSubmit)="signUp()">
         <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
         <app-label
-        size="md"
-        [prefix]="'Ingreso'"
-        [label]="'Bienvenido'"
-        subtitle="Aquí comienza tu historia de Salud"
-        [direction]="'column'"
-      ></app-label>
+          size="md"
+          [prefix]="'Ingreso'"
+          [label]="'Bienvenido'"
+          subtitle="Aquí comienza tu historia de Salud"
+          [direction]="'column'"
+        ></app-label>
 
-        <div class="form__input-wrapper--col">
-            <label for="nombre">Nombres</label>
+        <span class="form__input-wrapper--row">
+          <div class="form__input-wrapper--col">
+            <app-required [label]="'Nombre'" [control]="'nombre'"></app-required>
             <input formControlName="nombre" />
-        </div>
-  
-        <div class="form__input-wrapper--col">
-            <label for="apellido">Apellidos</label>
+            <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
+              Nombre es obligatorio
+            </small>
+          </div>
+    
+          <div class="form__input-wrapper--col">
+            <app-required [label]="'Apellido'" [control]="'apellido'"></app-required>
             <input formControlName="apellido" />
-            <small>This field is required</small>
-        </div>
-        <div class="form__input-wrapper--col">
-            <label for="email">Email</label>
+            <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
+              Apellido es obligatorio
+            </small>
+          </div>
+        </span>
+          <div class="form__input-wrapper--col">
+            <app-required [label]="'Email'" [control]="'email'"></app-required>
             <input formControlName="email" />
-            <small *ngIf="isEmailValid as messsage">{{ messsage })</small>
-        </div>
+            <small class="required" *ngIf="form.controls['email']?.invalid && form.controls['email']?.touched">
+              {{ form.controls['email']?.errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
+            </small>
+          </div>
+          <span class="form__input-wrapper--row">
+            <div class="form__input-wrapper--col">
+              <app-required [label]="'Contraseña'" [control]="'password'"></app-required>
+              <input
+                [type]="hide ? 'password' : 'text'"
+                formControlName="password"
+              />
+              <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
+                Contraseña es obligatoria
+              </small>
+            </div>  
   
-        <div class="form__input-wrapper--col">
-          <label>Enter your password</label>
-          <input
-            [type]="hide ? 'password' : 'text'"
-            formControlName="password"
-          />
-          <app-button
-            size="xs"
-            [severity]="'info'"
-            [variant]="'link'"
-            [icon]="'eye'"
-            [direction]="'row'"
-            [label]="'Editar'"
-            (click)="hide = !hide"
-          >
-        </app-button>
-          <i>{{ hide ? "Ocultar contraseña" : "Mostrar contraseña" }}</i>
-          <small>Campo requerido</small>
-        </div>    
-
+              <app-button
+                size="sm"
+                [severity]="'primary'"
+                [variant]="'outline'"
+                [icon]="'eye'"
+                [direction]="'none'"
+                (click)="hide = !hide"
+              >
+              </app-button>
+          </span>
+  
         <footer class="panel__footer">
           <app-button
             size="xs"
-            [severity]="'info'"
-            [variant]="'fill'"
-            [icon]="'trash'"
+            [severity]="'primary'"
+            [variant]="'link'"
+            [icon]="'arrow-left'"
             [direction]="'row'"
             [label]="'Volver'"
             [path]="'auth/sign-in'"
-            ></app-button>
+          ></app-button>
 
-            <app-button
+          <app-button
             severity="success"
             type="submit"
             variant="fill"
-            [icon]="'check'"
+            [icon]="'check-circle'"
             [direction]="'row'"
             [label]="'Registrarme'"
             size="xs">
           </app-button>
         </footer>
+
+        <hr />
+        <small class="footer__text--sm">
+          <b>Aviso Legal y Términos de Uso</b><br>
+Al registrarte en experienciaPaciente, reconoces que la plataforma te brinda el poder de gestionar y controlar tus propios datos de salud, sin depender exclusivamente de sistemas tradicionales. experienciaPaciente no sustituye la atención médica, pero te posibilita acceder, registrar y compartir tu información de Salud.
+        </small>
       </form>
-    </div>
   </main>
 </section>

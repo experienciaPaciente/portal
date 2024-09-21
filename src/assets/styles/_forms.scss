@@ -45,8 +45,9 @@ section,aside, div, header {
     flex-direction: row;
     width: 100%;
     height: fit-content;
-    overflow-x: scroll;
+    overflow-x: hidden;
     gap: var(--wrapper__gap);
+    align-items: flex-end;
   }
 
   fieldset {
@@ -73,26 +74,26 @@ section,aside, div, header {
     // font-weight: var(--input__label--weight);
     font-size: var(--input__label--size);
     color: var(--input__label--color);
-    
-    ~ span.required {
-      color: var(--danger--dark);
-      font-weight: bold;
-    }
-    
-    ~ input, ~ textarea, ~ select {
-      font-size: var(--input__font--size);
-      // width: 100%;
-      flex: 1;
-      color: var(--input__font--color);
-      padding: var(--input__padding);
-      border: var(--input__border);
-      border-radius: var(--input__border--radius);
+  }
+  
+  .required {
+    color: var(--danger--dark);
+    // font-weight: bold;
+  }
+  
+  input, textarea, select {
+    font-size: var(--input__font--size);
+    // width: 100%;
+    flex: 1;
+    color: var(--input__font--color);
+    padding: var(--input__padding);
+    border: var(--input__border);
+    border-radius: var(--input__border--radius);
 
-      &.input__size--sm {
-        --input__font--size: 16px;
-        --input__padding: .5rem;
-        --input__border--radius: 4px;
-      }
+    &.input__size--sm {
+      --input__font--size: 16px;
+      --input__padding: .5rem;
+      --input__border--radius: 4px;
     }
   }
 
@@ -108,12 +109,6 @@ section,aside, div, header {
   }
   
   td > span.required {
-    color: var(--danger--dark);
-    font-weight: bold;
-  }
-
-  .required::after {
-    content: ' *';
     color: var(--danger--dark);
     font-weight: bold;
   }

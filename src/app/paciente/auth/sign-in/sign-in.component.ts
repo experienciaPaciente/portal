@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
+import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 
 interface LogInForm {
   email: FormControl<string>;
@@ -24,7 +25,8 @@ interface LogInForm {
     RouterModule,
     NgIf,
     LabelComponent,
-    ButtonComponent
+    ButtonComponent,
+    RequiredComponent
   ],
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
