@@ -51,7 +51,6 @@ export class ButtonComponent{
   setFabPositionStyles(): { [key: string]: string | undefined } {
     return this.variant === 'fab'
       ? {
-          position: 'absolute',
           top: this.top,
           right: this.right,
           bottom: this.bottom,

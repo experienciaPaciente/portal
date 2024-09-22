@@ -46,7 +46,7 @@
   --page__gap--vertical: 2.5rem;
   --page__font-familiy: ui-sans-serif, system-ui, -apple-system, 'Open Sans', 'Helvetica Neue',
     'Segoe UI', sans-serif;
-
+  --page__bg--img: inherit;
   --page__title--size: 1.75rem;
   --page__title--color: var(--primary);
   --page__title--lineHeight: auto;
@@ -84,7 +84,7 @@
   --header__gap--row: 12px; // Unificar los gaps
 
   // Panel 
-  --panel__border--radius: 6px;
+  --panel__border--radius: 8px;
   --panel__bg--color: white;
   --panel__img--size: 30vw; // reveer para adjuntos
   --panel__img--radius: 50%;
@@ -93,11 +93,11 @@
   --panel__text--align: center;
   --panel__font--size: 19px;
   --panel__line--height: 1.2;
-  --panel__gap: 16px;
-  --panel__gap--row: 16px;
+  --panel__gap: 48px;
+  --panel__gap--row: 24px;
   --panel__gap--col: 24px;
 
-  --panel__padding: 16px;
+  --panel__padding: 24px;
   --panel__shadow: 2px 2px 4px 0px rgba(180, 180, 180, 0.5);
   --panel__width: 100%;
   --panel__width--sidebar: 420px;
@@ -132,8 +132,8 @@
 
   --card__padding: 16px;
   --card__shadow: 2px 2px 4px 0px rgba(180, 180, 180, 0.5);
-  --card__width: 100%;
-  --card__height: 100%;
+  --card__width: min-content;
+  --card__height: min-content;
   --card__direction: column;
 
   // Accordion 

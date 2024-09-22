@@ -12,6 +12,7 @@ import { AuthService, Credential } from 'src/app/core/services/auth.service';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
+import { CardComponent } from 'src/app/shared/ui/card/card.component';
 
 interface SignUpForm {
   nombre: FormControl<string>;
@@ -19,7 +20,6 @@ interface SignUpForm {
   email: FormControl<string>;
   password: FormControl<string>;
 }
-
 
 @Component({
   standalone: true,
@@ -29,7 +29,8 @@ interface SignUpForm {
     NgIf,
     ButtonComponent,
     LabelComponent,
-    RequiredComponent
+    RequiredComponent,
+    CardComponent
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -37,6 +38,8 @@ interface SignUpForm {
 })
 export default class SignUpComponent {
   hide = true;
+  showConfirmMsg = false;
+  showErrorMsg = false;
 
   private router = inject(Router);
   private pacienteId = '';
@@ -57,23 +60,27 @@ export default class SignUpComponent {
   });
 
   async signUp(): Promise<void> {
-    if (this.form.invalid) return;
-
+    if (this.form.invalid) {
+      this.showErrorMsg = true;
+      return;
+    };
+    
     const credential: Credential = {
       email: this.form.value.email || '',
       password: this.form.value.password || '',
     };
-
+    
     try {
       await this.authService.signUpWithEmailAndPassword(credential);
-
-      this.router.navigateByUrl('/');
- 
+      this.showConfirmMsg = true;
+      setTimeout(() => {
+          this.router.navigateByUrl('/ingresar'); 
+        }, 900
+      )
     } catch (error) {
       console.error(error);
     }
   }
-
   get isEmailValid(): string | boolean {
     const control = this.form.get('email');
     const isInvalid = control?.invalid && control.touched;
@@ -83,7 +90,6 @@ export default class SignUpComponent {
         ? 'This field is required'
         : 'Enter a valid email';
     }
-
     return false;
   }
 }

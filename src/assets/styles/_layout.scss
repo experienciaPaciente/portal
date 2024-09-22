@@ -118,7 +118,7 @@
             flex: 1 1 320px;
             display: flex;
             flex-direction: column;
-            row-gap: var(--panel__gap--col);
+            row-gap: var(--panel__gap--row);
   
             article.panel__text--article {
               --label__icon--size: 14px;
@@ -166,7 +166,7 @@
           .panel__inner--aside {
             display: flex;
             flex-direction: row-reverse;
-            row-gap: var(--panel__gap--col);
+            row-gap: var(--panel__gap--row);
             flex: 1; 
             height: max-content;
 
@@ -224,6 +224,7 @@
     left: 0;
     z-index: 1;
     box-shadow: 0 -1px 0px 0px var(--shadow);
+    column-gap: var(--panel__gap);
 
     .panel__footer--right {
       display: flex;

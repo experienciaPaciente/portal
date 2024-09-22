@@ -1,41 +1,44 @@
-<section id="signUp">
-  <img class="page__body--bg" src="./assets/img/login__bg--desktop.jpg" alt="">
-  <main class="page__panel--float">
-      <form type="flex" [formGroup]="form" (ngSubmit)="signUp()">
-        <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
-        <app-label
+  <!-- <img class="page__body--bg" src="./assets/img/login__bg--desktop.jpg" alt=""> -->
+  <main id="signUp">
+      <!-- <span class="overlay"></span> -->
+      <form class="page__panel--float" [formGroup]="form" (ngSubmit)="signUp()">
+        <!-- im -->
+        <section class="panel__inner--left">
+          <img class="panel__img--center" width="240" src="./assets/img/ep__marca--row.svg" alt="logo experiencia paciente">
+        </section>
+        <!-- form -->
+        <section type="flex" class="panel__inner--right">
+          <app-label
           size="md"
           [prefix]="'Ingreso'"
           [label]="'Bienvenido'"
           subtitle="Aquí comienza tu historia de Salud"
-          [direction]="'column'"
+          [direction]="'row'"
         ></app-label>
-
-        <span class="form__input-wrapper--row">
+        <hr>
+        <div type="wrap">
           <div class="form__input-wrapper--col">
             <app-required [label]="'Nombre'" [control]="'nombre'"></app-required>
             <input formControlName="nombre" />
             <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
               Nombre es obligatorio
             </small>
-          </div>
-    
-          <div class="form__input-wrapper--col">
-            <app-required [label]="'Apellido'" [control]="'apellido'"></app-required>
-            <input formControlName="apellido" />
-            <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
-              Apellido es obligatorio
-            </small>
-          </div>
-        </span>
-          <div class="form__input-wrapper--col">
-            <app-required [label]="'Email'" [control]="'email'"></app-required>
-            <input formControlName="email" />
-            <small class="required" *ngIf="form.controls['email']?.invalid && form.controls['email']?.touched">
-              {{ form.controls['email']?.errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
-            </small>
-          </div>
-          <span class="form__input-wrapper--row">
+          </div>   
+            <div class="form__input-wrapper--col">
+              <app-required [label]="'Apellido'" [control]="'apellido'"></app-required>
+              <input formControlName="apellido" />
+              <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
+                Apellido es obligatorio
+              </small>
+            </div>
+            <div class="form__input-wrapper--col">
+              <app-required [label]="'Email'" [control]="'email'"></app-required>
+              <input formControlName="email" />
+              <small class="required" *ngIf="form.controls['email']?.invalid && form.controls['email']?.touched">
+                {{ form.controls['email']?.errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
+              </small>
+            </div>
+            <div class="form__input-wrapper--row">
             <div class="form__input-wrapper--col">
               <app-required [label]="'Contraseña'" [control]="'password'"></app-required>
               <input
@@ -45,19 +48,26 @@
               <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
                 Contraseña es obligatoria
               </small>
-            </div>  
-  
-              <app-button
+            </div>
+                <app-button
                 size="sm"
                 [severity]="'primary'"
                 [variant]="'outline'"
                 [icon]="'eye'"
                 [direction]="'none'"
                 (click)="hide = !hide"
-              >
+                >
               </app-button>
-          </span>
-  
+            </div>
+        </div>
+        </section>
+        <!-- disclaimer -->
+        <section class="panel__prefooter">
+          <small class="footer__text--sm">
+            <b>Aviso Legal y Términos de Uso</b><br>
+            Al registrarte en experienciaPaciente, reconoces que la plataforma te brinda el poder de gestionar y controlar tus propios datos de salud, sin depender exclusivamente de sistemas tradicionales. experienciaPaciente no sustituye la atención médica, pero te posibilita acceder, registrar y compartir tu información de Salud.
+          </small>
+        </section>
         <footer class="panel__footer">
           <app-button
             size="xs"
@@ -79,12 +89,26 @@
             size="xs">
           </app-button>
         </footer>
-
-        <hr />
-        <small class="footer__text--sm">
-          <b>Aviso Legal y Términos de Uso</b><br>
-Al registrarte en experienciaPaciente, reconoces que la plataforma te brinda el poder de gestionar y controlar tus propios datos de salud, sin depender exclusivamente de sistemas tradicionales. experienciaPaciente no sustituye la atención médica, pero te posibilita acceder, registrar y compartir tu información de Salud.
-        </small>
       </form>
+      <!-- Notificación -->
+      <app-card
+        size="lg"
+        direction="row"
+        [variant]="'fill'"
+        bottom="20px"
+        left="50%"
+        [severity]="showErrorMsg ? 'danger' : 'success'"
+        [closable]="hide"
+        [selectable]="showErrorMsg"
+      >
+      <app-label
+        size="xxs"
+        [label]="showErrorMsg ? 'No se ha podido registrar el usuario' : 'El usuario ha sido creado exitosamente'"
+        [subtitle]="showErrorMsg ? 'Vuelva a intentar luego' : 'Será redirigido al login'"
+        [icon]="showErrorMsg ? 'alert-circle' : 'info-circle'"
+        variant="outline"
+        direction="row"
+        severity="success"
+      ></app-label>
+    </app-card>
   </main>
-</section>
