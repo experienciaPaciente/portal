@@ -375,12 +375,31 @@ app-card {
 
     // Severity
     &--success {
-      --card__border--color: var(--success);
-      border: solid 2px var(--card__border--color);
-      
+      --card__bg--color: var(--success);
+      --label__title--color: white;
+      --label__icon--color: lightgreen;
+      --label__subtitle--color: lightgreen;
+      --neutral: white;
+
+      background-color: var(--card__bg--color);
+      color: var(--label__icon--color);
+      animation: fade-in 1.5s ease-in;
+
+      @keyframes fade-in {
+        0% {
+          transform: translateY(300px);
+          opacity: 0;
+        }
+        
+        100% {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
       &.card--selectable {
         &:hover {
-          --card__bg--color: var(--success-light);
+          --card__bg--color: var(--success--light);
           background-color: var(--card__bg--color);
         }
         

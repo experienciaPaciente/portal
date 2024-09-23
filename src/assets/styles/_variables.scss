@@ -23,6 +23,7 @@
   --warning--light: #FCEBD0;
   --success: #27AE60;
   --success--light: #DCFBD2;
+  --success--dark: #17934b;
   --danger--dark: #b82e76;
   --danger: #ef5da8;
   --danger--light: #FAE5E4;
@@ -132,7 +133,7 @@
 
   --card__padding: 16px;
   --card__shadow: 2px 2px 4px 0px rgba(180, 180, 180, 0.5);
-  --card__width: min-content;
+  --card__width: fit-content;
   --card__height: min-content;
   --card__direction: column;
 

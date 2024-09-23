@@ -1,6 +1,6 @@
   <!-- <img class="page__body--bg" src="./assets/img/login__bg--desktop.jpg" alt=""> -->
   <main id="signUp">
-      <!-- <span class="overlay"></span> -->
+      <span class="page__bg--overlay"></span>
       <form class="page__panel--float" [formGroup]="form" (ngSubmit)="signUp()">
         <!-- im -->
         <section class="panel__inner--left">
@@ -46,7 +46,7 @@
                 formControlName="password"
               />
               <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
-                Contraseña es obligatoria
+                La contraseña es obligatoria
               </small>
             </div>
                 <app-button
@@ -94,9 +94,9 @@
       <app-card
         size="lg"
         direction="row"
-        [variant]="'fill'"
+        [variant]="'fab'"
         bottom="20px"
-        left="50%"
+        left="35%"
         [severity]="showErrorMsg ? 'danger' : 'success'"
         [closable]="hide"
         [selectable]="showErrorMsg"
