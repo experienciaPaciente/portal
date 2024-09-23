@@ -80,7 +80,7 @@ export class CardComponent implements OnChanges, AfterViewInit {
           top: this.top,
           right: this.right,
           bottom: this.bottom,
-          left: this.left
+          left: this.left,
         }
       : {};
   }

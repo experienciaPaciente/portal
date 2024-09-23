@@ -25,7 +25,7 @@ export class BadgeComponent implements OnChanges {
       case 'success':
         this.badgeStyle = {
           'background-color': 'var(--success--light)',
-          'color': 'var(--success)'
+          'color': 'var(--success--dark)'
         };
         this.badgeIconClass = 'fa-solid fa-circle-check';
         break;

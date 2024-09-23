@@ -28,6 +28,10 @@ section,aside, div, header {
     flex-flow: wrap;
     column-gap: var(--form__gap--col);
     row-gap: var(--form__gap--row);
+
+    .form__input-wrapper--col {
+      flex: 1 1 160px;
+    }
   }
 
   &[type='grid'] {
@@ -39,7 +43,6 @@ section,aside, div, header {
     display: flex;
     flex-direction: column;
     row-gap: var(--wrapper__gap--col);
-    // flex: 1;
   }
 
   .form__input-wrapper--row {
@@ -52,7 +55,7 @@ section,aside, div, header {
     align-items: flex-end;
 
     >.form__input-wrapper--col {
-      flex: 1;
+      flex: 1 1 160px;
     }
   }
 
