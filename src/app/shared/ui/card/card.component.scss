@@ -301,7 +301,8 @@ app-card {
   }
 
   &.card__fab {
-    
+    animation: fade-in 1.5s ease-in;
+
     &--primary {
       --card__border--color: var(--card__text--color);
       border: solid 2px var(--card__border--color);
@@ -383,19 +384,6 @@ app-card {
 
       background-color: var(--card__bg--color);
       color: var(--label__icon--color);
-      animation: fade-in 1.5s ease-in;
-
-      @keyframes fade-in {
-        0% {
-          transform: translateY(300px);
-          opacity: 0;
-        }
-        
-        100% {
-          transform: translateY(0px);
-          opacity: 1;
-        }
-      }
 
       &.card--selectable {
         &:hover {
@@ -410,7 +398,16 @@ app-card {
     }
 
     &--warning {
-      --card__border--color: var(--warning);
+      // --card__border--color: var(--warning);
+      --card__bg--color: var(--warning);
+      --label__title--color: white;
+      --label__icon--color: var(--warning--light);
+      --label__subtitle--color: var(--warning--light);;
+      --neutral: white;
+
+      background-color: var(--card__bg--color);
+      color: var(--label__icon--color);
+
       &.card--selectable {
         &:hover {
           --card__bg--color: var(--warning--light);
@@ -424,7 +421,16 @@ app-card {
     }
       
     &--danger {
-      --card__border--color: var(--danger);
+      // --card__border--color: var(--danger);
+      --card__bg--color: var(--danger);
+      --label__title--color: white;
+      --label__icon--color: var(--danger--light);
+      --label__subtitle--color: var(--danger--light);;
+      --neutral: white;
+
+      background-color: var(--card__bg--color);
+      color: var(--label__icon--color);
+
       &.card--selectable {
         &:hover {
           --card__bg--color: var(--danger--light);
@@ -448,7 +454,10 @@ app-card {
     &--xs {
       --card__width: 90px;
       --card__padding: 12px;
+      --card__height: 100%;
       background-color: #f1f4f5;
+      width: var(--card__width);
+      height: var(--card__height);
     }
 
     &--sm {
@@ -457,6 +466,8 @@ app-card {
 
     &--md {
       --card__padding: 0 0 0 12px;
+      --card__width: 100%;
+      width: var(--card__width);
 
       .label__content {
         row-gap: 4px;

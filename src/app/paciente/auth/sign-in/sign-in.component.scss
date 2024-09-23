@@ -33,6 +33,7 @@ background-size: cover;
 position: relative;
 
     .page__panel--sidebar {
+        position: absolute;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -40,7 +41,7 @@ position: relative;
         box-shadow: var(--box-shadow);
         border-radius: var(--panel__border--radius);
         box-sizing: border-box;
-        height: 85%;
+        height: 75vh;
         z-index: 1;
         background-color: white;
         row-gap: var(--wrapper__gap--row);

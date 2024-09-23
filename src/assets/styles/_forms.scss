@@ -39,7 +39,7 @@ section,aside, div, header {
     display: flex;
     flex-direction: column;
     row-gap: var(--wrapper__gap--col);
-    flex: 1;
+    // flex: 1;
   }
 
   .form__input-wrapper--row {
@@ -50,6 +50,10 @@ section,aside, div, header {
     overflow-x: hidden;
     gap: var(--wrapper__gap);
     align-items: flex-end;
+
+    >.form__input-wrapper--col {
+      flex: 1;
+    }
   }
 
   fieldset {

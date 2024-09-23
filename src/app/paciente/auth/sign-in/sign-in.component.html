@@ -38,24 +38,24 @@
             >
           </app-button>
       </div>
+      <app-button
+      size="xxs"
+      [severity]="'secondary'"
+      [variant]="'link'"
+      [icon]="'key'"
+      [direction]="'row'"
+      [label]="'Recuperar contraseña'"
+      ></app-button>
     </section>
       <footer class="panel__footer">
           <app-button
             size="xxs"
             [severity]="'primary'"
-            [variant]="'outline'"
-            [icon]="'user'"
-            [direction]="'row'"
-            [label]="'Sign-up'"
-            [path]="'registrarse'"
-            ></app-button>
-            <app-button
-            size="xxs"
-            [severity]="'secondary'"
             [variant]="'link'"
-            [icon]="'key'"
+            [icon]="'user-plus'"
             [direction]="'row'"
-            [label]="'Contraseña'"
+            [label]="'Registrarse'"
+            [path]="'registrarse'"
             ></app-button>
             <app-button
             severity="success"
@@ -63,11 +63,36 @@
             variant="fill"
             [bottom]="'24px'"
             [right]="'24px'"
-            [direction]="'none'"
+            [direction]="'row'"
             icon="user"
-            [label]="''"
-            size="xxs">
+            [label]="'Acceder'"
+            size="xxs"
+            [disabled]="form.invalid"
+            >
           </app-button>
     </footer>
+
   </form>
+    <!-- Notificación -->
+     @if (errorMessage) {
+       <app-card
+           size="lg"
+           direction="row"
+           [variant]="'fab'"
+           bottom="20px"
+           left="calc(50vw - 180px)"
+           [severity]="errorMessage ? 'danger' : 'success'"
+           [closable]="hide"
+         >
+           <app-label
+             size="xxs"
+             [label]="errorMessage ? 'No se ha podido autenticar el usuario' : 'El usuario ha sido creado exitosamente'"
+             [subtitle]="errorMessage ? errorMessage : successMessage"
+             [icon]="errorMessage ? 'alert-circle' : 'info-circle'"
+             variant="outline"
+             direction="row"
+             severity="danger"
+           ></app-label>
+       </app-card>
+     }
 </section>

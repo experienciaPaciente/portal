@@ -1,3 +1,15 @@
+@keyframes fade-in {
+  0% {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+  
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 @mixin custom-card-color($color) {
   background-color: var(--customColor, $color);
   border-color: var(--customColor, $color);
