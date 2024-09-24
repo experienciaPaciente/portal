@@ -1,11 +1,12 @@
 import { Component, Input, ViewChild, ElementRef, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 import { LabelComponent } from '../label/label.component';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [LabelComponent, CommonModule],
+  imports: [LabelComponent, CommonModule, ButtonComponent],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
@@ -17,10 +18,15 @@ export class CardComponent implements OnChanges, AfterViewInit {
   @Input() align: 'start' | 'end' | 'center' = 'center';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'block' = 'md';
   @Input() severity: 'info' | 'success' | 'warning' | 'danger' | 'neutral' | 'custom' = 'neutral';
-  @Input() type: 'fill' | 'outline' = 'outline';
+  @Input() variant: 'fill' | 'outline' | 'fab' = 'outline';
   @Input() direction: 'column' | 'row' = 'column';
   @Input() color = '';
-  
+  @Input() closable = false;
+  @Input() top?: string;
+  @Input() right?: string;
+  @Input() bottom?: string;
+  @Input() left?: string;
+
   // Ver de pasar direccionalidad desde la card al label
   @ViewChild('cardColor', { static: true }) cardColor!: ElementRef;
   @ViewChild(LabelComponent, { static: true}) label?: LabelComponent;
@@ -56,9 +62,26 @@ export class CardComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  closeCard(event: Event) {
+    event.stopPropagation();
+    this.cardColor.nativeElement.remove();
+  }
+
   onCardClick() {
     if (this.selectable) {
       this.selected = !this.selected;
     }
+  }
+
+  setFabPositionStyles(): { [key: string]: string | undefined } {
+    return this.variant === 'fab'
+      ? {
+          position: 'absolute',
+          top: this.top,
+          right: this.right,
+          bottom: this.bottom,
+          left: this.left,
+        }
+      : {};
   }
 }

@@ -33,7 +33,7 @@
     <ul class="list__wrapper--{{ type }}">
         <!-- Resolver bubbling -->
         <li *ngFor="let data of (filteredRegistros$ | async); trackBy: trackByFn" (click)="onItemSelected(data)">
-            <app-card direction="row" [selectable]="true" [type]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
+            <app-card direction="row" [selectable]="true" [variant]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
                     <app-label
                     [size]="'xs'"
                     [label]="data.titulo"

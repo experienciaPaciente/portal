@@ -14,8 +14,11 @@
    </header>
   <section class="panel__inner--main">
     <div class="form__input-wrapper--col">
-      <label for="titulo">Titulo</label>
+      <app-required [label]="'Título'" [control]="'titulo'"></app-required>
       <input type="text" formControlName="titulo" (keyup)="onTitleChange()">
+      <small class="required" *ngIf="form.controls['titulo']?.invalid && form.controls['titulo']?.touched">
+        Título es obligatorio
+      </small>
     </div>
 
     @if (!qrResultString) {
@@ -46,15 +49,18 @@
       }
 
       <div class="form__input-wrapper--col">
-        <label for="categoria">Categoría</label>
+        <app-required [label]="'Categoría'" [control]="'categoria'"></app-required>
           <select class="form__select--custom" id="categoria" formControlName="categoria" (change)="onCategoryChange()">
-          <option value="" disabled selected>Select a category</option>
+          <option value="" disabled selected>Seleccionar categoría</option>
           @for (categoria of categorias; track categoria) {
             <option [value]="categoria">
               {{ categoria }}
             </option>
           }
         </select>
+        <small class="required" *ngIf="form.controls['categoria']?.invalid && form.controls['categoria']?.touched">
+          La categoría es obligatoria
+        </small>
       </div>
       <div class="form__input-wrapper--col">
         <label for="adjuntos">Adjuntar archivo</label>
@@ -65,12 +71,18 @@
     @if (!qrRegister) {
     <section class="panel__inner--aside">
         <div class="form__input-wrapper--col">
-          <label for="fecha">Fecha</label>
+          <app-required [label]="'Fecha'" [control]="'fecha'"></app-required>
           <input type="date" formControlName="fecha">
+          <small class="required" *ngIf="form.controls['fecha']?.invalid && form.controls['fecha']?.touched">
+            Debe seleccionar una fecha
+          </small>
         </div>
         <div class="form__input-wrapper--col">
-          <label for="hora">Hora</label>
+          <app-required [label]="'Hora'" [control]="'hora'"></app-required>
           <input type="time" formControlName="hora">
+          <small class="required" *ngIf="form.controls['hora']?.invalid && form.controls['hora']?.touched">
+            Debe seleccionar un horario
+          </small>
         </div>
         <div class="form__input-wrapper--col">
           <label for="lugar">Establecimiento de Salud</label>
@@ -86,7 +98,7 @@
           ></app-switcher>
           @if (validado) {
             <div class="form__input-wrapper--col">
-              <label for="validador">Miembro equipo de Salud</label>
+              <app-required [label]="'Miembro equipo de Salud'" [control]="'validador'"></app-required>
               <input type="text" formControlName="validador">
             </div>
           }
@@ -127,6 +139,7 @@
       <div class="panel__footer--right">
         @if (!registroId) {
           <app-button
+          [type]="'button'"
           size="xs"
           [severity]="'primary'"
           [variant]="'link'"

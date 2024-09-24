@@ -1,65 +1,99 @@
 <section id="signIn" class="page__body">
-  <main class="page__panel--main">
-    <img class="img--hero" src="./assets/img/login__bg--desktop.jpg">
-  </main>
-  <aside class="page__panel--sidebar">
-    <img src="./assets/img/shape__circle--quarter.svg" alt="" class="shape__circle--quarter">
-      <form type="flex" [formGroup]="form" (ngSubmit)="logIn()">
-          <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
-          <app-label
-          size="md"
-          [prefix]="'Ingreso'"
-          [label]="'Bienvenido'"
-          subtitle="Aquí comienza tu historia de Salud"
-          [direction]="'column'"
-        ></app-label>
+  <span class="page__bg--overlay"></span>
+  <form class="page__panel--sidebar" [formGroup]="form" (ngSubmit)="logIn()">
+    <section type="flex">
+      <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
+      <app-label
+      size="md"
+      [prefix]="'Ingreso'"
+      [label]="'Bienvenido'"
+      subtitle="Aquí comienza tu historia de Salud"
+      [direction]="'column'"
+    ></app-label>
+    </section>
+    <section type="flex">
+      <div class="form__input-wrapper--col">
+          <app-required [label]="'Email'" [control]="'email'"></app-required>
+          <input type="email" formControlName="email" />
+          <small class="required" *ngIf="isEmailValid as messsage">{{ messsage }}</small>
+      </div>
+      <div class="form__input-wrapper--row">
         <div class="form__input-wrapper--col">
-          <label>Email</label>
-            <input type="email" formControlName="email" />
-            <small *ngIf="isEmailValid as messsage">{{ messsage }}</small>
-        </div>
-        <div class="form__input-wrapper--col">
-          <label>Enter your password</label>
+          <app-required [label]="'Contraseña'" [control]="'password'"></app-required>
           <input
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
           />
-          <app-button
-            size="xs"
-            [severity]="'info'"
-            [variant]="'link'"
-            [icon]="'eye'"
-            [direction]="'row'"
-            [label]="'Editar'"
-            (click)="hide = !hide"
-          >
-        </app-button>
-          <i>{{ hide ? "Ocultar contraseña" : "Mostrar contraseña" }}</i>
-          <small>Campo requerido</small>
+          <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
+            La contraseña es obligatoria
+          </small>
         </div>
-    
-        <footer class="panel__footer">
+            <app-button
+            size="sm"
+            [severity]="'primary'"
+            [variant]="'outline'"
+            [icon]="'eye'"
+            [direction]="'none'"
+            (click)="hide = !hide"
+            >
+          </app-button>
+      </div>
+      <app-button
+      size="xxs"
+      [severity]="'secondary'"
+      [variant]="'link'"
+      [icon]="'key'"
+      [direction]="'row'"
+      [label]="'Recuperar contraseña'"
+      [disabled]="true"
+      ></app-button>
+    </section>
+      <footer class="panel__footer">
           <app-button
-            size="xs"
-            [severity]="'info'"
-            [variant]="'fill'"
-            [icon]="'user'"
+            size="xxs"
+            [severity]="'primary'"
+            [variant]="'link'"
+            [icon]="'user-plus'"
             [direction]="'row'"
-            [label]="'Registrarme'"
+            [label]="'Registrarse'"
             [path]="'registrarse'"
             ></app-button>
-
             <app-button
             severity="success"
             type="submit"
-            variant="fab"
+            variant="fill"
             [bottom]="'24px'"
             [right]="'24px'"
-            [direction]="'column'"
-            [label]="'Ingresar'"
-            size="sm">
+            [direction]="'row'"
+            icon="user"
+            [label]="'Acceder'"
+            size="xxs"
+            [disabled]="form.invalid"
+            >
           </app-button>
-        </footer>
-      </form>
-  </aside>
+    </footer>
+
+  </form>
+    <!-- Notificación -->
+     @if (errorMessage) {
+       <app-card
+           size="lg"
+           direction="row"
+           [variant]="'fab'"
+           bottom="20px"
+           left="calc(50vw - 180px)"
+           [severity]="errorMessage ? 'danger' : 'success'"
+           [closable]="hide"
+         >
+           <app-label
+             size="xxs"
+             [label]="errorMessage ? 'No se ha podido autenticar el usuario' : 'El usuario ha sido creado exitosamente'"
+             [subtitle]="errorMessage ? errorMessage : successMessage"
+             [icon]="errorMessage ? 'alert-circle' : 'info-circle'"
+             variant="outline"
+             direction="row"
+             severity="danger"
+           ></app-label>
+       </app-card>
+     }
 </section>

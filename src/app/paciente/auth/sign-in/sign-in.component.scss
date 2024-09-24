@@ -1,49 +1,139 @@
-#signIn, #signUp {
-    --box-shadow: -2px 0 4px var(--shadow);
-    --page__body--height: 100vh;
+// Mover a mixins
+@mixin baseFlexWrap {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: var(--panel__gap--row);
+}
+
+@mixin baseFlexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#signIn {
+--box-shadow: -2px 0 4px var(--shadow);
+--page__body--height: 100vh;
+
+position: relative;
+height: 100vh;
+width: 100vw;
+padding: 2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+box-sizing: border-box;
+
+--page__bg--img: url('./../../../../assets/img/login__bg--desktop.jpg');
+background-image: var(--page__bg--img);
+background-position: center;
+background-attachment: fixed;
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+
+    .page__panel--sidebar {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 4rem 2.5rem 0 2.5rem;
+        box-shadow: var(--box-shadow);
+        border-radius: var(--panel__border--radius);
+        box-sizing: border-box;
+        height: 84vh;
+        z-index: 1;
+        background-color: white;
+        row-gap: var(--wrapper__gap--row);
+        
+        .panel__img--center {
+            align-self: center;
+        }
+
+        .panel__footer {
+            --panel__gap: auto;
+            column-gap: var(--panel__gap);
+        }
+    }
+
+}
+
+// Sign-up
+#signUp {
+    --page__bg--img: url('./../../../../assets/img/login__bg--signup.jpg');
+    background-image: var(--page__bg--img);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
+
+    // @extend %baseFlexCenter;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: var(--panel__gap--row);
+
     height: 100vh;
     width: 100vw;
 
-    .page__body--bg {
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        object-fit: cover;
-        filter: blur(5px) grayscale(75%);
-    }
-
     .page__panel--float {
-        position: absolute;
-        left: 30%;
-        top: 2rem;
-        width: var(--panel__width--sidebar);
+        --panel__padding: 48px;
+        --panel__width: 72vw;
+        --panel__height: 80vh;
+    
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+        grid-template-rows: 60px auto auto;
+        grid-auto-flow: row dense;
+        row-gap: var(--panel__gap--row);
+        column-gap: var(--panel__gap);
+        z-index: 1;
+        width: var(--panel__width);
         height: fit-content;
-        padding: var(--panel__padding);
+        max-height: var(--panel__height);
+        padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
         background-color: white;
         overflow-y: scroll;
+        overflow-x: hidden;
         box-shadow: var(--box-shadow);
-        z-index: 1;
-    }
+        border-radius: var(--panel__border--radius);
 
-    // Mover a archivo _img.scss
-    .img--hero {
-        flex: 1;
-        height: 100%;
-        object-fit: cover;
-    }
+        .panel__inner--left {
+            display: flex;
+            flex-direction: column;
+            height: min-content;
+            order: 0;
+        }
+        .panel__prefooter {
+            order: 2;
 
-    .panel__img--center {
-        align-self: center;
-    }
+            .footer__text--sm {
+                font-size: var(--footer__text--sm);
+            }
+        }
 
-    .shape__circle--quarter {
-        width: 219px; // Variables | procurar proporción
-        height: 198px;
-        // background-image: './assets/img/shape__circle--quarter.svg';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        z-index: 2;
+        .panel__inner--right {
+            grid-row: span 3;
+        }
+
+        footer.panel__footer {
+            grid-column: 1 / -1;
+            grid-row: 6;
+        }
     }
 }
+
+.page__bg--overlay {
+    background-color: var(--primary);
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    // filter: grayscale(0) blur(100px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
