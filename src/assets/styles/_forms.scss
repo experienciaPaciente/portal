@@ -105,6 +105,12 @@ section,aside, div, header {
       --input__padding: .5rem;
       --input__border--radius: 4px;
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+      opacity: 0.5;
+    }
   }
 
   select {

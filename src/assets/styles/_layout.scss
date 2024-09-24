@@ -87,33 +87,6 @@
           box-sizing: border-box;
           row-gap: var(--wrapper__gap--row);
 
-          // Dark mode | Scan page
-          &--center {
-            --label__prefix--color: var(--secondary);
-            --label__title--color: white;
-            --label__subtitle--color: white;
-            --footer__bg--color: var(--primaryDarker);
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            width: 100vw;
-            height: 100vh;
-            padding: var(--panel__padding);
-            box-sizing: border-box;
-            row-gap: var(--wrapper__gap--row);
-            background-color: var(--neutral);
-  
-            .inner__wrapper--qr {
-              height: 200px;
-              width: 200px;
-              background-color: gray;
-              outline: solid 1px white;
-              outline-offset: 4px;
-            }
-          }
-
           .panel__inner--main {
             flex: 1 1 320px;
             display: flex;

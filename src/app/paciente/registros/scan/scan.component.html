@@ -4,12 +4,19 @@
             size="md"
             [label]="'Scanea el QR
             de la consulta'"
-            [prefix]="'Hola Claudio'"
+            [prefix]="'Autoregistro'"
             severity="neutral"
+            [subtitle]="'Muestra el QR a la camara para obtener su contenido.'"
             direction="column">
         </app-label>
     </header>
     @if (noPermissions) {
+        <!-- <canvas id="qrHolder" width="200" height="200" style="border:1px solid grey"></canvas> -->
+        <div class="qr-scanner">
+            <div class="qr-scanner__overlay"></div>
+            <div class="qr-scanner__line"></div>
+        </div>
+          
         <app-badge severity="danger" label="Cámara no habilitada" size="xs"></app-badge>
     }
     @if (!noPermissions) {
@@ -26,28 +33,30 @@
         <app-label
         size="sm"
         [label]="'Enfoca'"
-        [subtitle]="'Pronto te reenviaremos al detalle de la consulta.'"
+        [subtitle]="isMobile ? 'Te redireccionaremos al detalle de la consulta.' : 'El contenido del QR se autocompletará en la descripción del registro'"
         [icon]="'hand'"
         severity="neutral"
         direction="column">
         </app-label>
     <!-- Crear componente Footer -->
-    <footer class="panel__footer">
-        <app-button
-            size="xs"
-            severity="danger"
-            [variant]="'outline'"
-            [direction]="'row'"
-            [icon]="'close'"
-            [label]="'Cancelar'"
-            ></app-button>
-            <app-button
-            size="xs"
-            severity="success"
-            [variant]="'fill'"
-            [direction]="'row'"
-            [icon]="'code'"
-            [label]="'Scanear'"
-        ></app-button>
-    </footer>
+     @if (isMobile) {
+         <footer class="panel__footer">
+             <app-button
+                 size="xs"
+                 severity="danger"
+                 [variant]="'outline'"
+                 [direction]="'row'"
+                 [icon]="'close'"
+                 [label]="'Cancelar'"
+                 ></app-button>
+                 <app-button
+                 size="xs"
+                 severity="success"
+                 [variant]="'fill'"
+                 [direction]="'row'"
+                 [icon]="'code'"
+                 [label]="'Scanear'"
+             ></app-button>
+         </footer>
+     }
 </section>
