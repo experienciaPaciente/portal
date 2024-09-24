@@ -157,7 +157,7 @@
                 row-gap: var(--wrapper__gap--row);
 
                 &.panel__qr--wrapper {
-                  padding: var(--wrapper__gap);
+                  padding: var(--card__padding);
                   border: solid 1px var(--neutral);
                   border-radius: var(--card__border--radius);
 

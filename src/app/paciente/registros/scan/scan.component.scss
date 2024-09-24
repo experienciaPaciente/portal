@@ -1,79 +1,79 @@
 .panel__main--center {
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    // height: 100;
-    padding: var(--panel__padding);
+    padding: var(--card__padding) var(--card__padding) 24px var(--card__padding);
     box-sizing: border-box;
     row-gap: var(--wrapper__gap--row);
     background-color: white;
+    border: solid 1px var(--neutral);
+    border-radius: var(--card__border--radius);
 
-    .inner__wrapper--qr {
-        height: 200px;
-        width: 200px;
-        background-color: gray;
-        outline: solid 1px white;
-        outline-offset: 4px;
-    }
+    // QR Styles
+    --qr__border: solid 1px var(--secondary);
+    --qr__background: white;
+    --qr__line-color: var(--secondary);
+    --qr__glow-color: var(--secondaryLighter);
+    --qr__animation-duration: 2.5s;
+    --qr__line-height: 4px;
 
-// QR Styles
---qr-scanner-border: 2px solid #333;
---qr-background: lightgray;
---scanner-line-color: #6CBCFC;
---scanner-glow-color: #6CBCFC;
---scanner-animation-duration: 2s;
---scanner-line-height: 4px;
+    .qr__wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 220px;
+        height: 160px;
+        max-height: 220px;
+        background-color: var(--qr__background);
+        overflow: hidden;
+        outline: var(--qr__border);
+        outline-offset: 8px;
 
-.qr-scanner {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border: var(--qr-scanner-border);
-    background: var(--qr-background); /* Overlay effect */
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .qr-scanner__line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--scanner-line-height);
-    background-color: var(--scanner-line-color); /* Line color */
-    animation: qr-scan var(--scanner-animation-duration) infinite ease-in-out;
-    box-shadow: 0 0 10px var(--scanner-glow-color), 0 0 20px var(--scanner-glow-color); /* Glowing effect */
-  }
-  
-  .qr-scanner__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0; /* Start with no height */
-    background-color: var(--scanner-line-color);
-    mix-blend-mode: multiply; /* Apply blend effect */
-    animation: qr-overlay-grow var(--scanner-animation-duration) infinite ease-in-out;
-  }
-  
-  @keyframes qr-scan {
-    0% {
-      top: 0;
+        .qr__line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--qr__line-height);
+            background-color: var(--qr__line-color);
+            animation: qr-scan var(--qr__animation-duration) infinite ease-in-out;
+            box-shadow: 0 0 10px var(--qr__glow-color), 0 0 20px var(--qr__glow-color);
+        }
+        
+        .qr__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: var(--qr__line-color);
+            mix-blend-mode: multiply;
+            animation: qr-overlay-grow var(--qr__animation-duration) infinite ease-in-out;
+        }
     }
-    100% {
-      top: 100%;
+    
+    @keyframes qr-scan {
+        0% {
+            top: 0;
+        }
+        100% {
+            top: 100%;
+        }
+        0% {
+            top: 0;
+        }
     }
-  }
-  
-  @keyframes qr-overlay-grow {
-    0% {
-      height: 0; /* Starts with no height */
+    
+    @keyframes qr-overlay-grow {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 100%;
+        }
+        0% {
+            height: 0;
+        }
     }
-    100% {
-      height: 100%; /* Fills the area as the line scans */
-    }
-  }
 }

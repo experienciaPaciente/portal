@@ -43,6 +43,7 @@ export class ScanComponent {
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;  
   isMobile!: boolean;
+  qrRegistro: boolean = true;
 
   constructor(
     private router: Router,
@@ -99,4 +100,8 @@ export class ScanComponent {
   //   this.isScanView = url.includes('/scan');
   //   this.isRegistroView = url.includes('/register');
   // }
+
+  cancel() {
+    this.qrRegistro = !this.qrRegistro;
+  }
 }
