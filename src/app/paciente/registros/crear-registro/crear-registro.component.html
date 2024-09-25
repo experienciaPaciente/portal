@@ -9,8 +9,11 @@
        direction="row"
      ></app-label>
      <!-- Integrar con validators -->
-       <app-badge severity="warning" label="Tienes cambios sin guardar" size="md"></app-badge>
-       <app-badge severity="success" label="Registro guardado" size="md"></app-badge>
+      @if (form.invalid) {
+        <app-badge severity="warning" label="Campos requeridos sin completar" size="md"></app-badge>
+      } @else if (!form.invalid) {
+        <app-badge severity="success" label="Campos requeridos completos" size="md"></app-badge>
+      }
    </header>
   <section class="panel__inner--main">
     <div class="form__input-wrapper--col">
@@ -23,14 +26,13 @@
 
     @if (!qrResultString) {
     <div class="form__input-wrapper--col">
-      <label for="descripcion"
-        >Description (optional)</label>
+      <app-required [label]="'Descripción'" [control]="'descripcion'"></app-required>
         <textarea
           rows="5"
           type="text"
           id="descripcion"
-          class=""
-          placeholder="Your description goes here"
+          [class]="qrRegister ? 'disabled' : ''"
+          placeholder="Describa su registro de Salud"
           formControlName="descripcion"
         ></textarea>
       </div>
@@ -38,7 +40,7 @@
 
     @if (qrResultString) {
       <div class="form__input-wrapper--col">
-        <label for="paciente">Registro de esta consulta</label>
+        <app-required [label]="'Registro obtenido del QR'" [control]="'paciente'"></app-required>
         <textarea 
           id="paciente"
           formControlName="paciente">
@@ -67,9 +69,11 @@
         <input type="file" id="adjuntos" formControlName="adjuntos" (change)="uploadFile($event)">
       </div>
     </section>
-
-    @if (!qrRegister) {
+    
     <section class="panel__inner--aside">
+        @if (qrRegister) {
+          <app-scan></app-scan>
+        }
         <div class="form__input-wrapper--col">
           <app-required [label]="'Fecha'" [control]="'fecha'"></app-required>
           <input type="date" formControlName="fecha">
@@ -103,13 +107,6 @@
             </div>
           }
         </section>
-      }
-
-      @if (qrRegister) {
-        <section class="panel__inner--aside">
-          <app-scan></app-scan>
-        </section>
-      }
 
        <!-- Desacoplar footer en componente -->
     <footer class="panel__footer">
@@ -156,8 +153,9 @@
         [label]="'registroId' ? 'Guardar cambios' : 'Registrar'"
         [direction]="'row'"
         [icon]="'registroId' ? 'floppy-disk' : 'file-lines'"
-        [disabled]="false"
+        [disabled]="form.invalid"
         size="xs"
+        [path]="'item/' + registroId"
       >
       </app-button>
       </div>

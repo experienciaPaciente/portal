@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -20,6 +20,7 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { ScanComponent } from '../scan/scan.component';
 import { Location } from '@angular/common';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
+import { CommonModule } from '@angular/common';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -49,7 +50,8 @@ export interface RegistroForm {
     LabelComponent,
     SwitcherComponent,
     ScanComponent,
-    RequiredComponent
+    RequiredComponent,
+    CommonModule
   ],
 })
 
@@ -208,17 +210,17 @@ export class createRegistroComponent implements OnInit{
   private auth: Auth = inject(Auth);
 
   form = this._formBuilder.group<RegistroForm>({
-    paciente: this._formBuilder.control('', Validators.required),
+    paciente: this._formBuilder.control(''),
     titulo: this._formBuilder.control('', Validators.required),
     descripcion: this._formBuilder.control('', Validators.required),
     categoria: this._formBuilder.control('', Validators.required),
-    estado: this._formBuilder.control('', Validators.required),
+    estado: this._formBuilder.control(''),
     validado: this._formBuilder.control(false),
     lugar: this._formBuilder.control('', Validators.required),
-    validador: this._formBuilder.control('', Validators.required),
+    validador: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date, Validators.required),
     hora: this._formBuilder.control('', Validators.required),
-    adjuntos: this._formBuilder.control<string[]>([], Validators.required),
+    adjuntos: this._formBuilder.control<string[]>([]),
   });
 
   getPacienteControl() {

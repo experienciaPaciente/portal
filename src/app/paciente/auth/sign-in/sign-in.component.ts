@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
@@ -24,11 +24,11 @@ interface LogInForm {
   imports: [
     ReactiveFormsModule,
     RouterModule,
-    NgIf,
     LabelComponent,
     ButtonComponent,
     RequiredComponent,
-    CardComponent
+    CardComponent,
+    CommonModule
   ],
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',

@@ -31,7 +31,7 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 export default class HomeComponent {
   title = 'portal-paciente';
   imgSrc = './assets/img/ep__marca--row.svg';
-  isMobile! : boolean;
+  isMobile!: boolean;
   isDetailView: boolean = false;
   isRegistroView: boolean = false;
   isScanView  : boolean = false;

@@ -1,0 +1,79 @@
+.panel__main--center {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: var(--card__padding) var(--card__padding) 24px var(--card__padding);
+    box-sizing: border-box;
+    row-gap: var(--wrapper__gap--row);
+    background-color: white;
+    border: solid 1px var(--neutral);
+    border-radius: var(--card__border--radius);
+
+    // QR Styles
+    --qr__border: solid 1px var(--secondary);
+    --qr__background: white;
+    --qr__line-color: var(--secondary);
+    --qr__glow-color: var(--secondaryLighter);
+    --qr__animation-duration: 2.5s;
+    --qr__line-height: 4px;
+
+    .qr__wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 220px;
+        height: 160px;
+        max-height: 220px;
+        background-color: var(--qr__background);
+        overflow: hidden;
+        outline: var(--qr__border);
+        outline-offset: 8px;
+
+        .qr__line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--qr__line-height);
+            background-color: var(--qr__line-color);
+            animation: qr-scan var(--qr__animation-duration) infinite ease-in-out;
+            box-shadow: 0 0 10px var(--qr__glow-color), 0 0 20px var(--qr__glow-color);
+        }
+        
+        .qr__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: var(--qr__line-color);
+            mix-blend-mode: multiply;
+            animation: qr-overlay-grow var(--qr__animation-duration) infinite ease-in-out;
+        }
+    }
+    
+    @keyframes qr-scan {
+        0% {
+            top: 0;
+        }
+        100% {
+            top: 100%;
+        }
+        0% {
+            top: 0;
+        }
+    }
+    
+    @keyframes qr-overlay-grow {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 100%;
+        }
+        0% {
+            height: 0;
+        }
+    }
+}

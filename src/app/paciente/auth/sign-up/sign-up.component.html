@@ -30,71 +30,71 @@
               </small>
             </div>
             <div class="form__input-wrapper--col">
-              <label class="required" for="email">Email</app-required>
+              <label class="required" for="email">Email</label>
               <input formControlName="email" />
               <small class="required" *ngIf="form.controls['email']?.invalid && form.controls['email']?.touched">
                 {{ form.controls['email']?.errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
               </small>
             </div>
-            <section type="flex">
-              <span class="form__input-wrapper--row">
-                <div class="form__input-wrapper--row">
-                  <div class="form__input-wrapper--col">
-                    <app-required [label]="'Contraseña'" [control]="'password'"></app-required>
-                    <input
-                      [type]="hide ? 'password' : 'text'"
-                      formControlName="password"
-                    />
-                    <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
-                      La contraseña es obligatoria
-                    </small>
-                  </div>
-                    <app-button
-                    [type]="'button'"
-                    size="sm"
-                    [severity]="'primary'"
-                    [variant]="'outline'"
-                    [icon]="'eye'"
-                    [direction]="'none'"
-                    (click)="hide = !hide"
-                    >
-                  </app-button>
+          <section type="flex">
+            <span class="form__input-wrapper--row">
+              <div class="form__input-wrapper--row">
+                <div class="form__input-wrapper--col">
+                  <app-required [label]="'Contraseña'" [control]="'password'"></app-required>
+                  <input
+                    [type]="hide ? 'password' : 'text'"
+                    formControlName="password"
+                  />
+                  <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
+                    La contraseña es obligatoria
+                  </small>
                 </div>
-                <div class="form__input-wrapper--row">
-                  <div class="form__input-wrapper--col">
-                    <app-required [label]="'Repetir contraseña'" [control]="'confirmPassword'"></app-required>
-                    <input
-                      [type]="hide ? 'password' : 'text'"
-                      formControlName="confirmPassword"
-                      (input)="form.get('confirmPassword')?.updateValueAndValidity()"
-                    />
-                    <small class="required" *ngIf="passwordsDoNotMatch">
-                      Las contraseñas no coinciden
-                    </small>
-                  </div>
-                    <app-button
-                    [type]="'button'"
-                    size="sm"
-                    [severity]="'primary'"
-                    [variant]="'outline'"
-                    [icon]="'eye'"
-                    [direction]="'none'"
-                    (click)="hide = !hide"
-                    >
-                  </app-button>
+                  <app-button
+                  [type]="'button'"
+                  size="sm"
+                  [severity]="'primary'"
+                  [variant]="'outline'"
+                  [icon]="'eye'"
+                  [direction]="'none'"
+                  (click)="hide = !hide"
+                  >
+                </app-button>
+              </div>
+              <div class="form__input-wrapper--row">
+                <div class="form__input-wrapper--col">
+                  <app-required [label]="'Repetir contraseña'" [control]="'confirmPassword'"></app-required>
+                  <input
+                    [type]="hide ? 'password' : 'text'"
+                    formControlName="confirmPassword"
+                    (input)="form.get('confirmPassword')?.updateValueAndValidity()"
+                  />
+                  <small class="required" *ngIf="passwordsDoNotMatch">
+                    Las contraseñas no coinciden
+                  </small>
                 </div>
-              </span>
-              <article>
-                  <!-- Password help text -->
-                  <app-label
-                  [size]="'sm'"
-                  [prefix]="passwordHelpText"
-                  [direction]="'row'"
-                  [severity]="'neutral'"
-                  [icon]="'info-circle'" >
-                </app-label>
-              </article>
-            </section>
+                  <app-button
+                  [type]="'button'"
+                  size="sm"
+                  [severity]="'primary'"
+                  [variant]="'outline'"
+                  [icon]="'eye'"
+                  [direction]="'none'"
+                  (click)="hide = !hide"
+                  >
+                </app-button>
+              </div>
+            </span>
+            <article>
+                <!-- Password help text -->
+                <app-label
+                [size]="'sm'"
+                [prefix]="passwordHelpText"
+                [direction]="'row'"
+                [severity]="'neutral'"
+                [icon]="'info-circle'" >
+              </app-label>
+            </article>
+          </section>
         </div>
         </section>
         <!-- disclaimer -->

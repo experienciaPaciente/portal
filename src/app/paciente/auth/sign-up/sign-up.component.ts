@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   AbstractControl,
   ValidatorFn,
@@ -30,11 +30,11 @@ interface SignUpForm {
   imports: [
     ReactiveFormsModule,
     RouterModule,
-    NgIf,
     ButtonComponent,
     LabelComponent,
     RequiredComponent,
-    CardComponent
+    CardComponent,
+    CommonModule
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',

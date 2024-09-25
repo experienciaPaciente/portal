@@ -99,6 +99,7 @@ app-label {
         flex: 1;
         overflow: hidden;
         line-height: 1.5;
+        width: var(--label__width);
       }
     
       &__prefix {
@@ -115,11 +116,15 @@ app-label {
       &__subtitle {
         font-size: var(--label__subtitle--size);
         color: var(--label__subtitle--color);
-        text-overflow: ellipsis;
-        word-break: break-all;
+        // text-overflow: ellipsis;
+        // word-break: break-all;
         width: -webkit-fill-available; // reveer
         overflow: hidden;
-        text-wrap: nowrap;
+        // text-wrap: nowrap;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
       }
     }
 }

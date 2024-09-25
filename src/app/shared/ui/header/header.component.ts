@@ -44,11 +44,11 @@ export class HeaderComponent implements OnInit {
       { label: 'Nuevo registro', icon: 'user', path: '/registrar', disabled: false },
       { label: 'Gestionar permisos', icon: 'user', path: '/path-to-item2', disabled: true },
       { label: 'Delegar cuenta', icon: 'user', path: '/path-to-item2', disabled: true },
-      { label: 'Cerrar sesión', icon: 'user', path: '/auth/sign-in', disabled: false }
+      { label: 'Cerrar sesión', icon: 'user', disabled: false, callback: () => this.openModal() }
     ]
   }
 
-  dropdownPosition = { top: '45px', left: '-185px' };
+  dropdownPosition = { top: '45px', left: '-165px' };
 
   // Listen for window resize events
   @HostListener('window:resize', ['$event'])
@@ -78,7 +78,6 @@ export class HeaderComponent implements OnInit {
   // Open the modal for confirmation
   openModal(): void {
     this.isModalOpen = !this.isModalOpen;
-    console.log(this.isModalOpen);
   }
 
   onConfirm() {

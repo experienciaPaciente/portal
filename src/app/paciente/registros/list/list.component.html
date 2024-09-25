@@ -11,7 +11,7 @@
           <input type="text" placeholder="Busca por título del registro" class="input__size--sm"
           [formControl]="searchControl">
         </span>
-        <app-button type="button" [direction]="'none'" icon="chevron-down" size="xs" variant="outline" severity="primary" direction="none" (clickEvent)="showMedCategories($event)"></app-button>
+        <app-button type="button" [direction]="'none'" [icon]="medCategories ? 'chevron-up' : 'chevron-down'" size="xs" [variant]="'outline'" severity="primary" direction="none" (clickEvent)="showMedCategories($event)"></app-button>
         <app-dropdown
         [items]="getRegistroOptions()"
         [position]="splitButtonPosition"
