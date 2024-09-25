@@ -306,7 +306,10 @@ app-card {
     &--md {
       --card__padding: 0 0 0 12px;
       --card__width: 100%;
+      --card__height: 100%;
+
       width: var(--card__width);
+      height: var(--card__height);
 
       .label__content {
         row-gap: 4px;

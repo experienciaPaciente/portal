@@ -65,9 +65,25 @@
         </small>
       </div>
       <div class="form__input-wrapper--col">
-        <label for="adjuntos">Adjuntar archivo</label>
-        <input type="file" id="adjuntos" formControlName="adjuntos" (change)="uploadFile($event)">
+        <label for="adjuntos">Adjuntar archivos</label>
+        <input 
+          type="file" 
+          id="adjuntos" 
+          formControlName="adjuntos" 
+          (change)="uploadFiles($event)" 
+          multiple>
       </div>
+      
+      <div>
+        <h3>Archivos Subidos:</h3>
+        <div class="uploaded-files">
+          <figure *ngFor="let file of form.get('adjuntos')?.value; let i = index">
+            <img [src]="file" alt="Uploaded Image" />
+            <figcaption>{{ file }}</figcaption>
+            <button (click)="removeFile(i)">Remove</button>
+          </figure>
+        </div>
+      </div>     
     </section>
     
     <section class="panel__inner--aside">

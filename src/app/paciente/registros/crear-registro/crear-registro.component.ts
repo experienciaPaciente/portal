@@ -74,46 +74,6 @@ export class createRegistroComponent implements OnInit{
     private location: Location
   ) {}
 
-  // Uploads
-  uploadFile(event: any) {
-    const file = event.target.files[0];
-    if (!file) return; 
-  
-    const filePath = `images/${Date.now()}_${file.name}`;
-    const storageRef = ref(this.storage, filePath);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-  
-    uploadTask.on('state_changed', {
-      next: (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      },
-      error: (error) => console.error('Upload error:', error),
-      complete: async () => {
-        try {
-          const downloadURL = await getDownloadURL(storageRef);
-          this.saveImageMetadata(downloadURL, filePath);
-          const currentAdjuntos = this.form.get('adjuntos')?.value || [];
-          this.form.get('adjuntos')?.setValue([...currentAdjuntos, downloadURL]);
-          event.target.value = ''; // This is allowed
-
-        } catch (error) {
-          console.error('Error getting download URL:', error);
-        }
-      }
-    });
-  }  
-
-  // Reveer uso
-  async saveImageMetadata(downloadURL: string, fileName: string) {
-    const imagesCollection = collection(this.firestore, 'images');
-    await addDoc(imagesCollection, {
-      url: downloadURL,
-      name: fileName,
-      uploadedAt: new Date()
-    });
-  }
-
   ngOnInit() {
     this.registroId = this._activatedRoute.snapshot.paramMap.get('id');
     
@@ -143,6 +103,7 @@ export class createRegistroComponent implements OnInit{
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.form.get('adjuntos')?.value.forEach(url => URL.revokeObjectURL(url));
   }
 
   onTitleChange() {
@@ -336,4 +297,82 @@ export class createRegistroComponent implements OnInit{
     }
     this.goBack();
   }
+
+  // Uploads
+  uploadFiles(event: Event) {
+    const input = event.target as HTMLInputElement; 
+    const files = input.files; 
+    if (!files || files.length === 0) return; 
+  
+    const fileArray = Array.from(files);
+  
+    const uploadPromises = fileArray.map((file: File) => {
+      const filePath = `images/${Date.now()}_${file.name}`;
+      const storageRef = ref(this.storage, filePath);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+  
+      return new Promise<string>((resolve, reject) => { 
+        uploadTask.on(
+          'state_changed',
+          {
+            next: (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log('Upload is ' + progress + '% done');
+            },
+            error: (error) => {
+              console.error('Upload error:', error);
+              reject(error); 
+            },
+            complete: async () => {
+              try {
+                const downloadURL = await getDownloadURL(storageRef);
+                this.saveImageMetadata(downloadURL, filePath);
+                resolve(downloadURL); 
+              } catch (error) {
+                console.error('Error getting download URL:', error);
+                reject(error); 
+              }
+            }
+          }
+        );
+      });
+    });
+  
+    Promise.all(uploadPromises)
+      .then((downloadURLs) => {
+        const currentAdjuntos = this.form.get('adjuntos')?.value || [];
+        this.form.get('adjuntos')?.setValue([...currentAdjuntos, ...downloadURLs]);
+  
+        input.value = '';
+      })
+      .catch((error) => {
+        console.error('One or more uploads failed:', error);
+      });
+  }
+  
+  // Reveer uso
+  async saveImageMetadata(downloadURL: string, fileName: string) {
+    const imagesCollection = collection(this.firestore, 'images');
+    await addDoc(imagesCollection, {
+      url: downloadURL,
+      name: fileName,
+      uploadedAt: new Date()
+    });
+  }
+
+  removeFile(index: number): void {
+    const fileArray: string[] = this.form.get('adjuntos')?.value || [];
+    
+    fileArray.splice(index, 1);
+  
+    this.form.get('adjuntos')?.setValue(fileArray);
+  }
+  trackByFn(index: number, item: string): string {
+    return item; 
+  }
+
+  get adjuntosControl() {
+    return this.form.get('adjuntos');
+  }
+  
 }

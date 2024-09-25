@@ -33,11 +33,11 @@
         </app-label>
         <hr>
         <section role="navigation" class="img__wrapper--grid">
-            @for (file of registro.adjuntos; track trackByFn(file)) {
-            <figure class=""> 
-                <img [src]="file" alt="Uploaded Image">
-                <figcaption>{{ file }}</figcaption>
-            </figure>
+            @for (file of registro.adjuntos; track trackByFn) {
+                <figure>
+                    <img [src]="file" alt="Uploaded Image">
+                    <figcaption>{{ file }}</figcaption>
+                  </figure>
             }
         </section>
         }
