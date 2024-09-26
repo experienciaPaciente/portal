@@ -64,23 +64,40 @@
           La categoría es obligatoria
         </small>
       </div>
-      <div class="form__input-wrapper--col">
-        <label for="adjuntos">Adjuntar archivos</label>
-        <input 
-          type="file" 
-          id="adjuntos" 
-          formControlName="adjuntos" 
-          (change)="uploadFiles($event)" 
-          multiple>
-      </div>
-      
-      <div>
-        <h3>Archivos Subidos:</h3>
-        <div class="uploaded-files">
-          <figure *ngFor="let file of form.get('adjuntos')?.value; let i = index">
-            <img [src]="file" alt="Uploaded Image" />
-            <figcaption>{{ file }}</figcaption>
-            <button (click)="removeFile(i)">Remove</button>
+        <div class="form__input-wrapper--col">
+          <label for="adjuntos">Adjuntar archivos</label>
+          <input 
+            type="file" 
+            id="adjuntos" 
+            formControlName="adjuntos" 
+            (change)="uploadFiles($event)" 
+            multiple>
+        </div>
+        <div>
+      @if (uploadedImages.length > 0) {
+        <app-label
+        prefix="Adjuntos"
+        label="Mis archivos"
+        [size]="'sm'"
+        direction="row"
+          >
+      </app-label>
+      <hr>
+      }
+        <div class="img__wrapper--grid">
+          <figure *ngFor="let fileName of uploadedFileNames; let i = index">
+            <img [src]="fileName" alt="Uploaded Image" />
+            <figcaption>{{ fileName }}</figcaption>
+            <app-button
+            size="xxs"
+            [severity]="'danger'"
+            [variant]="'outline'"
+            [icon]="'trash-can'"
+            [direction]="'none'"
+            [label]="''"
+            [type]="'button'"
+            (clickEvent)="removeFile(i)"
+          ></app-button>
           </figure>
         </div>
       </div>     
@@ -105,7 +122,7 @@
           </small>
         </div>
         <div class="form__input-wrapper--col">
-          <label for="lugar">Establecimiento de Salud</label>
+          <app-required [label]="'Establecimiento'" [control]="'lugar'"></app-required>
           <input type="text" formControlName="lugar">
         </div>
           <app-switcher

@@ -111,16 +111,18 @@ app-label {
         color: var(--label__title--color);
         font-weight: 600;
         line-height: 1.25;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;      
+        text-wrap: nowrap;
       }
     
       &__subtitle {
         font-size: var(--label__subtitle--size);
         color: var(--label__subtitle--color);
-        // text-overflow: ellipsis;
-        // word-break: break-all;
-        width: -webkit-fill-available; // reveer
+        width: -webkit-fill-available;
         overflow: hidden;
-        // text-wrap: nowrap;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
@@ -137,7 +139,6 @@ app-label {
     align-items: center;
     justify-content: flex-start;
     column-gap: var(--wrapper__gap--col);
-    // margin-left: calc(var(--label__icon--size) * 2 + 0.5rem);
     width: 100%;
   }   
 

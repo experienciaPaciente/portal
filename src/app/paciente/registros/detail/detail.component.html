@@ -23,7 +23,7 @@
             {{ registro.descripcion }}
             {{ registro.paciente }}
         </article>
-        @if (registro.adjuntos.length > 0) {
+    @if (registro.adjuntos.length > 0) {
             <app-label
                 prefix="Adjuntos"
                 label="Mis archivos"
@@ -33,14 +33,26 @@
         </app-label>
         <hr>
         <section role="navigation" class="img__wrapper--grid">
-            @for (file of registro.adjuntos; track trackByFn) {
-                <figure>
-                    <img [src]="file" alt="Uploaded Image">
-                    <figcaption>{{ file }}</figcaption>
-                  </figure>
-            }
+            <figure *ngFor="let file of registro.adjuntos; trackBy: trackByFn" (click)="openModal(file)">
+                <img [src]="file" alt="Uploaded Image">
+                <figcaption>{{ file }}</figcaption>
+            </figure>
         </section>
+        @if (isModalOpen) {
+        <app-modal
+            [prefix]="'Previsualizar'"
+            [title]="selectedFile"
+            [subtitle]="'Modal Subtitle'"
+            icon="info-circle"
+            [img]="selectedFile"
+            [closeable]="true"
+            (closeModal)="isModalOpen = false"
+        >
+            <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
+            <app-button direction="none" size="sm" label="Editar" variant="fill" severity="success"></app-button>
+        </app-modal>
         }
+     }
     </div>
     @if (isMobile) {
         <hr>

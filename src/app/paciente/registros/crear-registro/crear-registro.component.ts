@@ -64,6 +64,8 @@ export class createRegistroComponent implements OnInit{
   registroId: string | null = null;
   registro?: Registro;
   hasChange: boolean = false;
+  uploadedImages: string[] = [];
+  uploadedFileNames: string[] = [];
 
   constructor(
     private QrService: QrService,
@@ -299,58 +301,36 @@ export class createRegistroComponent implements OnInit{
   }
 
   // Uploads
-  uploadFiles(event: Event) {
-    const input = event.target as HTMLInputElement; 
-    const files = input.files; 
-    if (!files || files.length === 0) return; 
-  
-    const fileArray = Array.from(files);
-  
-    const uploadPromises = fileArray.map((file: File) => {
+  uploadFiles(event: any) {
+    const files: FileList = event.target.files;
+    if (!files.length) return;
+
+    Array.from(files).forEach((file: File) => {
       const filePath = `images/${Date.now()}_${file.name}`;
       const storageRef = ref(this.storage, filePath);
       const uploadTask = uploadBytesResumable(storageRef, file);
-  
-      return new Promise<string>((resolve, reject) => { 
-        uploadTask.on(
-          'state_changed',
-          {
-            next: (snapshot) => {
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log('Upload is ' + progress + '% done');
-            },
-            error: (error) => {
-              console.error('Upload error:', error);
-              reject(error); 
-            },
-            complete: async () => {
-              try {
-                const downloadURL = await getDownloadURL(storageRef);
-                this.saveImageMetadata(downloadURL, filePath);
-                resolve(downloadURL); 
-              } catch (error) {
-                console.error('Error getting download URL:', error);
-                reject(error); 
-              }
-            }
+      this.uploadedFileNames.push(file.name);
+
+      uploadTask.on('state_changed', {
+        next: (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        },
+        error: (error) => console.error('Upload error:', error),
+        complete: async () => {
+          try {
+            const downloadURL = await getDownloadURL(storageRef);
+            this.uploadedImages.push(downloadURL);
+            this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
+            event.target.value = '';
+          } catch (error) {
+            console.error('Error getting download URL:', error);
           }
-        );
+        }
       });
     });
-  
-    Promise.all(uploadPromises)
-      .then((downloadURLs) => {
-        const currentAdjuntos = this.form.get('adjuntos')?.value || [];
-        this.form.get('adjuntos')?.setValue([...currentAdjuntos, ...downloadURLs]);
-  
-        input.value = '';
-      })
-      .catch((error) => {
-        console.error('One or more uploads failed:', error);
-      });
   }
-  
-  // Reveer uso
+
   async saveImageMetadata(downloadURL: string, fileName: string) {
     const imagesCollection = collection(this.firestore, 'images');
     await addDoc(imagesCollection, {
