@@ -40,10 +40,10 @@ export class HeaderComponent implements OnInit {
 
   getMenuItems(item: void): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
-      { label: 'Mi cuenta', icon: 'user', path: '/path-to-item1', disabled: false },
+      { label: 'Mi cuenta', icon: 'user', path: '/auth/sign-in', disabled: false },
       { label: 'Nuevo registro', icon: 'user', path: '/registrar', disabled: false },
-      { label: 'Gestionar permisos', icon: 'user', path: '/path-to-item2', disabled: true },
-      { label: 'Delegar cuenta', icon: 'user', path: '/path-to-item2', disabled: true },
+      { label: 'Gestionar permisos', icon: 'user', path: '/', disabled: true },
+      { label: 'Delegar cuenta', icon: 'user', path: '/', disabled: true },
       { label: 'Cerrar sesión', icon: 'user', disabled: false, callback: () => this.openModal() }
     ]
   }

@@ -31,68 +31,45 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 export default class HomeComponent {
   title = 'portal-paciente';
   imgSrc = './assets/img/ep__marca--row.svg';
-  isMobile!: boolean;
-  isDetailView: boolean = false;
-  isRegistroView: boolean = false;
-  isScanView  : boolean = false;
-  currentView: 'list' | 'detail' | 'register' | 'scan' = 'list';
+  isMobile: boolean = false;
+  currentView: 'list' | 'detail' | 'registrar' | 'scan' = 'list';
 
   constructor(private router: Router) {}
-
-  // Listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkIfMobile(event.target.innerWidth);
   }
 
   ngOnInit(): void {
-    
-  // Subscribe to routing events
-  this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
-      const url = event.url;
-      // Determine the current view based on the URL (works like an enum?)
-      if (url.includes('/item/')) {
-        this.currentView = 'detail';
-      } else if (url.includes('/registrar')) {
-        this.currentView = 'register';
-      } else if (url.includes('/scan')) {
-        this.currentView = 'scan';
-      } else {
-        this.currentView = 'list';
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.determineCurrentView(event.url);
       }
-    }
-  });
+    });
     this.checkIfMobile(window.innerWidth);
   }
 
   checkIfMobile(width: number): void {
     this.isMobile = width < 980;
-    this.updateViewState(this.router.url);
   }
 
-  shouldShowPanel(panel: 'list' | 'detail' | 'register' | 'scan'): boolean {
-
-    if (this.isMobile) {
-      return this.currentView === panel;
+  determineCurrentView(url: string): void {
+    if (url.includes('/item/')) {
+      this.currentView = 'detail';
+    } else if (url.includes('/registrar')) {
+      this.currentView = 'registrar';
+    } else if (url.includes('/scan')) {
+      this.currentView = 'scan';
+    } else {
+      this.currentView = 'list';
     }
-    return true;
   }
 
-  // Determines if the <main> panel should be shown
+  shouldShowPanel(panel: 'list' | 'detail' | 'registrar' | 'scan'): boolean {
+    return this.isMobile ? this.currentView === panel : true;
+  }
+
   shouldShowMainPanel(): boolean {
-    // On mobile, only show the main panel if it's not in the 'list' view
-    if (this.isMobile) {
-      return this.currentView !== 'list';
-    }
-    // On desktop, always show the main panel
-    return true;
-  }
-
-  // Checkear funcionamiento
-  updateViewState(url: string): void {
-    this.isDetailView = url.includes('/item/');
-    this.isScanView = url.includes('/scan');
-    this.isRegistroView = url.includes('/register');
+    return this.isMobile ? this.currentView !== 'list' : true;
   }
 }
