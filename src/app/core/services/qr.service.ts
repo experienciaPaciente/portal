@@ -10,6 +10,5 @@ export class QrService {
 
   setQRData(data: string): void {
     this.qrDataSubject.next(data);
-    console.log(data)
   }
 }

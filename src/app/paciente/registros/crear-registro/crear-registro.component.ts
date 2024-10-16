@@ -64,6 +64,8 @@ export class createRegistroComponent implements OnInit{
   registroId: string | null = null;
   registro?: Registro;
   hasChange: boolean = false;
+  uploadedImages: string[] = [];
+  uploadedFileNames: string[] = [];
 
   constructor(
     private QrService: QrService,
@@ -73,46 +75,6 @@ export class createRegistroComponent implements OnInit{
     private router: Router,
     private location: Location
   ) {}
-
-  // Uploads
-  uploadFile(event: any) {
-    const file = event.target.files[0];
-    if (!file) return; 
-  
-    const filePath = `images/${Date.now()}_${file.name}`;
-    const storageRef = ref(this.storage, filePath);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-  
-    uploadTask.on('state_changed', {
-      next: (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      },
-      error: (error) => console.error('Upload error:', error),
-      complete: async () => {
-        try {
-          const downloadURL = await getDownloadURL(storageRef);
-          this.saveImageMetadata(downloadURL, filePath);
-          const currentAdjuntos = this.form.get('adjuntos')?.value || [];
-          this.form.get('adjuntos')?.setValue([...currentAdjuntos, downloadURL]);
-          event.target.value = ''; // This is allowed
-
-        } catch (error) {
-          console.error('Error getting download URL:', error);
-        }
-      }
-    });
-  }  
-
-  // Reveer uso
-  async saveImageMetadata(downloadURL: string, fileName: string) {
-    const imagesCollection = collection(this.firestore, 'images');
-    await addDoc(imagesCollection, {
-      url: downloadURL,
-      name: fileName,
-      uploadedAt: new Date()
-    });
-  }
 
   ngOnInit() {
     this.registroId = this._activatedRoute.snapshot.paramMap.get('id');
@@ -143,6 +105,7 @@ export class createRegistroComponent implements OnInit{
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.form.get('adjuntos')?.value.forEach(url => URL.revokeObjectURL(url));
   }
 
   onTitleChange() {
@@ -322,7 +285,6 @@ export class createRegistroComponent implements OnInit{
   }
 
   goBack(): void {
-    console.log('Historial:', window.history.length);
     if (window.history.length > 1) {
       this.location.back();
     } else {
@@ -336,4 +298,59 @@ export class createRegistroComponent implements OnInit{
     }
     this.goBack();
   }
+
+  // Uploads
+  uploadFiles(event: any) {
+    const files: FileList = event.target.files;
+    if (!files.length) return;
+
+    Array.from(files).forEach((file: File) => {
+      const filePath = `images/${Date.now()}_${file.name}`;
+      const storageRef = ref(this.storage, filePath);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      this.uploadedFileNames.push(file.name);
+
+      uploadTask.on('state_changed', {
+        next: (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        error: (error) => console.error('Upload error:', error),
+        complete: async () => {
+          try {
+            const downloadURL = await getDownloadURL(storageRef);
+            this.uploadedImages.push(downloadURL);
+            this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
+            event.target.value = '';
+          } catch (error) {
+            console.error('Error getting download URL:', error);
+          }
+        }
+      });
+    });
+  }
+
+  async saveImageMetadata(downloadURL: string, fileName: string) {
+    const imagesCollection = collection(this.firestore, 'images');
+    await addDoc(imagesCollection, {
+      url: downloadURL,
+      name: fileName,
+      uploadedAt: new Date()
+    });
+  }
+
+  removeFile(index: number): void {
+    const fileArray: string[] = this.form.get('adjuntos')?.value || [];
+    
+    fileArray.splice(index, 1);
+  
+    this.form.get('adjuntos')?.setValue(fileArray);
+  }
+  trackByFn(index: number, item: string): string {
+    return item; 
+  }
+
+  get adjuntosControl() {
+    return this.form.get('adjuntos');
+  }
+  
 }

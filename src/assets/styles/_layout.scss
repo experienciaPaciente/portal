@@ -86,13 +86,14 @@
           padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
           box-sizing: border-box;
           row-gap: var(--wrapper__gap--row);
-
+          
           .panel__inner--main {
             flex: 1 1 320px;
             display: flex;
             flex-direction: column;
             row-gap: var(--panel__gap--row);
-  
+            position: relative;
+
             article.panel__text--article {
               --label__icon--size: 14px;
               --panel__font--size: 16px;
@@ -111,7 +112,7 @@
                 overflow: hidden;
 
                 &:hover {
-                  cursor: e-resize;
+                  cursor: move;
                   filter: drop-shadow(50%);
                 }
 

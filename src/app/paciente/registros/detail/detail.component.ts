@@ -6,8 +6,9 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
+import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
 
 @Component({
   selector: 'app-detail',
@@ -17,7 +18,9 @@ import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component
     ButtonComponent,
     LabelComponent,
     SwitcherComponent,
-    DropdownComponent
+    DropdownComponent,
+    ModalComponent,
+    CommonModule
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
@@ -30,6 +33,8 @@ export class DetailComponent {
   qrCodeUrl?: string;
   disabled = false;
   isMobile!: boolean;
+  isModalOpen: boolean = false;
+  selectedFile?: string;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Consulta general': { icon: 'user-md', color: '#FD5B71' },
@@ -120,7 +125,6 @@ export class DetailComponent {
   }
 
   goBack(): void {
-    console.log('Historial:', window.history.length);
     if (window.history.length > 1) {
       this.location.back();
     } else {
@@ -133,14 +137,17 @@ export class DetailComponent {
   }
 
   async navigateToDelete(item: Registro): Promise<void> {
-      console.log('emitting!');
     try {
       await this.registroService.deleteRegistro(item.id);
-      console.log('Registro deleted successfully');
      this.router.navigate(['/']);
     } catch (error) {
       console.error('Error deleting registro', error);
     }
+  }
+
+  openModal(file: string): void {
+    this.selectedFile = file;
+    this.isModalOpen = !this.isModalOpen;
   }
 
 }

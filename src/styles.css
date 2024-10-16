@@ -376,7 +376,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: 100%;
-  line-height: 1.15;
+  line-height: 1.25;
   margin: 0;
 }
 
@@ -808,6 +808,7 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   display: flex;
   flex-direction: column;
   row-gap: var(--panel__gap--row);
+  position: relative;
 }
 .page__body main.page__panel--main .panel__main .panel__inner--main article.panel__text--article {
   --label__icon--size: 14px;
@@ -826,7 +827,7 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   overflow: hidden;
 }
 .page__body main.page__panel--main .panel__main .panel__inner--main .img__wrapper--grid figure:hover {
-  cursor: e-resize;
+  cursor: move;
   filter: drop-shadow(50%);
 }
 .page__body main.page__panel--main .panel__main .panel__inner--main .img__wrapper--grid figure img {
@@ -1310,7 +1311,9 @@ app-card .card--sm {
 app-card .card--md {
   --card__padding: 0 0 0 12px;
   --card__width: 100%;
+  --card__height: 100%;
   width: var(--card__width);
+  height: var(--card__height);
 }
 app-card .card--md .label__content {
   row-gap: 4px;
@@ -1425,6 +1428,11 @@ app-label .label__title {
   color: var(--label__title--color);
   font-weight: 600;
   line-height: 1.25;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 app-label .label__subtitle {
   font-size: var(--label__subtitle--size);
@@ -1545,6 +1553,34 @@ app-label .label__subtitle {
 .switcher__label {
   font-size: var(--input__label--size);
   line-height: var(--input__label--lineHeight);
+}
+
+header#main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: var(--header__padding--vertical) var(--header__padding--row);
+  height: var(--header__height);
+  width: 100vw;
+  box-sizing: border-box;
+  box-shadow: var(--shadow);
+}
+header#main > section > img:hover {
+  filter: brightness(110%);
+  cursor: pointer;
+}
+header#main nav#header__menu--main {
+  display: none;
+}
+header#main .header__wrapper--right {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
 }
 
 nav.nav__wrapper--row {

@@ -136,10 +136,8 @@ export class ListComponent implements OnInit {
   }
 
   async navigateToDelete(item: Registro): Promise<void> {
-      console.log('emitting!');
     try {
       await this.registroService.deleteRegistro(item.id);
-      console.log('Registro deleted successfully');
      this.router.navigate(['/']);
     } catch (error) {
       console.error('Error deleting registro', error);

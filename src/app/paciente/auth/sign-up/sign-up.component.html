@@ -32,8 +32,8 @@
             <div class="form__input-wrapper--col">
               <label class="required" for="email">Email</label>
               <input formControlName="email" />
-              <small class="required" *ngIf="form.controls['email']?.invalid && form.controls['email']?.touched">
-                {{ form.controls['email']?.errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
+              <small class="required" *ngIf="form.controls['email'].invalid && form.controls['email']?.touched">
+                {{ form.controls['email'].errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
               </small>
             </div>
           <section type="flex">
