@@ -1,5 +1,3 @@
-@import './../../../../assets/styles/mixins';
-
 app-card {
   width: 100%;
 
@@ -9,7 +7,6 @@ app-card {
     justify-content: var(--card__wrapper--justify);
     align-items: var(--card__wrapper--align);
     background-color: transparent;
-    // box-shadow: var(--card__shadow);
     padding: var(--card__padding);
     gap: var(--card__gap);
     text-align: var(--card__text--align);
@@ -136,51 +133,6 @@ app-card {
         }
       }
     }
-
-    // Severity
-    &--success {
-    --card__border--color: var(--success);
-    border: solid 2px var(--card__border--color);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--success-light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--success);     
-        }
-      }
-    }
-      
-    &--warning {
-    --card__border--color: var(--warning);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--warning--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--card__border--color);     
-        }
-      }
-    }
-    
-    &--danger {
-    --card__border--color: var(--danger);
-    --label__icon--color: var(--danger);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--danger--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--card__border--color);     
-        }
-      }
-    }
   }
   
     &.card__outline {
@@ -247,50 +199,6 @@ app-card {
       &.card--selectable {
         &:hover {
           --card__bg--color: var(--neutral--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--card__border--color);     
-        }
-      }
-    }
-
-    // Severity
-    &--success {
-      --card__border--color: var(--success);
-      border: solid 2px var(--card__border--color);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--success-light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--success);     
-        }
-      }
-    }
-      
-    &--warning {
-      --card__border--color: var(--warning);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--warning--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--card__border--color);     
-        }
-      }
-    }
-      
-    &--danger {
-      --card__border--color: var(--danger);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--danger--light);
           background-color: var(--card__bg--color);
         }
         
@@ -374,79 +282,9 @@ app-card {
       }
       }
     }
-
-    // Severity
-    &--success {
-      --card__bg--color: var(--success);
-      --label__title--color: white;
-      --label__icon--color: lightgreen;
-      --label__subtitle--color: lightgreen;
-      --neutral: white;
-
-      background-color: var(--card__bg--color);
-      color: var(--label__icon--color);
-
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--success--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--success);     
-        }
-      }
-    }
-
-    &--warning {
-      // --card__border--color: var(--warning);
-      --card__bg--color: var(--warning);
-      --label__title--color: white;
-      --label__icon--color: var(--warning--light);
-      --label__subtitle--color: var(--warning--light);;
-      --neutral: white;
-
-      background-color: var(--card__bg--color);
-      color: var(--label__icon--color);
-
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--warning--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--card__border--color);     
-        }
-      }
-    }
-      
-    &--danger {
-      // --card__border--color: var(--danger);
-      --card__bg--color: var(--danger);
-      --label__title--color: white;
-      --label__icon--color: var(--danger--light);
-      --label__subtitle--color: var(--danger--light);;
-      --neutral: white;
-
-      background-color: var(--card__bg--color);
-      color: var(--label__icon--color);
-
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--danger--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          border: solid 2px var(--card__border--color);     
-        }
-      }
-    }
   }
     
   &.card--selected {
-    // box-shadow: inset 0 0 0 1px var(--card__border--color);
     border: solid 2px var(--card__border--color);     
     background-color: var(--card__bg--color);
   }
@@ -496,6 +334,5 @@ app-card {
     &__text-end {
       text-align: right;
     }
-
   }
 }
