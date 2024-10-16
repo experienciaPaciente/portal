@@ -125,7 +125,6 @@ export class DetailComponent {
   }
 
   goBack(): void {
-    console.log('Historial:', window.history.length);
     if (window.history.length > 1) {
       this.location.back();
     } else {
@@ -138,10 +137,8 @@ export class DetailComponent {
   }
 
   async navigateToDelete(item: Registro): Promise<void> {
-      console.log('emitting!');
     try {
       await this.registroService.deleteRegistro(item.id);
-      console.log('Registro deleted successfully');
      this.router.navigate(['/']);
     } catch (error) {
       console.error('Error deleting registro', error);

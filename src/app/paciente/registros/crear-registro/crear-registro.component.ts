@@ -285,7 +285,6 @@ export class createRegistroComponent implements OnInit{
   }
 
   goBack(): void {
-    console.log('Historial:', window.history.length);
     if (window.history.length > 1) {
       this.location.back();
     } else {
@@ -314,7 +313,6 @@ export class createRegistroComponent implements OnInit{
       uploadTask.on('state_changed', {
         next: (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
         },
         error: (error) => console.error('Upload error:', error),
         complete: async () => {

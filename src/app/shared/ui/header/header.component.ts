@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit {
       await this.authservice.logOut();
       this._router.navigateByUrl('/auth/sign-in');
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
   }  
 }

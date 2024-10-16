@@ -1555,6 +1555,34 @@ app-label .label__subtitle {
   line-height: var(--input__label--lineHeight);
 }
 
+header#main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: var(--header__padding--vertical) var(--header__padding--row);
+  height: var(--header__height);
+  width: 100vw;
+  box-sizing: border-box;
+  box-shadow: var(--shadow);
+}
+header#main > section > img:hover {
+  filter: brightness(110%);
+  cursor: pointer;
+}
+header#main nav#header__menu--main {
+  display: none;
+}
+header#main .header__wrapper--right {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
+}
+
 nav.nav__wrapper--row {
   display: flex;
   flex-direction: row;
