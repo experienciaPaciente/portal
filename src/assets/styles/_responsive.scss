@@ -55,4 +55,35 @@
         --form__gap--colum: 24px;
         }
     }
+
+    // Sign-in
+    #signIn {
+        padding: 2rem;
+        .page__panel--sidebar {
+            --panel__height--center: 84vh!important;
+            height: var(--panel__height--center);
+        }
+    }
+
+    #signUp {
+
+        .page__panel--float {
+            --panel__padding: 48px!important;
+            --panel__width: 72vw!important;
+            --panel__height: fit-content!important;
+            
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr))!important;
+
+            width: var(--panel__width);
+            height: var(--panel__height);
+            max-height: var(--panel__height);
+            border-radius: var(--panel__border--radius)!important;
+
+            box-sizing: unset!important;
+
+            .panel__img--center {
+                align-self: flex-start!important;
+            }
+        }
+    }
 }

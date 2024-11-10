@@ -32,16 +32,17 @@ background-repeat: no-repeat;
 background-size: cover;
 position: relative;
 
-    .page__panel--sidebar {
+.page__panel--sidebar {
+        --panel__height--center: 100vh;
         position: absolute;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 4rem 2.5rem 0 2.5rem;
+        padding: 6rem 2.5rem 0 2.5rem;
         box-shadow: var(--box-shadow);
         border-radius: var(--panel__border--radius);
         box-sizing: border-box;
-        height: 84vh;
+        height: var(--panel__height--center);
         z-index: 1;
         background-color: white;
         row-gap: var(--wrapper__gap--row);
@@ -73,32 +74,36 @@ position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: var(--panel__gap--row);
-
+    // row-gap: var(--panel__gap--row);
+    padding: 0;
     height: 100vh;
     width: 100vw;
 
     .page__panel--float {
-        --panel__padding: 48px;
-        --panel__width: 72vw;
-        --panel__height: 80vh;
+        --panel__padding: 36px;
+        --panel__width: 100vw;
+        --panel__height: 100vh;
     
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         grid-template-rows: 60px auto auto;
         grid-auto-flow: row dense;
         row-gap: var(--panel__gap--row);
         column-gap: var(--panel__gap);
         z-index: 1;
         width: var(--panel__width);
-        height: fit-content;
-        max-height: var(--panel__height);
+        height: var(--panel__height);
         padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
         background-color: white;
         overflow-y: scroll;
         overflow-x: hidden;
         box-shadow: var(--box-shadow);
-        border-radius: var(--panel__border--radius);
+        border-radius: 0;
+        box-sizing: border-box;
+
+        .panel__img--center {
+            align-self: center;
+        }
 
         .panel__inner--left {
             display: flex;

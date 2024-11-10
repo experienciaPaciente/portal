@@ -2,7 +2,8 @@
       <span class="page__bg--overlay"></span>
       <form class="page__panel--float" [formGroup]="form" (ngSubmit)="signUp()">
         <section class="panel__inner--left">
-          <img class="panel__img--center" width="240" src="./assets/img/ep__marca--row.svg" alt="logo experiencia paciente">
+          <img *ngIf="!isMobile" class="panel__img--center" width="240" src="./assets/img/ep__marca--row.svg" alt="logo experiencia paciente">
+          <img *ngIf="isMobile" class="panel__img--center" width="60" height="60" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
         </section>
         <!-- form -->
         <section type="flex" class="panel__inner--right">
@@ -11,7 +12,7 @@
           [prefix]="'Ingreso'"
           [label]="'Bienvenido'"
           subtitle="Aquí comienza tu historia de Salud"
-          [direction]="'row'"
+          [direction]="isMobile ? 'column' : 'row'"
         ></app-label>
         <hr>
         <div type="wrap">
@@ -84,8 +85,7 @@
                 </app-button>
               </div>
             </span>
-            <article>
-                <!-- Password help text -->
+            <!-- <article>
                 <app-label
                 [size]="'sm'"
                 [prefix]="passwordHelpText"
@@ -93,7 +93,7 @@
                 [severity]="'neutral'"
                 [icon]="'info-circle'" >
               </app-label>
-            </article>
+            </article> -->
           </section>
         </div>
         </section>
@@ -129,7 +129,7 @@
         </footer>
       </form>
       <!-- Notificación -->
-      <app-card
+      <!-- <app-card
         size="lg"
         direction="row"
         [variant]="'fab'"
@@ -148,5 +148,5 @@
           direction="row"
           severity="success"
         ></app-label>
-    </app-card>
+    </app-card> -->
   </main>

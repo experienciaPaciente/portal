@@ -611,7 +611,7 @@ form .form__input-wrapper--row,
 fieldset .form__input-wrapper--row,
 section .form__input-wrapper--row, aside .form__input-wrapper--row, div .form__input-wrapper--row, header .form__input-wrapper--row {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   width: 100%;
   height: fit-content;
   overflow-x: hidden;
@@ -953,6 +953,29 @@ section label, aside label, div label, header label {
 fieldset[type=flex],
 section[type=flex], aside[type=flex], div[type=flex], header[type=flex] {
     --form__gap--colum: 24px;
+  }
+
+  #signIn {
+    padding: 2rem;
+  }
+  #signIn .page__panel--sidebar {
+    --panel__height--center: 84vh!important;
+    height: var(--panel__height--center);
+  }
+
+  #signUp .page__panel--float {
+    --panel__padding: 48px!important;
+    --panel__width: 72vw!important;
+    --panel__height: fit-content!important;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)) !important;
+    width: var(--panel__width);
+    height: var(--panel__height);
+    max-height: var(--panel__height);
+    border-radius: var(--panel__border--radius) !important;
+    box-sizing: unset !important;
+  }
+  #signUp .page__panel--float .panel__img--center {
+    align-self: flex-start !important;
   }
 }
 app-badge [class^=badge__wrapper] {
@@ -1631,15 +1654,16 @@ nav.nav__wrapper .nav__list--row {
   position: relative;
 }
 #signIn .page__panel--sidebar {
+  --panel__height--center: 100vh;
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 4rem 2.5rem 0 2.5rem;
+  padding: 6rem 2.5rem 0 2.5rem;
   box-shadow: var(--box-shadow);
   border-radius: var(--panel__border--radius);
   box-sizing: border-box;
-  height: 84vh;
+  height: var(--panel__height--center);
   z-index: 1;
   background-color: white;
   row-gap: var(--wrapper__gap--row);
@@ -1664,30 +1688,33 @@ nav.nav__wrapper .nav__list--row {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: var(--panel__gap--row);
+  padding: 0;
   height: 100vh;
   width: 100vw;
 }
 #signUp .page__panel--float {
-  --panel__padding: 48px;
-  --panel__width: 72vw;
-  --panel__height: 80vh;
+  --panel__padding: 36px;
+  --panel__width: 100vw;
+  --panel__height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-template-rows: 60px auto auto;
   grid-auto-flow: row dense;
   row-gap: var(--panel__gap--row);
   column-gap: var(--panel__gap);
   z-index: 1;
   width: var(--panel__width);
-  height: fit-content;
-  max-height: var(--panel__height);
+  height: var(--panel__height);
   padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
   background-color: white;
   overflow-y: scroll;
   overflow-x: hidden;
   box-shadow: var(--box-shadow);
-  border-radius: var(--panel__border--radius);
+  border-radius: 0;
+  box-sizing: border-box;
+}
+#signUp .page__panel--float .panel__img--center {
+  align-self: center;
 }
 #signUp .page__panel--float .panel__inner--left {
   display: flex;

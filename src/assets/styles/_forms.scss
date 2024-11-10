@@ -47,7 +47,7 @@ section,aside, div, header {
 
   .form__input-wrapper--row {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     width: 100%;
     height: fit-content;
     overflow-x: hidden;
