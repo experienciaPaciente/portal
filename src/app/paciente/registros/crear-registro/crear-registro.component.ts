@@ -56,7 +56,7 @@ export interface RegistroForm {
 })
 
 export class createRegistroComponent implements OnInit{
-
+  isMobile = false;
   qrResultString: string | null = null;
   qrRegister!: boolean;
   private subscription: Subscription = new Subscription();
@@ -66,6 +66,10 @@ export class createRegistroComponent implements OnInit{
   hasChange: boolean = false;
   uploadedImages: string[] = [];
   uploadedFileNames: string[] = [];
+
+  checkIfMobile(width: number): void {
+    this.isMobile = width < 980; 
+  }
 
   constructor(
     private QrService: QrService,
@@ -77,6 +81,7 @@ export class createRegistroComponent implements OnInit{
   ) {}
 
   ngOnInit() {
+    this.checkIfMobile(window.innerWidth);
     this.registroId = this._activatedRoute.snapshot.paramMap.get('id');
     
     if (this.registroId) {

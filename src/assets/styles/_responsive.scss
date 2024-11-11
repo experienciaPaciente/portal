@@ -22,7 +22,7 @@
                   }
 
                 .panel__inner--aside {
-                    flex-direction: column!important;
+                    flex-direction: column;
                     row-gap: var(--panel__gap--row);
                     flex: 1;
                     height: 100%;
@@ -46,6 +46,13 @@
     form,
     fieldset,
     section,aside, div, header {
+        
+        input, textarea, select {
+            --input__font--size: 18px;
+            --input__padding: 12px 14px;
+            font-size: var(--input__font--size);
+            padding: var(--input__padding);
+        }
 
         label {
             --input__label--size: 16px;

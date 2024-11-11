@@ -26,6 +26,15 @@
         width: 100%;
       }
 
+      .panel__header--col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--panel__gap--row);
+        justify-content: space-between;
+        width: 100%;
+      }
+
       // Componente panel
       aside.page__panel--sidebar {
         height: var(--panel__height);
@@ -72,6 +81,7 @@
         overflow-y: scroll;
         position: relative;
         z-index: 0;
+        width: 100%;
 
         app-crear-registro, app-scan, app-detail {
           display: flex;
@@ -139,7 +149,7 @@
           // QR
           .panel__inner--aside {
             display: flex;
-            flex-direction: row-reverse;
+            flex-direction: column;
             row-gap: var(--panel__gap--row);
             flex: 1; 
             height: max-content;

@@ -53,6 +53,7 @@ section,aside, div, header {
     overflow-x: hidden;
     gap: var(--wrapper__gap);
     align-items: flex-end;
+    justify-content: center;
 
     >.form__input-wrapper--col {
       flex: 1 1 160px;
@@ -80,19 +81,16 @@ section,aside, div, header {
 
   label {
     --input__label--size: 14px;
-    // font-weight: var(--input__label--weight);
     font-size: var(--input__label--size);
     color: var(--input__label--color);
   }
   
   .required {
     color: var(--danger--dark);
-    // font-weight: bold;
   }
   
   input, textarea, select {
     font-size: var(--input__font--size);
-    // flex: 1;
     color: var(--input__font--color);
     padding: var(--input__padding);
     border: var(--input__border);
