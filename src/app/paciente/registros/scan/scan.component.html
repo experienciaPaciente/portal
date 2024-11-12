@@ -2,12 +2,12 @@
     <section class="panel__main--center">
         <div class="form__input-wrapper--row">
             <app-label
-            [size]="isMobile ? 'md' : 'sm'"
+            [size]="isMobile ? 'md' : 'lg'"
             [prefix]="'Autoregistro'"
             [label]="'Scan QR'"
             [subtitle]="isMobile ? 'Scanea el QR para obtener su contenido y autocompletar el formulario.' : ''"
             severity="neutral"
-            [direction]="isMobile ? 'column' : 'row'">
+            direction="column">
         </app-label>
         @if (!isMobile) {
             <app-badge severity="danger" label="Cámara" size="xs"></app-badge>
@@ -58,7 +58,6 @@
             </app-label>
         }
         <!-- Crear componente Footer -->
-         @if (isMobile) {
              <footer class="panel__footer">
                  <app-button
                      size="xxs"
@@ -77,6 +76,5 @@
                      [label]="'Registro manual'"
                  ></app-button>
              </footer>
-         }
     </section>
 }

@@ -1,7 +1,7 @@
  <form [formGroup]="form" class="panel__main" (ngSubmit)="createRegistro()">
-   <header class="panel__header--row">
+   <header class="{{ isMobile ? 'panel__header--col' : 'panel__header--row' }}">
        <app-label
-       size="lg"
+       [size]="isMobile ? 'md' : 'lg'"
        [label]="registroId ? setTitle() : 'Nuevo registro de Salud'"
        [prefix]="'Autoregistro'"
        subtitle="Completa los campos requeridos (*)"
@@ -149,8 +149,8 @@
           [severity]="'danger'"
           [variant]="'outline'"
           [icon]="'xmark'"
-          [direction]="'row'"
-          [label]="'Cancelar'"
+          [direction]="isMobile ? 'none' : 'row'"
+          [label]="isMobile ? '' : 'Cancelar'"
           [type]="'button'"
           (clickEvent)="cancel()"
         ></app-button>
@@ -160,8 +160,8 @@
           [severity]="'warning'"
           [variant]="'outline'"
           [icon]="'arrows-rotate'"
-          [direction]="'row'"
-          [label]="'Reset'"
+          [direction]="isMobile ? 'none' : 'row'"
+          [label]="isMobile ? '' : 'Reset'"
           [type]="'reset'"
         ></app-button>
         }
@@ -174,8 +174,8 @@
           [severity]="'primary'"
           [variant]="'link'"
           [icon]="'mobile-screen-button'"
-          [direction]="'row'"
-          [label]="'Registro QR'"
+          [direction]="isMobile ? 'none' : 'row'"
+          [label]="isMobile ? '' : 'Registro QR'"
           (clickEvent)="showQrRegister()"
           ></app-button>
         }
@@ -183,8 +183,8 @@
         [severity]="'success'"
         type="submit"
         [variant]="'fill'"
-        [label]="'registroId' ? 'Guardar cambios' : 'Registrar'"
-        [direction]="'row'"
+        [label]="isMobile ? '' : 'Guardar'"
+        [direction]="isMobile ? 'none' : 'row'"
         [icon]="'registroId' ? 'floppy-disk' : 'file-lines'"
         [disabled]="form.invalid"
         size="xs"

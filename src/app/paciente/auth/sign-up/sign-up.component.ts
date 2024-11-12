@@ -42,6 +42,8 @@ interface SignUpForm {
 })
 export default class SignUpComponent {
   hide = true;
+  isMobile = false;
+  direction = 'column';
   showConfirmMsg = false;
   showErrorMsg = false;
   confirmPassword = '';
@@ -75,6 +77,14 @@ export default class SignUpComponent {
       this.passwordFormatValidator()]
     }),
   });
+
+  ngOnInit(): void {
+    this.checkIfMobile(window.innerWidth);
+  }
+
+  checkIfMobile(width: number): void {
+    this.isMobile = width < 768; 
+  }
 
   // Custom Validator for password format (must contain at least one number)
   passwordFormatValidator(): ValidatorFn {
