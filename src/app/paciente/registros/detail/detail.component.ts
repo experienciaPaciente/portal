@@ -78,7 +78,7 @@ export class DetailComponent {
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 980; 
+    this.isMobile = width < 768; 
   }
 
   generateQRCode(data: any) {

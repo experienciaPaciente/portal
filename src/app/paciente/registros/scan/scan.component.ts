@@ -91,7 +91,7 @@ export class ScanComponent {
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 980;
+    this.isMobile = width < 768;
     // this.updateViewState(this.router.url);
   }
 

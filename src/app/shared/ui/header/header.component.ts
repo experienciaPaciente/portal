@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 980; 
+    this.isMobile = width < 768; 
   }
 
 

@@ -83,7 +83,7 @@ export default class SignUpComponent {
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 980; 
+    this.isMobile = width < 768; 
   }
 
   // Custom Validator for password format (must contain at least one number)

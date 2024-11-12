@@ -50,7 +50,7 @@ export default class HomeComponent {
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 980;
+    this.isMobile = width < 768;
   }
 
   determineCurrentView(url: string): void {
