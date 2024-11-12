@@ -74,7 +74,6 @@ export class HeaderComponent implements OnInit {
     this.isMobile = width < 768; 
   }
 
-
   // Open the modal for confirmation
   openModal(): void {
     this.isModalOpen = !this.isModalOpen;

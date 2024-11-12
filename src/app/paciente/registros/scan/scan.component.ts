@@ -95,12 +95,6 @@ export class ScanComponent {
     // this.updateViewState(this.router.url);
   }
 
-  // updateViewState(url: string): void {
-  //   this.isDetailView = url.includes('/item/');
-  //   this.isScanView = url.includes('/scan');
-  //   this.isRegistroView = url.includes('/register');
-  // }
-
   cancel() {
     this.qrRegistro = !this.qrRegistro;
   }

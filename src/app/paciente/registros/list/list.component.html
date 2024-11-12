@@ -44,7 +44,9 @@
                     [color]="getColorForCategoria(data.categoria)"
                     direction="row">
                     <app-badge [severity]="data.validado ? 'success' : 'info'" [label]="data.validado ? 'Validado' : 'Auto-registro'" size="xs"></app-badge>
-                    <app-badge severity="info" [label]="data.validador" size="xs" icon="user"></app-badge>
+                    @if (data.lugar) {
+                        <app-badge severity="info" [label]="data.lugar" size="xs" icon="hospital"></app-badge>
+                    }
                     <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
                     <app-dropdown
                         [items]="getMenuItems(data)"
