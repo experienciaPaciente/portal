@@ -1,4 +1,4 @@
-# ExperienciaPaciente | portal-paciente
+# ExperienciaPaciente
 
 ## Descripción
 ExperienciaPaciente es una iniciativa de base tecnológica y propósito social, orientada a otorgar a cada ciudadano el control y acceso directo a su historial de salud. Actualmente, el acceso a los registros de salud es limitado y fragmentado, condicionado por múltiples factores, como la entidad que gestiona los datos, la tecnología disponible y las políticas de la institución que realiza el registro. Este proyecto busca transformar ese panorama, facilitando la autogestión y descentralización de la información de salud de cada paciente, independiente de entidades públicas o privadas, sin responder a sesgos económicos o políticos.
