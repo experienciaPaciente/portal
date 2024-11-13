@@ -115,7 +115,7 @@ export default class SignUpComponent {
       this.showConfirmMsg = true;
       setTimeout(() => {
           this.router.navigateByUrl('/ingresar'); 
-        }, 2000
+        }, 1000
       )
     } catch (error) {
       console.error(error);

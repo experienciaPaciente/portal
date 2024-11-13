@@ -28,7 +28,7 @@ export interface RegistroForm {
   descripcion: FormControl<string>;
   categoria: FormControl<string>;
   estado: FormControl<string>;
-  validado: FormControl<boolean>;
+  validado: FormControl<boolean | null>;
   lugar: FormControl<string>;
   validador: FormControl<string>;
   fecha: FormControl<Date>;
@@ -140,22 +140,46 @@ export class createRegistroComponent implements OnInit{
 
   // considerar utilizar un enum o crear una colección para especialidades
   categorias: string[] = [
-    'Consulta general',
-    'Laboratorios',
-    'Consulta pediátrica',
-    'Vacunación',
-    'Alergia e Inmunología',
-    'Cardiología'
+    'Medicina General',
+    'Pediatría',
+    'Ginecología y Obstetricia',
+    'Cardiología',
+    'Dermatología',
+    'Neurología',
+    'Psiquiatría',
+    'Endocrinología',
+    'Gastroenterología',
+    'Traumatología y Ortopedia',
+    'Oftalmología',
+    'Otorrinolaringología',
+    'Urología',
+    'Neumología',
+    'Oncología',
+    'Nutrición y Dietética',
+    'Fisiatría y Rehabilitación',
+    'Odontología'
   ];
-
+  
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
-    'Consulta general': { icon: 'user', color: 'blue' },
-    'Laboratorios': { icon: 'vial', color: 'purple' },
-    'Consulta pediátrica': { icon: 'child', color: 'green' },
-    'Vacunación': { icon: 'syringe', color: 'orange' },
-    'Alergia e Inmunología': { icon: 'allergies', color: 'yellow' },
-    'Cardiología': { icon: 'heart', color: 'red' },
-  };
+    'Medicina General': { icon: 'user-md', color: '#007bff' }, // Blue
+    'Pediatría': { icon: 'child', color: '#28a745' }, // Green
+    'Ginecología y Obstetricia': { icon: 'venus', color: '#e83e8c' }, // Pink
+    'Cardiología': { icon: 'heart', color: '#dc3545' }, // Red
+    'Dermatología': { icon: 'spa', color: '#fd7e14' }, // Orange
+    'Neurología': { icon: 'brain', color: '#6f42c1' }, // Purple
+    'Psiquiatría': { icon: 'comments', color: '#20c997' }, // Teal
+    'Endocrinología': { icon: 'balance-scale', color: '#ffc107' }, // Yellow
+    'Gastroenterología': { icon: 'stethoscope', color: '#795548' }, // Brown
+    'Traumatología y Ortopedia': { icon: 'crutch', color: '#6c757d' }, // Gray
+    'Oftalmología': { icon: 'eye', color: '#17a2b8' }, // Cyan
+    'Otorrinolaringología': { icon: 'head-side-cough', color: '#6610f2' }, // Indigo
+    'Urología': { icon: 'toilet', color: '#007bff' }, // Blue
+    'Neumología': { icon: 'lungs', color: '#87ceeb' }, // Light Blue
+    'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
+    'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
+    'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
+    'Odontología': { icon: 'tooth', color: '#ffffff' } // White
+  };  
 
   // Properties for the Label component
   editableTitle: string = '';
@@ -183,7 +207,7 @@ export class createRegistroComponent implements OnInit{
     descripcion: this._formBuilder.control('', Validators.required),
     categoria: this._formBuilder.control('', Validators.required),
     estado: this._formBuilder.control(''),
-    validado: this._formBuilder.control(false),
+    validado: this._formBuilder.control(null),
     lugar: this._formBuilder.control('', Validators.required),
     validador: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date, Validators.required),
@@ -217,8 +241,9 @@ export class createRegistroComponent implements OnInit{
           titulo: registro.titulo,
           descripcion: registro.descripcion,
           categoria: registro.categoria,
-          validado: registro.validado,
           estado: registro.estado,
+          validado: registro.validado,
+          lugar: registro.lugar,
           validador: registro.validador,
           fecha: registro.fecha,
           hora: registro.hora,
@@ -276,7 +301,7 @@ export class createRegistroComponent implements OnInit{
         categoria: registro.categoria || '',
         estado: registro.estado || '',
         validado: registro.validado ?? false,
-        lugar: registro.validador || '',
+        lugar: registro.lugar || '',
         validador: registro.validador || '',
         fecha: registro.fecha || new Date(),
         hora: registro.hora || '',

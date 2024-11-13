@@ -42,6 +42,11 @@ export class ListComponent implements OnInit {
   searchControl = new FormControl('');
   selectedCategory: string = '';
   medCategories!: boolean;
+  selectedItemId: string | null = null;
+
+  onCardSelected(data: { id: string }) {
+    this.selectedItemId = data.id;
+  }
 
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
@@ -50,19 +55,31 @@ export class ListComponent implements OnInit {
   @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
-    'Consulta general': { icon: 'user-md', color: '#FD5B71' },
-    'Laboratorios': { icon: 'vial', color: '#6DDDFC' },
-    'Consulta pediátrica': { icon: 'baby', color: '#A2BDFF' },
-    'Vacunación': { icon: 'syringe', color: '#FF9110' },
-    'Alergia e Inmunología': { icon: 'allergies', color: '#208AF2' },
-    'Cardiología': { icon: 'heart', color: '#1BC5DD' },
+    'Medicina General': { icon: 'user-md', color: '#007bff' }, // Blue
+    'Pediatría': { icon: 'child', color: '#28a745' }, // Green
+    'Ginecología y Obstetricia': { icon: 'venus', color: '#e83e8c' }, // Pink
+    'Cardiología': { icon: 'heart', color: '#dc3545' }, // Red
+    'Dermatología': { icon: 'spa', color: '#fd7e14' }, // Orange
+    'Neurología': { icon: 'brain', color: '#6f42c1' }, // Purple
+    'Psiquiatría': { icon: 'comments', color: '#20c997' }, // Teal
+    'Endocrinología': { icon: 'balance-scale', color: '#ffc107' }, // Yellow
+    'Gastroenterología': { icon: 'stethoscope', color: '#795548' }, // Brown
+    'Traumatología y Ortopedia': { icon: 'crutch', color: '#6c757d' }, // Gray
+    'Oftalmología': { icon: 'eye', color: '#17a2b8' }, // Cyan
+    'Otorrinolaringología': { icon: 'head-side-cough', color: '#6610f2' }, // Indigo
+    'Urología': { icon: 'toilet', color: '#007bff' }, // Blue
+    'Neumología': { icon: 'lungs', color: '#87ceeb' }, // Light Blue
+    'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
+    'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
+    'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
+    'Odontología': { icon: 'tooth', color: '#ffffff' } // White
   };
 
   // Función que devuelve un array en lugar del array per-sé
   getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
       { label: 'Ver detalle', icon: 'file-lines', disabled: false, callback: () => this.onItemSelected(data) },
-      { label: 'Editar', icon: 'file-pen', disabled: false, callback: () => this.navigateToEdit(data) },
+      { label: 'Editar', icon: 'pencil', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Destacar', icon: 'star', disabled: true },
       { label: 'Gestionar permisos', icon: 'user-lock', disabled: true },
       { label: 'Asociar a registro', icon: 'link', disabled: true },

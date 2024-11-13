@@ -33,7 +33,7 @@
     <ul class="list__wrapper--{{ type }}">
         <!-- Resolver bubbling -->
         <li *ngFor="let data of (filteredRegistros$ | async); trackBy: trackByFn" (click)="onItemSelected(data)">
-            <app-card direction="row" [selectable]="true" [variant]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)">
+            <app-card direction="row" [selectable]="true" [selected]="selectedItemId === data.id" [variant]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)" (cardSelected)="onCardSelected(data)">
                     <app-label
                     [size]="'xs'"
                     [label]="data.titulo"
@@ -44,7 +44,9 @@
                     [color]="getColorForCategoria(data.categoria)"
                     direction="row">
                     <app-badge [severity]="data.validado ? 'success' : 'info'" [label]="data.validado ? 'Validado' : 'Auto-registro'" size="xs"></app-badge>
-                    <app-badge severity="info" [label]="data.validador" size="xs" icon="user"></app-badge>
+                    @if (data.lugar) {
+                        <app-badge severity="info" [label]="data.lugar" size="xs" icon="hospital"></app-badge>
+                    }
                     <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
                     <app-dropdown
                         [items]="getMenuItems(data)"
