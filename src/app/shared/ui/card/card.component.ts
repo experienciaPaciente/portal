@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnChanges, AfterViewInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { LabelComponent } from '../label/label.component';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
@@ -26,6 +26,8 @@ export class CardComponent implements OnChanges, AfterViewInit {
   @Input() right?: string;
   @Input() bottom?: string;
   @Input() left?: string;
+  @Output() cardSelected = new EventEmitter<void>(); // Emits when this card is selected
+
 
   // Ver de pasar direccionalidad desde la card al label
   @ViewChild('cardColor', { static: true }) cardColor!: ElementRef;
@@ -69,7 +71,7 @@ export class CardComponent implements OnChanges, AfterViewInit {
 
   onCardClick() {
     if (this.selectable) {
-      this.selected = !this.selected;
+      this.cardSelected.emit(); // Notify parent component
     }
   }
 

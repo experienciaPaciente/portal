@@ -42,6 +42,11 @@ export class ListComponent implements OnInit {
   searchControl = new FormControl('');
   selectedCategory: string = '';
   medCategories!: boolean;
+  selectedItemId: string | null = null;
+
+  onCardSelected(data: { id: string }) {
+    this.selectedItemId = data.id;
+  }
 
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
@@ -65,8 +70,6 @@ export class ListComponent implements OnInit {
     'Urología': { icon: 'toilet', color: '#007bff' }, // Blue
     'Neumología': { icon: 'lungs', color: '#87ceeb' }, // Light Blue
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
-    'Medicina Interna': { icon: 'hospital', color: '#007bff' }, // Blue
-    'Medicina Familiar': { icon: 'users', color: '#28a745' }, // Green
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
     'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
     'Odontología': { icon: 'tooth', color: '#ffffff' } // White
@@ -76,7 +79,7 @@ export class ListComponent implements OnInit {
   getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
       { label: 'Ver detalle', icon: 'file-lines', disabled: false, callback: () => this.onItemSelected(data) },
-      { label: 'Editar', icon: 'file-pen', disabled: false, callback: () => this.navigateToEdit(data) },
+      { label: 'Editar', icon: 'pencil', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Destacar', icon: 'star', disabled: true },
       { label: 'Gestionar permisos', icon: 'user-lock', disabled: true },
       { label: 'Asociar a registro', icon: 'link', disabled: true },

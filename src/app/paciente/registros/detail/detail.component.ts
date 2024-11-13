@@ -52,8 +52,6 @@ export class DetailComponent {
     'Urología': { icon: 'toilet', color: '#007bff' }, // Blue
     'Neumología': { icon: 'lungs', color: '#87ceeb' }, // Light Blue
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
-    'Medicina Interna': { icon: 'hospital', color: '#007bff' }, // Blue
-    'Medicina Familiar': { icon: 'users', color: '#28a745' }, // Green
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
     'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
     'Odontología': { icon: 'tooth', color: '#ffffff' } // White

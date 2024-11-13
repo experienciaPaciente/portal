@@ -79,7 +79,7 @@ export default class LogInComponent {
       await this.authService.logInWithEmailAndPassword(credential);
       this.successMessage = 'Usuario autenticado, redirigiendo...';
       this.errorMessage = '';
-      setTimeout(() => this.router.navigateByUrl('/'), 2000);
+      setTimeout(() => this.router.navigateByUrl('/'), 1000);
 
     } catch (error) {
       this.successMessage = '';
@@ -87,6 +87,6 @@ export default class LogInComponent {
   }
 
   openSnackBar() {
-    return alert('Succesfully Log in 😀')
+    return alert('Succesfully Log in')
   }
 }

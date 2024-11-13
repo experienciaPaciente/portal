@@ -11,8 +11,8 @@
 }
 
 @mixin custom-card-color($color) {
-  background-color: var(--customColor, $color);
-  border-color: var(--customColor, $color);
+  background-color: var(--card__bg--color, $color);
+  border-color: var(--card__border--color, $color);
 }
 
 

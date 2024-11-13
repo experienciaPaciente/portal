@@ -48,15 +48,15 @@ app-card {
 
     // Custom    
     &.card__fill--custom, &.card__outline--custom, &.card__fab--custom {
-      --card__bg--color: var(--customColor);
-      --card__border--color: var(--customColor);
+      --card__bg--color: var(--card__bg--color);
+      --card__border--color: var(--card__border--color);
       &.card--selectable {
         &:hover {
           background-color: var(--card__bg--color);
         }
     
         &:focus {
-          border: solid 2px var(--customColor);
+          border: solid 2px var(--card__border--color);
         }
       }
     }

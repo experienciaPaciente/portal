@@ -9,7 +9,7 @@
             [severity]="'custom'"
             [color]="getColorForCategoria(registro.categoria)"
             direction="row">
-            <app-badge severity="success" label="{{ registro.validado }}" size="xs"></app-badge>
+            <app-badge [severity]="registro.validado ? 'success' : 'info'" label="{{ registro.validado ? 'validado' : 'auto-registro' }}" size="xs"></app-badge>
             <app-dropdown
                 [items]="getMenuItems(registro)"
                 [position]="dropdownPosition"
