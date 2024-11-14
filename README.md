@@ -1,42 +1,35 @@
 # ExperienciaPaciente
 
-## Descripción
-ExperienciaPaciente es una iniciativa de base tecnológica y propósito social, orientada a otorgar a cada ciudadano el control y acceso directo a su historial de salud. Actualmente, el acceso a los registros de salud es limitado y fragmentado, condicionado por múltiples factores, como la entidad que gestiona los datos, la tecnología disponible y las políticas de la institución que realiza el registro. Este proyecto busca transformar ese panorama, facilitando la autogestión y descentralización de la información de salud de cada paciente, independiente de entidades públicas o privadas, sin responder a sesgos económicos o políticos.
+## Estado de situación
+Actualmente las personas acceden, en el mejor de los casos, a una historia de salud fragmentada y condicionada por diversos factores como: la entidad que gestiona los datos, la disponibilidad tecnológica, la predisposición del equipo médico/administrativo y las propias políticas del ámbito en el cual se realiza el registro.
 
 ## Objetivo principal
-Permitir que todo ciudadano pueda acceder de manera autónoma a sus datos de salud.
+Que todo ciudadano pueda acceder a sus datos de Salud.
 
 ## Premisas
-- **Autogestión**: Empoderar a los ciudadanos para que gestionen sus propios datos de salud.
-- **Descentralización**: Reducir el control restrictivo y arbitrario de la información de salud, actualmente en manos de entidades públicas y privadas.
-- **Herramientas digitales**: Proveer plataformas y aplicaciones para cumplir los principios anteriores.
-- **Neutralidad**: Sin influencias de intereses económicos o políticos.
+- Fomentar la autogestión de datos de salud por parte de la ciudadanía.
+- Descentralizar el manejo restrictivo y arbitrario de la información de salud de las personas (actualmente en un circuito limitado entre entidades públicas y privadas).
+- Proveer herramientas digitales que permitan cumplir las premisas anteriores.
+- Sin sesgos económicos, dado que no responde al mercado.
+- Sin sesgos políticos ya que no responde a ningún gobierno.
 
-## Esencia del proyecto
-ExperienciaPaciente se basa en la premisa de que el sistema de salud actual presenta deficiencias y carece de alineación con las verdaderas necesidades del paciente. Este proyecto, por tanto, busca construir puentes entre las entidades tradicionales de salud y una aplicación digital accesible para cada ciudadano.
+## Esencia
+Es una iniciativa con un propósito claramente social, con un fuerte componente tecnológico; y que esencialmente se basa en la premisa de que muchos de los procesos actuales de atención dentro del sistema de salud son deficitarios, retrógrados y principalmente, que no están alineados con las necesidades reales del paciente.
 
-## Componentes principales
+## El “qué”
+Construir puentes entre las entidades tradicionales y una aplicación digital que organiza y posibilita su acceso.
 
-### Portal del Paciente (App en Angular)
-- Función: Permite a los pacientes crear, recibir, almacenar y organizar sus registros de salud, independientemente del origen de los mismos.
-- Características: Los datos pueden provenir de instituciones públicas, entidades privadas, profesionales particulares o de un auto-registro realizado por el propio paciente o su familia.
+## El “Cómo”
+Mediante un conjunto de aplicaciones digitales orientadas a disponibilizar los registros de salud a quienes realmente le pertenecen… los pacientes:
 
-### Portal Equipo de Salud (Extensión Chrome)
-- Función: Actúa como un enlace entre los sistemas de salud de las entidades que generan y gestionan datos de salud (hospitales, clínicas, farmacias, etc.) y el Portal del Paciente.
-- Características: La extensión permite registrar automáticamente información en el navegador de la entidad y generar un código QR para que el paciente pueda transferir sus datos a la app de ExperienciaPaciente.
+### Portal del paciente (app Angular)
+Crea, recibe, almacena y categoriza registros de salud independientemente de su origen (una institución pública, una entidad privada, un profesional particular, un auto-registro del paciente o familiar).
 
-## Funcionamiento
+### Portal equipo de salud (extensión Chrome)
+Funciona como nexo entre los sistemas propios de las entidades que actualmente generan y administran dichos datos de salud (entidades de salud, obras sociales, farmacias, profesionales particulares, etc) y el portal del paciente.
 
-1. **Contexto**: El paciente se encuentra interactuando con el sistema de salud, ya sea en una consulta, en una compra de medicamento en una farmacia o en una clínica.
-2. **Registro de datos**: Cuando el equipo de salud realiza un registro de la consulta o transacción mediante un formulario, la extensión Chrome de ExperienciaPaciente guarda la información en el `localStorage` del navegador y genera un código QR para el registro.
-3. **Transferencia de datos**: El paciente escanea el código QR con la app de ExperienciaPaciente en su dispositivo, integrando ese registro en su historia de salud.
+## Funcionamiento (paso por paso)
+**Contexto**: Paciente interactuando con el sistema de Salud (ya sea sacando un turno desde una ventanilla de un hospital, consultando un particular, comprando un medicamento en una farmacia o internado en una clínica privada).
 
-## Cómo contribuir
-Si deseas contribuir a ExperienciaPaciente, por favor revisa nuestras guías de contribución en este repositorio, incluyendo lineamientos para desarrollo de software y pruebas de seguridad y privacidad.
-
-## Licencia
-Este proyecto se encuentra bajo una licencia de software de código abierto para fomentar la transparencia y accesibilidad en el acceso a la salud. Ver el archivo `LICENSE` para más detalles.
-
----
-
-Este proyecto es parte de un esfuerzo por una transformación social en el ámbito de la salud, priorizando el bienestar y los derechos de cada ciudadano.
+1. Con la extensión Chrome de experienciaPaciente instalada y activa en el navegador de la entidad (hospital, clínica, obra social, farmacia), cada registro realizado a través de uno de sus formularios, será recolectado y almacenado en el localStorage del navegador, generando a su vez, un código QR del registro (de la consulta, parte médico, receta, etc).
+2. El paciente abre la app de experienciaPaciente en su dispositivo, scanea el código generado desde la extensión Chrome de la entidad y guarda sus datos en su Historia de Salud.
