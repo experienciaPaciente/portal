@@ -282,6 +282,70 @@ app-card {
       }
       }
     }
+    // Severities
+      &--success {
+        --card__border--color: var(--success);
+        --card__bg--color: var(--success--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
+        &:hover {
+          --card__bg--color: var(--success--dark);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+    }
+
+      &--warning {
+        --card__border--color: var(--warning);
+        --card__bg--color: var(--warning--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
+        &:hover {
+          --card__bg--color: var(--warning--dark);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+    }
+
+      &--warning {
+        --card__border--color: var(--warning);
+        --card__bg--color: var(--warning--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
+        &:hover {
+          --card__bg--color: var(--warning--dark);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+    }
+
+      &--info {
+        --card__border--color: var(--info);
+        --card__bg--color: var(--info--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
+        &:hover {
+          --card__bg--color: var(--info--dark);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+    }
   }
     
   &.card--selected {

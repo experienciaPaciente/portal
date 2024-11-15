@@ -21,6 +21,7 @@ import { ScanComponent } from '../scan/scan.component';
 import { Location } from '@angular/common';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 import { CommonModule } from '@angular/common';
+import { CardComponent } from 'src/app/shared/ui/card/card.component';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -51,7 +52,8 @@ export interface RegistroForm {
     SwitcherComponent,
     ScanComponent,
     RequiredComponent,
-    CommonModule
+    CommonModule,
+    CardComponent
   ],
 })
 
@@ -66,6 +68,9 @@ export class createRegistroComponent implements OnInit{
   hasChange: boolean = false;
   uploadedImages: string[] = [];
   uploadedFileNames: string[] = [];
+  showConfirmMsg = false;
+  showErrorMsg = false;
+  hide = true;
 
   checkIfMobile(width: number): void {
     this.isMobile = width < 768; 

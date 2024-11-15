@@ -54,7 +54,7 @@ export class DetailComponent {
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
     'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
-    'Odontología': { icon: 'tooth', color: '#ffffff' } // White
+    'Odontología': { icon: 'tooth', color: '#5fc8db' } // White
   };
 
   // Función que devuelve un array en lugar del array per-sé

@@ -14,6 +14,7 @@ import { NavbarComponent } from 'src/app/shared/ui/navbar/navbar.component';
 import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
 
 @Component({
   selector: 'app-list',
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ButtonComponent,
     NavbarComponent,
     DropdownComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalComponent
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
@@ -43,6 +45,7 @@ export class ListComponent implements OnInit {
   selectedCategory: string = '';
   medCategories!: boolean;
   selectedItemId: string | null = null;
+  isModalOpen: boolean = false;
 
   onCardSelected(data: { id: string }) {
     this.selectedItemId = data.id;
@@ -72,7 +75,7 @@ export class ListComponent implements OnInit {
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
     'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
-    'Odontología': { icon: 'tooth', color: '#ffffff' } // White
+    'Odontología': { icon: 'tooth', color: '#5fc8db' } // White
   };
 
   // Función que devuelve un array en lugar del array per-sé
@@ -155,7 +158,6 @@ export class ListComponent implements OnInit {
   async navigateToDelete(item: Registro): Promise<void> {
     try {
       await this.registroService.deleteRegistro(item.id);
-     this.router.navigate(['/']);
     } catch (error) {
       console.error('Error deleting registro', error);
     }
@@ -192,4 +194,26 @@ filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
   showMedCategories(event: any) {
     this.medCategories = !this.medCategories;
   }
+
+  // Open the modal and store the item
+  openModal(event: MouseEvent, data: { id: string }) {
+    event.stopPropagation(); // Prevent the click event from propagating
+    this.selectedItemId = data.id;;
+    this.isModalOpen = true;
+  }
+
+  // Handle the confirm action
+  async onConfirm(): Promise<void> {
+    this.isModalOpen = false;
+    if (this.selectedItemId) {
+      try {
+        await this.registroService.deleteRegistro(this.selectedItemId); // No `.id` here
+        this.router.navigate(['/']);
+      } catch (error) {
+        console.error('Error deleting registro', error);
+      } finally {
+        this.selectedItemId = null; // Clear the selection
+      }
+    }
+  }  
 }
