@@ -34,7 +34,9 @@ export class DetailComponent {
   disabled = false;
   isMobile!: boolean;
   isModalOpen: boolean = false;
+  modalDelete: boolean = false;
   selectedFile?: string;
+  selectedItemId: string | null = null;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Medicina General': { icon: 'user-md', color: '#007bff' }, // Blue
@@ -62,7 +64,8 @@ export class DetailComponent {
     return [
       { label: 'Editar', icon: 'user', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Gestionar permisos', icon: 'star', disabled: true },
-      { label: 'Eliminar', icon: 'trash', disabled: false, callback: () => this.navigateToDelete(data)  }
+      { label: 'Eliminar', icon: 'trash', disabled: false, callback: (event?: MouseEvent) => this.openDeleteModal(event, { id: data.id }),
+    }
     ]
   }
 
@@ -157,8 +160,28 @@ export class DetailComponent {
     }
   }
 
-  openModal(file: string): void {
-    this.selectedFile = file;
-    this.isModalOpen = !this.isModalOpen;
+  openDeleteModal(event: MouseEvent | undefined, data: { id: string}) {
+    event?.stopPropagation();
+    this.selectedItemId = data.id;;
+    this.modalDelete = true;
   }
+
+  openModal(file: string):void {
+      this.selectedFile = file;
+      this.isModalOpen = !this.isModalOpen;
+  }
+
+  async onConfirm(): Promise<void> {
+    this.modalDelete = false;
+    if (this.selectedItemId) {
+      try {
+        await this.registroService.deleteRegistro(this.selectedItemId); // No `.id` here
+        this.router.navigate(['/']);
+      } catch (error) {
+        console.error('Error deleting registro', error);
+      } finally {
+        this.selectedItemId = null; // Clear the selection
+      }
+    }
+  }  
 }

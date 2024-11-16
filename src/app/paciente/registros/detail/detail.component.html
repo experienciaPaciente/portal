@@ -137,7 +137,19 @@
             ></app-button>
         </div>
     </footer>
-
+    @if (modalDelete) {
+        <app-modal
+            [prefix]="'Previsualizar'"
+            [title]="selectedFile"
+            [subtitle]="'Modal Subtitle'"
+            icon="info-circle"
+            [closeable]="true"
+            (closeModal)="modalDelete = false"
+        >
+            <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="modalDelete = false"></app-button>
+            <app-button direction="none" size="sm" label="Editar" variant="fill" severity="success" (click)="onConfirm()"></app-button>
+        </app-modal>
+        }
 </section>
 } @else {
     <p>Sin registros!</p>

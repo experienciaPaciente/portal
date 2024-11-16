@@ -164,20 +164,20 @@ export class ListComponent implements OnInit {
   }
 
  // Search & filter
- onCategorySelected(category: string): void {
-  this.selectedCategory = category;
-  this.filteredRegistros$ = this.filterRegistros(this.searchControl.value || '', this.selectedCategory);
-}
+  onCategorySelected(category: string): void {
+    this.selectedCategory = category;
+    this.filteredRegistros$ = this.filterRegistros(this.searchControl.value || '', this.selectedCategory);
+  }
 
-filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
-  const term = searchTerm.toLowerCase() || '';
-  return this.registros$.pipe(
-    map(registros => registros.filter(registro =>
-      registro.titulo.toLowerCase().includes(term) &&
-      (category === '' || registro.categoria === category)
-    ))
-  );
-}
+  filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
+    const term = searchTerm.toLowerCase() || '';
+    return this.registros$.pipe(
+      map(registros => registros.filter(registro =>
+        registro.titulo.toLowerCase().includes(term) &&
+        (category === '' || registro.categoria === category)
+      ))
+    );
+  }
 
   getIconForCategoria(categoria: string): string {
     return this.categoriaMap[categoria]?.icon || 'question-circle';
