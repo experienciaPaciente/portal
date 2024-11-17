@@ -189,28 +189,9 @@
         [disabled]="form.invalid"
         size="xs"
         [path]="'item/' + registroId"
+        (click)="form.invalid ? triggerError : triggerSuccess()"
       >
       </app-button>
       </div>
   </footer>
-  <app-card
-    size="lg"
-    direction="row"
-    [variant]="'fab'"
-    bottom="20px"
-    left="calc(55vw - 50%)"
-    [severity]="showErrorMsg ? 'danger' : 'success'"
-    [closable]="hide"
-    [selectable]="showErrorMsg"
-    >
-    <app-label
-      size="xxs"
-      [label]="showErrorMsg ? 'No se ha podido registrar el usuario' : 'El usuario ha sido creado exitosamente'"
-      [subtitle]="showErrorMsg ? 'Vuelva a intentar luego' : 'Será redirigido al login'"
-      [icon]="showErrorMsg ? 'alert-circle' : 'info-circle'"
-      variant="outline"
-      direction="row"
-      severity="success"
-    ></app-label>
-  </app-card>
 </form>

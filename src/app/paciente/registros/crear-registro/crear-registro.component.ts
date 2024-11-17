@@ -22,6 +22,7 @@ import { Location } from '@angular/common';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
+import { NotificationService } from './../../../core/services/mensajes.service';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -68,6 +69,7 @@ export class createRegistroComponent implements OnInit{
   hasChange: boolean = false;
   uploadedImages: string[] = [];
   uploadedFileNames: string[] = [];
+
   showConfirmMsg = false;
   showErrorMsg = false;
   hide = true;
@@ -82,8 +84,20 @@ export class createRegistroComponent implements OnInit{
     private firestore: Firestore,
     private _activatedRoute: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private notificationService: NotificationService
   ) {}
+
+
+// Notificaiones
+  triggerSuccess() {
+    this.notificationService.addNotification('Registro creado con éxito!');
+    console.log('Notification triggered!')
+  }
+
+  triggerError() {
+    this.notificationService.addNotification('Error al generar el registro');
+  }
 
   ngOnInit() {
     this.checkIfMobile(window.innerWidth);
@@ -387,5 +401,7 @@ export class createRegistroComponent implements OnInit{
   get adjuntosControl() {
     return this.form.get('adjuntos');
   }
+
+  
   
 }
