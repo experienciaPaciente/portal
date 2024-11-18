@@ -4,6 +4,7 @@
   --secondary: #6CBCFC;
   --tertiary: #F5C451;
   --neutral: #8189B0;
+  --neutralDark: #6c6f7e;
   --primaryLight: #ECF5FF;
   --primaryLighter: #D7F6FF;
   --primaryDarker: #1B2F53;
@@ -190,14 +191,14 @@
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
 
   // Input
-  --input__font--size: 18px;
+  --input__font--size: 16px;
   --input__label--size: 16px;
   --input__label--weight: bold;
   --input__label--lineHeight: 1.25;
   --input__label--color: var(--neutral);
-  --input__font--color: var(--neutral);
+  --input__font--color: var(--neutralDark);
   --input__padding: 12px 14px;
-  --input__border: solid 2px var(--input__label--color);
+  --input__border: solid 2px var(--neutral);
   --input__border--radius: 8px;
   
   // Wrapper | Group
