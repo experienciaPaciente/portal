@@ -21,6 +21,8 @@ import { ScanComponent } from '../scan/scan.component';
 import { Location } from '@angular/common';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 import { CommonModule } from '@angular/common';
+import { CardComponent } from 'src/app/shared/ui/card/card.component';
+import { NotificationService } from './../../../core/services/mensajes.service';
 
 export interface RegistroForm {
   paciente: FormControl<string>;
@@ -51,7 +53,8 @@ export interface RegistroForm {
     SwitcherComponent,
     ScanComponent,
     RequiredComponent,
-    CommonModule
+    CommonModule,
+    CardComponent
   ],
 })
 
@@ -67,6 +70,10 @@ export class createRegistroComponent implements OnInit{
   uploadedImages: string[] = [];
   uploadedFileNames: string[] = [];
 
+  showConfirmMsg = false;
+  showErrorMsg = false;
+  hide = true;
+
   checkIfMobile(width: number): void {
     this.isMobile = width < 768; 
   }
@@ -77,8 +84,18 @@ export class createRegistroComponent implements OnInit{
     private firestore: Firestore,
     private _activatedRoute: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private notificationService: NotificationService
   ) {}
+
+// Notificaciones
+  triggerSuccess() {
+    this.notificationService.addNotification('Registro creado con éxito!', 'success');
+  }
+
+  triggerError() {
+    this.notificationService.addNotification('Error al generar el registro', 'error');
+  }
 
   ngOnInit() {
     this.checkIfMobile(window.innerWidth);
@@ -276,8 +293,9 @@ export class createRegistroComponent implements OnInit{
         await this._registrosService.updateRegistro(this.registroId, registro);
       }
       this._router.navigate(['/']);
+      this.triggerSuccess();
     } catch (error) {
-      console.error('Error saving record:', error);
+      this.triggerError();
     }
   }
   
@@ -351,6 +369,7 @@ export class createRegistroComponent implements OnInit{
             this.uploadedImages.push(downloadURL);
             this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
             event.target.value = '';
+            // Implementar notificación uploads
           } catch (error) {
             console.error('Error getting download URL:', error);
           }
@@ -382,5 +401,4 @@ export class createRegistroComponent implements OnInit{
   get adjuntosControl() {
     return this.form.get('adjuntos');
   }
-  
 }

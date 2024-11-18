@@ -9,6 +9,7 @@ import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component
 import { CommonModule, Location } from '@angular/common';
 import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
+import { NotificationService } from './../../../core/services/mensajes.service';
 
 @Component({
   selector: 'app-detail',
@@ -34,7 +35,9 @@ export class DetailComponent {
   disabled = false;
   isMobile!: boolean;
   isModalOpen: boolean = false;
+  modalDelete: boolean = false;
   selectedFile?: string;
+  selectedItemId: string | null = null;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Medicina General': { icon: 'user-md', color: '#007bff' }, // Blue
@@ -54,7 +57,7 @@ export class DetailComponent {
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
     'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
-    'Odontología': { icon: 'tooth', color: '#ffffff' } // White
+    'Odontología': { icon: 'tooth', color: '#5fc8db' } // White
   };
 
   // Función que devuelve un array en lugar del array per-sé
@@ -62,7 +65,11 @@ export class DetailComponent {
     return [
       { label: 'Editar', icon: 'user', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Gestionar permisos', icon: 'star', disabled: true },
-      { label: 'Eliminar', icon: 'trash', disabled: false, callback: () => this.navigateToDelete(data)  }
+      { label: 'Eliminar', icon: 'trash', disabled: false, 
+        callback: (event?: MouseEvent) => {
+          this.openDeleteModal(event);
+      },
+    }
     ]
   }
 
@@ -72,13 +79,28 @@ export class DetailComponent {
     private route: ActivatedRoute,
     private registroService: RegistrosService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private notificationService: NotificationService
   ) {}
+
+  // Notificaciones
+  triggerSuccess() {
+    this.notificationService.addNotification('Registro eliminado con éxito!', 'danger');
+  }
+
+  triggerError() {
+    this.notificationService.addNotification('Error al generar el registro', 'warning');
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.fetchDetails(this.id);
+      if (this.id) {
+        this.fetchDetails(this.id);
+        console.log(`ID: ${this.id}`);
+      } else {
+        console.error('ID not found in route parameters');
+      }
     });
     this.checkIfMobile(window.innerWidth)
   }
@@ -102,11 +124,16 @@ export class DetailComponent {
     }
   }
 
-  fetchDetails(id: string) {
+  async fetchDetails(id: string) {
     if (id) {
-      this.loadRegistro(id);
-      if (this.registro) {
-        this.generateQRCode(this.registro);
+      try {
+        await this.loadRegistro(id); 
+        if (this.registro) {
+          this.generateQRCode(this.registro);
+        }
+      } catch (error) {
+        console.error('Error loading registro:', error);
+        this.registro = null; 
       }
     } else {
       this.registro = null;
@@ -125,11 +152,11 @@ export class DetailComponent {
   }
 
   getIconForCategoria(categoria: string): string {
-    return this.categoriaMap[categoria]?.icon || 'question-circle'; // Default icon
+    return this.categoriaMap[categoria]?.icon || 'question-circle';
   }
 
   getColorForCategoria(categoria: string): string {
-    return this.categoriaMap[categoria]?.color || 'gray'; // Default color
+    return this.categoriaMap[categoria]?.color || 'gray';
   }
 
   trackByFn(item: any): any {
@@ -157,8 +184,28 @@ export class DetailComponent {
     }
   }
 
-  openModal(file: string): void {
-    this.selectedFile = file;
-    this.isModalOpen = !this.isModalOpen;
+  openDeleteModal(event: MouseEvent | undefined) {
+    event?.stopPropagation();
+    this.modalDelete = true; 
+  }
+
+  openModal(file: string):void {
+      this.selectedFile = file;
+      this.isModalOpen = !this.isModalOpen;
+  }
+
+  async onConfirm(): Promise<void> {
+    const itemId = this.id;
+
+    if (itemId) {
+      try {
+        this.modalDelete = false;
+        await this.registroService.deleteRegistro(itemId);
+        this.router.navigate(['/']);
+        this.triggerSuccess();
+      } catch (error) {
+        this.triggerError();
+      }
+    }
   }
 }

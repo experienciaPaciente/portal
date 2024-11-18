@@ -47,7 +47,7 @@
                     @if (data.lugar) {
                         <app-badge severity="info" [label]="data.lugar" size="xs" icon="hospital"></app-badge>
                     }
-                    <app-button variant="icon" icon="trash" size="xs" severity="neutral" (clickEvent)="navigateToDelete(data)"></app-button>
+                    <app-button variant="icon" icon="trash" size="xs" severity="neutral" (click)="openModal($event, data)"></app-button>
                     <app-dropdown
                         [items]="getMenuItems(data)"
                         [position]="dropdownPosition"
@@ -56,10 +56,24 @@
                     ></app-dropdown>
                 </app-label>
             </app-card>
+            @if (isModalOpen) {
+                <app-modal
+                  [prefix]="'Cerrar sesión'"
+                  [title]="'Desea eliminar Eliminar registro?'"
+                  [subtitle]="'Modal Subtitle'"
+                  icon="info-circle"
+                  [caption]="'This is the image caption.'"
+                  [closeable]="true"
+                  (closeModal)="isModalOpen = false"
+                >
+                  <app-button direction="none" size="sm" label="Cancel" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
+                  <app-button direction="none" size="sm" label="Confirm" variant="fill" severity="success" (click)="onConfirm(data)"></app-button>
+                </app-modal>
+              }
         </li>
     </ul>
 </ng-container>
 <ng-template #noRecords>
-    <!-- Work on empty states / align-justify: center -->
     <h3>Sin registros</h3>
 </ng-template>
+

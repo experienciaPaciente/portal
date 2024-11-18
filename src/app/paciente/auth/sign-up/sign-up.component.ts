@@ -100,10 +100,10 @@ export default class SignUpComponent {
   }
 
   async signUp(): Promise<void> {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.passwordsDoNotMatch) {
       this.showErrorMsg = true;
       return;
-    };
+    }
     
     const credential: Credential = {
       email: this.form.value.email || '',
@@ -113,14 +113,17 @@ export default class SignUpComponent {
     try {
       await this.authService.signUpWithEmailAndPassword(credential);
       this.showConfirmMsg = true;
+  
       setTimeout(() => {
-          this.router.navigateByUrl('/ingresar'); 
-        }, 1000
-      )
+        this.router.navigateByUrl('/ingresar');
+      }, 2000);
+      
     } catch (error) {
       console.error(error);
+      this.showErrorMsg = true;
     }
   }
+  
   get isEmailValid(): string | boolean {
     const control = this.form.get('email');
     const isInvalid = control?.invalid && control.touched;

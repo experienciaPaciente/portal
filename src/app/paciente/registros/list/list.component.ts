@@ -14,6 +14,8 @@ import { NavbarComponent } from 'src/app/shared/ui/navbar/navbar.component';
 import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
+import { NotificationService } from './../../../core/services/mensajes.service';
 
 @Component({
   selector: 'app-list',
@@ -27,7 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ButtonComponent,
     NavbarComponent,
     DropdownComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalComponent
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
@@ -43,6 +46,7 @@ export class ListComponent implements OnInit {
   selectedCategory: string = '';
   medCategories!: boolean;
   selectedItemId: string | null = null;
+  isModalOpen: boolean = false;
 
   onCardSelected(data: { id: string }) {
     this.selectedItemId = data.id;
@@ -72,7 +76,7 @@ export class ListComponent implements OnInit {
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime
     'Fisiatría y Rehabilitación': { icon: 'dumbbell', color: '#fd7e14' }, // Orange
-    'Odontología': { icon: 'tooth', color: '#ffffff' } // White
+    'Odontología': { icon: 'tooth', color: '#5fc8db' } // White
   };
 
   // Función que devuelve un array en lugar del array per-sé
@@ -83,7 +87,7 @@ export class ListComponent implements OnInit {
       { label: 'Destacar', icon: 'star', disabled: true },
       { label: 'Gestionar permisos', icon: 'user-lock', disabled: true },
       { label: 'Asociar a registro', icon: 'link', disabled: true },
-      { label: 'Eliminar', icon: 'trash', disabled: false, callback: () => this.navigateToDelete(data)  }
+      { label: 'Eliminar', icon: 'trash', disabled: false, callback: (event?: MouseEvent) => this.openModal(event, { id: data.id })  }
     ]
   }
 
@@ -109,8 +113,18 @@ export class ListComponent implements OnInit {
 
   constructor(
     private registroService: RegistrosService, 
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
+
+  // Notificaciones
+  triggerSuccess() {
+    this.notificationService.addNotification('Registro eliminado!', 'danger');
+  }
+
+  triggerError() {
+    this.notificationService.addNotification('Error al eliminar registro', 'warning');
+  }
 
   ngOnInit(): void {
     this.authState$.subscribe(user => {
@@ -155,27 +169,26 @@ export class ListComponent implements OnInit {
   async navigateToDelete(item: Registro): Promise<void> {
     try {
       await this.registroService.deleteRegistro(item.id);
-     this.router.navigate(['/']);
     } catch (error) {
       console.error('Error deleting registro', error);
     }
   }
 
  // Search & filter
- onCategorySelected(category: string): void {
-  this.selectedCategory = category;
-  this.filteredRegistros$ = this.filterRegistros(this.searchControl.value || '', this.selectedCategory);
-}
+  onCategorySelected(category: string): void {
+    this.selectedCategory = category;
+    this.filteredRegistros$ = this.filterRegistros(this.searchControl.value || '', this.selectedCategory);
+  }
 
-filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
-  const term = searchTerm.toLowerCase() || '';
-  return this.registros$.pipe(
-    map(registros => registros.filter(registro =>
-      registro.titulo.toLowerCase().includes(term) &&
-      (category === '' || registro.categoria === category)
-    ))
-  );
-}
+  filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
+    const term = searchTerm.toLowerCase() || '';
+    return this.registros$.pipe(
+      map(registros => registros.filter(registro =>
+        registro.titulo.toLowerCase().includes(term) &&
+        (category === '' || registro.categoria === category)
+      ))
+    );
+  }
 
   getIconForCategoria(categoria: string): string {
     return this.categoriaMap[categoria]?.icon || 'question-circle';
@@ -192,4 +205,29 @@ filterRegistros(searchTerm: string, category: string): Observable<Registro[]> {
   showMedCategories(event: any) {
     this.medCategories = !this.medCategories;
   }
+
+  // Open the modal and store the item
+  openModal(event: MouseEvent | undefined, data: { id: string }) {
+    event?.stopPropagation();
+    this.selectedItemId = data.id;;
+    this.isModalOpen = true;
+  }
+  
+  // Handle the confirm action
+  async onConfirm(data: { id: string }): Promise<void> {
+    this.selectedItemId = data.id;;
+    this.isModalOpen = false;
+    
+    if (this.selectedItemId) {
+      try {
+        await this.registroService.deleteRegistro(this.selectedItemId);
+        this.router.navigate(['/']);
+        this.triggerSuccess();
+      } catch (error) {
+        this.triggerError();
+      } finally {
+        this.selectedItemId = null;
+      }
+    }
+  }  
 }
