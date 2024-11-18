@@ -401,7 +401,4 @@ export class createRegistroComponent implements OnInit{
   get adjuntosControl() {
     return this.form.get('adjuntos');
   }
-
-  
-  
 }

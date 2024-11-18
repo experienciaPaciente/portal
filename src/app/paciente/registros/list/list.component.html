@@ -56,23 +56,24 @@
                     ></app-dropdown>
                 </app-label>
             </app-card>
+            @if (isModalOpen) {
+                <app-modal
+                  [prefix]="'Cerrar sesión'"
+                  [title]="'Desea eliminar Eliminar registro?'"
+                  [subtitle]="'Modal Subtitle'"
+                  icon="info-circle"
+                  [caption]="'This is the image caption.'"
+                  [closeable]="true"
+                  (closeModal)="isModalOpen = false"
+                >
+                  <app-button direction="none" size="sm" label="Cancel" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
+                  <app-button direction="none" size="sm" label="Confirm" variant="fill" severity="success" (click)="onConfirm(data)"></app-button>
+                </app-modal>
+              }
         </li>
     </ul>
 </ng-container>
 <ng-template #noRecords>
     <h3>Sin registros</h3>
 </ng-template>
-@if (isModalOpen) {
-    <app-modal
-      [prefix]="'Cerrar sesión'"
-      [title]="'Modal Title'"
-      [subtitle]="'Modal Subtitle'"
-      icon="info-circle"
-      [caption]="'This is the image caption.'"
-      [closeable]="true"
-      (closeModal)="isModalOpen = false"
-    >
-      <app-button direction="none" size="sm" label="Cancel" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
-      <app-button direction="none" size="sm" label="Confirm" variant="fill" severity="success" (click)="onConfirm()"></app-button>
-    </app-modal>
-  }
+

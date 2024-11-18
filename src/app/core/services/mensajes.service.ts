@@ -13,6 +13,10 @@ export class NotificationService {
   addNotification(message: string) {
     const currentNotifications = this.notificationsSubject.value;
     this.notificationsSubject.next([...currentNotifications, message]);
+
+    setTimeout(() => {
+        this.removeNotification(0);
+      }, 3000);
   }
 
   removeNotification(index: number) {

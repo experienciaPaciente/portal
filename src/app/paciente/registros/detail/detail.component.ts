@@ -9,6 +9,7 @@ import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component
 import { CommonModule, Location } from '@angular/common';
 import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-detail',
@@ -64,7 +65,10 @@ export class DetailComponent {
     return [
       { label: 'Editar', icon: 'user', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Gestionar permisos', icon: 'star', disabled: true },
-      { label: 'Eliminar', icon: 'trash', disabled: false, callback: (event?: MouseEvent) => this.openDeleteModal(event, { id: data.id }),
+      { label: 'Eliminar', icon: 'trash', disabled: false, 
+        callback: (event?: MouseEvent) => {
+          this.openDeleteModal(event);
+      },
     }
     ]
   }
@@ -81,7 +85,12 @@ export class DetailComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.fetchDetails(this.id);
+      if (this.id) {
+        this.fetchDetails(this.id); // Fetch the details for the given `id`
+        console.log(`ID: ${this.id}`);
+      } else {
+        console.error('ID not found in route parameters');
+      }
     });
     this.checkIfMobile(window.innerWidth)
   }
@@ -105,11 +114,16 @@ export class DetailComponent {
     }
   }
 
-  fetchDetails(id: string) {
+  async fetchDetails(id: string) {
     if (id) {
-      this.loadRegistro(id);
-      if (this.registro) {
-        this.generateQRCode(this.registro);
+      try {
+        await this.loadRegistro(id); 
+        if (this.registro) {
+          this.generateQRCode(this.registro);
+        }
+      } catch (error) {
+        console.error('Error loading registro:', error);
+        this.registro = null; 
       }
     } else {
       this.registro = null;
@@ -128,11 +142,11 @@ export class DetailComponent {
   }
 
   getIconForCategoria(categoria: string): string {
-    return this.categoriaMap[categoria]?.icon || 'question-circle'; // Default icon
+    return this.categoriaMap[categoria]?.icon || 'question-circle';
   }
 
   getColorForCategoria(categoria: string): string {
-    return this.categoriaMap[categoria]?.color || 'gray'; // Default color
+    return this.categoriaMap[categoria]?.color || 'gray';
   }
 
   trackByFn(item: any): any {
@@ -160,10 +174,9 @@ export class DetailComponent {
     }
   }
 
-  openDeleteModal(event: MouseEvent | undefined, data: { id: string}) {
+  openDeleteModal(event: MouseEvent | undefined) {
     event?.stopPropagation();
-    this.selectedItemId = data.id;;
-    this.modalDelete = true;
+    this.modalDelete = true; 
   }
 
   openModal(file: string):void {
@@ -171,17 +184,19 @@ export class DetailComponent {
       this.isModalOpen = !this.isModalOpen;
   }
 
+
   async onConfirm(): Promise<void> {
-    this.modalDelete = false;
-    if (this.selectedItemId) {
+    const idToDelete = this.id;
+
+    if (idToDelete) {
       try {
-        await this.registroService.deleteRegistro(this.selectedItemId); // No `.id` here
-        this.router.navigate(['/']);
+        this.modalDelete = false;
+        console.log('Deleting item with id:', idToDelete);
+        await this.registroService.deleteRegistro(idToDelete);
+        this.router.navigate(['/']);  // Navigate after deletion
       } catch (error) {
-        console.error('Error deleting registro', error);
-      } finally {
-        this.selectedItemId = null; // Clear the selection
+        console.error('Error deleting registro:', error);
       }
     }
-  }  
+  }
 }

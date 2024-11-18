@@ -86,7 +86,7 @@ export class ListComponent implements OnInit {
       { label: 'Destacar', icon: 'star', disabled: true },
       { label: 'Gestionar permisos', icon: 'user-lock', disabled: true },
       { label: 'Asociar a registro', icon: 'link', disabled: true },
-      { label: 'Eliminar', icon: 'trash', disabled: false, callback: () => this.navigateToDelete(data)  }
+      { label: 'Eliminar', icon: 'trash', disabled: false, callback: (event?: MouseEvent) => this.openModal(event, { id: data.id })  }
     ]
   }
 
@@ -196,23 +196,25 @@ export class ListComponent implements OnInit {
   }
 
   // Open the modal and store the item
-  openModal(event: MouseEvent, data: { id: string }) {
-    event.stopPropagation(); // Prevent the click event from propagating
+  openModal(event: MouseEvent | undefined, data: { id: string }) {
+    event?.stopPropagation();
     this.selectedItemId = data.id;;
     this.isModalOpen = true;
   }
-
+  
   // Handle the confirm action
-  async onConfirm(): Promise<void> {
+  async onConfirm(data: { id: string }): Promise<void> {
+    this.selectedItemId = data.id;;
     this.isModalOpen = false;
+    
     if (this.selectedItemId) {
       try {
-        await this.registroService.deleteRegistro(this.selectedItemId); // No `.id` here
+        await this.registroService.deleteRegistro(this.selectedItemId);
         this.router.navigate(['/']);
       } catch (error) {
         console.error('Error deleting registro', error);
       } finally {
-        this.selectedItemId = null; // Clear the selection
+        this.selectedItemId = null;
       }
     }
   }  

@@ -139,9 +139,9 @@
     </footer>
     @if (modalDelete) {
         <app-modal
-            [prefix]="'Previsualizar'"
-            [title]="selectedFile"
-            [subtitle]="'Modal Subtitle'"
+            [prefix]="registro.categoria"
+            [title]="registro.titulo"
+            [subtitle]="'Esta acción es irreversible'"
             icon="info-circle"
             [closeable]="true"
             (closeModal)="modalDelete = false"
