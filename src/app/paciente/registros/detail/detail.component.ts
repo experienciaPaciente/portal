@@ -9,7 +9,7 @@ import { SwitcherComponent } from 'src/app/shared/ui/switcher/switcher.component
 import { CommonModule, Location } from '@angular/common';
 import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component';
 import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
-import { isNgTemplate } from '@angular/compiler';
+import { NotificationService } from './../../../core/services/mensajes.service';
 
 @Component({
   selector: 'app-detail',
@@ -79,14 +79,24 @@ export class DetailComponent {
     private route: ActivatedRoute,
     private registroService: RegistrosService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private notificationService: NotificationService
   ) {}
+
+  // Notificaciones
+  triggerSuccess() {
+    this.notificationService.addNotification('Registro eliminado con éxito!', 'danger');
+  }
+
+  triggerError() {
+    this.notificationService.addNotification('Error al generar el registro', 'warning');
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {
-        this.fetchDetails(this.id); // Fetch the details for the given `id`
+        this.fetchDetails(this.id);
         console.log(`ID: ${this.id}`);
       } else {
         console.error('ID not found in route parameters');
@@ -184,18 +194,17 @@ export class DetailComponent {
       this.isModalOpen = !this.isModalOpen;
   }
 
-
   async onConfirm(): Promise<void> {
-    const idToDelete = this.id;
+    const itemId = this.id;
 
-    if (idToDelete) {
+    if (itemId) {
       try {
         this.modalDelete = false;
-        console.log('Deleting item with id:', idToDelete);
-        await this.registroService.deleteRegistro(idToDelete);
-        this.router.navigate(['/']);  // Navigate after deletion
+        await this.registroService.deleteRegistro(itemId);
+        this.router.navigate(['/']);
+        this.triggerSuccess();
       } catch (error) {
-        console.error('Error deleting registro:', error);
+        this.triggerError();
       }
     }
   }

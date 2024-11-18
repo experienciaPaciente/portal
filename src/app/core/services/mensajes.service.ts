@@ -5,18 +5,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private notificationsSubject = new BehaviorSubject<string[]>([]);
+  private notificationsSubject = new BehaviorSubject<{ message: string, severity: string }[]>([]);
   notifications$ = this.notificationsSubject.asObservable();
 
   constructor() {}
 
-  addNotification(message: string) {
+  addNotification(message: string, severity: string) {
     const currentNotifications = this.notificationsSubject.value;
-    this.notificationsSubject.next([...currentNotifications, message]);
+    this.notificationsSubject.next([...currentNotifications, { message, severity }]);
 
     setTimeout(() => {
-        this.removeNotification(0);
-      }, 3000);
+      this.removeNotification(0);
+    }, 3000);
   }
 
   removeNotification(index: number) {

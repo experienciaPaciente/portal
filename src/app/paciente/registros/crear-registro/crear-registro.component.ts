@@ -88,15 +88,13 @@ export class createRegistroComponent implements OnInit{
     private notificationService: NotificationService
   ) {}
 
-
-// Notificaiones
+// Notificaciones
   triggerSuccess() {
-    this.notificationService.addNotification('Registro creado con éxito!');
-    console.log('Notification triggered!')
+    this.notificationService.addNotification('Registro creado con éxito!', 'success');
   }
 
   triggerError() {
-    this.notificationService.addNotification('Error al generar el registro');
+    this.notificationService.addNotification('Error al generar el registro', 'error');
   }
 
   ngOnInit() {
@@ -295,8 +293,9 @@ export class createRegistroComponent implements OnInit{
         await this._registrosService.updateRegistro(this.registroId, registro);
       }
       this._router.navigate(['/']);
+      this.triggerSuccess();
     } catch (error) {
-      console.error('Error saving record:', error);
+      this.triggerError();
     }
   }
   
@@ -370,6 +369,7 @@ export class createRegistroComponent implements OnInit{
             this.uploadedImages.push(downloadURL);
             this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
             event.target.value = '';
+            // Implementar notificación uploads
           } catch (error) {
             console.error('Error getting download URL:', error);
           }

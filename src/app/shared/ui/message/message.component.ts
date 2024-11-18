@@ -15,19 +15,21 @@ import { CommonModule } from '@angular/common';
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
+
 export class MessageComponent {
-  notifications: string[] = [];
   showConfirmMsg = false;
   showErrorMsg = false;
   hide = true;
+  notifications: { message: string, severity: string }[] = [];
 
   constructor(private notificationService: NotificationService) {
     this.notificationService.notifications$.subscribe(
-      (messages) => (this.notifications = messages)
+      (messages) => {
+        this.notifications = messages;
+      }
     );
   }
   
-  // implementar uso
   dismissNotification(index: number) {
     this.notificationService.removeNotification(index);
   }

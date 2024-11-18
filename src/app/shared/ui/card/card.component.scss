@@ -315,13 +315,13 @@ app-card {
       }
     }
 
-      &--warning {
-        --card__border--color: var(--warning);
-        --card__bg--color: var(--warning--light);
+      &--danger {
+        --card__border--color: var(--danger);
+        --card__bg--color: var(--danger--light);
         background-color: var(--card__bg--color);
         &.card--selectable {
         &:hover {
-          --card__bg--color: var(--warning--dark);
+          --card__bg--color: var(--danger--dark);
           background-color: var(--card__bg--color);
         }
         

@@ -15,6 +15,7 @@ import { DropdownComponent } from 'src/app/shared/ui/dropdown/dropdown.component
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from 'src/app/shared/ui/modal/modal.component';
+import { NotificationService } from './../../../core/services/mensajes.service';
 
 @Component({
   selector: 'app-list',
@@ -112,8 +113,18 @@ export class ListComponent implements OnInit {
 
   constructor(
     private registroService: RegistrosService, 
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
+
+  // Notificaciones
+  triggerSuccess() {
+    this.notificationService.addNotification('Registro eliminado!', 'danger');
+  }
+
+  triggerError() {
+    this.notificationService.addNotification('Error al eliminar registro', 'warning');
+  }
 
   ngOnInit(): void {
     this.authState$.subscribe(user => {
@@ -211,8 +222,9 @@ export class ListComponent implements OnInit {
       try {
         await this.registroService.deleteRegistro(this.selectedItemId);
         this.router.navigate(['/']);
+        this.triggerSuccess();
       } catch (error) {
-        console.error('Error deleting registro', error);
+        this.triggerError();
       } finally {
         this.selectedItemId = null;
       }

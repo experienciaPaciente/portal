@@ -4,18 +4,17 @@
         [variant]="'fab'"
         bottom="20px"
         left="50vw"
-        [severity]="showErrorMsg ? 'danger' : 'success'"
+        [severity]="notification.severity === 'danger' ? 'danger' : 'success'"
         [closable]="hide"
         [selectable]="showErrorMsg"
         >
         <app-label
-        size="xxs"
-        label="{{ notification }}"
-        [subtitle]="showErrorMsg ? 'Vuelva a intentar luego' : 'Será redirigido al login'"
-        [icon]="showErrorMsg ? 'alert-circle' : 'info-circle'"
-        variant="outline"
-        direction="row"
-        severity="success"
+            size="xxs"
+            label="{{ notification.message }}"
+            [subtitle]="showErrorMsg ? 'Vuelva a intentar luego' : 'Será redirigido al login'"
+            [icon]="notification.severity === 'danger' ? 'circle-exclamation' : 'circle-check'"
+            variant="outline"
+            direction="row"
+            severity="{{ notification.severity }}"
         ></app-label>
     </app-card>
-    <!-- <button (click)="dismissNotification(i)">Dismiss</button> -->
