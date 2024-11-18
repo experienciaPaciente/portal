@@ -211,77 +211,7 @@ app-card {
 
   &.card__fab {
     animation: fade-in 1.5s ease-in;
-
-    &--primary {
-      --card__border--color: var(--card__text--color);
-      border: solid 2px var(--card__border--color);
-      &.card--selectable {
-      &:hover {
-        --card__bg--color: var(--primaryLighter);
-        background-color: var(--card__bg--color);
-      }
-      
-      &:focus {
-        border: solid 2px var(--card__border--color);     
-      }
-      }
-    }
-      
-    &--secondary {
-      --card__border--color: var(--secondary);
-      &.card--selectable {
-      &:hover {
-        --card__bg--color: var(--secondaryLighter);
-        background-color: var(--card__bg--color);
-      }
-      
-      &:focus {
-        border: solid 2px var(--card__border--color);     
-      }
-      }
-    }
-      
-    &--tertiary {
-      --card__border--color: var(--tertiary);
-      &.card--selectable {
-      &:hover {
-        --card__bg--color: var(--tertiaryLighter);
-        background-color: var(--card__bg--color);
-      }
-      
-      &:focus {
-        border: solid 2px var(--card__border--color);     
-      }
-      }
-    }
-  
-    &--info {
-      --card__border--color: var(--info);
-      &.card--selectable {
-      &:hover {
-        --card__bg--color: var(--info--light);
-        background-color: var(--card__bg--color);
-      }
-      
-      &:focus {
-        border: solid 2px var(--card__border--color);     
-      }
-      }
-    }
-      
-    &--neutral {
-      --card__border--color: var(--neutral);
-      &.card--selectable {
-      &:hover {
-        --card__bg--color: var(--neutral--light);
-        background-color: var(--card__bg--color);
-      }
-      
-      &:focus {
-        border: solid 2px var(--card__border--color);     
-      }
-      }
-    }
+    
     // Severities
       &--success {
         --card__border--color: var(--success);
@@ -389,17 +319,9 @@ app-card {
     }
 
     // Images
-    > img, > app-icon {
+    > img {
       margin-bottom: .75rem;
       object-fit: cover;
-    }
-
-    &__text-start {
-      text-align: left;
-    }
-
-    &__text-end {
-      text-align: right;
     }
   }
 }
