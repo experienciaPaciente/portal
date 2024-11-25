@@ -140,9 +140,9 @@
     @if (modalDelete) {
         <app-modal
             [prefix]="registro.categoria"
-            [title]="registro.titulo"
+            [title]="'¿Desea eliminar el registro' + '' + registro.titulo + '?'"
             [subtitle]="'Esta acción es irreversible'"
-            icon="info-circle"
+            icon="info-alert"
             [closeable]="true"
             (closeModal)="modalDelete = false"
         >

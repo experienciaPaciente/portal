@@ -19,7 +19,8 @@ export class ModalComponent {
   @Input() title?: string;
   @Input() subtitle?: string;
   @Input() icon?: string;
-  @Input() closeable: boolean = true;
+  @Input() size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
+  @Input() closeable?: boolean;
   @Output() closeModal = new EventEmitter<void>();
   @Output() confirmAction = new EventEmitter<void>();
 

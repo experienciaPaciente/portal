@@ -83,6 +83,11 @@
         z-index: 0;
         width: 100%;
 
+        &.center {
+          align-items: center;
+          padding: 0 5vw;
+        }
+
         app-crear-registro, app-scan, app-detail {
           display: flex;
           width: 100%;

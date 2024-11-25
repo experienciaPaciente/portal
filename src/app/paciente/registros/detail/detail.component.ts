@@ -41,7 +41,7 @@ export class DetailComponent {
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Medicina General': { icon: 'user-md', color: '#007bff' }, // Blue
-    'Pediatría': { icon: 'child', color: '#28a745' }, // Green
+    'Pediatría': { icon: 'baby', color: '#28a745' }, // Green
     'Ginecología y Obstetricia': { icon: 'venus', color: '#e83e8c' }, // Pink
     'Cardiología': { icon: 'heart', color: '#dc3545' }, // Red
     'Dermatología': { icon: 'spa', color: '#fd7e14' }, // Orange
@@ -52,7 +52,7 @@ export class DetailComponent {
     'Traumatología y Ortopedia': { icon: 'crutch', color: '#6c757d' }, // Gray
     'Oftalmología': { icon: 'eye', color: '#17a2b8' }, // Cyan
     'Otorrinolaringología': { icon: 'head-side-cough', color: '#6610f2' }, // Indigo
-    'Urología': { icon: 'toilet', color: '#007bff' }, // Blue
+    'Urología': { icon: 'x-ray', color: '#007bff' }, // Blue
     'Neumología': { icon: 'lungs', color: '#87ceeb' }, // Light Blue
     'Oncología': { icon: 'ribbon', color: '#6f42c1' }, // Purple
     'Nutrición y Dietética': { icon: 'utensils', color: '#a2d729' }, // Lime

@@ -37,37 +37,45 @@ app-label {
       }
           
       &.xxs {
-        --label__prefix--size: 9px;
+        --label__prefix--size: 8px;
         --label__subtitle--size: 10px;
         --label__icon--size: 12px;
       }
           
       &.xs {
-        --label__prefix--size: 11px;
+        --label__prefix--size: 10px;
         --label__subtitle--size: 11px;
         --label__icon--size: 14px;
       }
       
       &.sm {
-        --label__prefix--size: 12px;
+        --label__prefix--size: 11px;
         --label__subtitle--size: 12px;
         --label__icon--size: 16px;
+
+        > .label__content {
+          row-gap: 6px;
+        }
       }
       
       &.md {
-        --label__prefix--size: 14px;
+        --label__prefix--size: 12px;
         --label__subtitle--size: 14px;
         --label__icon--size: 36px;
+
+        > .label__content {
+          row-gap: 8px;
+        }
       }
       
       &.lg {
-        --label__prefix--size: 16px;
+        --label__prefix--size: 14px;
         --label__subtitle--size: 16px;
         --label__icon--size: 56px;
       }
       
       &.xl {
-        --label__prefix--size: 20px;
+        --label__prefix--size: 18px;
         --label__subtitle--size: 20px;
         --label__icon--size: 64px;
       }
@@ -105,6 +113,7 @@ app-label {
       &__prefix {
         font-size: var(--label__prefix--size);
         color: var(--label__prefix--color);
+        text-transform: uppercase;
       }
       
       &__title {
@@ -114,8 +123,9 @@ app-label {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
-        text-overflow: ellipsis;      
-        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;   
+        // text-wrap: nowrap;
       }
     
       &__subtitle {
@@ -125,8 +135,9 @@ app-label {
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
 }

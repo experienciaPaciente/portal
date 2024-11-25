@@ -32,7 +32,7 @@ export default class HomeComponent {
   title = 'portal-paciente';
   imgSrc = './assets/img/ep__marca--row.svg';
   isMobile: boolean = false;
-  currentView: 'list' | 'detail' | 'registrar' | 'scan' = 'list';
+  currentView: 'list' | 'detail' | 'registrar' | 'scan' | 'update' = 'list';
 
   constructor(private router: Router) {}
   @HostListener('window:resize', ['$event'])
@@ -60,12 +60,14 @@ export default class HomeComponent {
       this.currentView = 'registrar';
     } else if (url.includes('/scan')) {
       this.currentView = 'scan';
+    } else if (url.includes('/actualizar/')) {
+      this.currentView = 'update';
     } else {
       this.currentView = 'list';
     }
   }
 
-  shouldShowPanel(panel: 'list' | 'detail' | 'registrar' | 'scan'): boolean {
+  shouldShowPanel(panel: 'list' | 'detail' | 'registrar' | 'scan' | 'update'): boolean {
     return this.isMobile ? this.currentView === panel : true;
   }
 

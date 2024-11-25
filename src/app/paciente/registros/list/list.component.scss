@@ -7,6 +7,14 @@ ul {
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
+
+    }
+
+    &.list__wrapper--center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 1vw;
     }
 
     &.list__wrapper--grid {

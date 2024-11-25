@@ -4,11 +4,14 @@
       <app-label
       [prefix]="prefix"
       [icon]="icon"
+      [size]="size"
       [label]="title"
       [subtitle]="subtitle"
       direction="row"
       >
+      @if (closeable) {
         <app-button icon="close" variant="icon" severity="primary" (click)="close()"></app-button>
+      }
       </app-label>
     </header>
     <div class="modal__body">
