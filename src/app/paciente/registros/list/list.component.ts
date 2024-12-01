@@ -39,8 +39,10 @@ export class ListComponent implements OnInit {
 
   registro!: Registro[];
   registros$!: Observable<Registro[]>;
+  loggedUser = true;
   isMobile!: boolean;
-
+  email: string | null = null;
+  name: string | null = null;
   filteredRegistros$!: Observable<Registro[]>;
   searchControl = new FormControl('');
   selectedCategory: string = '';
@@ -127,6 +129,16 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      this.authState$.subscribe(user => {
+        if (user) {
+          this.email = user.email;
+          this.name = user.displayName;
+        } else {
+          this.email = null;
+          this.name = 'Usuario';
+        }
+      });
+  
     this.authState$.subscribe(user => {
       if (user) {
         this.registros$ = this.authState$.pipe(

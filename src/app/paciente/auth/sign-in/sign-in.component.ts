@@ -15,6 +15,8 @@ import { RequiredComponent } from 'src/app/shared/ui/required/required.component
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
 
 interface LogInForm {
+  nombre: FormControl<string | null>;
+  apellido: FormControl<string | null>;
   email: FormControl<string>;
   password: FormControl<string>;
 }
@@ -44,6 +46,8 @@ export default class LogInComponent {
   private router = inject(Router);
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
+    nombre: this.formBuilder.control(''),
+    apellido: this.formBuilder.control(''),
     email: this.formBuilder.control('', {
       validators: [Validators.required, Validators.email],
       nonNullable: true,
@@ -71,6 +75,8 @@ export default class LogInComponent {
     if (this.form.invalid) return;
 
     const credential: Credential = {
+      name: this.form.value.email || '',
+      lastName: this.form.value.email || '',
       email: this.form.value.email || '',
       password: this.form.value.password || '',
     };

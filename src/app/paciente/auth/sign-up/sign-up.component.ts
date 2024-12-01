@@ -106,6 +106,8 @@ export default class SignUpComponent {
     }
     
     const credential: Credential = {
+      name: this.form.value.nombre || '',
+      lastName: this.form.value.apellido || '',
       email: this.form.value.email || '',
       password: this.form.value.password || '',
     };
