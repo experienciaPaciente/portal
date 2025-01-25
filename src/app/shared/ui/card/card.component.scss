@@ -53,6 +53,7 @@ app-card {
       &.card--selectable {
         &:hover {
           background-color: var(--card__bg--color);
+          cursor: pointer;
         }
     
         &:focus {

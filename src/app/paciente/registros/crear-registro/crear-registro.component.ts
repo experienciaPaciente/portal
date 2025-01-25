@@ -221,7 +221,7 @@ export class createRegistroComponent implements OnInit{
   form = this._formBuilder.group<RegistroForm>({
     paciente: this._formBuilder.control(''),
     titulo: this._formBuilder.control('', Validators.required),
-    descripcion: this._formBuilder.control('', Validators.required),
+    descripcion: this._formBuilder.control(''),
     categoria: this._formBuilder.control('', Validators.required),
     estado: this._formBuilder.control(''),
     validado: this._formBuilder.control(null),

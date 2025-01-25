@@ -85,8 +85,7 @@ export default class LogInComponent {
       await this.authService.logInWithEmailAndPassword(credential);
       this.successMessage = 'Usuario autenticado, redirigiendo...';
       this.errorMessage = '';
-      setTimeout(() => this.router.navigateByUrl('/'), 1000);
-
+      this.router.navigateByUrl('/');
     } catch (error) {
       this.successMessage = '';
       this.errorMessage = 'Las credenciales ingresadas no son correctas';    }

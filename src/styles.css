@@ -13,6 +13,7 @@
   --secondary: #6CBCFC;
   --tertiary: #F5C451;
   --neutral: #8189B0;
+  --neutralDark: #6c6f7e;
   --primaryLight: #ECF5FF;
   --primaryLighter: #D7F6FF;
   --primaryDarker: #1B2F53;
@@ -37,7 +38,7 @@
   --label__height: fit-content;
   --label__width: 100%;
   --label__padding: 1rem;
-  --label__prefix--size: 14px;
+  --label__prefix--size: 12px;
   --label__prefix--color: var(--neutral);
   --label__title--size: 18px;
   --label__title--color: var(--primary);
@@ -163,14 +164,14 @@
   --form__gap--row: 16px;
   --form__gap--col: 12px;
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
-  --input__font--size: 18px;
+  --input__font--size: 16px;
   --input__label--size: 16px;
   --input__label--weight: bold;
   --input__label--lineHeight: 1.25;
   --input__label--color: var(--neutral);
-  --input__font--color: var(--neutral);
+  --input__font--color: var(--neutralDark);
   --input__padding: 12px 14px;
-  --input__border: solid 2px var(--input__label--color);
+  --input__border: solid 2px var(--neutral);
   --input__border--radius: 8px;
   --wrapper__gap: 16px;
   --wrapper__gap--row: 16px;
@@ -375,8 +376,8 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
-  font-size: 100%;
-  line-height: 1.25;
+  font-size: 16px;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -554,6 +555,7 @@ a, ul, li {
 }
 a:hover, ul:hover, li:hover {
   color: var(--secondary);
+  cursor: pointer;
 }
 a:visited, ul:visited, li:visited {
   color: var(--tertiary);
@@ -574,6 +576,7 @@ section[type=flex], aside[type=flex], div[type=flex], header[type=flex] {
   column-gap: var(--form__gap--col);
   row-gap: var(--form__gap--row);
   box-sizing: border-box;
+  width: 100%;
 }
 form[type=flex] div.form__input-wrapper ~ button,
 fieldset[type=flex] div.form__input-wrapper ~ button,
@@ -617,6 +620,7 @@ section .form__input-wrapper--row, aside .form__input-wrapper--row, div .form__i
   overflow-x: hidden;
   gap: var(--wrapper__gap);
   align-items: flex-end;
+  justify-content: center;
 }
 form .form__input-wrapper--row > .form__input-wrapper--col,
 fieldset .form__input-wrapper--row > .form__input-wrapper--col,
@@ -680,7 +684,7 @@ fieldset select.input__size--sm,
 section input.input__size--sm,
 section textarea.input__size--sm,
 section select.input__size--sm, aside input.input__size--sm, aside textarea.input__size--sm, aside select.input__size--sm, div input.input__size--sm, div textarea.input__size--sm, div select.input__size--sm, header input.input__size--sm, header textarea.input__size--sm, header select.input__size--sm {
-  --input__font--size: 16px;
+  --input__font--size: 14px;
   --input__padding: .5rem;
   --input__border--radius: 4px;
 }
@@ -749,6 +753,14 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   justify-content: space-between;
   width: 100%;
 }
+.page__body .panel__header--col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--panel__gap--row);
+  justify-content: space-between;
+  width: 100%;
+}
 .page__body aside.page__panel--sidebar {
   height: var(--panel__height);
   width: 100vw;
@@ -789,6 +801,11 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   overflow-y: scroll;
   position: relative;
   z-index: 0;
+  width: 100%;
+}
+.page__body main.page__panel--main.center {
+  align-items: center;
+  padding: 0 5vw;
 }
 .page__body main.page__panel--main app-crear-registro, .page__body main.page__panel--main app-scan, .page__body main.page__panel--main app-detail {
   display: flex;
@@ -846,7 +863,7 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
 }
 .page__body main.page__panel--main .panel__inner--aside {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   row-gap: var(--panel__gap--row);
   flex: 1;
   height: max-content;
@@ -883,11 +900,11 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
 
 footer.panel__footer {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 84px;
+  height: fit-content;
   box-sizing: border-box;
   padding: var(--footer__padding);
   background-color: var(--footer__bg--color);
@@ -896,7 +913,7 @@ footer.panel__footer {
   left: 0;
   z-index: 1;
   box-shadow: 0 -1px 0px 0px var(--shadow);
-  column-gap: var(--panel__gap);
+  gap: var(--panel__gap);
 }
 footer.panel__footer .panel__footer--right {
   display: flex;
@@ -911,7 +928,7 @@ footer.panel__footer .panel__footer--left {
   flex: 1;
 }
 
-@media screen and (min-width: 980px) {
+@media screen and (min-width: 768px) {
   .page__panel--sidebar {
     --panel__padding: 24px;
     --wrapper__gap--row: 24px;
@@ -921,7 +938,6 @@ footer.panel__footer .panel__footer--left {
 
   .page__body .page__panel--main .panel__main {
     column-gap: 140px;
-    padding: var(--page__main--padding) !important;
   }
   .page__body .page__panel--main .panel__main article.panel__text--article {
     font-size: var(--panel__font--size);
@@ -929,7 +945,7 @@ footer.panel__footer .panel__footer--left {
     word-break: break-all;
   }
   .page__body .page__panel--main .panel__main .panel__inner--aside {
-    flex-direction: column !important;
+    flex-direction: column;
     row-gap: var(--panel__gap--row);
     flex: 1;
     height: 100%;
@@ -944,6 +960,18 @@ footer.panel__footer .panel__footer--left {
     border: solid 1px var(--neutral);
   }
 
+  form input, form textarea, form select,
+fieldset input,
+fieldset textarea,
+fieldset select,
+section input,
+section textarea,
+section select, aside input, aside textarea, aside select, div input, div textarea, div select, header input, header textarea, header select {
+    --input__font--size: 18px;
+    --input__padding: 12px 14px;
+    font-size: var(--input__font--size);
+    padding: var(--input__padding);
+  }
   form label,
 fieldset label,
 section label, aside label, div label, header label {
@@ -961,6 +989,7 @@ section[type=flex], aside[type=flex], div[type=flex], header[type=flex] {
   #signIn .page__panel--sidebar {
     --panel__height--center: 84vh!important;
     height: var(--panel__height--center);
+    border-radius: var(--panel__border--radius);
   }
 
   #signUp .page__panel--float {
@@ -1152,14 +1181,15 @@ app-card .card__wrapper--column {
   --card__direction: column;
 }
 app-card .card.card__fill--custom, app-card .card.card__outline--custom, app-card .card.card__fab--custom {
-  --card__bg--color: var(--customColor);
-  --card__border--color: var(--customColor);
+  --card__bg--color: var(--card__bg--color);
+  --card__border--color: var(--card__border--color);
 }
 app-card .card.card__fill--custom.card--selectable:hover, app-card .card.card__outline--custom.card--selectable:hover, app-card .card.card__fab--custom.card--selectable:hover {
   background-color: var(--card__bg--color);
+  cursor: pointer;
 }
 app-card .card.card__fill--custom.card--selectable:focus, app-card .card.card__outline--custom.card--selectable:focus, app-card .card.card__fab--custom.card--selectable:focus {
-  border: solid 2px var(--customColor);
+  border: solid 2px var(--card__border--color);
 }
 app-card .card.card__fill--primary {
   --card__border--color: var(--primary);
@@ -1265,55 +1295,52 @@ app-card .card.card__outline--neutral.card--selectable:focus {
 app-card .card.card__fab {
   animation: fade-in 1.5s ease-in;
 }
-app-card .card.card__fab--primary {
-  --card__border--color: var(--card__text--color);
-  border: solid 2px var(--card__border--color);
-}
-app-card .card.card__fab--primary.card--selectable:hover {
-  --card__bg--color: var(--primaryLighter);
+app-card .card.card__fab--success {
+  --card__border--color: var(--success);
+  --card__bg--color: var(--success--light);
   background-color: var(--card__bg--color);
 }
-app-card .card.card__fab--primary.card--selectable:focus {
-  border: solid 2px var(--card__border--color);
-}
-app-card .card.card__fab--secondary {
-  --card__border--color: var(--secondary);
-}
-app-card .card.card__fab--secondary.card--selectable:hover {
-  --card__bg--color: var(--secondaryLighter);
+app-card .card.card__fab--success.card--selectable:hover {
+  --card__bg--color: var(--success--dark);
   background-color: var(--card__bg--color);
 }
-app-card .card.card__fab--secondary.card--selectable:focus {
+app-card .card.card__fab--success.card--selectable:focus {
   border: solid 2px var(--card__border--color);
 }
-app-card .card.card__fab--tertiary {
-  --card__border--color: var(--tertiary);
-}
-app-card .card.card__fab--tertiary.card--selectable:hover {
-  --card__bg--color: var(--tertiaryLighter);
+app-card .card.card__fab--warning {
+  --card__border--color: var(--warning);
+  --card__bg--color: var(--warning--light);
   background-color: var(--card__bg--color);
 }
-app-card .card.card__fab--tertiary.card--selectable:focus {
+app-card .card.card__fab--warning.card--selectable:hover {
+  --card__bg--color: var(--warning--dark);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fab--warning.card--selectable:focus {
+  border: solid 2px var(--card__border--color);
+}
+app-card .card.card__fab--danger {
+  --card__border--color: var(--danger);
+  --card__bg--color: var(--danger--light);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fab--danger.card--selectable:hover {
+  --card__bg--color: var(--danger--dark);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fab--danger.card--selectable:focus {
   border: solid 2px var(--card__border--color);
 }
 app-card .card.card__fab--info {
   --card__border--color: var(--info);
-}
-app-card .card.card__fab--info.card--selectable:hover {
   --card__bg--color: var(--info--light);
   background-color: var(--card__bg--color);
 }
-app-card .card.card__fab--info.card--selectable:focus {
-  border: solid 2px var(--card__border--color);
-}
-app-card .card.card__fab--neutral {
-  --card__border--color: var(--neutral);
-}
-app-card .card.card__fab--neutral.card--selectable:hover {
-  --card__bg--color: var(--neutral--light);
+app-card .card.card__fab--info.card--selectable:hover {
+  --card__bg--color: var(--info--dark);
   background-color: var(--card__bg--color);
 }
-app-card .card.card__fab--neutral.card--selectable:focus {
+app-card .card.card__fab--info.card--selectable:focus {
   border: solid 2px var(--card__border--color);
 }
 app-card .card.card--selected {
@@ -1347,15 +1374,9 @@ app-card .card--lg {
 app-card .card--xl {
   --card__padding: 12px 24px;
 }
-app-card .card > img, app-card .card > app-icon {
+app-card .card > img {
   margin-bottom: 0.75rem;
   object-fit: cover;
-}
-app-card .card__text-start {
-  text-align: left;
-}
-app-card .card__text-end {
-  text-align: right;
 }
 
 app-label .label__icon {
@@ -1391,32 +1412,38 @@ app-label .label.column {
   text-align: center;
 }
 app-label .label.xxs {
-  --label__prefix--size: 9px;
+  --label__prefix--size: 8px;
   --label__subtitle--size: 10px;
   --label__icon--size: 12px;
 }
 app-label .label.xs {
-  --label__prefix--size: 11px;
+  --label__prefix--size: 10px;
   --label__subtitle--size: 11px;
   --label__icon--size: 14px;
 }
 app-label .label.sm {
-  --label__prefix--size: 12px;
+  --label__prefix--size: 11px;
   --label__subtitle--size: 12px;
   --label__icon--size: 16px;
 }
+app-label .label.sm > .label__content {
+  row-gap: 6px;
+}
 app-label .label.md {
-  --label__prefix--size: 14px;
+  --label__prefix--size: 12px;
   --label__subtitle--size: 14px;
   --label__icon--size: 36px;
 }
+app-label .label.md > .label__content {
+  row-gap: 8px;
+}
 app-label .label.lg {
-  --label__prefix--size: 16px;
+  --label__prefix--size: 14px;
   --label__subtitle--size: 16px;
   --label__icon--size: 56px;
 }
 app-label .label.xl {
-  --label__prefix--size: 20px;
+  --label__prefix--size: 18px;
   --label__subtitle--size: 20px;
   --label__icon--size: 64px;
 }
@@ -1446,6 +1473,7 @@ app-label .label__content {
 app-label .label__prefix {
   font-size: var(--label__prefix--size);
   color: var(--label__prefix--color);
+  text-transform: uppercase;
 }
 app-label .label__title {
   color: var(--label__title--color);
@@ -1455,7 +1483,7 @@ app-label .label__title {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;
-  text-wrap: nowrap;
+  overflow: hidden;
 }
 app-label .label__subtitle {
   font-size: var(--label__subtitle--size);
@@ -1464,8 +1492,9 @@ app-label .label__subtitle {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .button__group {
@@ -1640,7 +1669,6 @@ nav.nav__wrapper .nav__list--row {
   position: relative;
   height: 100vh;
   width: 100vw;
-  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1655,18 +1683,17 @@ nav.nav__wrapper .nav__list--row {
 }
 #signIn .page__panel--sidebar {
   --panel__height--center: 100vh;
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 6rem 2.5rem 0 2.5rem;
+  align-items: center;
   box-shadow: var(--box-shadow);
-  border-radius: var(--panel__border--radius);
   box-sizing: border-box;
-  height: var(--panel__height--center);
+  height: 100%;
   z-index: 1;
   background-color: white;
   row-gap: var(--wrapper__gap--row);
+  padding: 2rem;
 }
 #signIn .page__panel--sidebar .panel__img--center {
   align-self: center;
@@ -1674,6 +1701,11 @@ nav.nav__wrapper .nav__list--row {
 #signIn .page__panel--sidebar .panel__footer {
   --panel__gap: auto;
   column-gap: var(--panel__gap);
+}
+#signIn > app-card {
+  position: absolute;
+  bottom: 2.5rem;
+  width: calc(100vw - 2rem);
 }
 
 #signUp {

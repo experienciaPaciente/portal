@@ -118,7 +118,7 @@ export default class SignUpComponent {
   
       setTimeout(() => {
         this.router.navigateByUrl('/ingresar');
-      }, 2000);
+      }, 1500);
       
     } catch (error) {
       console.error(error);

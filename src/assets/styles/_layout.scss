@@ -200,11 +200,12 @@
   // Desacoplar en componente
   footer.panel__footer {
     display: flex;
-    flex-direction: row;
+    // flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 84px;
+    height: fit-content;
     box-sizing: border-box;
     padding: var(--footer__padding);
     background-color: var(--footer__bg--color);
@@ -213,7 +214,7 @@
     left: 0;
     z-index: 1;
     box-shadow: 0 -1px 0px 0px var(--shadow);
-    column-gap: var(--panel__gap);
+    gap: var(--panel__gap);
 
     .panel__footer--right {
       display: flex;

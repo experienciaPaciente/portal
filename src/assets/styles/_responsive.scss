@@ -12,7 +12,7 @@
 
             .panel__main {
                 column-gap: 140px;
-                padding: var(--page__main--padding)!important;
+                // padding: var(--page__main--padding)!important;
 
                 article.panel__text--article {
                     // padding-left: var(--label__icon--size);
@@ -69,6 +69,7 @@
         .page__panel--sidebar {
             --panel__height--center: 84vh!important;
             height: var(--panel__height--center);
+            border-radius: var(--panel__border--radius);
         }
     }
 

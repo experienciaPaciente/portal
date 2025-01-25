@@ -12,40 +12,41 @@
 }
 
 #signIn {
---box-shadow: -2px 0 4px var(--shadow);
---page__body--height: 100vh;
+    --box-shadow: -2px 0 4px var(--shadow);
+    --page__body--height: 100vh;
 
-position: relative;
-height: 100vh;
-width: 100vw;
-padding: 2rem;
-display: flex;
-align-items: center;
-justify-content: center;
-box-sizing: border-box;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    // padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 
---page__bg--img: url('./../../../../assets/img/login__bg--desktop.jpg');
-background-image: var(--page__bg--img);
-background-position: center;
-background-attachment: fixed;
-background-repeat: no-repeat;
-background-size: cover;
-position: relative;
+    --page__bg--img: url('./../../../../assets/img/login__bg--desktop.jpg');
+    background-image: var(--page__bg--img);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 
-.page__panel--sidebar {
+    .page__panel--sidebar {
         --panel__height--center: 100vh;
-        position: absolute;
+        // position: absolute;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 6rem 2.5rem 0 2.5rem;
+        align-items: center;
         box-shadow: var(--box-shadow);
-        border-radius: var(--panel__border--radius);
+
         box-sizing: border-box;
-        height: var(--panel__height--center);
+        height: 100%;
         z-index: 1;
         background-color: white;
         row-gap: var(--wrapper__gap--row);
+        padding: 2rem;
         
         .panel__img--center {
             align-self: center;
@@ -56,7 +57,12 @@ position: relative;
             column-gap: var(--panel__gap);
         }
     }
-
+    
+    > app-card {
+        position: absolute;
+        bottom: 2.5rem;
+        width: calc(100vw - 2rem);
+    }
 }
 
 // Sign-up
@@ -141,4 +147,3 @@ position: relative;
     height: 100vh;
     width: 100vw;
 }
-
