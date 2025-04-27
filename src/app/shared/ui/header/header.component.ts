@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
 
   getMenuItems(item: void): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
-      { label: 'Mi cuenta', icon: 'user', path: '/auth/sign-in', disabled: false },
+      { label: 'Mi cuenta', icon: 'user', path: '/ingresar', disabled: false },
       { label: 'Nuevo registro', icon: 'folder-plus', path: '/registrar', disabled: false },
       { label: 'Gestionar permisos', icon: 'user-lock', path: '/', disabled: true },
       { label: 'Delegar cuenta', icon: 'people-arrows', path: '/', disabled: true },
@@ -87,7 +87,7 @@ export class HeaderComponent implements OnInit {
   async logOut(): Promise<void> {
     try {
       await this.authservice.logOut();
-      this._router.navigateByUrl('/auth/sign-in');
+      this._router.navigateByUrl('/ingresar');
     } catch (error) {
         console.log(error);
     }

@@ -6,6 +6,7 @@ import { ListComponent } from './paciente/registros/list/list.component';
 import { DetailComponent } from './paciente/registros/detail/detail.component';
 import { ScanComponent } from './paciente/registros/scan/scan.component';
 import SignUpComponent from './paciente/auth/sign-up/sign-up.component';
+import LogInComponent from './paciente/auth/sign-in/sign-in.component';
 
 export const routes: Routes = [
   {
@@ -19,10 +20,8 @@ export const routes: Routes = [
       { path: 'actualizar/:id', component: createRegistroComponent },
     ]
   },
-  { path: 'registrarse', component: SignUpComponent },
-  {
-    path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
-  },
+  { path: 'portal-paciente/registrarse', component: SignUpComponent },
+  { path: 'portal-paciente/ingresar', component: LogInComponent },
   {
     path: 'auth',
     canActivate: [publicGuard],
@@ -34,6 +33,9 @@ export const routes: Routes = [
         path: 'sign-up', loadComponent: () => import('./paciente/auth/sign-up/sign-up.component').then(m => m.default),
       },
     ],
+  },
+  {
+    path: '**', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
   },
 ];
 

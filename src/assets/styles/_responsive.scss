@@ -42,6 +42,10 @@
         }
     }
 
+    footer.panel__footer {
+        width: calc(100% - var(--panel__width--sidebar));
+    }
+
     // Generics
     form,
     fieldset,

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterOutlet, Router, ActivatedRoute } from '@angular/router';
 import { MessageComponent } from './shared/ui/message/message.component';
 
 @Component({
@@ -13,4 +13,20 @@ import { MessageComponent } from './shared/ui/message/message.component';
   ],
 })
 export class AppComponent {
+  private router = inject(Router);
+
+  constructor(private route: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    // Detectar parámetro de consulta y redirigir
+    this.route.queryParams.subscribe(params => {
+      const destino = params['destino'];
+      if (destino === 'registrarse') {
+        this.router.navigate(['/portal-paciente/registrarse']);
+      } else if (destino === 'ingresar') {
+        this.router.navigate(['/portal-paciente/ingresar']);
+      }
+    });
+  }
 }
