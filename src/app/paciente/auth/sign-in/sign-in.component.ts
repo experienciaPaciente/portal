@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -39,11 +39,26 @@ export default class LogInComponent {
   hide = true;
   successMessage = '';
   errorMessage = '';
+  isMobile = false;
 
   formBuilder = inject(FormBuilder);
 
   private authService = inject(AuthService);
   private router = inject(Router);
+
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkIfMobile(event.target.innerWidth);
+  }
+
+  ngOnInit(): void {
+    this.checkIfMobile(window.innerWidth);
+  }
+
+  checkIfMobile(width: number): void {
+    this.isMobile = width < 768; 
+  }
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
     nombre: this.formBuilder.control(''),

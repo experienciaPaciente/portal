@@ -14,6 +14,7 @@
 #signIn {
     --box-shadow: -2px 0 4px var(--shadow);
     --page__body--height: 100vh;
+    --panel__height--center: 100vh;
 
     position: relative;
     height: 100vh;
@@ -33,16 +34,14 @@
     position: relative;
 
     .page__panel--sidebar {
-        --panel__height--center: 100vh;
         // position: absolute;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
         box-shadow: var(--box-shadow);
-
         box-sizing: border-box;
-        height: 100%;
+        height: var(--panel__height--center);        
         z-index: 1;
         background-color: white;
         row-gap: var(--wrapper__gap--row);

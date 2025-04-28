@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
 
   getMenuItems(item: void): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
-      { label: 'Mi cuenta', icon: 'user', path: '/ingresar', disabled: false },
+      { label: 'Mi cuenta', icon: 'user', path: '/ingresar', disabled: true },
       { label: 'Nuevo registro', icon: 'folder-plus', path: '/registrar', disabled: false },
       { label: 'Gestionar permisos', icon: 'user-lock', path: '/', disabled: true },
       { label: 'Delegar cuenta', icon: 'people-arrows', path: '/', disabled: true },

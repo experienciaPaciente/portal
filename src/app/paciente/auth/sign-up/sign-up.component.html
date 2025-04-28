@@ -97,7 +97,7 @@
         </section>
         <footer class="panel__footer">
           <app-button
-            size="xxs"
+            [size]="isMobile ? 'xxs' : 'xs'"
             [severity]="'primary'"
             [variant]="'link'"
             [icon]="'arrow-left'"
@@ -113,7 +113,7 @@
             [icon]="'check-circle'"
             [direction]="'row'"
             [label]="'Registrarme'"
-            size="xxs"
+            [size]="isMobile ? 'xxs' : 'xs'"
             [disabled]="form.invalid || passwordsDoNotMatch"
             >
           </app-button>

@@ -40,7 +40,7 @@
           </app-button>
       </div>
       <app-button
-      size="xxs"
+      [size]="isMobile ? 'xxs' : 'xs'"
       [severity]="'secondary'"
       [variant]="'link'"
       [icon]="'key'"
@@ -51,7 +51,7 @@
     </section>
       <footer class="panel__footer">
           <app-button
-            size="xxs"
+            [size]="isMobile ? 'xxs' : 'xs'"
             [severity]="'primary'"
             [variant]="'link'"
             [icon]="'user-plus'"
@@ -68,7 +68,7 @@
             [direction]="'row'"
             icon="user"
             [label]="'Acceder'"
-            size="xxs"
+            [size]="isMobile ? 'xxs' : 'xs'"
             [disabled]="form.invalid"
             >
           </app-button>

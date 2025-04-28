@@ -53,11 +53,8 @@ app-card {
       &.card--selectable {
         &:hover {
           background-color: var(--card__bg--color);
-          cursor: pointer;
-        }
-    
-        &:focus {
           border: solid 2px var(--card__border--color);
+          cursor: pointer;
         }
       }
     }
