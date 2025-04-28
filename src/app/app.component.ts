@@ -23,9 +23,9 @@ export class AppComponent {
     this.route.queryParams.subscribe(params => {
       const destino = params['destino'];
       if (destino === 'registrarse') {
-        this.router.navigate(['/portal-paciente/registrarse']);
+        this.router.navigate(['/portal/registrarse']);
       } else if (destino === 'ingresar') {
-        this.router.navigate(['/portal-paciente/ingresar']);
+        this.router.navigate(['/portal/ingresar']);
       }
     });
   }

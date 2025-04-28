@@ -20,8 +20,8 @@ export const routes: Routes = [
       { path: 'actualizar/:id', component: createRegistroComponent },
     ]
   },
-  { path: 'portal-paciente/registrarse', component: SignUpComponent },
-  { path: 'portal-paciente/ingresar', component: LogInComponent },
+  { path: 'registrarse', component: SignUpComponent },
+  { path: 'ingresar', component: LogInComponent },
   {
     path: 'auth',
     canActivate: [publicGuard],

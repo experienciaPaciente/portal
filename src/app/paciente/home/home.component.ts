@@ -29,7 +29,7 @@ import { BadgeComponent } from 'src/app/shared/ui/badge/badge.component';
   styleUrl: './home.component.scss'
 })
 export default class HomeComponent {
-  title = 'portal-paciente';
+  title = 'portal';
   imgSrc = './assets/img/ep__marca--row.svg';
   isMobile: boolean = false;
   currentView: 'list' | 'detail' | 'registrar' | 'scan' | 'update' = 'list';
