@@ -121,19 +121,19 @@
             Debe seleccionar un horario
           </small>
         </div>
-        <div class="form__input-wrapper--col">
-          <app-required [label]="'Establecimiento'" [control]="'lugar'"></app-required>
-          <input type="text" formControlName="lugar">
-        </div>
-          <app-switcher
-              [on]="validado"
-              size="md"
-              [onLabel]="'Validado por equipo de Salud'"
-              offLabel="No validado por equipo de Salud"
-              labelPosition="right"
-              (toggle)="validateRecord()"
-          ></app-switcher>
+        <app-switcher
+            [on]="validado"
+            size="md"
+            [onLabel]="'Validado por equipo de Salud'"
+            offLabel="No validado por equipo de Salud"
+            labelPosition="right"
+            (toggle)="validateRecord()"
+        ></app-switcher>
           @if (validado) {
+            <div class="form__input-wrapper--col">
+              <app-required [label]="'Establecimiento'" [control]="'lugar'"></app-required>
+              <input type="text" formControlName="lugar">
+            </div>
             <div class="form__input-wrapper--col">
               <app-required [label]="'Miembro equipo de Salud'" [control]="'validador'"></app-required>
               <input type="text" formControlName="validador">

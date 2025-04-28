@@ -225,7 +225,7 @@ export class createRegistroComponent implements OnInit{
     categoria: this._formBuilder.control('', Validators.required),
     estado: this._formBuilder.control(''),
     validado: this._formBuilder.control(null),
-    lugar: this._formBuilder.control('', Validators.required),
+    lugar: this._formBuilder.control(''),
     validador: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date, Validators.required),
     hora: this._formBuilder.control('', Validators.required),
