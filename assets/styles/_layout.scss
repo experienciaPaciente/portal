@@ -24,6 +24,14 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        position: sticky;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        box-sizing: border-box;
+        padding: 1rem;
+        background: white;
+        box-shadow: 0 1px 0 0 var(--shadow);
       }
 
       .panel__header--col {

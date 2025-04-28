@@ -69,10 +69,10 @@
 
     // Sign-in
     #signIn {
+        height: var(--panel__height--center);
         padding: 2rem;
         .page__panel--sidebar {
-            --panel__height--center: 84vh!important;
-            height: var(--panel__height--center);
+            --panel__height--center: fit-content;
             border-radius: var(--panel__border--radius);
         }
     }
