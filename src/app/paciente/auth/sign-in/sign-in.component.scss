@@ -34,7 +34,7 @@
     position: relative;
 
     .page__panel--sidebar {
-        // position: absolute;
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -85,6 +85,7 @@
         --panel__height: 100vh;
     
         display: grid;
+        position: relative;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         grid-template-rows: 60px auto auto;
         grid-auto-flow: row dense;
@@ -126,6 +127,7 @@
         footer.panel__footer {
             grid-column: 1 / -1;
             grid-row: 6;
+            padding: .5rem 0;
         }
     }
 }
@@ -148,7 +150,9 @@
         --panel__gap: auto;
         column-gap: var(--panel__gap);
         position: sticky;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        padding: 1rem 0;
+        padding: .5rem 0;
     }
 }

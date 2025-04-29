@@ -59,6 +59,11 @@ section,aside, div, header {
     >.form__input-wrapper--col {
       flex: 1 1 160px;
     }
+
+    > app-button {
+        align-self: start;
+        padding-top: 1.6rem;
+      }
   }
 
   fieldset {
