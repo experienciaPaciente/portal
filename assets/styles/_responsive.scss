@@ -40,10 +40,25 @@
                 }
             }
         }
+        .panel__header--row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            box-sizing: border-box;
+            padding: 1rem 0;
+            background: white;
+            box-shadow: 0 1px 0 0 var(--shadow);
+        }
     }
 
     footer.panel__footer {
-        width: calc(100% - var(--panel__width--sidebar));
+       padding: 1rem 0rem;
     }
 
     // Generics
@@ -96,6 +111,13 @@
             .panel__img--center {
                 align-self: flex-start!important;
             }
+        }
+    }
+
+    #signIn, #signUp {
+        
+        footer.panel__footer {
+            padding: 1rem 0 0 0;
         }
     }
 }
