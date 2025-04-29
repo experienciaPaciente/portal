@@ -29,7 +29,7 @@
         right: 0;
         z-index: 1;
         box-sizing: border-box;
-        padding: 1rem;
+        padding: .5rem 0;
         background: white;
         box-shadow: 0 1px 0 0 var(--shadow);
       }
@@ -106,7 +106,7 @@
           flex-wrap: wrap;
           width: 100%;
           height: fit-content;
-          padding: var(--panel__padding);
+          padding: 0 var(--panel__padding);
           box-sizing: border-box;
           row-gap: var(--wrapper__gap--row);
           
@@ -215,9 +215,9 @@
     height: fit-content;
     width: 100%;
     box-sizing: border-box;
-    padding: var(--footer__padding);
+    padding: .5rem var(--footer__padding);
     background-color: var(--footer__bg--color);
-    position: fixed;
+    position: sticky;
     bottom: 0;
     right: 0;
     z-index: 1;
