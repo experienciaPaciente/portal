@@ -34,6 +34,7 @@
     position: relative;
 
     .page__panel--sidebar {
+        --panel__padding: 36px;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -45,7 +46,7 @@
         z-index: 1;
         background-color: white;
         row-gap: var(--wrapper__gap--row);
-        padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
+        padding: 56px var(--panel__padding) 0 var(--panel__padding);
         
         .panel__img--center {
             align-self: center;
@@ -80,7 +81,7 @@
     width: 100vw;
 
     .page__panel--float {
-        --panel__padding: 36px;
+        --panel__padding: 24px;
         --panel__width: 100vw;
         --panel__height: 100vh;
     
@@ -127,7 +128,6 @@
         footer.panel__footer {
             grid-column: 1 / -1;
             grid-row: 6;
-            padding: .5rem 0;
         }
     }
 }
@@ -153,6 +153,6 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        padding: .5rem 0;
+        padding: 1.5rem 0rem;
     }
 }

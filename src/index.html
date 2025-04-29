@@ -9,55 +9,6 @@
   <link rel="stylesheet" href="./assets/fonts/inter.min.css">
   <link rel="stylesheet" href="./assets/webfonts/fontawesome.min.css">
   <link rel="stylesheet" href="./styles.css">
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const redirectPath = urlParams.get('redirect');
-      
-      if (redirectPath) {
-        const cleanUrl = window.location.href.split('?')[0];
-        history.replaceState(null, document.title, cleanUrl);
-        
-        function attemptNavigation() {
-          let targetButton = null;
-          const targetRoute = redirectPath.split('/').pop();
-
-          targetButton = document.querySelector(`app-button[path="${targetRoute}"]`);
-          
-          if (!targetButton) {
-            const allButtons = document.querySelectorAll('app-button');
-            for (const btn of allButtons) {
-              if (btn.getAttribute('label')?.toLowerCase() === targetRoute ||
-                  btn.getAttribute('label')?.toLowerCase().includes(targetRoute)) {
-                targetButton = btn;
-                break;
-              }
-            }
-          }
-
-          if (targetButton) {
-            targetButton.click();
-            return true;
-          } 
-          return false;
-        }
-        
-        if (!attemptNavigation()) {
-          const delays = [500, 1000, 2000];
-          
-          delays.forEach(delay => {
-            setTimeout(() => {
-              if (!window.navigationAttempted) {
-                if (attemptNavigation()) {
-                  window.navigationAttempted = true;
-                }
-              }
-            }, delay);
-          });
-        }
-      }
-    });
-  </script>
 </head>
 <body>
   <app-root></app-root>

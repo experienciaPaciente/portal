@@ -1,4 +1,4 @@
-import { Component, inject, HostListener } from '@angular/core';
+import { Component, inject, HostListener, AfterViewInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -58,6 +58,52 @@ export default class LogInComponent {
 
   checkIfMobile(width: number): void {
     this.isMobile = width < 768; 
+  }
+
+  ngAfterViewInit() {
+    this.handleNavigation();
+  }
+
+  private handleNavigation() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectParam = urlParams.get('redirect');
+    
+    if (redirectParam) {
+      const cleanUrl = window.location.href.split('?')[0];
+      history.replaceState(null, document.title, cleanUrl);
+      
+      const targetRoute = this.extractRouteFromPath(redirectParam);
+      console.log('Navigating via redirect param to:', targetRoute);
+      this.navigateToRoute(targetRoute);
+      return;
+    }
+    
+    if (document.referrer) {
+      console.log('Checking referrer:', document.referrer);
+      
+      const referrerUrl = new URL(document.referrer);
+      const referrerPath = referrerUrl.pathname;
+      
+      if (referrerPath.includes('/portal/registrarse') || referrerPath.includes('/registrarse')) {
+        console.log('Referrer matches registration page');
+        this.navigateToRoute('registrarse');
+        return;
+      } else if (referrerPath.includes('/portal/ingresar') || referrerPath.includes('/ingresar')) {
+        console.log('Referrer matches login page');
+        this.navigateToRoute('ingresar');
+        return;
+      }
+    }
+  }
+  
+  private extractRouteFromPath(path: string): string {
+    return path.replace(/^\/+|\/+$/g, '').split('/').pop() || '';
+  }
+  
+  private navigateToRoute(route: string) {
+    setTimeout(() => {
+      this.router.navigate([route]);
+    }, 100);
   }
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
