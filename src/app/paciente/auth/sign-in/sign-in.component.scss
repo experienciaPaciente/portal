@@ -42,7 +42,8 @@
         align-items: center;
         box-shadow: var(--box-shadow);
         box-sizing: border-box;
-        height: var(--panel__height--center);        
+        height: var(--panel__height--center);
+        overflow-y: scroll;     
         z-index: 1;
         background-color: white;
         row-gap: var(--wrapper__gap--row);
@@ -145,6 +146,28 @@
 }
 
 #signIn, #signUp {
+
+    %baseText {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .body__text--title {
+        @extend %baseText;
+        color: var(--primary);
+    }
+
+    .body__text--center {
+        @extend %baseText;
+        color: var(--neutralDark);
+        text-align: center;
+    }
+
+    .body__text--link {
+        @extend %baseText;
+        text-decoration: underline;
+        color: var(--secondary);
+    }
         
     footer.panel__footer {
         --panel__gap: auto;
