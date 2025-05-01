@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
       { label: 'Nuevo registro', icon: 'folder-plus', path: '/registrar', disabled: false },
       { label: 'Gestionar permisos', icon: 'user-lock', path: '/', disabled: true },
       { label: 'Delegar cuenta', icon: 'people-arrows', path: '/', disabled: true },
+      { label: 'Enviar comentario', icon: 'comments', path: 'https://forms.gle/BhuhELXT3bp1xw2DA', disabled: true },
       { label: 'Cerrar sesión', icon: 'right-from-bracket', disabled: false, callback: () => this.openModal() }
     ]
   }

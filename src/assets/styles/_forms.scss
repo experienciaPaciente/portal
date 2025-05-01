@@ -61,7 +61,8 @@ section,aside, div, header {
     }
 
     > app-button {
-        align-self: start;
+        border-radius: 50%;
+        align-self: center;
         padding-top: 1.6rem;
       }
   }
