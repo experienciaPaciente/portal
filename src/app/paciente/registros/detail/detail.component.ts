@@ -132,7 +132,7 @@ export class DetailComponent {
           this.generateQRCode(this.registro);
         }
       } catch (error) {
-        console.error('Error loading registro:', error);
+        console.error('Error al cargar registro:', error);
         this.registro = null; 
       }
     } else {
@@ -147,7 +147,7 @@ export class DetailComponent {
       this.generateQRCode(registro);
     } catch (error) {
       this.registro = null;
-      console.error('Error fetching registro:', error);
+      console.error('Error recuperando registro:', error);
     }
   }
 
@@ -180,7 +180,7 @@ export class DetailComponent {
       await this.registroService.deleteRegistro(item.id);
      this.router.navigate(['/']);
     } catch (error) {
-      console.error('Error deleting registro', error);
+      console.error('Error eliminando registro', error);
     }
   }
 

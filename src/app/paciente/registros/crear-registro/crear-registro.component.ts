@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -59,6 +59,8 @@ export interface RegistroForm {
 })
 
 export class createRegistroComponent implements OnInit{
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   isMobile = false;
   qrResultString: string | null = null;
   qrRegister!: boolean;
@@ -348,28 +350,40 @@ export class createRegistroComponent implements OnInit{
   }
 
   // Uploads
+
   uploadFiles(event: any) {
     const files: FileList = event.target.files;
     if (!files.length) return;
-
+    
     Array.from(files).forEach((file: File) => {
       const filePath = `images/${Date.now()}_${file.name}`;
       const storageRef = ref(this.storage, filePath);
       const uploadTask = uploadBytesResumable(storageRef, file);
       this.uploadedFileNames.push(file.name);
-
+      
       uploadTask.on('state_changed', {
         next: (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // You can use progress for displaying upload status if needed
         },
-        error: (error) => console.error('Upload error:', error),
+        error: (error) => {
+          console.error('Upload error:', error);
+          // Remove the file name if upload fails
+          const index = this.uploadedFileNames.findIndex(name => name === file.name);
+          if (index !== -1) {
+            this.uploadedFileNames.splice(index, 1);
+          }
+        },
         complete: async () => {
           try {
             const downloadURL = await getDownloadURL(storageRef);
             this.uploadedImages.push(downloadURL);
-            this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
-            event.target.value = '';
-            // Implementar notificación uploads
+            
+            // Update the form control with the current array of image URLs
+            this.form.controls.adjuntos.setValue([...this.uploadedImages]);
+            
+            // Save metadata if needed
+            await this.saveImageMetadata(downloadURL, file.name);
           } catch (error) {
             console.error('Error getting download URL:', error);
           }

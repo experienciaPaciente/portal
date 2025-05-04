@@ -42,14 +42,14 @@
         <app-modal
             [prefix]="'Previsualizar'"
             [title]="selectedFile"
-            [subtitle]="'Modal Subtitle'"
+            [subtitle]="selectedFile"
             icon="info-circle"
             [img]="selectedFile"
             [closeable]="true"
             (closeModal)="isModalOpen = false"
         >
             <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
-            <app-button direction="none" size="sm" label="Editar" variant="fill" severity="success"></app-button>
+            <app-button direction="none" size="sm" label="Cerrar" variant="fill" severity="success" (click)="isModalOpen = false"></app-button>
         </app-modal>
         }
      }
@@ -77,6 +77,13 @@
                 size="md"
                 [label]="registro.fecha"
                 [prefix]="'Fecha del registro'"
+                [direction]="'row'"
+                >
+            </app-label>
+            <app-label
+                size="md"
+                [label]="registro.hora"
+                [prefix]="'Hora del registro'"
                 [direction]="'row'"
                 >
             </app-label>
@@ -141,13 +148,13 @@
         <app-modal
             [prefix]="registro.categoria"
             [title]="'¿Desea eliminar el registro' + '' + registro.titulo + '?'"
-            [subtitle]="'Esta acción es irreversible'"
+            [subtitle]="'Esta acción es irreversible, perderá la información actual del registro.'"
             icon="info-alert"
             [closeable]="true"
             (closeModal)="modalDelete = false"
         >
             <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="modalDelete = false"></app-button>
-            <app-button direction="none" size="sm" label="Editar" variant="fill" severity="success" (click)="onConfirm()"></app-button>
+            <app-button direction="none" size="sm" label="Cancelar" variant="fill" severity="success" (click)="onConfirm()"></app-button>
         </app-modal>
         }
 </section>

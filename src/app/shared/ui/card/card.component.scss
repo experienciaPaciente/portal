@@ -118,11 +118,59 @@ app-card {
         }
       }
       
-    &--neutral {
-    --card__border--color: var(--neutral);
-      &.card--selectable {
+      &--neutral {
+      --card__border--color: var(--neutral);
+        &.card--selectable {
+          &:hover {
+            --card__bg--color: var(--neutral--light);
+            background-color: var(--card__bg--color);
+          }
+          
+          &:focus {
+            border: solid 2px var(--card__border--color);     
+          }
+        }
+      }
+      // Severities
+      &--success {
+        --card__border--color: var(--success);
+        --card__bg--color: var(--success--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
         &:hover {
-          --card__bg--color: var(--neutral--light);
+          --card__bg--color: var(--success--dark);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+    }
+
+      &--warning {
+        --card__border--color: var(--warning);
+        --card__bg--color: var(--warning--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
+        &:hover {
+          --card__bg--color: var(--warning--dark);
+          background-color: var(--card__bg--color);
+        }
+        
+        &:focus {
+          border: solid 2px var(--card__border--color);     
+        }
+      }
+    }
+
+      &--danger {
+        --card__border--color: var(--danger);
+        --card__bg--color: var(--danger--light);
+        background-color: var(--card__bg--color);
+        &.card--selectable {
+        &:hover {
+          --card__bg--color: var(--danger--dark);
           background-color: var(--card__bg--color);
         }
         

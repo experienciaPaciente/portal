@@ -14,6 +14,25 @@
           subtitle="Aquí comienza tu historia de Salud"
           [direction]="isMobile ? 'column' : 'row'"
         ></app-label>
+        <app-card
+        size="lg"
+        direction="row"
+        [variant]="'fill'"
+        bottom="20px"
+        [severity]="'warning'"
+        [closable]="false"
+        [selectable]="showErrorMsg"
+      >
+        <app-label
+          size="xxs"
+          label="Versión en desarrollo"
+          subtitle="Pueden presentarse errores. Evitá almacenar información sensible por ahora."
+          [icon]="'triangle-exclamation'"
+          variant="outline"
+          direction="row"
+          severity="info"
+        ></app-label>
+      </app-card>
         <hr>
         <div type="wrap">
           <div class="form__input-wrapper--col">
@@ -86,13 +105,35 @@
               </div>
             </span>
           </section>
+          <app-label
+          prefix="Opcional"
+          label="Datos de salud"
+          [size]="'sm'"
+          direction="row"
+            >
+        </app-label>
+        <hr>
+        <div class="form__input-wrapper--col">
+          <app-required label="Grupo sanguíneo" [control]="'nombre'"></app-required>
+          <input formControlName="nombre" />
+          <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
+            Nombre es obligatorio
+          </small>
+        </div>   
+          <div class="form__input-wrapper--col">
+            <app-required label="Alergías" [control]="'apellido'"></app-required>
+            <input formControlName="apellido" />
+            <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
+              Apellido es obligatorio
+            </small>
+          </div>
         </div>
         </section>
         <!-- disclaimer -->
         <section class="panel__prefooter">
           <small class="footer__text--sm">
             <b>Aviso Legal y Términos de Uso</b><br>
-            Al registrarte en experienciaPaciente, reconoces que la plataforma te brinda el poder de gestionar y controlar tus propios datos de salud, sin depender exclusivamente de sistemas tradicionales. experienciaPaciente no sustituye la atención médica, pero te posibilita acceder, registrar y compartir tu información de Salud.
+            Al registrarte en experienciaPaciente, reconoces que la plataforma pero te posibilita acceder, registrar y compartir tus propios datos de salud, sin depender exclusivamente de sistemas tradicionales. experienciaPaciente no sustituye la atención médica.
           </small>
         </section>
         <footer class="panel__footer">
