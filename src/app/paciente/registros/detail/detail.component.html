@@ -48,7 +48,6 @@
             [closeable]="true"
             (closeModal)="isModalOpen = false"
         >
-            <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="isModalOpen = false"></app-button>
             <app-button direction="none" size="sm" label="Cerrar" variant="fill" severity="success" (click)="isModalOpen = false"></app-button>
         </app-modal>
         }
@@ -154,7 +153,7 @@
             (closeModal)="modalDelete = false"
         >
             <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="modalDelete = false"></app-button>
-            <app-button direction="none" size="sm" label="Cancelar" variant="fill" severity="success" (click)="onConfirm()"></app-button>
+            <app-button direction="none" size="sm" label="Cancelar" variant="fill" severity="info" (click)="onConfirm()"></app-button>
         </app-modal>
         }
 </section>

@@ -18,6 +18,9 @@ export interface Credential {
   lastName: string;
   email: string;
   password: string;
+  grupoSanguineo: string;
+  alergia: string;
+  otraAlergia: string;
 }
 
 @Injectable({

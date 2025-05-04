@@ -20,13 +20,13 @@
         [variant]="'fill'"
         bottom="20px"
         [severity]="'warning'"
-        [closable]="false"
+        [closable]="true"
         [selectable]="showErrorMsg"
       >
         <app-label
           size="xxs"
           label="Versión en desarrollo"
-          subtitle="Pueden presentarse errores. Evitá almacenar información sensible por ahora."
+          subtitle="Evitá almacenar información sensible por ahora. Aún puede presentar errores."
           [icon]="'triangle-exclamation'"
           variant="outline"
           direction="row"
@@ -39,18 +39,18 @@
             <app-required [label]="'Nombre'" [control]="'nombre'"></app-required>
             <input formControlName="nombre" />
             <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
-              Nombre es obligatorio
+              El nombre es obligatorio
             </small>
           </div>   
             <div class="form__input-wrapper--col">
               <app-required [label]="'Apellido'" [control]="'apellido'"></app-required>
               <input formControlName="apellido" />
               <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
-                Apellido es obligatorio
+                El apellido es obligatorio
               </small>
             </div>
             <div class="form__input-wrapper--col">
-              <label class="required" for="email">Email</label>
+              <app-required [label]="'Email'" [control]="'email'"></app-required>
               <input formControlName="email" />
               <small class="required" *ngIf="form.controls['email'].invalid && form.controls['email']?.touched">
                 {{ form.controls['email'].errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
@@ -105,28 +105,59 @@
               </div>
             </span>
           </section>
+          <hr>
+          <app-button
+          [size]="isMobile ? 'xxs' : 'xs'"
+          [severity]="'primary'"
+          [variant]="'link'"
+          [icon]="'arrow-down'"
+          [direction]="'row'"
+          [label]="'Información de salud (opcional)'"
+          (click)="moreInfo = !moreInfo"
+        ></app-button>
+        @if (moreInfo) {
           <app-label
-          prefix="Opcional"
-          label="Datos de salud"
+          prefix="Adicional"
+          label="Datos básicos de salud"
           [size]="'sm'"
           direction="row"
             >
         </app-label>
-        <hr>
         <div class="form__input-wrapper--col">
-          <app-required label="Grupo sanguíneo" [control]="'nombre'"></app-required>
-          <input formControlName="nombre" />
-          <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
-            Nombre es obligatorio
-          </small>
-        </div>   
-          <div class="form__input-wrapper--col">
-            <app-required label="Alergías" [control]="'apellido'"></app-required>
-            <input formControlName="apellido" />
-            <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
-              Apellido es obligatorio
-            </small>
-          </div>
+          <app-required [label]="'Grupo sanguíneo'" [control]="'grupoSanguineo'"></app-required>
+            <select class="form__select--custom" id="grupoSanguineo" formControlName="grupoSanguineo" (change)="onGruposChange()">
+            <option value="" disabled selected>Seleccionar grupo</option>
+            @for (grupo of grupos; track grupo) {
+              <option [value]="grupo">
+                {{ grupo }}
+              </option>
+            }
+          </select>
+        </div> 
+        <div class="form__input-wrapper--col">
+          <app-required [label]="'Alergia'" [control]="'alergia'"></app-required>
+            <select class="form__select--custom" id="alergia" formControlName="alergia" (change)="onAlergiasChange()">
+            <option value="" disabled selected>Seleccionar categoría</option>
+            @for (alergia of alergias; track alergia) {
+              <option [value]="alergia">
+                {{ alergia }}
+              </option>
+            }
+          </select>
+        </div>
+          @if (otraAlergia) {
+            <div class="form__input-wrapper--col">
+              <app-required [label]="'Otras alergias'" [control]="'otraAlergia'"></app-required>
+                <textarea
+                  rows="3"
+                  type="text"
+                  id="otraAlergia"
+                  placeholder="Especifique sus otras alergias"
+                  formControlName="otraAlergia"
+                ></textarea>
+              </div>
+            }
+          }
         </div>
         </section>
         <!-- disclaimer -->
@@ -151,7 +182,7 @@
             severity="success"
             type="submit"
             variant="fill"
-            [icon]="'check-circle'"
+            [icon]="'heart'"
             [direction]="'row'"
             [label]="'Registrarme'"
             [size]="isMobile ? 'xxs' : 'xs'"

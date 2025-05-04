@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -59,7 +59,6 @@ export interface RegistroForm {
 })
 
 export class createRegistroComponent implements OnInit{
-  @ViewChild('fileInput') fileInput!: ElementRef;
 
   isMobile = false;
   qrResultString: string | null = null;
@@ -120,11 +119,14 @@ export class createRegistroComponent implements OnInit{
 
     const formattedDate: any = today.toISOString().split('T')[0];
     this.form.controls['fecha'].setValue(formattedDate);  
-  
+    
     const hours = today.getHours().toString().padStart(2, '0');  
     const minutes = today.getMinutes().toString().padStart(2, '0');  
     const formattedTime = `${hours}:${minutes}`;  
     this.form.controls['hora'].setValue(formattedTime);  
+
+    const dateTime: any = `Registro del ${formattedDate} - ${formattedTime}`;
+    this.form.controls['titulo'].setValue(dateTime);  
   }
 
   ngOnDestroy(): void {
@@ -268,6 +270,23 @@ export class createRegistroComponent implements OnInit{
           hora: registro.hora,
           adjuntos: registro.adjuntos || []
         });
+        
+        // Update local arrays for UI display
+        this.uploadedImages = registro.adjuntos || [];
+        
+        // Extract filenames from URLs (optional, for display purposes)
+        this.uploadedFileNames = registro.adjuntos?.map(url => {
+          try {
+            // Extract filename from URL
+            const urlObj = new URL(url);
+            const pathSegments = urlObj.pathname.split('/');
+            const filename = pathSegments[pathSegments.length - 1];
+            // Remove timestamp prefix if present (e.g., 1620123456_filename.jpg)
+            return filename.includes('_') ? filename.split('_').slice(1).join('_') : filename;
+          } catch {
+            return 'Archivo adjunto';
+          }
+        }) || [];
       }
     } catch (error) {
       console.error('Error loading registro:', error);
@@ -364,26 +383,17 @@ export class createRegistroComponent implements OnInit{
       uploadTask.on('state_changed', {
         next: (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // You can use progress for displaying upload status if needed
         },
-        error: (error) => {
-          console.error('Upload error:', error);
-          // Remove the file name if upload fails
-          const index = this.uploadedFileNames.findIndex(name => name === file.name);
-          if (index !== -1) {
-            this.uploadedFileNames.splice(index, 1);
-          }
-        },
+        error: (error) => console.error('Upload error:', error),
         complete: async () => {
           try {
             const downloadURL = await getDownloadURL(storageRef);
             this.uploadedImages.push(downloadURL);
             
-            // Update the form control with the current array of image URLs
-            this.form.controls.adjuntos.setValue([...this.uploadedImages]);
-            
-            // Save metadata if needed
-            await this.saveImageMetadata(downloadURL, file.name);
+   
+            this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
+            event.target.value = '';
+
           } catch (error) {
             console.error('Error getting download URL:', error);
           }

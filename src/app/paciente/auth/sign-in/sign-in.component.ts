@@ -19,6 +19,9 @@ interface LogInForm {
   apellido: FormControl<string | null>;
   email: FormControl<string>;
   password: FormControl<string>;
+  grupoSanguineo: FormControl<string>;
+  alergia: FormControl<string>;
+  otraAlergia: FormControl<string>;
 }
 
 @Component({
@@ -71,6 +74,9 @@ export default class LogInComponent {
       validators: Validators.required,
       nonNullable: true,
     }),
+    grupoSanguineo: this.formBuilder.control('', { nonNullable: true }),
+    alergia: this.formBuilder.control('',{ nonNullable: true }),
+    otraAlergia: this.formBuilder.control('',{ nonNullable: true }),
   });
 
   get isEmailValid(): string | boolean {
@@ -94,6 +100,9 @@ export default class LogInComponent {
       lastName: this.form.value.email || '',
       email: this.form.value.email || '',
       password: this.form.value.password || '',
+      grupoSanguineo: this.form.value.grupoSanguineo || '',
+      alergia: this.form.value.alergia || '',
+      otraAlergia: this.form.value.otraAlergia || '',
     };
 
     try {

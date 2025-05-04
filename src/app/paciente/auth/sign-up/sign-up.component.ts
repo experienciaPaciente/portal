@@ -23,6 +23,9 @@ interface SignUpForm {
   email: FormControl<string>;
   password: FormControl<string>;
   confirmPassword: FormControl<string>;
+  grupoSanguineo: FormControl<string>;
+  alergia: FormControl<string>;
+  otraAlergia: FormControl<string>;
 }
 
 @Component({
@@ -44,6 +47,10 @@ export default class SignUpComponent {
   hide = true;
   isMobile = false;
   direction = 'column';
+  hasChange = false;
+  otraAlergia = false;
+  moreInfo = false;
+  editableType: string = '';
   showConfirmMsg = false;
   showErrorMsg = false;
   confirmPassword = '';
@@ -70,8 +77,11 @@ export default class SignUpComponent {
   form = this.formBuilder.group<SignUpForm>({
     nombre: this.formBuilder.control('', Validators.required),
     apellido: this.formBuilder.control('', Validators.required),
-    email: this.formBuilder.control('', Validators.email),
+    email: this.formBuilder.control('', {validators: [Validators.email, Validators.required]}),
     password: this.formBuilder.control('', Validators.required),
+    grupoSanguineo: this.formBuilder.control(''),
+    alergia: this.formBuilder.control(''),
+    otraAlergia: this.formBuilder.control(''),
     confirmPassword: this.formBuilder.control('', {
      validators: [Validators.required,
       this.passwordFormatValidator()]
@@ -110,6 +120,9 @@ export default class SignUpComponent {
       lastName: this.form.value.apellido || '',
       email: this.form.value.email || '',
       password: this.form.value.password || '',
+      grupoSanguineo: this.form.value.grupoSanguineo || '',
+      alergia: this.form.value.alergia || '',
+      otraAlergia: this.form.value.otraAlergia || '',
     };
     
     try {
@@ -142,4 +155,55 @@ export default class SignUpComponent {
     return this.form.controls['password'].value !== this.form.controls['confirmPassword'].value;
   }
 
+
+  onGruposChange() {
+    const grupo = this.form.controls['grupoSanguineo'].value;
+    this.hasChange = true;
+    this.editableType = grupo;
+  }
+
+  onAlergiasChange(): void {
+    const selected = this.form.get('alergia')?.value;
+    this.otraAlergia = selected === 'Otra';
+  
+    if (!this.otraAlergia) {
+      this.form.get('otraAlergia')?.reset();
+    }
+  }
+
+
+  // considerar utilizar un enum o crear una colección para especialidades
+  grupos: string[] = [
+    'A+',
+    'A−',
+    'B+',
+    'B−',
+    'AB+',
+    'AB−',
+    'O+',
+    'O−'
+  ];
+
+  alergias: string[] = [
+    'Ácaros del polvo',
+    'Pólenes',
+    'Hongos ambientales',
+    'Pelo de gato',
+    'Pelo de perro',
+    'Picaduras de insectos',
+    'Lácteos',
+    'Maní',
+    'Frutos secos',
+    'Soja',
+    'Trigo (gluten)',
+    'Pescado',
+    'Mariscos',
+    'Huevos',
+    'Penicilina',
+    'Aspirina',
+    'Antiinflamatorios',
+    'Latex',
+    'Níquel',
+    'Otra'
+  ];
 }
