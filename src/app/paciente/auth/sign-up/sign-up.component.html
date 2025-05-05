@@ -14,26 +14,6 @@
           subtitle="Aquí comienza tu historia de Salud"
           [direction]="isMobile ? 'column' : 'row'"
         ></app-label>
-        <app-card
-        size="lg"
-        direction="row"
-        [variant]="'fill'"
-        bottom="20px"
-        [severity]="'warning'"
-        [closable]="true"
-        [selectable]="showErrorMsg"
-      >
-        <app-label
-          size="xxs"
-          label="Esta es una versión en desarrollo"
-          subtitle="Evitá almacenar datos sensibles. Aún puede haber errores."
-          [icon]="'triangle-exclamation'"
-          variant="outline"
-          direction="row"
-          severity="info"
-        ></app-label>
-      </app-card>
-        <hr>
         <div type="wrap">
             <div class="form__input-wrapper--col">
               <app-required [label]="'DNI'" [control]="'dni'"></app-required>
@@ -120,24 +100,15 @@
           [size]="isMobile ? 'xxs' : 'xs'"
           [severity]="'primary'"
           [variant]="'link'"
-          [icon]="'arrow-down'"
+          [icon]="'chevron-down'"
           [direction]="'row'"
           [label]="'Información adicional de salud (opcional)'"
           (click)="moreInfo = !moreInfo"
         ></app-button>
-        <hr>
         @if (moreInfo) {
-          <!-- <app-label
-          prefix="Adicional"
-          label="Datos básicos de salud"
-          [size]="'sm'"
-          direction="row"
-            >
-        </app-label> -->
         <div class="form__input-wrapper--col">
           <app-required [label]="'Grupo sanguíneo'" [control]="'grupoSanguineo'"></app-required>
             <select class="form__select--custom" id="grupoSanguineo" formControlName="grupoSanguineo" (change)="onGruposChange()">
-            <option value="" disabled selected>Seleccionar grupo</option>
             @for (grupo of grupos; track grupo) {
               <option [value]="grupo">
                 {{ grupo }}
@@ -148,7 +119,6 @@
         <div class="form__input-wrapper--col">
           <app-required [label]="'Alergias'" [control]="'alergia'"></app-required>
             <select class="form__select--custom" id="alergia" formControlName="alergia" (change)="onAlergiasChange()">
-            <option value="" disabled selected>Seleccionar alergia</option>
             @for (alergia of alergias; track alergia) {
               <option [value]="alergia">
                 {{ alergia }}
@@ -171,6 +141,25 @@
           }
         </div>
         </section>
+        <app-card
+            size="lg"
+            direction="row"
+            [variant]="'fill'"
+            bottom="20px"
+            [severity]="'warning'"
+            [closable]="true"
+            [selectable]="showErrorMsg"
+          >
+          <app-label
+            size="xxs"
+            label="Esta es una versión en desarrollo"
+            subtitle="Evitá almacenar datos sensibles. Aún puede haber errores."
+            [icon]="'triangle-exclamation'"
+            variant="outline"
+            direction="row"
+            severity="info"
+          ></app-label>
+        </app-card>
         <!-- disclaimer -->
         <section class="panel__prefooter">
           <small class="footer__text--sm">

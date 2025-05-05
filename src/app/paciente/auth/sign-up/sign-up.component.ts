@@ -16,7 +16,6 @@ import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
-import { EROFS } from 'constants';
 
 interface SignUpForm {
   nombre: FormControl<string>;
