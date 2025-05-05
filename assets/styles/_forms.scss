@@ -61,7 +61,8 @@ section,aside, div, header {
     }
 
     > app-button {
-        align-self: start;
+        border-radius: 50%;
+        align-self: center;
         padding-top: 1.6rem;
       }
   }
@@ -144,4 +145,18 @@ section,aside, div, header {
     justify-content: flex-start;
     height: 100%;
   }
+
+  $spans: (
+    1: 1 1 620px,
+    2: 1 1 480px,
+    3: 1 1 320px,
+    4: 1 1 180px,
+  );
+  
+  @each $key, $value in $spans {
+    .flex--#{$key} {
+      flex: $value!important;
+    }
+  }
+
 }
