@@ -25,8 +25,8 @@
       >
         <app-label
           size="xxs"
-          label="Versión en desarrollo"
-          subtitle="Evitá almacenar información sensible por ahora. Aún puede presentar errores."
+          label="Esta es una versión en desarrollo"
+          subtitle="Evitá almacenar datos sensibles. Aún puede haber errores."
           [icon]="'triangle-exclamation'"
           variant="outline"
           direction="row"
@@ -35,27 +35,38 @@
       </app-card>
         <hr>
         <div type="wrap">
+            <div class="form__input-wrapper--col">
+              <app-required [label]="'DNI'" [control]="'dni'"></app-required>
+              <input type="text" formControlName="dni" maxlength="8" pattern="\d*" />
+              <!-- <small>Recuerda no agregar puntos, espacios ni guiones.</small> -->
+              <small class="required" *ngIf="form.controls['dni']?.invalid && form.controls['dni']?.touched">
+                {{ form.controls['dni'].errors?.['required'] ? 'DNI es obligatorio' : 'DNI no válido' }}
+              </small>
+            </div>
+          <div class="form__input-wrapper--col flex--3">
+            <app-required [label]="'Email'" [control]="'email'"></app-required>
+            <input formControlName="email" />
+            <small class="required" *ngIf="form.controls['email'].invalid && form.controls['email']?.touched">
+              {{ form.controls['email'].errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
+            </small>
+            <small class="required" *ngIf="errorMessage">
+              {{ errorMessage }}
+            </small>
+          </div>
           <div class="form__input-wrapper--col">
-            <app-required [label]="'Nombre'" [control]="'nombre'"></app-required>
+            <app-required [label]="'Nombre (Opcional)'" [control]="'nombre'"></app-required>
             <input formControlName="nombre" />
             <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
               El nombre es obligatorio
             </small>
           </div>   
-            <div class="form__input-wrapper--col">
-              <app-required [label]="'Apellido'" [control]="'apellido'"></app-required>
-              <input formControlName="apellido" />
-              <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
-                El apellido es obligatorio
-              </small>
-            </div>
-            <div class="form__input-wrapper--col">
-              <app-required [label]="'Email'" [control]="'email'"></app-required>
-              <input formControlName="email" />
-              <small class="required" *ngIf="form.controls['email'].invalid && form.controls['email']?.touched">
-                {{ form.controls['email'].errors?.['required'] ? 'Email es obligatorio' : 'Email no es válido' }}
-              </small>
-            </div>
+          <div class="form__input-wrapper--col">
+            <app-required [label]="'Apellido (Opcional)'" [control]="'apellido'"></app-required>
+            <input formControlName="apellido" />
+            <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
+              El apellido es obligatorio
+            </small>
+          </div>
           <section type="flex">
             <span class="form__input-wrapper--row">
               <div class="form__input-wrapper--row">
@@ -66,7 +77,7 @@
                     formControlName="password"
                   />
                   <small class="required" *ngIf="form.controls['password']?.invalid && form.controls['password']?.touched">
-                    La contraseña es obligatoria
+                    {{ form.controls['password'].errors?.['required'] ? 'La contraseña es obligatoria' : 'Al menos 8 caracteres, número y mayúscula.' }}
                   </small>
                 </div>
                   <app-button
@@ -105,24 +116,24 @@
               </div>
             </span>
           </section>
-          <hr>
           <app-button
           [size]="isMobile ? 'xxs' : 'xs'"
           [severity]="'primary'"
           [variant]="'link'"
           [icon]="'arrow-down'"
           [direction]="'row'"
-          [label]="'Información de salud (opcional)'"
+          [label]="'Información adicional de salud (opcional)'"
           (click)="moreInfo = !moreInfo"
         ></app-button>
+        <hr>
         @if (moreInfo) {
-          <app-label
+          <!-- <app-label
           prefix="Adicional"
           label="Datos básicos de salud"
           [size]="'sm'"
           direction="row"
             >
-        </app-label>
+        </app-label> -->
         <div class="form__input-wrapper--col">
           <app-required [label]="'Grupo sanguíneo'" [control]="'grupoSanguineo'"></app-required>
             <select class="form__select--custom" id="grupoSanguineo" formControlName="grupoSanguineo" (change)="onGruposChange()">
@@ -135,9 +146,9 @@
           </select>
         </div> 
         <div class="form__input-wrapper--col">
-          <app-required [label]="'Alergia'" [control]="'alergia'"></app-required>
+          <app-required [label]="'Alergias'" [control]="'alergia'"></app-required>
             <select class="form__select--custom" id="alergia" formControlName="alergia" (change)="onAlergiasChange()">
-            <option value="" disabled selected>Seleccionar categoría</option>
+            <option value="" disabled selected>Seleccionar alergia</option>
             @for (alergia of alergias; track alergia) {
               <option [value]="alergia">
                 {{ alergia }}
@@ -200,13 +211,13 @@
           bottom="20px"
           left="calc(50vw - 180px)"
           [severity]="showErrorMsg ? 'danger' : 'success'"
-          [closable]="hide"
-          [selectable]="showErrorMsg"
+          [closable]="true"
+          [selectable]="false"
         >
           <app-label
             size="xxs"
             [label]="showErrorMsg ? 'No se ha podido registrar el usuario' : 'El usuario ha sido creado exitosamente'"
-            [subtitle]="showErrorMsg ? 'Vuelva a intentar luego' : 'Será redirigido al login'"
+            [subtitle]="showErrorMsg ? errorMessage : 'Será redirigido al login'"
             [icon]="showErrorMsg ? 'alert-circle' : 'info-circle'"
             variant="outline"
             direction="row"

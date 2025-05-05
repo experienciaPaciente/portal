@@ -17,6 +17,7 @@ import { CardComponent } from 'src/app/shared/ui/card/card.component';
 interface LogInForm {
   nombre: FormControl<string | null>;
   apellido: FormControl<string | null>;
+  dni: FormControl<string | null>;
   email: FormControl<string>;
   password: FormControl<string>;
   grupoSanguineo: FormControl<string>;
@@ -66,6 +67,7 @@ export default class LogInComponent {
   form: FormGroup<LogInForm> = this.formBuilder.group({
     nombre: this.formBuilder.control(''),
     apellido: this.formBuilder.control(''),
+    dni: this.formBuilder.control(''),
     email: this.formBuilder.control('', {
       validators: [Validators.required, Validators.email],
       nonNullable: true,
@@ -98,6 +100,7 @@ export default class LogInComponent {
     const credential: Credential = {
       name: this.form.value.email || '',
       lastName: this.form.value.email || '',
+      dni: this.form.value.dni || '',
       email: this.form.value.email || '',
       password: this.form.value.password || '',
       grupoSanguineo: this.form.value.grupoSanguineo || '',

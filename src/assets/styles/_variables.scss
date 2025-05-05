@@ -22,9 +22,9 @@
   --info--light: #EFF7FF;
   --warning: #ff9a00;
   --warning--light: #FCEBD0;
-  --success: #23D3BD;
-  --success--light: #c9f5ef;
-  --success--dark: #18b09f;
+  --success: var(--primary); // #23D3BD;
+  --success--light: var(--primaryLight); // #c9f5ef;
+  --success--dark: var(--primaryDarker); // #18b09f;
   --danger--dark: #b82e76;
   --danger: #ef5da8;
   --danger--light: #FAE5E4;

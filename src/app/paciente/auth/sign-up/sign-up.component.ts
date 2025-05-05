@@ -16,10 +16,12 @@ import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RequiredComponent } from 'src/app/shared/ui/required/required.component';
 import { CardComponent } from 'src/app/shared/ui/card/card.component';
+import { EROFS } from 'constants';
 
 interface SignUpForm {
   nombre: FormControl<string>;
   apellido: FormControl<string>;
+  dni: FormControl<string>;
   email: FormControl<string>;
   password: FormControl<string>;
   confirmPassword: FormControl<string>;
@@ -73,10 +75,13 @@ export default class SignUpComponent {
   formBuilder = inject(FormBuilder).nonNullable;
   authService = inject(AuthService);
   pacienteService = inject(PacienteService);
+  errorMessage?: string;
+
 
   form = this.formBuilder.group<SignUpForm>({
-    nombre: this.formBuilder.control('', Validators.required),
-    apellido: this.formBuilder.control('', Validators.required),
+    nombre: this.formBuilder.control(''),
+    apellido: this.formBuilder.control(''),
+    dni: this.formBuilder.control( '', {validators: [this.documentValidator(), Validators.required]}),
     email: this.formBuilder.control('', {validators: [Validators.email, Validators.required]}),
     password: this.formBuilder.control('', Validators.required),
     grupoSanguineo: this.formBuilder.control(''),
@@ -96,17 +101,42 @@ export default class SignUpComponent {
     this.isMobile = width < 768; 
   }
 
-  // Custom Validator for password format (must contain at least one number)
   passwordFormatValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valid = /\d/.test(control.value);
       const uppercase = /[A-Z]/.test(control.value);
       const symbol = /[!@#$%^&*(),.?":{}|<>]/.test(control.value);
       const length = control.value?.length >= 8;
-      // const combined = /\d/.test(control.value) && /[A-Z]/.test(control.value) && control.value?.length >= 8;
 
       return valid && uppercase && symbol && length ? null : { invalidPasswordFormat: true };
     };
+  }
+
+  documentValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value?.toString() || '';
+      const valid = /^\d{1,8}$/.test(value);
+      return valid ? null : { invalidDocumentoFormat: true };
+    };
+  }
+
+  private traducirErrorFirebase(error: any): string {
+    const code = error.code || error.message;
+  
+    switch (code) {
+      case 'auth/email-already-in-use':
+        return 'El correo electrónico ya está en uso.';
+      case 'auth/invalid-email':
+        return 'El correo electrónico no es válido.';
+      case 'auth/weak-password':
+        return 'La contraseña es demasiado débil. Debe tener al menos 6 caracteres.';
+      case 'auth/missing-password':
+        return 'Debe ingresar una contraseña.';
+      case 'auth/network-request-failed':
+        return 'Error de red. Verifique su conexión.';
+      default:
+        return 'Ha ocurrido un error. Intente nuevamente.';
+    }
   }
 
   async signUp(): Promise<void> {
@@ -118,6 +148,7 @@ export default class SignUpComponent {
     const credential: Credential = {
       name: this.form.value.nombre || '',
       lastName: this.form.value.apellido || '',
+      dni: this.form.value.dni || '',
       email: this.form.value.email || '',
       password: this.form.value.password || '',
       grupoSanguineo: this.form.value.grupoSanguineo || '',
@@ -133,9 +164,10 @@ export default class SignUpComponent {
         this.router.navigateByUrl('/ingresar');
       }, 1500);
       
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
       this.showErrorMsg = true;
+      this.errorMessage = this.traducirErrorFirebase(error);
+      console.error(error);
     }
   }
   
@@ -171,8 +203,6 @@ export default class SignUpComponent {
     }
   }
 
-
-  // considerar utilizar un enum o crear una colección para especialidades
   grupos: string[] = [
     'A+',
     'A−',

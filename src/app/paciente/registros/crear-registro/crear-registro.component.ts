@@ -135,7 +135,6 @@ export class createRegistroComponent implements OnInit{
   }
 
   onTitleChange() {
-    // this.editableTitle = this.form.controls['titulo'].value;
     return this.hasChange = true;
   }
 
@@ -202,7 +201,6 @@ export class createRegistroComponent implements OnInit{
     'Odontología': { icon: 'tooth', color: '#ffffff' } // White
   };  
 
-  // Properties for the Label component
   editableTitle: string = '';
   editableCategory: string = '';
   editableIcon: string = 'heart';
@@ -271,17 +269,12 @@ export class createRegistroComponent implements OnInit{
           adjuntos: registro.adjuntos || []
         });
         
-        // Update local arrays for UI display
         this.uploadedImages = registro.adjuntos || [];
-        
-        // Extract filenames from URLs (optional, for display purposes)
         this.uploadedFileNames = registro.adjuntos?.map(url => {
           try {
-            // Extract filename from URL
             const urlObj = new URL(url);
             const pathSegments = urlObj.pathname.split('/');
             const filename = pathSegments[pathSegments.length - 1];
-            // Remove timestamp prefix if present (e.g., 1620123456_filename.jpg)
             return filename.includes('_') ? filename.split('_').slice(1).join('_') : filename;
           } catch {
             return 'Archivo adjunto';
@@ -301,7 +294,6 @@ export class createRegistroComponent implements OnInit{
     try {
       const registro = this.form.value as Registro;
   
-      // Adjuntos array (removes any invalid entries)
       registro.adjuntos = registro.adjuntos.filter((url) => this.isValidUrl(url));
   
       if (user) {
@@ -369,7 +361,6 @@ export class createRegistroComponent implements OnInit{
   }
 
   // Uploads
-
   uploadFiles(event: any) {
     const files: FileList = event.target.files;
     if (!files.length) return;

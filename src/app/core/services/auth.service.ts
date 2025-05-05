@@ -16,6 +16,7 @@ import {
 export interface Credential {
   name: string;
   lastName: string;
+  dni: string;
   email: string;
   password: string;
   grupoSanguineo: string;
@@ -29,26 +30,26 @@ export interface Credential {
 
 export class AuthService {
   constructor(private firestore: Firestore) {}
-
   private auth: Auth = inject(Auth);
-
   readonly authState$ = authState(this.auth);
+  errorMessage: string | null = null;
 
   async signUpWithEmailAndPassword(credential: Credential): Promise<void> {
     try {
-      // Create the user with email and password
-      const userCredential: UserCredential = await createUserWithEmailAndPassword(
-        this.auth,
-        credential.email,
-        credential.password
-      );
+        // Create the user with email and password
+        const userCredential: UserCredential = await createUserWithEmailAndPassword(
+          this.auth,
+          credential.email,
+          credential.password
+        );
 
-      // Update the user's display name
-      if (userCredential.user) {
-        await updateProfile(userCredential.user, {
-          displayName: `${credential.name} ${credential.lastName}`,
-        });
+        // Update the user's display name
+        if (userCredential.user) {
+          await updateProfile(userCredential.user, {
+            displayName: `${credential.name} ${credential.lastName}`,
+          });
       }
+      
 
       // Save additional details to Firestore
       const userRef = doc(this.firestore, `users/${userCredential.user?.uid}`);
@@ -56,11 +57,20 @@ export class AuthService {
         uid: userCredential.user?.uid,
         name: credential.name,
         lastName: credential.lastName,
+        dni: credential.dni,
         email: credential.email,
+        grupoSanguineo: credential.grupoSanguineo,
+        alergia: credential.alergia,
+        otraAlergia: credential.otraAlergia,
       });
-    } catch (error) {
-      console.error('Error creating user:', error);
-      throw error;
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        this.errorMessage = 'El correo ya está registrado.';
+        console.error('Error creating user:', error);
+        throw error;
+      } else {
+        this.errorMessage = 'Error al registrar el usuario.';
+      }
     }
   }
 
