@@ -105,7 +105,7 @@
           display: flex;
           flex-wrap: wrap;
           width: 100%;
-          height: 100%;
+          height: fit-content;
           padding: 0 var(--panel__padding);
           box-sizing: border-box;
           row-gap: var(--wrapper__gap--row);

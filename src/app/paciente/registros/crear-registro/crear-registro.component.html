@@ -175,6 +175,7 @@
           [icon]="'mobile-screen-button'"
           [direction]="isMobile ? 'none' : 'row'"
           [label]="isMobile ? '' : 'Registro QR'"
+          [path]="'scan'"
           (clickEvent)="showQrRegister()"
           ></app-button>
         }

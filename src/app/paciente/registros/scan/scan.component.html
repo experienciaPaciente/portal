@@ -2,7 +2,7 @@
     <section class="panel__main--center">
         <div class="form__input-wrapper--row">
             <app-label
-            [size]="isMobile ? 'md' : 'lg'"
+            [size]="isMobile ? 'sm' : 'md'"
             [prefix]="'Autoregistro'"
             [label]="'Scan QR'"
             [subtitle]="isMobile ? 'Scanea el QR para obtener su contenido y autocompletar el formulario.' : ''"
@@ -71,10 +71,10 @@
                      ></app-button>
                      <app-button
                      size="xxs"
-                     severity="primary"
+                     severity="success"
                      [variant]="'fill'"
                      [direction]="'row'"
-                     [icon]="'pencil'"
+                     icon="pencil"
                      [path]="'/registrar'"
                      [label]="'Registro manual'"
                  ></app-button>

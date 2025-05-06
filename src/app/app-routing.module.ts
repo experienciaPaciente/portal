@@ -27,16 +27,22 @@ export const routes: Routes = [
     canActivate: [publicGuard],
     children: [
       {
-        path: 'sign-in', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default),
+        path: 'sign-up', loadComponent: () => import('./paciente/auth/sign-up/sign-up.component').then(m => m.default),
       },
       {
-        path: 'sign-up', loadComponent: () => import('./paciente/auth/sign-up/sign-up.component').then(m => m.default),
+        path: 'sign-in', loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default),
       },
     ],
   },
   {
-    path: '**', loadComponent: () => import('./paciente/auth/sign-up/sign-up.component').then(m => m.default)
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'auth/sign-up/sign-up.component'
   },
+  {
+    path: '**',
+    loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
+  }
 ];
 
 @NgModule({
