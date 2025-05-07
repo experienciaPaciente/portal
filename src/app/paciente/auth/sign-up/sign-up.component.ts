@@ -97,7 +97,8 @@ export default class SignUpComponent {
   }
 
   checkIfMobile(width: number): void {
-    this.isMobile = width < 768; 
+    this.isMobile = width < 768;
+    this.moreInfo = this.isMobile;
   }
 
   passwordFormatValidator(): ValidatorFn {

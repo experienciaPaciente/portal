@@ -40,39 +40,34 @@ export class DetailComponent {
   selectedItemId: string | null = null;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
-    'Cardiología': { icon: 'heart', color: '#dc3545' },
-    'Dermatología': { icon: 'spa', color: '#fd7e14' },
-    'Emergentología': { icon: 'ambulance', color: '#f44336' },
-    'Endocrinología': { icon: 'balance-scale', color: '#ffc107' },
-    'Gastroenterología': { icon: 'stethoscope', color: '#795548' },
-    'Ginecología y Obstetricia': { icon: 'venus', color: '#e83e8c' },
-    'Hematología': { icon: 'droplet', color: '#d32f2f' },
-    'Hemoterapia': { icon: 'tint', color: '#c0392b' },
-    'Infectología': { icon: 'virus', color: '#ff5722' },
-    'Kinesiología': { icon: 'dumbbell', color: '#fd7e14' },
+    'Acción médica': { icon: 'user-nurse', color: '#00bcd4' },             
+    'Alteración de la salud': { icon: 'person-dots-from-line', color: '#ff5722' }, 
+    'Atención virtual': { icon: 'laptop-medical', color: '#00bcd4' },
+    'Consulta de salud': { icon: 'hand-holding-medical', color: '#17a2b8' },               
+    'Consulta ginecológica': { icon: 'venus', color: '#e83e8c' },              
+    'Consulta odontológica': { icon: 'tooth', color: '#d3d3d3' },              
+    'Consulta pediátrica': { icon: 'child', color: '#F5C451' },               
+    'Control de salud': { icon: 'notes-medical', color: '#17a2b8' },               
+    'Dispositivo': { icon: 'crutch', color: '#6c757d' },                     
+    'Emergencia médica': { icon: 'square-h', color: '#f44336' },
+    'Estudios por imagen': { icon: 'x-ray', color: '#00bcd4' },
+    'Internación': { icon: 'bed-pulse', color: '#212529' },
     'Laboratorio': { icon: 'flask', color: '#8e44ad' },
-    'Medicina General': { icon: 'user-md', color: '#007bff' },
-    'Nefrología': { icon: 'filter', color: '#3f51b5' },
-    'Neumología': { icon: 'lungs', color: '#87ceeb' },
-    'Neurología': { icon: 'brain', color: '#6f42c1' },
-    'Nutrición': { icon: 'apple-whole', color: '#a2d729' },
-    'Odontología': { icon: 'tooth', color: '#ffffff' },
-    'Oftalmología': { icon: 'eye', color: '#17a2b8' },
-    'Oncología': { icon: 'ribbon', color: '#6f42c1' },
-    'Otorrinolaringología': { icon: 'head-side-cough', color: '#6610f2' },
-    'Pediatría': { icon: 'child', color: '#28a745' },
-    'Psiquiatría': { icon: 'comments', color: '#20c997' },
-    'Reumatología': { icon: 'hand-holding-medical', color: '#9c27b0' },
-    'Terapia Intensiva': { icon: 'procedures', color: '#212529' },
-    'Traumatología y Ortopedia': { icon: 'crutch', color: '#6c757d' },
-    'Urología': { icon: 'x-ray', color: '#007bff' },
-    'Vacunatorio': { icon: 'syringe', color: '#00bcd4' }
+    'Medicamento': { icon: 'pills', color: '#6f42c1' },         
+    'Prescripción': { icon: 'file-medical', color: '#007bff' },
+    'Salud mental': { icon: 'comments', color: '#20c997' },
+    'Sesión kinesiológica': { icon: 'dumbbell', color: '#20c997' },
+    'Tratamiento': { icon: 'hand-holding-heart', color: '#20c997' },                 
+    'Turno': { icon: 'calendar-day', color: '#28a745' },                     
+    'Vacuna': { icon: 'syringe', color: '#00bcd4' },
+    'Cardiología': { icon: 'heart', color: '#dc3545' },
+    'Dermatología': { icon: 'hand-dots', color: '#fd7e14' }
   };  
 
   // Función que devuelve un array en lugar del array per-sé
   getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
-      { label: 'Editar', icon: 'user', disabled: false, callback: () => this.navigateToEdit(data) },
+      { label: 'Editar', icon: 'pencil', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Gestionar permisos', icon: 'star', disabled: true },
       { label: 'Eliminar', icon: 'trash', disabled: false, 
         callback: (event?: MouseEvent) => {
@@ -106,7 +101,6 @@ export class DetailComponent {
       this.id = params['id'];
       if (this.id) {
         this.fetchDetails(this.id);
-        console.log(`ID: ${this.id}`);
       } else {
         console.error('ID not found in route parameters');
       }

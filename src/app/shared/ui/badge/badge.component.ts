@@ -41,7 +41,7 @@ export class BadgeComponent implements OnChanges {
           'background-color': 'var(--danger--light)',
           'color': 'var(--danger)'
         };
-        this.badgeIconClass = 'fa-solid fa-triangle-exclamation';
+        this.badgeIconClass = 'fa-solid fa-person-dots-from-line';
         break;
       case 'info':
         this.badgeStyle = {

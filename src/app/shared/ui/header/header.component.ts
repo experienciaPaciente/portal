@@ -91,7 +91,6 @@ export class HeaderComponent implements OnInit {
       await this.authservice.logOut();
       this._router.navigateByUrl('/ingresar');
     } catch (error) {
-        console.log(error);
     }
   }  
 }

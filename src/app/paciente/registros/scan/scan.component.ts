@@ -111,7 +111,6 @@ export class ScanComponent {
   }
 
  private parseQRData(qrString: string): Partial<Registro> {
-    console.log('Raw QR String:', qrString); // Verifica el texto completo del QR
     const lines = qrString.split('\n');
     const data: Partial<Registro> = {};
 
@@ -119,7 +118,6 @@ export class ScanComponent {
     lines.forEach((line) => {
       const [key, ...valueParts] = line.split(': ');
       const value = valueParts.join(': ').trim();
-      console.log('Key:', key, 'Value:', value); // Verifica clave y valor
 
       // Mapear los valores del string al formato de Registro
       switch (key.toLowerCase()) {
