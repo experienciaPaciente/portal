@@ -105,10 +105,11 @@
           display: flex;
           flex-wrap: wrap;
           width: 100%;
-          height: fit-content;
+          height: calc(100vh - var(--header__height));
           padding: 0 var(--panel__padding);
           box-sizing: border-box;
           row-gap: var(--wrapper__gap--row);
+          overflow-y: scroll;
           
           .panel__inner--main {
             flex: 1 1 320px;
