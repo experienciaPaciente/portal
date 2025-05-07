@@ -41,12 +41,11 @@ export class DetailComponent {
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Cardiología': { icon: 'heart', color: '#dc3545' },
-    'Dermatología': { icon: 'spa', color: '#fd7e14' },
-    'Emergentología': { icon: 'ambulance', color: '#f44336' },
-    'Endocrinología': { icon: 'balance-scale', color: '#ffc107' },
-    'Gastroenterología': { icon: 'stethoscope', color: '#795548' },
+    'Dermatología': { icon: 'hand-dots', color: '#fd7e14' },
+    'Guardia': { icon: 'square-h', color: '#f44336' },
+    'Endocrinología': { icon: 'hand-holding-medical', color: '#ffc107' },
+    'Gastroenterología': { icon: 'viruses', color: '#795548' },
     'Ginecología y Obstetricia': { icon: 'venus', color: '#e83e8c' },
-    'Hematología': { icon: 'droplet', color: '#d32f2f' },
     'Hemoterapia': { icon: 'tint', color: '#c0392b' },
     'Infectología': { icon: 'virus', color: '#ff5722' },
     'Kinesiología': { icon: 'dumbbell', color: '#fd7e14' },
@@ -57,13 +56,12 @@ export class DetailComponent {
     'Neurología': { icon: 'brain', color: '#6f42c1' },
     'Nutrición': { icon: 'apple-whole', color: '#a2d729' },
     'Odontología': { icon: 'tooth', color: '#ffffff' },
-    'Oftalmología': { icon: 'eye', color: '#17a2b8' },
+    'Oftalmología': { icon: 'eye-dropper', color: '#17a2b8' },
     'Oncología': { icon: 'ribbon', color: '#6f42c1' },
     'Otorrinolaringología': { icon: 'head-side-cough', color: '#6610f2' },
     'Pediatría': { icon: 'child', color: '#28a745' },
     'Psiquiatría': { icon: 'comments', color: '#20c997' },
-    'Reumatología': { icon: 'hand-holding-medical', color: '#9c27b0' },
-    'Terapia Intensiva': { icon: 'procedures', color: '#212529' },
+    'Terapia Intensiva': { icon: 'bed-pulse', color: '#212529' },
     'Traumatología y Ortopedia': { icon: 'crutch', color: '#6c757d' },
     'Urología': { icon: 'x-ray', color: '#007bff' },
     'Vacunatorio': { icon: 'syringe', color: '#00bcd4' }
@@ -72,7 +70,7 @@ export class DetailComponent {
   // Función que devuelve un array en lugar del array per-sé
   getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
-      { label: 'Editar', icon: 'user', disabled: false, callback: () => this.navigateToEdit(data) },
+      { label: 'Editar', icon: 'pencil', disabled: false, callback: () => this.navigateToEdit(data) },
       { label: 'Gestionar permisos', icon: 'star', disabled: true },
       { label: 'Eliminar', icon: 'trash', disabled: false, 
         callback: (event?: MouseEvent) => {
@@ -106,7 +104,6 @@ export class DetailComponent {
       this.id = params['id'];
       if (this.id) {
         this.fetchDetails(this.id);
-        console.log(`ID: ${this.id}`);
       } else {
         console.error('ID not found in route parameters');
       }

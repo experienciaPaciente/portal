@@ -48,14 +48,14 @@
             </small>
           </div>
           <div class="form__input-wrapper--col flex--1">
-            <app-required [label]="'Nombre (Opcional)'" [control]="'nombre'"></app-required>
+            <app-required [label]="'Nombre (opcional)'" [control]="'nombre'"></app-required>
             <input formControlName="nombre" />
             <small class="required" *ngIf="form.controls['nombre']?.invalid && form.controls['nombre']?.touched">
               El nombre es obligatorio
             </small>
           </div>   
           <div class="form__input-wrapper--col flex--1">
-            <app-required [label]="'Apellido (Opcional)'" [control]="'apellido'"></app-required>
+            <app-required [label]="'Apellido (opcional)'" [control]="'apellido'"></app-required>
             <input formControlName="apellido" />
             <small class="required" *ngIf="form.controls['apellido']?.invalid && form.controls['apellido']?.touched">
               El apellido es obligatorio
@@ -123,7 +123,7 @@
           </div>
         @if (moreInfo) {
         <div class="form__input-wrapper--col">
-          <app-required [label]="'Grupo sanguíneo (Opcional)'" [control]="'grupoSanguineo'"></app-required>
+          <app-required [label]="'Grupo sanguíneo'" [control]="'grupoSanguineo'"></app-required>
             <select class="form__select--custom" id="grupoSanguineo" formControlName="grupoSanguineo" (change)="onGruposChange()">
             @for (grupo of grupos; track grupo) {
               <option [value]="grupo">
@@ -133,7 +133,7 @@
           </select>
         </div> 
         <div class="form__input-wrapper--col">
-          <app-required [label]="'Alergias (Opcional)'" [control]="'alergia'"></app-required>
+          <app-required [label]="'Alergias'" [control]="'alergia'"></app-required>
             <select class="form__select--custom" id="alergia" formControlName="alergia" (change)="onAlergiasChange()">
             @for (alergia of alergias; track alergia) {
               <option [value]="alergia">
@@ -181,7 +181,7 @@
         <!-- disclaimer -->
         <section class="panel__prefooter">
           <small class="footer__text--sm">
-            <b>Aviso Legal y Términos de Uso</b><br>
+            <b>Aviso legal y términos de uso</b><br>
             Al registrarte en experienciaPaciente, reconoces que la plataforma pero te posibilita acceder, registrar y compartir tus propios datos de salud, sin depender exclusivamente de sistemas tradicionales. experienciaPaciente no sustituye la atención médica.
           </small>
         </section>

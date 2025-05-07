@@ -118,7 +118,13 @@
     }
 
     #signIn, #signUp {
-        
+        .page__panel--float {
+            --panel__height: 80vh!important;
+
+            height: var(--panel__height);
+
+        }
+
         footer.panel__footer {
             padding: 1rem 0 0 0;
         }

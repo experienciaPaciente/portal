@@ -2,7 +2,9 @@
   <span class="page__bg--overlay"></span>
   <form class="page__panel--sidebar" [formGroup]="form" (ngSubmit)="logIn()">
     <section type="flex">
-      <img class="panel__img--center" width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
+      <a href="https://experienciapaciente.org/" target="_blank" class="panel__img--center">
+        <img width="84" height="84" src="./assets/img/ep__marca--sqr.png" alt="logo experiencia paciente">
+      </a>
       <app-label
       size="md"
       [prefix]="'Ingreso'"
