@@ -105,7 +105,7 @@
           display: flex;
           flex-wrap: wrap;
           width: 100%;
-          height: calc(100vh - var(--header__height));
+          height: calc(100vh - var(--header__height) - var(--footer__height));
           padding: 0 var(--panel__padding);
           box-sizing: border-box;
           row-gap: var(--wrapper__gap--row);
@@ -213,7 +213,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    height: fit-content;
+    height: var(--footer__height);
     width: 100%;
     box-sizing: border-box;
     padding: .5rem 0;

@@ -37,11 +37,11 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'auth/sign-up/sign-up.component'
+    redirectTo: 'auth/sign-up'
   },
   {
     path: '**',
-    loadComponent: () => import('./paciente/auth/sign-up/sign-up.component').then(m => m.default)
+    redirectTo: 'auth/sign-in'
   }
 ];
 

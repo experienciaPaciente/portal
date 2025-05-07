@@ -148,10 +148,11 @@ section,aside, div, header {
   }
 
   $spans: (
-    1: 1 1 620px,
-    2: 1 1 480px,
-    3: 1 1 320px,
-    4: 1 1 180px,
+    1: 1 1 120px,
+    2: 1 1 320px,
+    3: 1 1 480px,
+    4: 1 1 560px,
+    block: 1 1 620px,
   );
   
   @each $key, $value in $spans {

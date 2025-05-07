@@ -74,8 +74,6 @@ export class ListComponent implements OnInit {
     'Infectología': { icon: 'virus', color: '#ff5722' },
     'Kinesiología': { icon: 'dumbbell', color: '#fd7e14' },
     'Laboratorio': { icon: 'flask', color: '#8e44ad' },
-    'Medicina del Deporte': { icon: 'running', color: '#4caf50' },
-    'Medicina del Trabajo': { icon: 'briefcase-medical', color: '#607d8b' },
     'Medicina General': { icon: 'user-md', color: '#007bff' },
     'Nefrología': { icon: 'filter', color: '#3f51b5' },
     'Neumología': { icon: 'lungs', color: '#87ceeb' },

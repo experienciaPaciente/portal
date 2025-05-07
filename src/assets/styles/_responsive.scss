@@ -11,6 +11,7 @@
         .page__panel--main {
 
             .panel__main {
+                --footer__height: fit-content!important;
                 column-gap: 140px;
                 // padding: var(--page__main--padding)!important;
 
@@ -40,6 +41,7 @@
                 }
             }
         }
+
         .panel__header--row {
             display: flex;
             flex-direction: row;
@@ -58,7 +60,8 @@
     }
 
     footer.panel__footer {
-       padding: 1rem 0rem;
+        --footer__height: fit-content!important;
+        padding: 1rem 0rem;
     }
 
     // Generics

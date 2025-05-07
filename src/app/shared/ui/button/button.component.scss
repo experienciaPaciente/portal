@@ -152,6 +152,10 @@ app-button {
       --button__padding: 0.9rem 1.5rem;
       --button__font--size: 18px;
     }
+
+    &--full {
+      display: block;
+    }
   }
   }
 }

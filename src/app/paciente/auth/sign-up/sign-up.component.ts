@@ -50,7 +50,7 @@ export default class SignUpComponent {
   direction = 'column';
   hasChange = false;
   otraAlergia = false;
-  moreInfo = false;
+  moreInfo = true;
   editableType: string = '';
   showConfirmMsg = false;
   showErrorMsg = false;

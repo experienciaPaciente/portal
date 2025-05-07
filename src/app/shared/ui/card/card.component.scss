@@ -368,6 +368,10 @@ app-card {
       --card__padding: 12px 24px;
     }
 
+    &--block {
+      width: 100%;
+    }
+
     // Images
     > img {
       margin-bottom: .75rem;
