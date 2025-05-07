@@ -1,7 +1,7 @@
 <header id="main">
     <section class="flex--row">
-      <img *ngIf="!isMobile" src="{{ brandDesktop }}" alt="" width="234" height="37" />
-      <img *ngIf="isMobile" src="{{ brandMobile }}" alt="" width="45" height="45" />
+      <img *ngIf="!isMobile" src="{{ brandDesktop }}" alt="" width="234" height="37" [routerLink]="['/']"/>
+      <img *ngIf="isMobile" src="{{ brandMobile }}" alt="" width="45" height="45" [routerLink]="['/']" />
     </section>
     <!-- Badges -->
     <section class="header__wrapper--right">

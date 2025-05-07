@@ -3,7 +3,7 @@ import { LabelComponent } from '../label/label.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ButtonComponent } from '../button/button.component';
 import { Auth, authState } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ModalComponent } from '../modal/modal.component';
@@ -17,7 +17,8 @@ import { ModalComponent } from '../modal/modal.component';
     CommonModule,
     DropdownComponent,
     ModalComponent,
-    ButtonComponent
+    ButtonComponent,
+    RouterModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

@@ -46,6 +46,10 @@ app-card {
       --card__direction: column;
     }
 
+    &--center {
+      justify-self: center;
+    }
+
     // Custom    
     &.card__fill--custom, &.card__outline--custom, &.card__fab--custom {
       --card__bg--color: var(--card__bg--color);

@@ -1,83 +1,148 @@
 @if (qrRegistro) {
     <section class="panel__main--center">
-        <div class="form__input-wrapper--row">
+            <!-- Título común para todos los casos -->
             <app-label
-            [size]="isMobile ? 'sm' : 'md'"
-            [prefix]="'Autoregistro'"
-            [label]="'Scan QR'"
-            [subtitle]="isMobile ? 'Scanea el QR para obtener su contenido y autocompletar el formulario.' : ''"
-            severity="neutral"
-            direction="column">
-        </app-label>
-        @if (!isMobile) {
-            <app-badge severity="danger" label="Cámara" size="xs"></app-badge>
-            <app-button
-                size="xs"
-                [severity]="'neutral'"
-                [variant]="'link'"
-                [icon]="'xmark'"
-                [direction]="'none'"
-                [type]="'button'"
-                [path]="'/'"
-                (clickEvent)="cancel()"
-            ></app-button>
-        }
-        </div>
-        @if (noPermissions) {
-            @if (isMobile) {
-                <app-badge severity="danger" label="Cámara no habilitada" size="xs"></app-badge>
-            }
-            <span class="qr__wrapper">
-                <div class="qr__overlay"></div>
-                <div class="qr__line"></div>
-            </span>
-        }
-        @if (!noPermissions) {
-            <span class="qr__wrapper">
-                <zxing-scanner [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
-                            [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-                            (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)">
-                </zxing-scanner>
-                <div class="qr__overlay"></div>
-                <div class="qr__line"></div>
-            </span>
-            @if (qrResultString) {
-                <app-badge severity="success" label="Scaneo exitoso" size="xs"></app-badge>
-            } @else {
-                <app-badge severity="warning" label="No se pudo leer el código" size="xs"></app-badge>
-            }
-        }
-        @if (isMobile) {
-            <app-label
-                size="sm"
-                [label]="'Enfoca'"
-                subtitle="Si el código no es detectado, vuelve a intentarlo."
-                [icon]="'info-circle'"
-                severity="warning"
-                variant="link"
+                [size]="isMobile ? 'sm' : 'md'"
+                [prefix]="'Autoregistro'"
+                [label]="'Scan QR'"
+                [subtitle]="isMobile ? 'Scanea el QR para obtener su contenido y autocompletar el formulario.' : ''"
+                severity="neutral"
                 direction="column">
             </app-label>
+
+            <!-- Escáner QR (solo visible con permisos) -->
+            @if (!noPermissions) {
+                <span class="qr__wrapper">
+                    <zxing-scanner 
+                        [torch]="torchEnabled" 
+                        [(device)]="currentDevice" 
+                        (scanSuccess)="onCodeResult($event)"
+                        [formats]="formatsEnabled" 
+                        [tryHarder]="tryHarder" 
+                        (permissionResponse)="onHasPermission($event)"
+                        (camerasFound)="onCamerasFound($event)" 
+                        (torchCompatible)="onTorchCompatible($event)">
+                    </zxing-scanner>
+                    <div class="qr__overlay"></div>
+                    <div class="qr__line"></div>
+                </span>
+                
+                <!-- Estado del escaneo -->
+                @if (qrResultString) {
+                    <app-badge severity="success" label="Scaneo exitoso" size="xs"></app-badge>
+                } @else {
+                    <app-badge severity="warning" label="No se pudo leer el código" size="xs"></app-badge>
+                }
+            }
+
+        <!-- Notificaciones según estado -->
+        <!-- 1. Notificación de error de permisos (PC) -->
+        @if (!isMobile && noPermissions) {
+            <app-card
+                aligned="center"
+                size="lg"
+                direction="row"
+                [variant]="'fill'"
+                bottom="20px"
+                [severity]="'danger'"
+                [closable]="true">
+                <app-label
+                    size="xxs"
+                    label="Activá la cámara"
+                    subtitle="Puedes habilitar los permisos desde el navegador."
+                    [icon]="'triangle-exclamation'"
+                    variant="outline"
+                    direction="row"
+                    severity="danger">
+                </app-label>
+            </app-card>
         }
-        <!-- Crear componente Footer -->
-             <footer class="panel__footer">
-                 <app-button
-                     size="xxs"
-                     severity="danger"
-                     [variant]="'outline'"
-                     [direction]="'row'"
-                     [icon]="'close'"
-                     [path]="'/'"
-                     [label]="'Cancelar'"
-                     ></app-button>
-                     <app-button
-                     size="xxs"
-                     severity="success"
-                     [variant]="'fill'"
-                     [direction]="'row'"
-                     icon="pencil"
-                     [path]="'/registrar'"
-                     [label]="'Registro manual'"
-                 ></app-button>
-             </footer>
+
+        <!-- 2. Notificación de error de permisos (móvil) -->
+        @if (isMobile && noPermissions) {
+            <app-card
+                aligned="center"
+                size="lg"
+                direction="row"
+                [variant]="'fill'"
+                bottom="20px"
+                [severity]="'danger'"
+                [closable]="true">
+                <app-label
+                    size="xxs"
+                    label="Activá la cámara"
+                    subtitle="Puedes habilitar los permisos desde el navegador."
+                    [icon]="'triangle-exclamation'"
+                    variant="outline"
+                    direction="row"
+                    severity="danger">
+                </app-label>
+            </app-card>
+        }
+
+        <!-- 3. Consejos de uso (PC) -->
+        @if (!isMobile && !noPermissions) {
+            <app-card
+                aligned="center"
+                size="lg"
+                direction="row"
+                [variant]="'fill'"
+                bottom="20px"
+                [severity]="'success'"
+                [closable]="true">
+                <app-label
+                    size="xxs"
+                    label="Mantén el código firme"
+                    subtitle="Si el código QR no es detectado, vuelve a intentarlo.."
+                    [icon]="'info-circle'"
+                    variant="outline"
+                    direction="row"
+                    severity="success">
+                </app-label>
+            </app-card>
+        }
+
+        <!-- 4. Consejos de uso (móvil) -->
+        @if (isMobile) {
+            <app-card
+                size="lg"
+                direction="row"
+                [variant]="'fill'"
+                bottom="20px"
+                [severity]="'success'"
+                [closable]="true">
+                <app-label
+                    size="xxs"
+                    label="Mantén el teléfono estable"
+                    subtitle="Si el código QR no es detectado, vuelve a intentarlo."
+                    [icon]="'info-circle'"
+                    variant="outline"
+                    direction="row"
+                    severity="success">
+                </app-label>
+            </app-card>
+        }
+
+        <!-- Footer común -->
+        <footer class="panel__footer">
+            <app-button
+                size="xxs"
+                severity="danger"
+                [variant]="'outline'"
+                [direction]="'row'"
+                [icon]="'close'"
+                [path]="'/'"
+                [label]="'Cancelar'">
+            </app-button>
+            <app-button
+                size="xxs"
+                severity="success"
+                [variant]="'fill'"
+                [direction]="'row'"
+                icon="pencil"
+                [path]="'/registrar'"
+                [label]="'Registro manual'">
+            </app-button>
+        </footer>
     </section>
 }

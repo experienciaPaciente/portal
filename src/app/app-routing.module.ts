@@ -41,7 +41,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    loadComponent: () => import('./paciente/auth/sign-in/sign-in.component').then(m => m.default)
+    loadComponent: () => import('./paciente/auth/sign-up/sign-up.component').then(m => m.default)
   }
 ];
 
