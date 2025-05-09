@@ -31,18 +31,18 @@
                 direction="row"
             >
         </app-label>
-        <hr>
+        <hr class="divider">
         <section role="navigation" class="img__wrapper--grid">
             <figure *ngFor="let file of registro.adjuntos; trackBy: trackByFn" (click)="openModal(file)">
-                <img [src]="file" alt="Uploaded Image">
-                <figcaption>{{ file }}</figcaption>
+                <img [src]="file" alt="Imagen cargada">
+                <figcaption>{{ getFileName(file) }}</figcaption>
             </figure>
         </section>
         @if (isModalOpen) {
-        <app-modal
+            <app-modal
             [prefix]="'Previsualizar'"
-            [title]="selectedFile"
-            [subtitle]="selectedFile"
+            [title]="displayFileName"
+            [subtitle]="displayFileName"
             icon="info-circle"
             [img]="selectedFile"
             [closeable]="true"

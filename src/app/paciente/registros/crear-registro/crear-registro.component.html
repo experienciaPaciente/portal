@@ -81,7 +81,7 @@
               [size]="'sm'"
               direction="row">
             </app-label>
-            <hr>
+            <hr class="divider">
             <div class="img__wrapper--grid">
               <figure *ngFor="let imageUrl of form.get('adjuntos')?.value ?? []; let i = index; trackBy: trackByFn">
                 <img [src]="imageUrl" alt="Uploaded Image" />

@@ -41,6 +41,24 @@
           </app-button>
       </div>
     </section>
+    <app-card
+      size="block"
+      direction="row"
+      [variant]="'fill'"
+      [severity]="'warning'"
+      [closable]="true"
+      [selectable]="false"
+    >
+    <app-label
+      size="xxs"
+      label="Versión de prueba"
+      subtitle="Evitá almacenar datos sensibles."
+      [icon]="'triangle-exclamation'"
+      variant="outline"
+      direction="row"
+      severity="info"
+    ></app-label>
+  </app-card>
     <small class="body__text--center"><b class="body__text--title">¿Aún no contás con tus datos de salud?</b><br>
       <a class="body__text--link" href="" [routerLink]="['/registrarse']">Registrate</a> en experienciaPaciente para comenzar a tener control sobre tus datos de salud.
     </small>

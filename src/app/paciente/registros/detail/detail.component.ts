@@ -38,6 +38,8 @@ export class DetailComponent {
   modalDelete: boolean = false;
   selectedFile?: string;
   selectedItemId: string | null = null;
+  displayFileName: string = '';
+
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Acción médica': { icon: 'user-nurse', color: '#00bcd4' },             
@@ -64,7 +66,6 @@ export class DetailComponent {
     'Dermatología': { icon: 'hand-dots', color: '#fd7e14' }
   };  
 
-  // Función que devuelve un array en lugar del array per-sé
   getMenuItems(data: Registro): { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void } [] {
     return [
       { label: 'Editar', icon: 'pencil', disabled: false, callback: () => this.navigateToEdit(data) },
@@ -102,13 +103,12 @@ export class DetailComponent {
       if (this.id) {
         this.fetchDetails(this.id);
       } else {
-        console.error('ID not found in route parameters');
+        console.error('ID no localizado');
       }
     });
     this.checkIfMobile(window.innerWidth)
   }
 
-  // Listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkIfMobile(event.target.innerWidth);
@@ -154,6 +154,17 @@ export class DetailComponent {
     }
   }
 
+  getFileName(url: string): string {
+    try {
+      const urlObj = new URL(url);
+      const pathSegments = urlObj.pathname.split('/');
+      const filename = pathSegments[pathSegments.length - 1];
+      return filename.includes('_') ? filename.split('_').slice(1).join('_') : filename;
+    } catch {
+      return 'Archivo adjunto';
+    }
+  }
+
   getIconForCategoria(categoria: string): string {
     return this.categoriaMap[categoria]?.icon || 'question-circle';
   }
@@ -192,9 +203,18 @@ export class DetailComponent {
     this.modalDelete = true; 
   }
 
-  openModal(file: string):void {
-      this.selectedFile = file;
-      this.isModalOpen = !this.isModalOpen;
+  openModal(file: string): void {
+    this.selectedFile = file;
+    try {
+      const urlObj = new URL(file);
+      const pathSegments = urlObj.pathname.split('/');
+      const filename = pathSegments[pathSegments.length - 1];
+      this.displayFileName = filename.includes('_') ? 
+        filename.split('_').slice(1).join('_') : filename;
+    } catch {
+      this.displayFileName = 'Archivo adjunto';
+    }
+    this.isModalOpen = !this.isModalOpen;
   }
 
   async onConfirm(): Promise<void> {

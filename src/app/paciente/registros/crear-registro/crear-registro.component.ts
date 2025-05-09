@@ -289,7 +289,7 @@ export class createRegistroComponent implements OnInit{
         }) || [];
       }
     } catch (error) {
-      console.error('Error loading registro:', error);
+      console.error('Error descargando registro:', error);
     }
   }
   
@@ -371,13 +371,21 @@ export class createRegistroComponent implements OnInit{
   uploadFiles(event: any) {
     const files: FileList = event.target.files;
     if (!files.length) return;
-    
+  
+    const maxSizeMB = 1;
+    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+  
     Array.from(files).forEach((file: File) => {
+      if (file.size > maxSizeBytes) {
+        alert(`El archivo "${file.name}" excede el límite de ${maxSizeMB} MB y no será subido.`);
+        return;
+      }
+  
       const filePath = `images/${Date.now()}_${file.name}`;
       const storageRef = ref(this.storage, filePath);
       const uploadTask = uploadBytesResumable(storageRef, file);
       this.uploadedFileNames.push(file.name);
-      
+  
       uploadTask.on('state_changed', {
         next: (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -387,11 +395,8 @@ export class createRegistroComponent implements OnInit{
           try {
             const downloadURL = await getDownloadURL(storageRef);
             this.uploadedImages.push(downloadURL);
-            
-   
             this.form.get('adjuntos')?.setValue([...this.uploadedImages]);
             event.target.value = '';
-
           } catch (error) {
             console.error('Error getting download URL:', error);
           }
@@ -399,6 +404,7 @@ export class createRegistroComponent implements OnInit{
       });
     });
   }
+  
 
   async saveImageMetadata(downloadURL: string, fileName: string) {
     const imagesCollection = collection(this.firestore, 'images');

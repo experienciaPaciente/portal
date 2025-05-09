@@ -80,7 +80,7 @@ export default class SignUpComponent {
   form = this.formBuilder.group<SignUpForm>({
     nombre: this.formBuilder.control(''),
     apellido: this.formBuilder.control(''),
-    dni: this.formBuilder.control( '', {validators: [this.documentValidator(), Validators.required]}),
+    dni: this.formBuilder.control(''),
     email: this.formBuilder.control('', {validators: [Validators.email, Validators.required]}),
     password: this.formBuilder.control('', Validators.required),
     grupoSanguineo: this.formBuilder.control(''),
