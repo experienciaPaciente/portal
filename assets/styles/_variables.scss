@@ -43,7 +43,7 @@
 
   // Page 
   --page__body--padding: 0;
-  --page__body--height: calc(100vh - var(--header__height));
+  --page__body--height: calc(100dvh - var(--header__height));
   --page__body--bg: white;
   --page__main--padding: 2rem 4rem;
   --page__gap--vertical: 2.5rem;
