@@ -125,7 +125,13 @@ export class createRegistroComponent implements OnInit{
     const formattedTime = `${hours}:${minutes}`;  
     this.form.controls['hora'].setValue(formattedTime);  
 
-    const dateTime: any = `Registro del ${formattedDate} - ${formattedTime}`;
+    const readableDate = today.toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    const dateTime: any = `${readableDate} - ${formattedTime}`;
     this.form.controls['titulo'].setValue(dateTime);  
   }
 

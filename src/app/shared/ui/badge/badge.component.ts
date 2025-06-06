@@ -52,10 +52,10 @@ export class BadgeComponent implements OnChanges {
         break;
       case 'neutral':
         this.badgeStyle = {
-          'background-color': '#e0e0e0',  // Add a neutral light color in your CSS variables
-          'color': '#6c757d'  // Add a neutral color in your CSS variables
+          'background-color': 'var(--neutralLight)',
+          'color': 'var(--neutralDark)'
         };
-        this.badgeIconClass = 'fa-solid fa-circle-question';
+        this.badgeIconClass = 'fa-solid fa-calendar-check';
         break;
       default:
         break;

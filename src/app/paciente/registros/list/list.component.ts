@@ -135,30 +135,34 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.authState$.subscribe(user => {
-        if (user) {
-          this.email = user.email;
-          this.name = user.displayName;
-        } else {
-          this.email = null;
-          this.name = 'Usuario';
-        }
-      });
-  
+    this.authState$.subscribe(user => {
+      if (user) {
+        this.email = user.email;
+        this.name = user.displayName;
+      } else {
+        this.email = null;
+        this.name = 'Usuario';
+      }
+    });
+
     this.authState$.subscribe(user => {
       if (user) {
         this.registros$ = this.authState$.pipe(
           switchMap((user) => {
             if (user) {
               return this.registroService.getRegistrosByUserId(user.uid).pipe(
-                // Apply sorting when getting the initial data
-                map(registros => registros.sort((a, b) => a.titulo.localeCompare(b.titulo))),
+                map(registros => registros.sort((a, b) => {
+                  const dateA = new Date(a.fecha);
+                  const dateB = new Date(b.fecha);
+                  return dateB.getTime() - dateA.getTime();
+                })),
                 startWith([])
               );
             }
             return of([]);
           })
         );        
+        
         this.filteredRegistros$ = combineLatest([
           this.searchControl.valueChanges.pipe(startWith('')),
           this.registros$,
@@ -168,13 +172,17 @@ export class ListComponent implements OnInit {
               registro.titulo.toLowerCase().includes((searchTerm ?? '').toLowerCase()) &&
               (this.selectedCategory === '' || registro.categoria === this.selectedCategory)
             )
-            // Sort already applied from the source registros$
+            .sort((a, b) => {
+              const dateA = new Date(a.fecha);
+              const dateB = new Date(b.fecha);
+              return dateB.getTime() - dateA.getTime();
+            })
           )
         );
       }
-    }
-  );
-    this.checkIfMobile(window.innerWidth)
+    });
+    
+    this.checkIfMobile(window.innerWidth);
   }
 
   // Listen for window resize events
@@ -217,10 +225,36 @@ export class ListComponent implements OnInit {
           registro.titulo.toLowerCase().includes(term) &&
           (category === '' || registro.categoria === category)
         )
-        // Sort alphabetically by title
-        .sort((a, b) => a.titulo.localeCompare(b.titulo))
+        // Cambiar ordenamiento alfabético por cronológico
+        .sort((a, b) => {
+          const dateA = new Date(a.fecha);
+          const dateB = new Date(b.fecha);
+          return dateB.getTime() - dateA.getTime();
+        })
       )
     );
+  }
+
+  formatDate(date: Date): string {
+    if (!date) return '';
+    
+    const dateObj = new Date(date);
+    if (isNaN(dateObj.getTime())) return '';
+    
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - dateObj.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) return 'Hoy';
+    if (diffDays === 1) return 'Ayer';
+    if (diffDays < 7) return `Hace ${diffDays} días`;
+    if (diffDays < 30) return `Hace ${Math.floor(diffDays / 7)} semanas`;
+    
+    return dateObj.toLocaleDateString('es-ES', { 
+      day: '2-digit', 
+      month: '2-digit', 
+      year: 'numeric' 
+    });
   }
 
   getIconForCategoria(categoria: string): string {
