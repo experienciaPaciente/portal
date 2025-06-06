@@ -95,6 +95,7 @@ export class ScanComponent {
   }
 
   onCodeResult(resultString: string): void {
+
     this.qrResultString = resultString;
     this.QrService.setQRData(this.qrResultString);
 
@@ -105,6 +106,11 @@ export class ScanComponent {
     }, 100);
     
     this.router.navigate(['/registrar']);
+
+    if (!resultString) {
+      this.tryHarder = true;
+      return;
+    }
   }
 
  private parseQRData(qrString: string): Partial<Registro> {

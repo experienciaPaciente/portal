@@ -13,7 +13,8 @@
                 <span class="qr__wrapper">
                     <zxing-scanner 
                         [torch]="torchEnabled" 
-                        [(device)]="currentDevice" 
+                        [(device)]="currentDevice"
+                        [autofocusEnabled]="true"
                         (scanSuccess)="onCodeResult($event)"
                         [formats]="formatsEnabled" 
                         [tryHarder]="tryHarder" 
