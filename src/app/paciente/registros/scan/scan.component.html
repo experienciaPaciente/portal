@@ -1,6 +1,5 @@
 @if (qrRegistro) {
     <section class="panel__main--center">
-            <!-- Título común para todos los casos -->
             <app-label
                 [size]="isMobile ? 'sm' : 'md'"
                 [prefix]="'Autoregistro'"
@@ -10,7 +9,6 @@
                 direction="column">
             </app-label>
 
-            <!-- Escáner QR (solo visible con permisos) -->
             @if (!noPermissions) {
                 <span class="qr__wrapper">
                     <zxing-scanner 
@@ -27,7 +25,6 @@
                     <div class="qr__line"></div>
                 </span>
                 
-                <!-- Estado del escaneo -->
                 @if (qrResultString) {
                     <app-badge severity="success" label="Scaneo exitoso" size="xs"></app-badge>
                 } @else {
@@ -35,8 +32,6 @@
                 }
             }
 
-        <!-- Notificaciones según estado -->
-        <!-- 1. Notificación de error de permisos (PC) -->
         @if (!isMobile && noPermissions) {
             <app-card
                 aligned="center"
@@ -58,7 +53,6 @@
             </app-card>
         }
 
-        <!-- 2. Notificación de error de permisos (móvil) -->
         @if (isMobile && noPermissions) {
             <app-card
                 aligned="center"
@@ -80,7 +74,6 @@
             </app-card>
         }
 
-        <!-- 3. Consejos de uso (PC) -->
         @if (!isMobile && !noPermissions) {
             <app-card
                 aligned="center"
@@ -102,7 +95,6 @@
             </app-card>
         }
 
-        <!-- 4. Consejos de uso (móvil) -->
         @if (isMobile) {
             <app-card
                 size="lg"
@@ -123,7 +115,6 @@
             </app-card>
         }
 
-        <!-- Footer común -->
         <footer class="panel__footer">
             <app-button
                 size="xxs"
@@ -131,8 +122,9 @@
                 [variant]="'outline'"
                 [direction]="'row'"
                 [icon]="'close'"
-                [path]="'/'"
-                [label]="'Cancelar'">
+                [label]="'Cancelar'"
+                (clickEvent)="cancel()"
+                >
             </app-button>
             <app-button
                 size="xxs"
@@ -140,8 +132,9 @@
                 [variant]="'fill'"
                 [direction]="'row'"
                 icon="pencil"
-                [path]="'/registrar'"
-                [label]="'Registro manual'">
+                [label]="'Registro manual'"
+                (clickEvent)="cancel()"
+                >
             </app-button>
         </footer>
     </section>

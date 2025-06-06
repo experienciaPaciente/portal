@@ -74,7 +74,7 @@ export class ScanComponent {
     private QrService: QrService
   ) {}
 
-  // Listen for window resize events
+  
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkIfMobile(event.target.innerWidth);
@@ -98,15 +98,12 @@ export class ScanComponent {
     this.qrResultString = resultString;
     this.QrService.setQRData(this.qrResultString);
 
-    // Parsear los datos del QR
     const parsedData = this.parseQRData(this.qrResultString);
 
-    // Autocompletar los campos del formulario
     setTimeout(() => {
       this.populateFormFromQR(parsedData);
     }, 100);
-
-    // setTimeout()
+    
     this.router.navigate(['/registrar']);
   }
 
@@ -114,12 +111,12 @@ export class ScanComponent {
     const lines = qrString.split('\n');
     const data: Partial<Registro> = {};
 
-    // Iterar por cada línea y extraer "Campo: Valor"
+    
     lines.forEach((line) => {
       const [key, ...valueParts] = line.split(': ');
       const value = valueParts.join(': ').trim();
 
-      // Mapear los valores del string al formato de Registro
+      
       switch (key.toLowerCase()) {
         case 'título':
           data.titulo = value;
@@ -172,7 +169,7 @@ export class ScanComponent {
   private populateFormFromQR(data: Partial<Registro>): void {
     if (!data) return;
     try {
-      // Usar patchValue para solo rellenar los campos existentes
+      
       this.form.patchValue({
         paciente: data.paciente,
         titulo: data.titulo,
@@ -206,10 +203,14 @@ export class ScanComponent {
 
   checkIfMobile(width: number): void {
     this.isMobile = width < 768;
-    // this.updateViewState(this.router.url);
+    
   }
 
   cancel() {
+    if (this.form) {
+      this.form.reset();
+    }
     this.qrRegistro = !this.qrRegistro;
+    this.router.navigate(['/']);
   }
 }
