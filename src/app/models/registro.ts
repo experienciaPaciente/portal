@@ -1,3 +1,4 @@
+import { IA } from "./ai";
 import { IPaciente } from "./paciente";
 
 export interface Paciente extends Registro {
@@ -19,4 +20,8 @@ export interface Registro {
     fecha: Date,
     hora: string,
     adjuntos: string[],
+    ai?: IA;
+    aiProcesado?: boolean;
+    aiEstado?: 'pending' | 'processing' | 'completed' | 'error';
+    aiVersion?: string;
 }

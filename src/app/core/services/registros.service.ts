@@ -56,9 +56,17 @@ export class RegistrosService {
     return registros;
   }
 
-  createRegistro(registro: Registro) {
-    return addDoc(this._collection, registro);
-  }
+createRegistro(registro: Registro) {
+
+  const iaRegistro: Registro = {
+    ...registro,
+    aiProcesado: false,
+    aiEstado: 'pending',
+    aiVersion: 'v1'
+  };
+
+  return addDoc(this._collection, iaRegistro);
+}
 
   updateRegistro(id: string, registro: Registro) {
     return updateDoc(this.document(id), { ...registro });
