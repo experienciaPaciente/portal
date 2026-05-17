@@ -7,3 +7,4 @@ if (getApps().length === 0) {
 
 setGlobalOptions({ maxInstances: 10 });
 export { onRegistroCreated } from "./triggers/registro.trigger";
+export { onRegistroCompletado } from "./triggers/insights.trigger";
