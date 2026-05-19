@@ -1,11 +1,35 @@
 <section class="sidebar__header">
     @if (loggedUser) {
-    <app-label
-        size="md"
-        [label]="'Tus registros de salud'"
-        prefix="Hola {{ name }}"
-        direction="row">
-    </app-label>
+        <div class="panel__header--row">
+            <app-label
+                size="md"
+                [label]="'Tus registros de salud'"
+                prefix="Hola {{ name }}"
+                direction="row">
+            </app-label>
+            <div class="notification__wrapper">
+                <app-button type="button" [direction]="'none'" img="assets/img/sparkles.svg" size="xs" [variant]="'outline'" severity="secondary" direction="none" (click)="toggleInsight()"></app-button>
+                <span class="notification__count" [class.notification__count--active]="hasNewInsight">{{ hasNewInsight ? 1 : 0 }}</span>
+            </div>
+        </div>
+        <ng-container *ngIf="insightVisible && (insight$ | async) as insight">
+            <app-card [direction]="'column'" variant="fill" severity="warning" [align]="'start'" [aligned]="'start'">
+                        
+                        @for (recomendacion of insight.recomendaciones; track $index) {
+
+                <app-label
+                    size="xs"
+                    [label]="'Recomendación'"
+                    [subtitle]="insight.recomendaciones[$index]"
+                    direction="row"
+                    [icon]="'lightbulb'">
+                </app-label>
+       
+                        
+                        }
+                
+            </app-card>
+        </ng-container>
     }
     <section class="input__group">
         <span class="input__wrapper">

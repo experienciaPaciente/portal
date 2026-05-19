@@ -71,7 +71,7 @@ export const onRegistroCreated = onDocumentCreated(
 
       // ── Paso 3: Marcar como 'completed' ─────────────────────────────────
       await db.collection(COLLECTION).doc(registroId).update({
-        aiProcessed: true,
+        aiProcesado: true,
         aiEstado: "completed",
         aiCompletedAt: FieldValue.serverTimestamp(),
       });
@@ -85,7 +85,7 @@ export const onRegistroCreated = onDocumentCreated(
       );
 
       await db.collection(COLLECTION).doc(registroId).update({
-        aiProcessed: false,
+        aiProcesado: false,
         aiEstado: "error",
         aiErrorAt: FieldValue.serverTimestamp(),
         aiErrorMessage:

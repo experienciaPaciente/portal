@@ -2,6 +2,7 @@ import { Component, OnInit, inject, Input, HostListener } from '@angular/core';
 import { ItemComponent } from 'src/app/shared/ui/item/item.component';
 import { LabelComponent } from 'src/app/shared/ui/label/label.component';
 import { RegistrosService } from 'src/app/core/services/registros.service';
+import { InsightsService, Insight } from 'src/app/core/services/insights.service';
 import { Registro } from 'src/app/models/registro';
 import { Auth, authState } from '@angular/fire/auth';
 import { Observable, map, startWith, combineLatest, of, switchMap } from 'rxjs';
@@ -39,6 +40,7 @@ export class ListComponent implements OnInit {
 
   registro!: Registro[];
   registros$!: Observable<Registro[]>;
+  insight$!: Observable<Insight | null>;
   loggedUser = true;
   isMobile!: boolean;
   email: string | null = null;
@@ -49,6 +51,8 @@ export class ListComponent implements OnInit {
   medCategories!: boolean;
   selectedItemId: string | null = null;
   isModalOpen: boolean = false;
+  insightVisible: boolean = false;
+  hasNewInsight: boolean = false;
   // Store selected item for deletion
   itemToDelete: Registro | null = null;
 
@@ -61,6 +65,7 @@ export class ListComponent implements OnInit {
   
   @Input() type?: 'flex' | 'grid' = 'flex';
   @Input() direction?: 'horizontal' | 'vertical' = 'horizontal';
+  @Input() insights: boolean = true;
 
   categoriaMap: { [key: string]: { icon: string; color: string } } = {
     'Acción médica': { icon: 'user-nurse', color: '#00bcd4' },             
@@ -120,7 +125,8 @@ export class ListComponent implements OnInit {
   });
 
   constructor(
-    private registroService: RegistrosService, 
+    private registroService: RegistrosService,
+    private insightsService: InsightsService,
     private router: Router,
     private notificationService: NotificationService
   ) {}
@@ -179,6 +185,12 @@ export class ListComponent implements OnInit {
             })
           )
         );
+
+        // Subscribe to insights
+        this.insight$ = this.insightsService.getInsight(user.uid);
+        this.insight$.subscribe(insight => {
+          this.hasNewInsight = insight !== null;
+        });
       }
     });
     
@@ -303,5 +315,12 @@ export class ListComponent implements OnInit {
   onCancel(): void {
     this.isModalOpen = false;
     this.itemToDelete = null;
+  }
+
+  toggleInsight(): void {
+    this.insightVisible = !this.insightVisible;
+    if (this.insightVisible) {
+      this.hasNewInsight = false;
+    }
   }
 }

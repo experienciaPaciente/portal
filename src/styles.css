@@ -21,17 +21,17 @@
   --secondaryLighter: #ECF5FF;
   --tertiaryLight: #FFF4E3;
   --tertiaryLighter: #E6E6FA;
-  --neutralLight: #e0e0e0;
+  --neutralLight: #f0f0f0;
   --shadow: rgba(140, 140, 140, 0.5);
-  --gradient: linear-gradient(to top right, #317aa0, #0abebb, #87d1b6);
+  --gradient: linear-gradient(to top right, var(--primaryDarker), var(--primary), var(--primaryLighter));
   --box-shadow: 2px 0 4px var(--shadow);
   --info: #6CBCFC;
   --info--light: #EFF7FF;
   --warning: #ff9a00;
   --warning--light: #FCEBD0;
-  --success: #23D3BD;
-  --success--light: #c9f5ef;
-  --success--dark: #18b09f;
+  --success: var(--primary);
+  --success--light: var(--primaryLight);
+  --success--dark: var(--primaryDarker);
   --danger--dark: #b82e76;
   --danger: #ef5da8;
   --danger--light: #FAE5E4;
@@ -46,12 +46,12 @@
   --label__subtitle--color: gray;
   --label__gap: 8px;
   --page__body--padding: 0;
-  --page__body--height: calc(100vh - var(--header__height));
+  --page__body--height: calc(100dvh - var(--header__height));
   --page__body--bg: white;
   --page__main--padding: 2rem 4rem;
   --page__gap--vertical: 2.5rem;
   --page__font-familiy: ui-sans-serif, system-ui, -apple-system, "Open Sans", "Helvetica Neue",
-    "Segoe UI", sans-serif;
+  "Segoe UI", sans-serif;
   --page__bg--img: inherit;
   --page__title--size: 1.75rem;
   --page__title--color: var(--primary);
@@ -60,6 +60,7 @@
   --page__title--weight: bolder;
   --page__title--shadow: 0px 0px 4px var(--shadow);
   --page__title--margin: 0.5rem 0;
+  --main__header--height: fit-content;
   --page__subtitle--size: 1.35rem;
   --page__subtitle--color: var(--primary);
   --page__subtitle--lineHeight: auto;
@@ -138,7 +139,7 @@
   --button__font--size: 14px;
   --button__border--color: var(--button__text--color);
   --button__border: solid 2px var(--button__border--color);
-  --button__border--radius: 6px;
+  --button__border--radius: 24px;
   --button__text--color: var(--primary);
   --button__bg--color: transparent;
   --button__opacity: 50%;
@@ -155,12 +156,12 @@
   --label__icon--color: var(--primary);
   --label__icon--border: solid 2px var(--label__icon--color);
   --label__icon--align: flex-start;
-  --footer__height: 120px;
+  --footer__height: 84px;
   --footer__text--sm: x-small;
   --footer__text--color: gray;
   --footer__text--align: center;
   --footer__bg--color: white;
-  --footer__padding: 24px 0;
+  --footer__padding: 1.5rem 0rem;
   --form__gap--row: 16px;
   --form__gap--col: 12px;
   --form__padding: 1rem 1rem var(--footer__height) 1rem;
@@ -275,6 +276,9 @@ hr {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+hr .divider {
+  margin: 1rem 0;
 }
 
 /**
@@ -577,6 +581,7 @@ section[type=flex], aside[type=flex], div[type=flex], header[type=flex] {
   row-gap: var(--form__gap--row);
   box-sizing: border-box;
   width: 100%;
+  position: relative;
 }
 form[type=flex] div.form__input-wrapper ~ button,
 fieldset[type=flex] div.form__input-wrapper ~ button,
@@ -626,6 +631,13 @@ form .form__input-wrapper--row > .form__input-wrapper--col,
 fieldset .form__input-wrapper--row > .form__input-wrapper--col,
 section .form__input-wrapper--row > .form__input-wrapper--col, aside .form__input-wrapper--row > .form__input-wrapper--col, div .form__input-wrapper--row > .form__input-wrapper--col, header .form__input-wrapper--row > .form__input-wrapper--col {
   flex: 1 1 160px;
+}
+form .form__input-wrapper--row > app-button,
+fieldset .form__input-wrapper--row > app-button,
+section .form__input-wrapper--row > app-button, aside .form__input-wrapper--row > app-button, div .form__input-wrapper--row > app-button, header .form__input-wrapper--row > app-button {
+  border-radius: 50%;
+  align-self: center;
+  padding-top: 1.6rem;
 }
 form fieldset,
 fieldset fieldset,
@@ -727,6 +739,31 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   justify-content: flex-start;
   height: 100%;
 }
+form .flex--1,
+fieldset .flex--1,
+section .flex--1, aside .flex--1, div .flex--1, header .flex--1 {
+  flex: 1 1 120px !important;
+}
+form .flex--2,
+fieldset .flex--2,
+section .flex--2, aside .flex--2, div .flex--2, header .flex--2 {
+  flex: 1 1 320px !important;
+}
+form .flex--3,
+fieldset .flex--3,
+section .flex--3, aside .flex--3, div .flex--3, header .flex--3 {
+  flex: 1 1 480px !important;
+}
+form .flex--4,
+fieldset .flex--4,
+section .flex--4, aside .flex--4, div .flex--4, header .flex--4 {
+  flex: 1 1 560px !important;
+}
+form .flex--block,
+fieldset .flex--block,
+section .flex--block, aside .flex--block, div .flex--block, header .flex--block {
+  flex: 1 1 620px !important;
+}
 
 .page {
   display: flex;
@@ -752,6 +789,12 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  padding: 0.5rem 0;
 }
 .page__body .panel__header--col {
   display: flex;
@@ -784,6 +827,26 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   row-gap: var(--wrapper__gap--row);
   justify-content: space-between;
 }
+.page__body aside.page__panel--sidebar .sidebar__header .notification__wrapper {
+  position: relative;
+}
+.page__body aside.page__panel--sidebar .sidebar__header .notification__wrapper .notification__count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background-color: var(--tertiary);
+  border-radius: 50%;
+  padding: 2px;
+  color: white;
+}
 .page__body .input__group {
   display: flex;
   flex-wrap: wrap;
@@ -796,7 +859,7 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: var(--page__body--height);
+  height: 100%;
   background-color: var(--panel__bg--color);
   overflow-y: scroll;
   position: relative;
@@ -815,10 +878,10 @@ section [type=form], aside [type=form], div [type=form], header [type=form] {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: fit-content;
-  padding: var(--panel__padding) var(--panel__padding) 0 var(--panel__padding);
+  padding: 0 var(--panel__padding);
   box-sizing: border-box;
   row-gap: var(--wrapper__gap--row);
+  overflow-y: scroll;
 }
 .page__body main.page__panel--main .panel__main .panel__inner--main {
   flex: 1 1 320px;
@@ -903,14 +966,14 @@ footer.panel__footer {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  height: var(--footer__height);
   width: 100%;
-  height: fit-content;
   box-sizing: border-box;
   padding: var(--footer__padding);
   background-color: var(--footer__bg--color);
   position: sticky;
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 1;
   box-shadow: 0 -1px 0px 0px var(--shadow);
   gap: var(--panel__gap);
@@ -937,6 +1000,7 @@ footer.panel__footer .panel__footer--left {
   }
 
   .page__body .page__panel--main .panel__main {
+    --footer__height: fit-content!important;
     column-gap: 140px;
   }
   .page__body .page__panel--main .panel__main article.panel__text--article {
@@ -958,6 +1022,26 @@ footer.panel__footer .panel__footer--left {
     max-width: 100% !important;
     background-color: white;
     border: solid 1px var(--neutral);
+  }
+  .page__body .panel__header--row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 1rem 0;
+    background: white;
+    box-shadow: 0 1px 0 0 var(--shadow);
+  }
+
+  footer.panel__footer {
+    --footer__height: fit-content!important;
+    padding: var(--footer__padding);
   }
 
   form input, form textarea, form select,
@@ -984,11 +1068,11 @@ section[type=flex], aside[type=flex], div[type=flex], header[type=flex] {
   }
 
   #signIn {
+    height: var(--panel__height--center);
     padding: 2rem;
   }
   #signIn .page__panel--sidebar {
-    --panel__height--center: 84vh!important;
-    height: var(--panel__height--center);
+    --panel__height--center: fit-content;
     border-radius: var(--panel__border--radius);
   }
 
@@ -1005,6 +1089,14 @@ section[type=flex], aside[type=flex], div[type=flex], header[type=flex] {
   }
   #signUp .page__panel--float .panel__img--center {
     align-self: flex-start !important;
+  }
+
+  #signIn .page__panel--float, #signUp .page__panel--float {
+    --panel__height: 80vh!important;
+    height: var(--panel__height);
+  }
+  #signIn footer.panel__footer, #signUp footer.panel__footer {
+    padding: 1rem 0 0 0;
   }
 }
 app-badge [class^=badge__wrapper] {
@@ -1127,7 +1219,7 @@ app-button > button.button__size--xs {
   --button__font--size: 10px;
 }
 app-button > button.button__size--sm {
-  --button__padding: .35rem .7rem;
+  --button__padding: .4rem .6rem;
   --button__font--size: 12px;
 }
 app-button > button.button__size--md {
@@ -1141,6 +1233,9 @@ app-button > button.button__size--lg {
 app-button > button.button__size--xl {
   --button__padding: 0.9rem 1.5rem;
   --button__font--size: 18px;
+}
+app-button > button.button__size--full {
+  display: block;
 }
 
 app-card {
@@ -1180,16 +1275,17 @@ app-card .card__wrapper--column {
   --card__wrapper--justify: flex-start;
   --card__direction: column;
 }
+app-card .card--center {
+  justify-self: center;
+}
 app-card .card.card__fill--custom, app-card .card.card__outline--custom, app-card .card.card__fab--custom {
   --card__bg--color: var(--card__bg--color);
   --card__border--color: var(--card__border--color);
 }
 app-card .card.card__fill--custom.card--selectable:hover, app-card .card.card__outline--custom.card--selectable:hover, app-card .card.card__fab--custom.card--selectable:hover {
   background-color: var(--card__bg--color);
-  cursor: pointer;
-}
-app-card .card.card__fill--custom.card--selectable:focus, app-card .card.card__outline--custom.card--selectable:focus, app-card .card.card__fab--custom.card--selectable:focus {
   border: solid 2px var(--card__border--color);
+  cursor: pointer;
 }
 app-card .card.card__fill--primary {
   --card__border--color: var(--primary);
@@ -1239,6 +1335,42 @@ app-card .card.card__fill--neutral.card--selectable:hover {
   background-color: var(--card__bg--color);
 }
 app-card .card.card__fill--neutral.card--selectable:focus {
+  border: solid 2px var(--card__border--color);
+}
+app-card .card.card__fill--success {
+  --card__border--color: var(--success);
+  --card__bg--color: var(--success--light);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fill--success.card--selectable:hover {
+  --card__bg--color: var(--success--dark);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fill--success.card--selectable:focus {
+  border: solid 2px var(--card__border--color);
+}
+app-card .card.card__fill--warning {
+  --card__border--color: var(--warning);
+  --card__bg--color: var(--warning--light);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fill--warning.card--selectable:hover {
+  --card__bg--color: var(--warning--dark);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fill--warning.card--selectable:focus {
+  border: solid 2px var(--card__border--color);
+}
+app-card .card.card__fill--danger {
+  --card__border--color: var(--danger);
+  --card__bg--color: var(--danger--light);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fill--danger.card--selectable:hover {
+  --card__bg--color: var(--danger--dark);
+  background-color: var(--card__bg--color);
+}
+app-card .card.card__fill--danger.card--selectable:focus {
   border: solid 2px var(--card__border--color);
 }
 app-card .card.card__outline--primary {
@@ -1374,6 +1506,10 @@ app-card .card--lg {
 app-card .card--xl {
   --card__padding: 12px 24px;
 }
+app-card .card--block {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
 app-card .card > img {
   margin-bottom: 0.75rem;
   object-fit: cover;
@@ -1425,9 +1561,6 @@ app-label .label.sm {
   --label__prefix--size: 11px;
   --label__subtitle--size: 12px;
   --label__icon--size: 16px;
-}
-app-label .label.sm > .label__content {
-  row-gap: 6px;
 }
 app-label .label.md {
   --label__prefix--size: 12px;
@@ -1666,6 +1799,7 @@ nav.nav__wrapper .nav__list--row {
 #signIn {
   --box-shadow: -2px 0 4px var(--shadow);
   --page__body--height: 100vh;
+  --panel__height--center: 100vh;
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -1673,7 +1807,7 @@ nav.nav__wrapper .nav__list--row {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  --page__bg--img: url("./../../../../assets/img/login__bg--desktop.jpg");
+  --page__bg--img: url("./../../../../assets/img/login__bg--signup.jpg");
   background-image: var(--page__bg--img);
   background-position: center;
   background-attachment: fixed;
@@ -1682,25 +1816,23 @@ nav.nav__wrapper .nav__list--row {
   position: relative;
 }
 #signIn .page__panel--sidebar {
-  --panel__height--center: 100vh;
+  --panel__padding: 36px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   box-shadow: var(--box-shadow);
   box-sizing: border-box;
-  height: 100%;
+  height: var(--panel__height--center);
+  overflow-y: scroll;
   z-index: 1;
   background-color: white;
   row-gap: var(--wrapper__gap--row);
-  padding: 2rem;
+  padding: 56px var(--panel__padding) 0 var(--panel__padding);
 }
 #signIn .page__panel--sidebar .panel__img--center {
   align-self: center;
-}
-#signIn .page__panel--sidebar .panel__footer {
-  --panel__gap: auto;
-  column-gap: var(--panel__gap);
 }
 #signIn > app-card {
   position: absolute;
@@ -1725,10 +1857,11 @@ nav.nav__wrapper .nav__list--row {
   width: 100vw;
 }
 #signUp .page__panel--float {
-  --panel__padding: 36px;
+  --panel__padding: 24px;
   --panel__width: 100vw;
   --panel__height: 100vh;
   display: grid;
+  position: relative;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-template-rows: 60px auto auto;
   grid-auto-flow: row dense;
@@ -1755,6 +1888,7 @@ nav.nav__wrapper .nav__list--row {
   order: 0;
 }
 #signUp .page__panel--float .panel__prefooter {
+  align-self: flex-end;
   order: 2;
 }
 #signUp .page__panel--float .panel__prefooter .footer__text--sm {
@@ -1777,6 +1911,31 @@ nav.nav__wrapper .nav__list--row {
   left: 0;
   height: 100vh;
   width: 100vw;
+}
+
+#signIn .body__text--link, #signIn .body__text--center, #signIn .body__text--title, #signUp .body__text--link, #signUp .body__text--center, #signUp .body__text--title {
+  font-size: 12px;
+  line-height: 18px;
+}
+#signIn .body__text--title, #signUp .body__text--title {
+  color: var(--primary);
+}
+#signIn .body__text--center, #signUp .body__text--center {
+  color: var(--neutralDark);
+  text-align: center;
+}
+#signIn .body__text--link, #signUp .body__text--link {
+  text-decoration: underline;
+  color: var(--secondary);
+}
+#signIn footer.panel__footer, #signUp footer.panel__footer {
+  --panel__gap: auto;
+  column-gap: var(--panel__gap);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
 }
 
 /*# sourceMappingURL=styles.css.map */

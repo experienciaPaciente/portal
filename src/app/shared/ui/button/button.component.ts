@@ -17,6 +17,7 @@ export class ButtonComponent{
   @Input() severity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' | 'primary' | 'secondary' | 'tertiary' = 'info';
   @Input() size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' = 'md';
   @Input() icon?: string;
+  @Input() img?: string;
   @Input() label?: string;
   @Input() badgeCount?: number;
   @Input() prefix?: string;

@@ -1,10 +1,16 @@
 <!-- Unificar criterios de anidación de clases utilizando BEM -->
 <section class="panel__header">
   <span #labelColor class="label" [ngClass]="[size, direction, severity]">
-    @if (icon) {
+    @if (img) {
       <div class="label__icon" [ngClass]="label ? '' : 'icon__border--none'">
-        <i class="fa-solid fa-{{ icon }}" [attr.aria-label]="iconLabel"></i>
+        <img class="label__icon--img" [src]="img" [attr.alt]="iconLabel || 'icon'" />
       </div>
+    } @else {
+      @if (icon) {
+        <div class="label__icon" [ngClass]="label ? '' : 'icon__border--none'">
+          <i class="fa-solid fa-{{ icon }}" [attr.aria-label]="iconLabel"></i>
+        </div>
+      }
     }
     <div class="label__content">
       @if (prefix) {
