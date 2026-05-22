@@ -52,9 +52,12 @@ export class ListComponent implements OnInit {
   selectedItemId: string | null = null;
   isModalOpen: boolean = false;
   insightVisible: boolean = false;
-  hasNewInsight: boolean = false;
+  visibleAlerts: string[] = [];
+  visibleRecommendations: string[] = [];
+  visibleInsightCount: number = 0;
   // Store selected item for deletion
   itemToDelete: Registro | null = null;
+  insightData: Insight | null = null;
 
   onCardSelected(data: { id: string }) {
     this.selectedItemId = data.id;
@@ -189,7 +192,8 @@ export class ListComponent implements OnInit {
         // Subscribe to insights
         this.insight$ = this.insightsService.getInsight(user.uid);
         this.insight$.subscribe(insight => {
-          this.hasNewInsight = insight !== null;
+          this.insightData = insight;
+          this.updateVisibleInsightState(insight);
         });
       }
     });
@@ -317,10 +321,29 @@ export class ListComponent implements OnInit {
     this.itemToDelete = null;
   }
 
-  toggleInsight(): void {
-    this.insightVisible = !this.insightVisible;
-    if (this.insightVisible) {
-      this.hasNewInsight = false;
+  private updateVisibleInsightState(insight: Insight | null): void {
+    if (!insight) {
+      this.visibleAlerts = [];
+      this.visibleRecommendations = [];
+    } else {
+      this.visibleAlerts = (insight.alertas || []).slice(0, 3);
+      this.visibleRecommendations = (insight.recomendaciones || []).slice(0, 3);
+    }
+
+    this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
+  }
+
+  dismissAlert(index: number): void {
+    if (index >= 0 && index < this.visibleAlerts.length) {
+      this.visibleAlerts.splice(index, 1);
+      this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
+    }
+  }
+
+  dismissRecommendation(index: number): void {
+    if (index >= 0 && index < this.visibleRecommendations.length) {
+      this.visibleRecommendations.splice(index, 1);
+      this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
     }
   }
 }

@@ -128,7 +128,7 @@ app-label {
         line-height: 1.25;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         text-overflow: ellipsis;
         overflow: hidden;   
         // text-wrap: nowrap;
@@ -141,12 +141,21 @@ app-label {
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         text-overflow: ellipsis;
         overflow: hidden;
       }
     }
 }
+
+  .dropdown-content {
+
+      app-label {
+          .label__subtitle {
+              -webkit-line-clamp: 3!important;
+          }
+      }
+  }
 
   // Checkear uso y considerar mover a layout.scss
   .button__group {

@@ -110,6 +110,8 @@ app-card {
     
       &--info {
       --card__border--color: var(--info);
+      --card__bg--color: var(--info--light);
+      background-color: var(--card__bg--color);
         &.card--selectable {
           &:hover {
             --card__bg--color: var(--info--light);
@@ -348,7 +350,7 @@ app-card {
     }
 
     &--md {
-      --card__padding: 0 0 0 12px;
+      --card__padding: 6px 12px;
       --card__width: 100%;
       --card__height: 100%;
 

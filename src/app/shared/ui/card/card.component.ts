@@ -27,6 +27,7 @@ export class CardComponent implements OnChanges, AfterViewInit {
   @Input() bottom?: string;
   @Input() left?: string;
   @Output() cardSelected = new EventEmitter<void>(); // Emits when this card is selected
+  @Output() close = new EventEmitter<Event>(); // Emits when the card close button is clicked
 
 
   // Ver de pasar direccionalidad desde la card al label
@@ -66,7 +67,7 @@ export class CardComponent implements OnChanges, AfterViewInit {
 
   closeCard(event: Event) {
     event.stopPropagation();
-    this.cardColor.nativeElement.remove();
+    this.close.emit(event);
   }
 
   onCardClick() {

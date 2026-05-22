@@ -18,99 +18,87 @@
                     buttonDirection="none"
                 >
                     <ng-container *ngIf="insight$ | async as insight; else noAnalysis">
-                        <!-- Recommendations Section -->
-                        <app-label
-                            size="xs"
-                            [label]="'Recomendaciones'"
-                            [icon]="'file-medical'"
-                            [direction]="'row'"
-                            [severity]="'neutral'"
-                        ></app-label>
-                        
-                        <ng-container *ngIf="insight.recomendaciones?.length; else noRecommendations">
-                            <ul class="list__wrapper--flex">
-                                <ng-container *ngFor="let recomendacion of insight.recomendaciones">
+                        <ng-container *ngIf="visibleInsightCount > 0; else emptyState">
+                            <ng-container *ngIf="visibleAlerts.length">
+                                <app-label
+                                    size="xs"
+                                    [label]="'Alertas'"
+                                    [icon]="'triangle-exclamation'"
+                                    [direction]="'row'"
+                                    [severity]="'warning'"
+                                ></app-label>
+
+                                <div class="list__wrapper--flex">
+                                    <ng-container *ngFor="let alerta of visibleAlerts; let i = index">
                                         <app-card 
                                             direction="row" 
                                             variant="fill" 
-                                            severity="success" 
+                                            severity="warning" 
                                             size="md"
                                             [selectable]="false"
                                             [closable]="true"
+                                            (close)="dismissAlert(i)"
                                         >
                                             <app-label
-                                                [size]="'xs'"
+                                                size="xs"
+                                                [subtitle]="alerta"
+                                                [direction]="'row'"
+                                                [severity]="'warning'"
+                                                [icon]="'exclamation-circle'"
+                                            ></app-label>
+                                        </app-card>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="visibleRecommendations.length">
+                                <app-label
+                                    size="xs"
+                                    [label]="'Recomendaciones'"
+                                    [icon]="'file-medical'"
+                                    [direction]="'row'"
+                                    [severity]="'info'"
+                                ></app-label>
+
+                                <div class="list__wrapper--flex">
+                                    <ng-container *ngFor="let recomendacion of visibleRecommendations; let i = index">
+                                        <app-card 
+                                            direction="row" 
+                                            variant="fill" 
+                                            severity="info" 
+                                            size="md"
+                                            [selectable]="false"
+                                            [closable]="true"
+                                            (close)="dismissRecommendation(i)"
+                                        >
+                                            <app-label
+                                                size="xs"
                                                 [subtitle]="recomendacion"
-                                                [icon]="'file'"
+                                                [icon]="'check-circle'"
                                                 [severity]="'info'"
                                                 direction="row"
                                             ></app-label>
                                         </app-card>
-                                </ng-container>
-                            </ul>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
                         </ng-container>
-                        <ng-template #noRecommendations>
-                            <app-card 
-                                direction="column" 
-                                variant="fill" 
-                                severity="info" 
-                                size="sm"
-                                [selectable]="false"
-                            >
-                                <app-label
-                                    size="xs"
-                                    [label]="'Sin recomendaciones disponibles'"
-                                    [severity]="'info'"
-                                    [direction]="'column'"
-                                    [icon]="'file'"
-                                ></app-label>
-                            </app-card>
-                        </ng-template>
 
-                        <!-- Alerts Section -->
-                        <app-label
-                            size="xs"
-                            [label]="'Alertas'"
-                            [icon]="'triangle-exclamation'"
-                            [direction]="'row'"
-                            [severity]="'neutral'"
-                        ></app-label>
-
-                        <ng-container *ngIf="insight.alertas?.length; else noAlerts">
-                            <ul class="list__wrapper--flex">
-                                <ng-container *ngFor="let alerta of insight.alertas">
-                                    <app-card 
-                                        direction="row" 
-                                        variant="fill" 
-                                        severity="warning" 
-                                        size="md"
-                                        [selectable]="false"
-                                        [closable]="true"
-                                    >
-                                        <app-label
-                                            size="xs"
-                                            [subtitle]="alerta"
-                                            [direction]="'row'"
-                                            [severity]="'warning'"
-                                            [icon]="'exclamation-circle'"
-                                        ></app-label>
-                                    </app-card>
-                                </ng-container>
-                            </ul>
-                        </ng-container>
-                        <ng-template #noAlerts>
+                        <ng-template #emptyState>
                             <app-card 
                                 direction="column" 
                                 variant="fill" 
                                 severity="neutral" 
                                 size="md"
-                                icon="info"
+                                [selectable]="false"
                             >
                                 <app-label
                                     size="xs"
-                                    [label]="'Sin alertas disponibles'"
-                                    [severity]="'warning'"
+                                    [label]="'Estás al día por ahora.'"
+                                    [subtitle]="'No hay nuevas alertas o recomendaciones en este momento.'"
+                                    [severity]="'neutral'"
                                     [direction]="'column'"
+                                    [icon]="'circle-check'"
                                 ></app-label>
                             </app-card>
                         </ng-template>
@@ -132,7 +120,12 @@
             </app-card>
         </ng-template>
     </app-dropdown>
-            <span class="notification__count" [class.notification__count--active]="hasNewInsight">{{ hasNewInsight ? 1 : 0 }}</span>
+            <span 
+                *ngIf="visibleInsightCount > 0" 
+                class="notification__count notification__count--active"
+            >
+                {{ visibleInsightCount }}
+            </span>
         </div>
     </div>
     }
@@ -177,7 +170,7 @@
                     [size]="'xs'"
                     [label]="data.titulo"
                     [prefix]="data.categoria"
-                    [subtitle]="isMobile ? '' : data.descripcion"
+                    [subtitle]="data.descripcion"
                     [icon]="getIconForCategoria(data.categoria)"
                     [severity]="'custom'"
                     [color]="getColorForCategoria(data.categoria)"

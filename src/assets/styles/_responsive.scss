@@ -132,6 +132,7 @@
 
     .dropdown-container {
         position: relative;
+        justify-self: end;
         
         .dropdown-menu {
             width: 320px!important;

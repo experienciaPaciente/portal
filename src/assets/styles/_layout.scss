@@ -70,6 +70,7 @@
 
           .notification__wrapper {
             position: relative;
+            width: min-content;
 
             .notification__count {
               position: absolute;
