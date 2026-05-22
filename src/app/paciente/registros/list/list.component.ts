@@ -111,8 +111,8 @@ export class ListComponent implements OnInit {
     ]
   }
   
-  dropdownPosition = { top: '35px', left: '-170px' };
-  splitButtonPosition = { top: '45px', left: '-160px' };
+  dropdownPosition = { top: '45px', right: '0px' };
+  splitButtonPosition = { top: '45px', right: '0px' };
 
   categoriaItems = Object.keys(this.categoriaMap).map(key => {
     return {

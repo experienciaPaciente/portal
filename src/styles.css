@@ -1592,6 +1592,11 @@ app-label .label__icon {
 app-label .label__icon.icon__border--none {
   border: none;
 }
+app-label .label__icon .label__icon--svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 app-label .label.column .label__icon {
   --label__icon--align: center;
 }
@@ -1625,7 +1630,7 @@ app-label .label__subtitle {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   overflow: hidden;
 }

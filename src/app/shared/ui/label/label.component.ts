@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-label',
@@ -22,7 +23,7 @@ export class LabelComponent implements OnChanges{
 
   @ViewChild('labelColor', { static: true }) labelColor!: ElementRef;
 
-  constructor() {}
+  constructor(private sanitizer: DomSanitizer) {}
   
   ngOnChanges(changes: SimpleChanges) {
     if (changes['severity'], ['color']) {
@@ -30,10 +31,20 @@ export class LabelComponent implements OnChanges{
     }
   }
 
+  // Check if icon is an SVG file path
+  isSvgIcon(): boolean {
+    return this.icon ? this.icon.endsWith('.svg') : false;
+  }
+
+  // Get safe URL for SVG icon
+  getSvgUrl(): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.icon || '');
+  }
+
   // Reveer color icono
   private updateIconColor() {
     if (typeof this.severity === 'string') {
-      if (['primary', 'secondary', 'tertiary', 'neutral'].includes(this.severity)) {
+      if (['primary', 'secondary', 'tertiary', 'neutral', 'warning', 'danger', 'info'].includes(this.severity)) {
         this.labelColor.nativeElement.style.setProperty('--label__icon--color', `var(--${this.severity})`);
       } else {
         this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.color);

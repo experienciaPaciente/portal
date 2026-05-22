@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { LabelComponent } from '../label/label.component';
+import { CardComponent } from '../card/card.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,16 +10,20 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule, 
-    ButtonComponent
+    ButtonComponent,
+    LabelComponent,
+    CardComponent
   ],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss'
 })
 export class DropdownComponent {
-  @Input() items: { label: string, icon?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void }[] = [];
-  @Input() position?: { top: string, left: string };
+  @Input() items: { label: string, icon?: string, subtitle?: string, subItems?: any[], path?: string, disabled: boolean, callback?: () => void }[] = [];
+  @Input() position?: { top: string; left?: string; right?: string };
   @Input() buttonLabel?: string;
   @Input() buttonIcon?: string;
+  @Input() buttonImg?: string;
+  @Input() customContent = false;
   // Split button
   @Input() buttonVariant: 'fill' | 'outline' | 'link' = 'link';
   @Input() buttonSeverity: 'success' | 'danger' | 'warning' | 'neutral' | 'info' | 'primary' | 'secondary' | 'tertiary' = 'info';

@@ -6,43 +6,63 @@
         [direction]="buttonDirection"
         (click)="toggle($event)"
         [icon]="buttonIcon"
+        [img]="buttonImg"
         [label]="buttonLabel"
     ></app-button>
     <div
       class="dropdown-menu"
-      [ngStyle]="{ top: position?.top, left: position?.left }"
+      [ngStyle]="{ top: position?.top || '45px', left: position?.left, right: position?.right ?? '0' }"
       *ngIf="isOpen"
     >
       <div
         class="dropdown-content"
         [ngClass]="{'nested': hasNestedItems}"
       >
-        <ng-container *ngFor="let item of items">
-          <ng-container *ngIf="!item.subItems; else nestedItems">
-              <app-button
-              [variant]="'link'"
-              [direction]="'row'"
-              [size]="'xxs'"
-              [icon]="item.icon"
-              [label]="item.label"
-              [path]="item.path"
-              [disabled]="item.disabled"
-              (clickEvent)="item.callback ? item.callback() : null"
-            ></app-button>
-          </ng-container>
-          <ng-template #nestedItems>
-            <app-button
-              [variant]="'link'"
-              [direction]="'row'"
-              [size]="'xxs'"
-              [icon]="item.icon"
-              [label]="item.label"
-              [path]="item.path"
-              [disabled]="item.disabled"
-              (clickEvent)="item.callback ? item.callback() : null"
-            ></app-button>
-          </ng-template>
+        <ng-container *ngIf="customContent; else defaultItems">
+          <ng-content></ng-content>
         </ng-container>
+        <ng-template #defaultItems>
+          <ng-container *ngFor="let item of items">
+            <ng-container *ngIf="!item.subItems; else nestedItems">
+              <ng-container *ngIf="item.subtitle; else buttonItem">
+                <app-label
+                  [icon]="item.icon"
+                  [label]="item.label"
+                  [subtitle]="item.subtitle"
+                  [direction]="'row'"
+                  [size]="'xs'"
+                  [severity]="'neutral'"
+                  [color]="'var(--neutral)'"
+                  (click)="item.callback ? item.callback() : null"
+                ></app-label>
+              </ng-container>
+              <ng-template #buttonItem>
+                <app-button
+                  [variant]="'link'"
+                  [direction]="'row'"
+                  [size]="'xxs'"
+                  [icon]="item.icon"
+                  [label]="item.label"
+                  [path]="item.path"
+                  [disabled]="item.disabled"
+                  (clickEvent)="item.callback ? item.callback() : null"
+                ></app-button>
+              </ng-template>
+            </ng-container>
+            <ng-template #nestedItems>
+              <app-button
+                [variant]="'link'"
+                [direction]="'row'"
+                [size]="'xxs'"
+                [icon]="item.icon"
+                [label]="item.label"
+                [path]="item.path"
+                [disabled]="item.disabled"
+                (clickEvent)="item.callback ? item.callback() : null"
+              ></app-button>
+            </ng-template>
+          </ng-container>
+        </ng-template>
       </div>
     </div>
   </div>

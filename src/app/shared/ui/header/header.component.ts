@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     ]
   }
 
-  dropdownPosition = { top: '45px', left: '-165px' };
+  dropdownPosition = { top: '45px', right: '0px' };
 
   // Listen for window resize events
   @HostListener('window:resize', ['$event'])

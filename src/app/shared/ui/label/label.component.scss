@@ -79,9 +79,9 @@ app-label {
         --label__subtitle--size: 20px;
         --label__icon--size: 64px;
       }
-  
+
       &__icon { 
-        @extend %baseFlex;     
+        @extend %baseFlex;
         padding: .5rem;
         border: solid 2px var(--label__icon--color);
         border-radius: 50%;
@@ -92,6 +92,12 @@ app-label {
   
         &.icon__border--none {
           border: none;
+        }
+
+        .label__icon--svg {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
       }
   
@@ -135,7 +141,7 @@ app-label {
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
+        -webkit-line-clamp: 2;
         text-overflow: ellipsis;
         overflow: hidden;
       }

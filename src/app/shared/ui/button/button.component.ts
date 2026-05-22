@@ -45,6 +45,14 @@ export class ButtonComponent{
     }
   }
 
+  get iconSource(): string | undefined {
+    return this.icon?.toLowerCase().endsWith('.svg') ? undefined : this.icon;
+  }
+
+  get imgSource(): string | undefined {
+    return this.icon?.toLowerCase().endsWith('.svg') ? this.icon : this.img;
+  }
+
   setButtonClass(): string {
     return `button__size--${this.size} button__${this.variant}--${this.severity}`;
   }

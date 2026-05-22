@@ -8,7 +8,11 @@
     } @else {
       @if (icon) {
         <div class="label__icon" [ngClass]="label ? '' : 'icon__border--none'">
-          <i class="fa-solid fa-{{ icon }}" [attr.aria-label]="iconLabel"></i>
+          @if (isSvgIcon()) {
+            <img class="label__icon--svg" [src]="getSvgUrl()" [attr.alt]="iconLabel || 'icon'" />
+          } @else {
+            <i class="fa-solid fa-{{ icon }}" [attr.aria-label]="iconLabel"></i>
+          }
         </div>
       }
     }
