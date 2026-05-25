@@ -24,19 +24,21 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        height: min-content;
         position: relative;
         top: 0;
         right: 0;
         z-index: 1;
         box-sizing: border-box;
-        padding: .5rem 0;
+        padding: 12px 0 0 0;
         // background: white;
         // box-shadow: 0 1px 0 0 var(--shadow);
       }
 
       .panel__header--col {
+        --panel__gap--row: 16px;
         display: flex;
-        flex-direction: column;
+        flex-flow: row wrap;
         align-items: flex-start;
         gap: var(--panel__gap--row);
         justify-content: space-between;
@@ -48,7 +50,7 @@
         height: var(--panel__height);
         width: 100vw;
         box-sizing: border-box;
-        padding: var(--panel__padding);
+        padding: 12px var(--panel__padding);
         background-color: white;
         overflow-y: auto;
         box-shadow: var(--box-shadow);
@@ -67,6 +69,33 @@
           flex-direction: column;
           row-gap: var(--wrapper__gap--row);
           justify-content: space-between;
+          z-index: 3;
+          padding-bottom: 12px;
+
+          .notification__wrapper {
+            position: relative;
+            width: min-content;
+            display: flex;
+            align-items: center;
+
+            .notification__count {
+              position: absolute;
+              top: 4px;
+              right:-4px;
+              text-align: center;
+              font-size: 10px;
+              font-weight: 900;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 16px;
+              height: 16px;
+              background-color: var(--tertiary);
+              border-radius: 50%;
+              padding: 2px;
+              color: white;
+            }
+          }
 
         }
       }
@@ -106,9 +135,10 @@
           flex-wrap: wrap;
           width: 100%;
           // height: calc(100dvh - var(--header__height) - var(--footer__height));
-          padding: 0 var(--panel__padding);
+          padding: 16px var(--panel__padding);
           box-sizing: border-box;
-          row-gap: var(--wrapper__gap--row);
+          row-gap: var(--wrapper__gap);
+          column-gap: var(--wrapper__gap);
           overflow-y: scroll;
           
           .panel__inner--main {
@@ -204,6 +234,14 @@
           }
         }
       }
+    }
+
+    .btn__wrapper--right {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
     }
  
   // Desacoplar en componente

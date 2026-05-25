@@ -1,18 +1,23 @@
 @media screen and (min-width: 768px) {
     
     .page__panel--sidebar {
-        --panel__padding: 24px;
+        --panel__padding: 0 24px;
         --wrapper__gap--row: 24px;
         max-width: 420px;
         padding: var(--panel__padding);
     }
 
     .page__body {
+        aside.page__panel--sidebar {
+          padding: var(--panel__padding)!important;
+        }
         .page__panel--main {
 
             .panel__main {
                 --footer__height: fit-content!important;
-                column-gap: 140px;
+                column-gap: 140px!important;
+                padding: 0 var(--panel__padding)!important;
+
                 // padding: var(--page__main--padding)!important;
 
                 article.panel__text--article {
@@ -53,7 +58,7 @@
             right: 0;
             z-index: 1;
             box-sizing: border-box;
-            padding: 1rem 0;
+            padding: 24px 0;
             background: white;
             box-shadow: 0 1px 0 0 var(--shadow);
         }
@@ -127,6 +132,15 @@
 
         footer.panel__footer {
             padding: 1rem 0 0 0;
+        }
+    }
+
+    .dropdown-container {
+        position: relative;
+        justify-self: end;
+        
+        .dropdown-menu {
+            width: 374px!important;
         }
     }
 }

@@ -18,10 +18,10 @@
   --box-shadow: 2px 0 4px var(--shadow);
 
   // Semantics
-  --info: #6CBCFC;
+  --info: #56a3e1;
   --info--light: #EFF7FF;
   --warning: #ff9a00;
-  --warning--light: #FCEBD0;
+  --warning--light: #fef0da;
   --success: var(--primary); // #23D3BD;
   --success--light: var(--primaryLight); // #c9f5ef;
   --success--dark: var(--primaryDarker); // #18b09f;
@@ -82,7 +82,7 @@
   --header__height: 72px;
   --header__bg--color: rgba(255, 255, 255, 0.5);
   --header__padding--vertical: 0.5rem;
-  --header__padding--row: 2rem;
+  --header__padding--row: 16px;
   --header__item-padding--vertical: 0;
   --header__item-padding--row: 16px;
   --header__gap--row: 12px; // Unificar los gaps
@@ -113,7 +113,7 @@
   --card__bg--color: transparent;
   --card__img--size: 100%;
   --card__text--align: center;
-  --card__gap: 24px;
+  --card__gap: 8px;
   --card__wrapper--justify: center;
   --card__wrapper--align: center;
   --card__padding: 16px;
@@ -204,7 +204,7 @@
   
   // Wrapper | Group
   --wrapper__gap: 16px;
-  --wrapper__gap--row: 16px;
+  --wrapper__gap--row: 12px;
   --wrapper__gap--col: 8px;
 
   // Divider 
