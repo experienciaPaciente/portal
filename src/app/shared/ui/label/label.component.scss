@@ -112,8 +112,9 @@ app-label {
         flex-direction: column;
         flex: 1;
         overflow: hidden;
-        line-height: 1.5;
+        line-height: 1.65;
         width: var(--label__width);
+        // gap: 6px;
       }
     
       &__prefix {
@@ -175,8 +176,8 @@ app-label {
       "xs": 14px,
       "sm": 16px,
       "md": 20px,
-      "lg": 30px,
-      "xl": 40px,
+      "lg": 26px,
+      "xl": 36px,
   );  
   
   @each $size in $sizes {
@@ -184,3 +185,30 @@ app-label {
           font-size: map-get($fontSizes, $size);
       }
   }
+
+
+  .modal__wrapper {
+    app-label {
+      .label {
+  &__title {
+        -webkit-line-clamp: unset!important;
+        text-overflow: auto!important;
+        overflow: auto!important;   
+        text-wrap: wrap!important;
+      }
+    
+      &__subtitle {
+        -webkit-line-clamp: unset!important;
+        text-overflow: auto!important;
+        overflow: auto!important;   
+        text-wrap: wrap!important;
+      }
+    }
+  }
+
+  button {
+    .label__content {
+        gap: 0px!important;
+    }
+  }
+}

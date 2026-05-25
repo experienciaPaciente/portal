@@ -9,7 +9,7 @@
             [severity]="'custom'"
             [color]="getColorForCategoria(registro.categoria)"
             direction="row">
-            <app-badge [severity]="registro.validado ? 'success' : 'info'" label="{{ registro.validado ? 'validado' : 'auto-registro' }}" size="xs"></app-badge>
+            <app-badge [severity]="registro.validado ? 'success' : 'info'" label="{{ registro.validado ? 'validado' : 'Auto-registro' }}" size="xs"></app-badge>
             <app-dropdown
                 [items]="getMenuItems(registro)"
                 [position]="dropdownPosition"
@@ -45,7 +45,6 @@
             [subtitle]="displayFileName"
             icon="info-circle"
             [img]="selectedFile"
-            [closeable]="true"
             (closeModal)="isModalOpen = false"
         >
             <app-button direction="none" size="sm" label="Cerrar" variant="fill" severity="success" (click)="isModalOpen = false"></app-button>
@@ -146,10 +145,9 @@
     @if (modalDelete) {
         <app-modal
             [prefix]="registro.categoria"
-            [title]="'¿Desea eliminar el registro' + '' + registro.titulo + '?'"
+            [title]="'¿Desea eliminar el registro' + ' ' + registro.titulo + '?'"
             [subtitle]="'Esta acción es irreversible, perderá la información actual del registro.'"
             icon="trash-can"
-            [closeable]="true"
             (closeModal)="modalDelete = false"
             [size]="isMobile ? 'sm' : 'md'"
         >

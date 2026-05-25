@@ -33,6 +33,7 @@
       display: flex;
       flex-direction: column;
       row-gap: var(--wrapper__gap);
+      height: min-content;
 
       .modal__img--wrapper {
   

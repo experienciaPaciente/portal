@@ -104,10 +104,10 @@
                                 severity="neutral" 
                                 size="md"
                                 [selectable]="false"
-                            >
+                                >
                                 <app-label
                                     size="xs"
-                                    [label]="'Estás al día por ahora.'"
+                                    [label]="'Estás al día'"
                                     [subtitle]="'No hay nuevas alertas o recomendaciones en este momento.'"
                                     [severity]="'neutral'"
                                     [direction]="'column'"
@@ -124,7 +124,7 @@
                 size="md"
             >
                 <app-label
-                    size="xs"
+                    [size]="isMobile? 'xxs' : 'xs'"
                     [label]="'No hay análisis disponible'"
                     [severity]="'neutral'"
                     [direction]="'column'"
@@ -163,10 +163,9 @@
      @if (medCategories) {
          <app-navbar [items]="categoriaItems" (categorySelected)="onCategorySelected($event)"></app-navbar>
      }
-    <hr>
 </section>
 <ng-container *ngIf="registros$ | async as records">
-    <ul class="list__wrapper--center" *ngIf="!records.length">
+    <div class="list__wrapper--center" *ngIf="!records.length">
         <app-label
             [size]="isMobile ? 'xs' : 'sm'"
             [icon]="'pen-to-square'"
@@ -174,8 +173,9 @@
             [label]="'Comienza a escribir tu historia de salud'"
             subtitle="Aquí se listarán los datos de salud que registres manualmente o a través del QR facilitado por quién haya gestionado tu registro de salud."
             [direction]="'column'"
+            [color]="'var(--neutral)'"
         ></app-label>
-    </ul>
+    </div>
     <ul class="list__wrapper--{{ type }}">
         <li *ngFor="let data of (filteredRegistros$ | async); trackBy: trackByFn" (click)="onItemSelected(data)">
             <app-card direction="row" [selectable]="true" [selected]="selectedItemId === data.id" [variant]="'fill'" severity="custom" [color]="getColorForCategoria(data.categoria)" (cardSelected)="onCardSelected(data)">
@@ -197,10 +197,10 @@
                     </app-badge>
                     
                     @if (data.lugar) {
-                    <app-badge severity="info" [label]="data.validado ? data.lugar : 'auto-registro'" size="xs"></app-badge>
+                    <app-badge severity="info" [label]="data.validado ? data.lugar : 'Auto-registro'" size="xs"></app-badge>
                     }
                                         
-                    <app-button variant="icon" icon="trash-can" size="xs" severity="neutral" (click)="openModal($event, data)"></app-button>
+                    <!-- <app-button variant="icon" icon="trash-can" size="xs" severity="neutral" (click)="openModal($event, data)"></app-button>    -->
                     <app-dropdown
                         [items]="getMenuItems(data)"
                         [position]="dropdownPosition"

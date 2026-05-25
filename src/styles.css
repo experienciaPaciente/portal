@@ -25,7 +25,7 @@
   --shadow: rgba(140, 140, 140, 0.5);
   --gradient: linear-gradient(to top right, var(--primaryDarker), var(--primary), var(--primaryLighter));
   --box-shadow: 2px 0 4px var(--shadow);
-  --info: #6CBCFC;
+  --info: #4aa0e6;
   --info--light: #EFF7FF;
   --warning: #ff9a00;
   --warning--light: #FCEBD0;

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "",
+    apiKey: "AIzaSyBpsJfN6s6cNBJhbOeI-uZMu_-3gM7Z8zc",
     authDomain: "experienciapaciente-2024.firebaseapp.com",
     databaseURL: "https://experienciapaciente-2024-default-rtdb.firebaseio.com",
     projectId: "experienciapaciente-2024",

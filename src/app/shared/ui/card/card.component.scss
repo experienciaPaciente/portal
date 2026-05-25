@@ -57,7 +57,8 @@ app-card {
       &.card--selectable {
         &:hover {
           background-color: var(--card__bg--color);
-          border: solid 2px var(--card__border--color);
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;
           cursor: pointer;
         }
       }
@@ -75,7 +76,8 @@ app-card {
           }
           
           &:focus {
-            border: solid 2px var(--card__border--color);     
+            outline: solid 2px var(--card__border--color);
+            outline-offset: -2px;     
           }
         }
       }
@@ -89,7 +91,8 @@ app-card {
           }
           
           &:focus {
-            border: solid 2px var(--card__border--color);     
+            outline: solid 2px var(--card__border--color);
+            outline-offset: -2px;     
           }
         }
       }
@@ -103,7 +106,8 @@ app-card {
           }
           
           &:focus {
-            border: solid 2px var(--card__border--color);     
+            outline: solid 2px var(--card__border--color);
+            outline-offset: -2px;     
           }
         }
       }
@@ -119,7 +123,8 @@ app-card {
           }
           
           &:focus {
-            border: solid 2px var(--card__border--color);     
+            outline: solid 2px var(--card__border--color);
+            outline-offset: -2px;     
           }
         }
       }
@@ -133,7 +138,8 @@ app-card {
           }
           
           &:focus {
-            border: solid 2px var(--card__border--color);     
+            outline: solid 2px var(--card__border--color);
+            outline-offset: -2px;     
           }
         }
       }
@@ -149,7 +155,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -165,7 +172,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -181,7 +189,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -191,7 +200,8 @@ app-card {
       
       &--primary {
       --card__border--color: var(--card__text--color);
-      border: solid 2px var(--card__border--color);
+      outline: solid 2px var(--card__border--color);
+      outline-offset: -2px;
       &.card--selectable {
         &:hover {
           --card__bg--color: var(--primaryLighter);
@@ -199,7 +209,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -213,7 +224,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -227,7 +239,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -241,7 +254,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -255,7 +269,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -276,7 +291,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -292,7 +308,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -308,7 +325,8 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
@@ -324,14 +342,16 @@ app-card {
         }
         
         &:focus {
-          border: solid 2px var(--card__border--color);     
+          outline: solid 2px var(--card__border--color);
+          outline-offset: -2px;     
         }
       }
     }
   }
     
   &.card--selected {
-    border: solid 2px var(--card__border--color);     
+    outline: solid 2px var(--card__border--color);
+    outline-offset: -2px;     
     background-color: var(--card__bg--color);
   }
 

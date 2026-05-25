@@ -29,7 +29,7 @@
         right: 0;
         z-index: 1;
         box-sizing: border-box;
-        padding: .5rem 0;
+        padding: 12px 0 0 0;
         // background: white;
         // box-shadow: 0 1px 0 0 var(--shadow);
       }
@@ -48,7 +48,7 @@
         height: var(--panel__height);
         width: 100vw;
         box-sizing: border-box;
-        padding: var(--panel__padding);
+        padding: 12px var(--panel__padding);
         background-color: white;
         overflow-y: auto;
         box-shadow: var(--box-shadow);
@@ -67,15 +67,19 @@
           flex-direction: column;
           row-gap: var(--wrapper__gap--row);
           justify-content: space-between;
+          z-index: 3;
+          padding-bottom: 12px;
 
           .notification__wrapper {
             position: relative;
             width: min-content;
+            display: flex;
+            align-items: center;
 
             .notification__count {
               position: absolute;
-              top: -4px;
-              right: -4px;
+              top: 4px;
+              right:-4px;
               text-align: center;
               font-size: 10px;
               font-weight: 900;

@@ -163,7 +163,11 @@ export class ListComponent implements OnInit {
                 map(registros => registros.sort((a, b) => {
                   const dateA = new Date(a.fecha);
                   const dateB = new Date(b.fecha);
-                  return dateB.getTime() - dateA.getTime();
+                  const dateDiff = dateB.getTime() - dateA.getTime();
+                  if (dateDiff !== 0) return dateDiff;
+                  const tsA = a.hora ? new Date(a.hora).getTime() : 0;
+                  const tsB = b.hora ? new Date(b.hora).getTime() : 0;
+                  return tsB - tsA;
                 })),
                 startWith([])
               );
@@ -184,7 +188,9 @@ export class ListComponent implements OnInit {
             .sort((a, b) => {
               const dateA = new Date(a.fecha);
               const dateB = new Date(b.fecha);
-              return dateB.getTime() - dateA.getTime();
+              const dateDiff = dateB.getTime() - dateA.getTime();
+              if (dateDiff !== 0) return dateDiff;
+              return (b.hora ?? '').localeCompare(a.hora ?? '');
             })
           )
         );
@@ -241,11 +247,14 @@ export class ListComponent implements OnInit {
           registro.titulo.toLowerCase().includes(term) &&
           (category === '' || registro.categoria === category)
         )
-        // Cambiar ordenamiento alfabético por cronológico
         .sort((a, b) => {
           const dateA = new Date(a.fecha);
           const dateB = new Date(b.fecha);
-          return dateB.getTime() - dateA.getTime();
+          const dateDiff = dateB.getTime() - dateA.getTime();
+          if (dateDiff !== 0) return dateDiff;
+          const tsA = a.hora ? new Date(a.hora).getTime() : 0;
+          const tsB = b.hora ? new Date(b.hora).getTime() : 0;
+          return tsB - tsA;
         })
       )
     );
@@ -259,7 +268,7 @@ export class ListComponent implements OnInit {
     
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - dateObj.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     
     if (diffDays === 0) return 'Hoy';
     if (diffDays === 1) return 'Ayer';
@@ -326,8 +335,8 @@ export class ListComponent implements OnInit {
       this.visibleAlerts = [];
       this.visibleRecommendations = [];
     } else {
-      this.visibleAlerts = (insight.alertas || []).slice(0, 3);
-      this.visibleRecommendations = (insight.recomendaciones || []).slice(0, 3);
+      this.visibleAlerts = (insight.alertas || []).slice(0, 1);
+      this.visibleRecommendations = (insight.recomendaciones || []).slice(0, 2);
     }
 
     this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
