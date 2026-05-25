@@ -16,7 +16,29 @@ app-card {
     height: var(--card__height);
     z-index: 3;
   }
-  
+
+  // ── Mixins ───────────────────────────────────────────────────────────────
+  @mixin selectable($bg-hover, $border-color: var(--card__border--color)) {
+    &.card--selectable {
+      &:hover {
+        --card__bg--color: #{$bg-hover};
+        background-color: var(--card__bg--color);
+      }
+      &:focus {
+        outline: solid 2px $border-color;
+        outline-offset: -2px;
+      }
+    }
+  }
+
+  @mixin severity-card($color-token, $light-token, $dark-token) {
+    --card__border--color: var(#{$color-token});
+    --card__bg--color: var(#{$light-token});
+    background-color: var(--card__bg--color);
+    @include selectable(var(#{$dark-token}), var(#{$color-token}));
+  }
+
+  // ── Card ─────────────────────────────────────────────────────────────────
   .card {
     @extend %baseCard;
 
@@ -26,11 +48,7 @@ app-card {
       --card__text--align: left;
 
       .card__inner-wrapper {
-
-        &--left {
-          width: 180px;
-        }
-
+        &--left { width: 180px; }
         &--right {
           display: flex;
           flex-direction: row;
@@ -46,314 +64,90 @@ app-card {
       --card__direction: column;
     }
 
-    &--center {
-      justify-self: center;
-    }
+    &--center { justify-self: center; }
 
-    // Custom    
+    // Custom
     &.card__fill--custom, &.card__outline--custom, &.card__fab--custom {
       --card__bg--color: var(--card__bg--color);
       --card__border--color: var(--card__border--color);
-      &.card--selectable {
-        &:hover {
-          background-color: var(--card__bg--color);
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;
-          cursor: pointer;
-        }
+      &.card--selectable:hover {
+        background-color: var(--card__bg--color);
+        outline: solid 2px var(--card__border--color);
+        outline-offset: -2px;
+        cursor: pointer;
       }
     }
 
-    // Variant
+    // Fill
     &.card__fill {
-      
       &--primary {
-      --card__border--color: var(--primary);
-        &.card--selectable {
-          &:hover {
-            --card__bg--color: var(--primaryLight);
-            background-color: var(--card__bg--color);
-          }
-          
-          &:focus {
-            outline: solid 2px var(--card__border--color);
-            outline-offset: -2px;     
-          }
-        }
+        --card__border--color: var(--primary);
+        @include selectable(var(--primaryLight));
       }
-      
       &--secondary {
-      --card__border--color: var(--secondary);
-        &.card--selectable {
-          &:hover {
-            --card__bg--color: var(--secondaryLight);
-            background-color: var(--card__bg--color);
-          }
-          
-          &:focus {
-            outline: solid 2px var(--card__border--color);
-            outline-offset: -2px;     
-          }
-        }
+        --card__border--color: var(--secondary);
+        @include selectable(var(--secondaryLight));
       }
-      
       &--tertiary {
-      --card__border--color: var(--tertiary);
-        &.card--selectable {
-          &:hover {
-            --card__bg--color: var(--tertiaryLight);
-            background-color: var(--card__bg--color);
-          }
-          
-          &:focus {
-            outline: solid 2px var(--card__border--color);
-            outline-offset: -2px;     
-          }
-        }
+        --card__border--color: var(--tertiary);
+        @include selectable(var(--tertiaryLight));
       }
-    
-      &--info {
-      --card__border--color: var(--info);
-      --card__bg--color: var(--info--light);
-      background-color: var(--card__bg--color);
-        &.card--selectable {
-          &:hover {
-            --card__bg--color: var(--info--light);
-            background-color: var(--card__bg--color);
-          }
-          
-          &:focus {
-            outline: solid 2px var(--card__border--color);
-            outline-offset: -2px;     
-          }
-        }
-      }
-      
-      &--neutral {
-      --card__border--color: var(--neutral);
-        &.card--selectable {
-          &:hover {
-            --card__bg--color: var(--neutral--light);
-            background-color: var(--card__bg--color);
-          }
-          
-          &:focus {
-            outline: solid 2px var(--card__border--color);
-            outline-offset: -2px;     
-          }
-        }
-      }
-      // Severities
-      &--success {
-        --card__border--color: var(--success);
-        --card__bg--color: var(--success--light);
-        background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--success--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-
-      &--warning {
-        --card__border--color: var(--warning);
-        --card__bg--color: var(--warning--light);
-        background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--warning--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-
-      &--danger {
-        --card__border--color: var(--danger);
-        --card__bg--color: var(--danger--light);
-        background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--danger--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-  }
-  
-    &.card__outline {
-      
-      &--primary {
-      --card__border--color: var(--card__text--color);
-      outline: solid 2px var(--card__border--color);
-      outline-offset: -2px;
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--primaryLighter);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-    
-    &--secondary {
-      --card__border--color: var(--secondary);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--secondaryLighter);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-      
-    &--tertiary {
-      --card__border--color: var(--tertiary);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--tertiaryLighter);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-
-    &--info {
-      --card__border--color: var(--info);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--info--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-      
-    &--neutral {
-      --card__border--color: var(--neutral);
-      &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--neutral--light);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-  }
-
-  &.card__fab {
-    animation: fade-in 1.5s ease-in;
-    
-    // Severities
-      &--success {
-        --card__border--color: var(--success);
-        --card__bg--color: var(--success--light);
-        background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--success--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-
-      &--warning {
-        --card__border--color: var(--warning);
-        --card__bg--color: var(--warning--light);
-        background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--warning--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-
-      &--danger {
-        --card__border--color: var(--danger);
-        --card__bg--color: var(--danger--light);
-        background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--danger--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
-      }
-    }
-
       &--info {
         --card__border--color: var(--info);
         --card__bg--color: var(--info--light);
         background-color: var(--card__bg--color);
-        &.card--selectable {
-        &:hover {
-          --card__bg--color: var(--info--dark);
-          background-color: var(--card__bg--color);
-        }
-        
-        &:focus {
-          outline: solid 2px var(--card__border--color);
-          outline-offset: -2px;     
-        }
+        @include selectable(var(--info--light));
+      }
+      &--neutral {
+        --card__border--color: var(--neutral);
+        @include selectable(var(--neutral--light));
+      }
+      &--success  { @include severity-card(--success, --success--light, --success--dark); }
+      &--warning  { @include severity-card(--warning, --warning--light, --warning--dark); }
+      &--danger   { @include severity-card(--danger,  --danger--light,  --danger--dark);  }
+    }
+
+    // Outline
+    &.card__outline {
+      &--primary {
+        --card__border--color: var(--card__text--color);
+        outline: solid 2px var(--card__border--color);
+        outline-offset: -2px;
+        @include selectable(var(--primaryLighter));
+      }
+      &--secondary {
+        --card__border--color: var(--secondary);
+        @include selectable(var(--secondaryLighter));
+      }
+      &--tertiary {
+        --card__border--color: var(--tertiary);
+        @include selectable(var(--tertiaryLighter));
+      }
+      &--info {
+        --card__border--color: var(--info);
+        @include selectable(var(--info--light));
+      }
+      &--neutral {
+        --card__border--color: var(--neutral);
+        @include selectable(var(--neutral--light));
       }
     }
-  }
-    
-  &.card--selected {
-    outline: solid 2px var(--card__border--color);
-    outline-offset: -2px;     
-    background-color: var(--card__bg--color);
-  }
+
+    // FAB
+    &.card__fab {
+      animation: fade-in 1.5s ease-in;
+      &--success  { @include severity-card(--success, --success--light, --success--dark); }
+      &--warning  { @include severity-card(--warning, --warning--light, --warning--dark); }
+      &--danger   { @include severity-card(--danger,  --danger--light,  --danger--dark);  }
+      &--info     { @include severity-card(--info,    --info--light,    --info--dark);     }
+    }
+
+    // Selected
+    &.card--selected {
+      outline: solid 2px var(--card__border--color);
+      outline-offset: -2px;
+      background-color: var(--card__bg--color);
+    }
 
     // Sizes
     &--xs {
@@ -364,38 +158,19 @@ app-card {
       width: var(--card__width);
       height: var(--card__height);
     }
-
-    &--sm {
-      --card__padding: 6px 14px;
-    }
-
+    &--sm  { --card__padding: 6px 14px; }
     &--md {
       --card__padding: 6px 12px;
       --card__width: 100%;
       --card__height: 100%;
-
       width: var(--card__width);
       height: var(--card__height);
-
-      .label__content {
-        row-gap: 4px;
-      }
+      .label__content { row-gap: 4px; }
     }
+    &--lg  { --card__padding: 10px 18px; }
+    &--xl  { --card__padding: 12px 24px; }
+    &--block { width: 100%; padding: .5rem 1rem; }
 
-    &--lg {
-      --card__padding: 10px 18px;
-    }
-
-    &--xl {
-      --card__padding: 12px 24px;
-    }
-
-    &--block {
-      width: 100%;
-      padding: .5rem 1rem;
-    }
-
-    // Images
     > img {
       margin-bottom: .75rem;
       object-fit: cover;
