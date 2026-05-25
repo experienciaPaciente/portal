@@ -44,7 +44,7 @@ export class LabelComponent implements OnChanges{
   // Reveer color icono
   private updateIconColor() {
     if (typeof this.severity === 'string') {
-      if (['primary', 'secondary', 'tertiary', 'neutral', 'warning', 'danger', 'info'].includes(this.severity)) {
+      if (['primary', 'secondary', 'tertiary'].includes(this.severity)) {
         this.labelColor.nativeElement.style.setProperty('--label__icon--color', `var(--${this.severity})`);
       } else {
         this.labelColor.nativeElement.style.setProperty('--label__icon--color', this.color);

@@ -78,7 +78,7 @@ export class DetailComponent {
     ]
   }
 
-  dropdownPosition = { top: '35px', left: '-190px' };
+  dropdownPosition = { top: '35px', right: '0px' };
 
   constructor(
     private route: ActivatedRoute,
@@ -231,4 +231,9 @@ export class DetailComponent {
       }
     }
   }
+
+  onCancel(): void {
+    this.modalDelete = false;
+  }
+
 }

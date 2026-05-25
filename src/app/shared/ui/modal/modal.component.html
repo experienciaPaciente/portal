@@ -8,6 +8,8 @@
       [label]="title"
       [subtitle]="subtitle"
       direction="row"
+      [color]="'var(--primary)'"
+      [severity]="'danger'"
       >
       @if (closeable) {
         <app-button icon="close" variant="icon" severity="primary" (click)="close()"></app-button>

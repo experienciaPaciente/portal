@@ -228,6 +228,14 @@
         }
       }
     }
+
+    .btn__wrapper--right {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+    }
  
   // Desacoplar en componente
   footer.panel__footer {

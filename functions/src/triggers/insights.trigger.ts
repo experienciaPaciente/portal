@@ -7,7 +7,7 @@ import {GoogleGenerativeAI} from "@google/generative-ai";
 const db = getFirestore();
 const GEMINI_MODEL = "gemini-2.5-flash";
 const GEMINI_API_KEY = process.env["GEMINI_API_KEY"] ?? "";
-const REGISTROS_POR_INSIGHT = 5;
+const REGISTROS_POR_INSIGHT = 3;
 
 // ── Tipos ────────────────────────────────────────────────────────────────────
 interface RegistroResumen {

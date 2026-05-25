@@ -101,7 +101,13 @@ export class createRegistroComponent implements OnInit{
   ngOnInit() {
     this.checkIfMobile(window.innerWidth);
     this.registroId = this._activatedRoute.snapshot.paramMap.get('id');
-    
+    const fromScan = window.history.state?.fromScan === true;
+
+    if (!fromScan) {
+      this.QrService.clearQRData();
+      this.qrResultString = null;
+    }
+
     if (this.registroId) {
       this.loadRegistroData(this.registroId);
     }
@@ -110,9 +116,11 @@ export class createRegistroComponent implements OnInit{
     this.onCategoryChange();
 
     this.subscription = this.QrService.qrData$.subscribe((data) => {
-        this.qrResultString = data;
-        this.setPacienteValue(data ?? '');
-      });
+      this.qrResultString = data;
+      if (data) {
+        this.setPacienteValue(data);
+      }
+    });
 
     // Date
     const today = new Date();
@@ -225,7 +233,9 @@ export class createRegistroComponent implements OnInit{
   }));
 
   clearResult(): void {
-    this.qrResultString = '';
+    this.qrResultString = null;
+    this.QrService.clearQRData();
+    this.setPacienteValue('');
   }
 
   private _formBuilder = inject(FormBuilder).nonNullable;
@@ -237,7 +247,7 @@ export class createRegistroComponent implements OnInit{
     paciente: this._formBuilder.control(''),
     titulo: this._formBuilder.control('', Validators.required),
     descripcion: this._formBuilder.control(''),
-    categoria: this._formBuilder.control('', Validators.required),
+    categoria: this._formBuilder.control('Control de salud', Validators.required),
     estado: this._formBuilder.control(''),
     validado: this._formBuilder.control(null),
     lugar: this._formBuilder.control(''),

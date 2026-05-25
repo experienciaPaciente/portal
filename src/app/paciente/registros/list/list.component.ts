@@ -346,4 +346,10 @@ export class ListComponent implements OnInit {
       this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
     }
   }
+
+  dismissAllInsights(): void {
+    this.visibleAlerts = [];
+    this.visibleRecommendations = [];
+    this.visibleInsightCount = 0;
+  }
 }

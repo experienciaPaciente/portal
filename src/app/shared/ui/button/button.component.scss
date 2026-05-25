@@ -48,6 +48,10 @@ app-button {
     background: transparent!important;
     border: solid 2px var(--button__bg--color);
     color: var(--label__title--color);
+
+    .label__icon {
+      border: none!important;
+    }
   }
   
   &[class*=__link] {
@@ -124,12 +128,12 @@ app-button {
   &.button__size {
 
     &--xxs {
-      --button__padding: .1rem .2rem;
+      --button__padding: .2rem .4rem;
       --button__font--size: 8px;
     }
 
     &--xs {
-      --button__padding: .2rem .25rem;
+      --button__padding: .3rem .3rem;
       --button__font--size: 10px;
     }
 

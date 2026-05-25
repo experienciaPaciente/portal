@@ -51,7 +51,7 @@ export interface RegistroForm {
 
 export class ScanComponent {
   availableDevices: MediaDeviceInfo[] | undefined;
-  currentDevice: MediaDeviceInfo | any = null;
+  currentDevice: MediaDeviceInfo | undefined;
   formatsEnabled: BarcodeFormat[] = [
     BarcodeFormat.CODE_128,
     BarcodeFormat.DATA_MATRIX,
@@ -64,7 +64,7 @@ export class ScanComponent {
   noPermissions = false;
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
-  tryHarder = false;  
+  tryHarder = false;
   isMobile!: boolean;
   qrRegistro: boolean = true;
   registro?: Registro;
@@ -74,6 +74,18 @@ export class ScanComponent {
     private QrService: QrService
   ) {}
 
+  private selectRearCamera(devices: MediaDeviceInfo[] = []): void {
+    if (!devices.length) {
+      return;
+    }
+
+    const rearCamera = devices.find((device) =>
+      /rear|back|environment/i.test(device.label)
+    );
+
+    this.currentDevice = rearCamera || devices[devices.length - 1];
+  }
+
   
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -81,16 +93,23 @@ export class ScanComponent {
   }
   
   ngOnInit() {
+    this.checkIfMobile(window.innerWidth);
     this.checkCameraPermissions();
   }
 
   checkCameraPermissions() {
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } })
       .then(() => {
         this.noPermissions = false;
       })
       .catch(() => {
-        this.noPermissions = true;
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(() => {
+            this.noPermissions = false;
+          })
+          .catch(() => {
+            this.noPermissions = true;
+          });
       });
   }
 
@@ -105,7 +124,7 @@ export class ScanComponent {
       this.populateFormFromQR(parsedData);
     }, 100);
     
-    this.router.navigate(['/registrar']);
+    this.router.navigate(['/registrar'], { state: { fromScan: true } });
 
     if (!resultString) {
       this.tryHarder = true;
@@ -201,6 +220,10 @@ export class ScanComponent {
   onCamerasFound(devices: MediaDeviceInfo[] | any): void {
     this.availableDevices = devices;
     this.hasDevices = Boolean(devices && devices.length);
+
+    if (devices && devices.length) {
+      this.selectRearCamera(devices);
+    }
   }
 
   onTorchCompatible(isCompatible: boolean ): void {

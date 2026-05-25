@@ -67,6 +67,7 @@ export class CardComponent implements OnChanges, AfterViewInit {
 
   closeCard(event: Event) {
     event.stopPropagation();
+    this.cardColor.nativeElement.remove();
     this.close.emit(event);
   }
 

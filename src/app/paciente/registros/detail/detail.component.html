@@ -148,12 +148,13 @@
             [prefix]="registro.categoria"
             [title]="'¿Desea eliminar el registro' + '' + registro.titulo + '?'"
             [subtitle]="'Esta acción es irreversible, perderá la información actual del registro.'"
-            icon="info-alert"
+            icon="trash-can"
             [closeable]="true"
             (closeModal)="modalDelete = false"
+            [size]="isMobile ? 'sm' : 'md'"
         >
-            <app-button direction="none" size="sm" label="Eliminar" variant="outline" severity="danger" (click)="modalDelete = false"></app-button>
-            <app-button direction="none" size="sm" label="Cancelar" variant="fill" severity="info" (click)="onConfirm()"></app-button>
+            <app-button direction="none" size="sm" label="Cancelar" variant="outline" severity="danger" (click)="onCancel()"></app-button>
+            <app-button direction="none" size="sm" label="Si, eliminar" variant="fill" severity="success" (click)="onConfirm()"></app-button>
         </app-modal>
         }
 </section>

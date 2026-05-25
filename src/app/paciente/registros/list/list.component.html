@@ -20,14 +20,24 @@
                     <ng-container *ngIf="insight$ | async as insight; else noAnalysis">
                         <ng-container *ngIf="visibleInsightCount > 0; else emptyState">
                             <ng-container *ngIf="visibleAlerts.length">
-                                <app-label
-                                    size="xs"
-                                    [label]="'Alertas'"
-                                    [icon]="'triangle-exclamation'"
-                                    [direction]="'row'"
-                                    [severity]="'warning'"
-                                ></app-label>
-
+                                <span class="btn__wrapper--right">
+                                    <app-label
+                                        size="xs"
+                                        [label]="'Alertas'"
+                                        [icon]="'triangle-exclamation'"
+                                        [direction]="'row'"
+                                        [severity]="'warning'"
+                                        [color]="'var(--warning)'"
+                                    ></app-label>
+                                    <app-button 
+                                        direction="none" 
+                                        size="xxs"
+                                        label="Descartar todo"
+                                        variant="outline"
+                                        severity="secondary"
+                                        (clickEvent)="dismissAllInsights()"
+                                    ></app-button>
+                                </span>
                                 <div class="list__wrapper--flex">
                                     <ng-container *ngFor="let alerta of visibleAlerts; let i = index">
                                         <app-card 
@@ -45,12 +55,13 @@
                                                 [direction]="'row'"
                                                 [severity]="'warning'"
                                                 [icon]="'exclamation-circle'"
+                                                [color]="'var(--warning)'"
                                             ></app-label>
                                         </app-card>
                                     </ng-container>
                                 </div>
                             </ng-container>
-
+                            <hr>
                             <ng-container *ngIf="visibleRecommendations.length">
                                 <app-label
                                     size="xs"
@@ -58,6 +69,7 @@
                                     [icon]="'file-medical'"
                                     [direction]="'row'"
                                     [severity]="'info'"
+                                    [color]="'var(--info)'"
                                 ></app-label>
 
                                 <div class="list__wrapper--flex">
@@ -76,6 +88,7 @@
                                                 [subtitle]="recomendacion"
                                                 [icon]="'check-circle'"
                                                 [severity]="'info'"
+                                                [color]="'var(--info)'"
                                                 direction="row"
                                             ></app-label>
                                         </app-card>

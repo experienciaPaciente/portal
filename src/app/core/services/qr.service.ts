@@ -8,7 +8,11 @@ export class QrService {
   private qrDataSubject = new BehaviorSubject<string | null>(null);
   qrData$ = this.qrDataSubject.asObservable();
 
-  setQRData(data: string): void {
+  setQRData(data: string | null): void {
     this.qrDataSubject.next(data);
+  }
+
+  clearQRData(): void {
+    this.qrDataSubject.next(null);
   }
 }
