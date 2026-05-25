@@ -24,6 +24,7 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        height: min-content;
         position: relative;
         top: 0;
         right: 0;
@@ -35,8 +36,9 @@
       }
 
       .panel__header--col {
+        --panel__gap--row: 16px;
         display: flex;
-        flex-direction: column;
+        flex-flow: row wrap;
         align-items: flex-start;
         gap: var(--panel__gap--row);
         justify-content: space-between;
@@ -133,9 +135,10 @@
           flex-wrap: wrap;
           width: 100%;
           // height: calc(100dvh - var(--header__height) - var(--footer__height));
-          padding: 0 var(--panel__padding);
+          padding: 16px var(--panel__padding);
           box-sizing: border-box;
-          row-gap: var(--wrapper__gap--row);
+          row-gap: var(--wrapper__gap);
+          column-gap: var(--wrapper__gap);
           overflow-y: scroll;
           
           .panel__inner--main {

@@ -15,7 +15,9 @@
 
             .panel__main {
                 --footer__height: fit-content!important;
-                column-gap: 140px;
+                column-gap: 140px!important;
+                padding: 0 var(--panel__padding)!important;
+
                 // padding: var(--page__main--padding)!important;
 
                 article.panel__text--article {
@@ -138,7 +140,7 @@
         justify-self: end;
         
         .dropdown-menu {
-            width: 320px!important;
+            width: 374px!important;
         }
     }
 }
