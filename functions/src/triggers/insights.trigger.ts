@@ -66,10 +66,10 @@ export const onRegistroCompletado = onDocumentUpdated(
     const after = event.data?.after.data();
 
     // Solo actuar cuando cambia a 'completed'
-    if (before?.['aiEstado'] === after?.['aiEstado']) return;
-    if (after?.['aiEstado'] !== "completed") return;
+    if (before?.["aiEstado"] === after?.["aiEstado"]) return;
+    if (after?.["aiEstado"] !== "completed") return;
 
-    const userId = after?.['userId'] as string;
+    const userId = after?.["userId"] as string;
     if (!userId) return;
 
     // Contar registros completados del usuario
@@ -80,12 +80,19 @@ export const onRegistroCompletado = onDocumentUpdated(
       .get();
 
     const total = snapshot.size;
-    console.log(`[insights.trigger] Usuario ${userId} tiene ${total} registros completados`);
-
+    console.log(
+      `[insights.trigger] Usuario ${userId} tiene` +
+      ` ${total} registros completados`
+    );
     if (total % REGISTROS_POR_INSIGHT !== 0) return;
 
-    console.log(`[insights.trigger] Disparando análisis longitudinal para ${userId}`);
-    await generarInsight(userId, snapshot.docs.map((d) => d.data() as RegistroResumen));
+    console.log(
+      `[insights.trigger] Disparando análisis longitudinal para ${userId}`
+    );
+    await generarInsight(
+      userId,
+      snapshot.docs.map((d) => d.data() as RegistroResumen)
+    );
   }
 );
 
@@ -116,6 +123,11 @@ export const solicitarInsight = onCall(
 );
 
 // ── Lógica compartida ─────────────────────────────────────────────────────────
+/**
+ * Genera un insight longitudinal para un usuario dado sus registros.
+ * @param {string} userId - ID del usuario.
+ * @param {RegistroResumen[]} registros - Registros a analizar.
+ */
 async function generarInsight(
   userId: string,
   registros: RegistroResumen[]

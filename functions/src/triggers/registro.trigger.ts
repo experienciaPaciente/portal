@@ -1,6 +1,6 @@
-import { onDocumentCreated } from "firebase-functions/v2/firestore";
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
-import { getApps, initializeApp } from "firebase-admin/app";
+import {onDocumentCreated} from "firebase-functions/v2/firestore";
+import {getFirestore, FieldValue} from "firebase-admin/firestore";
+import {getApps, initializeApp} from "firebase-admin/app";
 
 if (getApps().length === 0) {
   initializeApp();
@@ -61,12 +61,11 @@ export const onRegistroCreated = onDocumentCreated(
 
       console.log(`[registro.trigger] ${registroId} → processing`);
     } catch (error) {
-      console.error(`[registro.trigger] Error marcando como processing:`, error);
+      console.error("[registro.trigger] Error marcando como processing:", error);
       return;
     }
 
     try {
-      
       await simulateProcesamiento(registroId);
 
       // ── Paso 3: Marcar como 'completed' ─────────────────────────────────
@@ -77,7 +76,6 @@ export const onRegistroCreated = onDocumentCreated(
       });
 
       console.log(`[registro.trigger] ✅ ${registroId} → completed`);
-
     } catch (processingError) {
       console.error(
         `[registro.trigger] ❌ Error procesando ${registroId}:`,
@@ -89,17 +87,20 @@ export const onRegistroCreated = onDocumentCreated(
         aiEstado: "error",
         aiErrorAt: FieldValue.serverTimestamp(),
         aiErrorMessage:
-          processingError instanceof Error
-            ? processingError.message
-            : "Error desconocido",
+          processingError instanceof Error ?
+            processingError.message :
+            "Error desconocido",
       });
     }
   }
 );
 
 /** Simula un proceso asincrónico. Reemplazar con lógica real. */
+/**
+ * @param {string} id - ID del registro a procesar.
+ */
 async function simulateProcesamiento(id: string): Promise<void> {
   console.log(`[registro.trigger] Simulando procesamiento para ${id}...`);
   await new Promise((resolve) => setTimeout(resolve, 500));
-  console.log(`[registro.trigger] Procesamiento simulado completado.`);
+  console.log("[registro.trigger] Procesamiento simulado completado.");
 }
