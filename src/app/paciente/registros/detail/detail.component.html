@@ -63,11 +63,11 @@
                      <img class="panel__qr--aside" [src]="qrCodeUrl" alt="QR Code" alt="">
                  }
                 <app-label
-                    [size]="'sm'"
+                    [size]="isMobile? 'xs' : 'sm'"
                     [prefix]="'Escaneá el código para compartir esta información.'"
-                    [direction]="'row'"
                     [severity]="'neutral'"
-                    [icon]="isMobile ? '' : 'info-circle'"
+                    [direction]="isMobile? 'column' : 'row'"
+                    [icon]="isMobile? '' : 'info-circle'"
                 >
                 </app-label>
             </figure>

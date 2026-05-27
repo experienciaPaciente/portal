@@ -25,6 +25,8 @@ export const onRegistroCreated = onDocumentCreated(
     region: "us-central1",
     timeoutSeconds: 60,
     memory: "256MiB",
+    maxInstances: 3,
+    concurrency: 5,
   },
   async (event) => {
     const snapshot = event.data;

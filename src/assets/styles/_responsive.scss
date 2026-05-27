@@ -24,7 +24,7 @@
                     // padding-left: var(--label__icon--size);
                     font-size: var(--panel__font--size);
                     line-height: var(--panel__line--height);
-                    word-break: break-all;
+                    hyphens: auto;
                   }
 
                 .panel__inner--aside {

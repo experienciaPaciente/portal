@@ -134,7 +134,7 @@
           display: flex;
           flex-wrap: wrap;
           width: 100%;
-          // height: calc(100dvh - var(--header__height) - var(--footer__height));
+          height: calc(100dvh - 56px);
           padding: 16px var(--panel__padding);
           box-sizing: border-box;
           row-gap: var(--wrapper__gap);
@@ -154,7 +154,7 @@
               --panel__line--height: 24px;
               font-size: var(--panel__font--size);
               line-height: var(--panel__line--height);
-              word-break: break-all;
+              hyphens: auto;
             }
             
             .img__wrapper--grid {

@@ -1,7 +1,7 @@
 @if (qrRegistro) {
     <section class="panel__main--center">
             <app-label
-                [size]="isMobile ? 'sm' : 'md'"
+                [size]="isMobile ? 'md' : 'lg'"
                 [prefix]="'Autoregistro'"
                 [label]="'Scan QR'"
                 [subtitle]="isMobile ? 'Scanea el QR para obtener su contenido y autocompletar el formulario.' : ''"
@@ -134,7 +134,7 @@
                 [direction]="'row'"
                 icon="pencil"
                 [label]="'Registro manual'"
-                (clickEvent)="cancel()"
+                (clickEvent)="goToRegistro()"
                 >
             </app-button>
         </footer>

@@ -235,6 +235,10 @@ export class ScanComponent {
     
   }
 
+  goToRegistro(): void {
+  this.router.navigate(['/registrar']);
+  }
+
   cancel() {
     if (this.form) {
       this.form.reset();
