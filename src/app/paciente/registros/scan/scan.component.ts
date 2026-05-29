@@ -94,7 +94,6 @@ export class ScanComponent {
   
   ngOnInit() {
     this.checkIfMobile(window.innerWidth);
-    this.checkCameraPermissions();
   }
 
   checkCameraPermissions() {
@@ -215,13 +214,13 @@ export class ScanComponent {
   
   onHasPermission(has: boolean) {
     this.hasPermission = has;
+    this.noPermissions = !has;
   }
 
-  onCamerasFound(devices: MediaDeviceInfo[] | any): void {
+  onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
     this.hasDevices = Boolean(devices && devices.length);
-
-    if (devices && devices.length) {
+    if (devices?.length) {
       this.selectRearCamera(devices);
     }
   }
