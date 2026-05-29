@@ -330,33 +330,60 @@ export class ListComponent implements OnInit {
     this.itemToDelete = null;
   }
 
+ private readonly DISMISSED_KEY = 'dismissedInsights';
+
+  private getDismissedIds(): string[] {
+    return JSON.parse(localStorage.getItem(this.DISMISSED_KEY) || '[]');
+  }
+
+  private saveItemAsDismissed(item: string): void {
+    const dismissed = this.getDismissedIds();
+    if (!dismissed.includes(item)) {
+      dismissed.push(item);
+      localStorage.setItem(this.DISMISSED_KEY, JSON.stringify(dismissed));
+    }
+  }
+
   private updateVisibleInsightState(insight: Insight | null): void {
     if (!insight) {
       this.visibleAlerts = [];
       this.visibleRecommendations = [];
     } else {
-      this.visibleAlerts = (insight.alertas || []).slice(0, 1);
-      this.visibleRecommendations = (insight.recomendaciones || []).slice(0, 2);
+      const dismissed = this.getDismissedIds();
+      this.visibleAlerts = (insight.alertas || [])
+        .slice(0, 1)
+        .filter(a => !dismissed.includes(a));
+      this.visibleRecommendations = (insight.recomendaciones || [])
+        .slice(0, 2)
+        .filter(r => !dismissed.includes(r));
     }
-
-    this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
+    this.visibleInsightCount = 
+      this.visibleAlerts.length + this.visibleRecommendations.length;
   }
 
   dismissAlert(index: number): void {
-    if (index >= 0 && index < this.visibleAlerts.length) {
+    const item = this.visibleAlerts[index];
+    if (item) {
+      this.saveItemAsDismissed(item);
       this.visibleAlerts.splice(index, 1);
-      this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
+      this.visibleInsightCount = 
+        this.visibleAlerts.length + this.visibleRecommendations.length;
     }
   }
 
   dismissRecommendation(index: number): void {
-    if (index >= 0 && index < this.visibleRecommendations.length) {
+    const item = this.visibleRecommendations[index];
+    if (item) {
+      this.saveItemAsDismissed(item);
       this.visibleRecommendations.splice(index, 1);
-      this.visibleInsightCount = this.visibleAlerts.length + this.visibleRecommendations.length;
+      this.visibleInsightCount = 
+        this.visibleAlerts.length + this.visibleRecommendations.length;
     }
   }
 
   dismissAllInsights(): void {
+    [...this.visibleAlerts, ...this.visibleRecommendations]
+      .forEach(item => this.saveItemAsDismissed(item));
     this.visibleAlerts = [];
     this.visibleRecommendations = [];
     this.visibleInsightCount = 0;

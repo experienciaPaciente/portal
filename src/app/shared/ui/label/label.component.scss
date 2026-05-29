@@ -132,7 +132,6 @@ app-label {
         -webkit-line-clamp: 1;
         text-overflow: ellipsis;
         overflow: hidden;
-        // text-wrap: nowrap;
       }
     
       &__subtitle {
@@ -186,8 +185,8 @@ app-label {
       }
   }
 
-
-  .modal__wrapper,nav > app-card, .panel__header--row {
+// Exepciones
+  .modal__wrapper,nav > app-card, .panel__header--row, article.panel__inner--left {
     app-label {
       .label {
       &__title {

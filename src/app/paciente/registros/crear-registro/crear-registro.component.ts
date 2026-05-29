@@ -64,7 +64,7 @@ export class createRegistroComponent implements OnInit{
   qrResultString: string | null = null;
   qrRegister!: boolean;
   private subscription: Subscription = new Subscription();
-  validado = true;
+  validado = false;
   registroId: string | null = null;
   registro?: Registro;
   hasChange: boolean = false;
@@ -92,6 +92,10 @@ export class createRegistroComponent implements OnInit{
 // Notificaciones
   triggerSuccess() {
     this.notificationService.addNotification('Registro creado con éxito!', 'success');
+  }
+  
+  triggerSuccessUpdate() {
+    this.notificationService.addNotification('Registro actualizado con éxito!', 'success');
   }
 
   triggerError() {
@@ -156,9 +160,20 @@ export class createRegistroComponent implements OnInit{
     return this.form.controls['titulo'].value;
   }
 
-  validateRecord() {
-    this.validado = !this.validado;
-    this.form.controls['validado'].setValue(this.validado);
+  validateRecord(value: boolean) {
+    this.validado = value;
+    this.form.controls['validado'].setValue(value);
+
+    if (value) {
+      this.form.controls['validador'].setValidators(Validators.required);
+      this.form.controls['lugar'].setValidators(Validators.required);
+    } else {
+      this.form.controls['validador'].clearValidators();
+      this.form.controls['lugar'].clearValidators();
+    }
+
+    this.form.controls['validador'].updateValueAndValidity();
+    this.form.controls['lugar'].updateValueAndValidity();
   }
 
   onCategoryChange() {
@@ -249,7 +264,7 @@ export class createRegistroComponent implements OnInit{
     descripcion: this._formBuilder.control(''),
     categoria: this._formBuilder.control('Control de salud', Validators.required),
     estado: this._formBuilder.control(''),
-    validado: this._formBuilder.control(null),
+    validado: this._formBuilder.control(false),
     lugar: this._formBuilder.control(''),
     validador: this._formBuilder.control(''),
     fecha: this._formBuilder.control<Date>(new Date, Validators.required),
@@ -278,6 +293,8 @@ export class createRegistroComponent implements OnInit{
     try {
       const registro = await this._registrosService.getRegistro(id);
       if (registro) {
+        this.validado = registro.validado ?? false;
+
         this.form.patchValue({
           paciente: registro.paciente,
           titulo: registro.titulo,
@@ -311,25 +328,28 @@ export class createRegistroComponent implements OnInit{
   
   async createRegistro() {
     const user = await this.auth.currentUser;
-  
+
     if (this.form.invalid) return;
-  
+
     try {
       const registro = this.form.value as Registro;
-  
+
       registro.adjuntos = registro.adjuntos.filter((url) => this.isValidUrl(url));
-  
+
       if (user) {
         registro.userId = user.uid;
       }
-  
+
       if (!this.registroId) {
         await this._registrosService.createRegistro(registro);
+        this._router.navigate(['/']);
+        this.triggerSuccess();
       } else {
         await this._registrosService.updateRegistro(this.registroId, registro);
+        this._router.navigate(['/item', this.registroId]);
+        this.triggerSuccessUpdate();
       }
-      this._router.navigate(['/']);
-      this.triggerSuccess();
+
     } catch (error) {
       this.triggerError();
     }

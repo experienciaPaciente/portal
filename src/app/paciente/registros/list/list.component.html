@@ -199,8 +199,7 @@
                     @if (data.lugar) {
                     <app-badge severity="info" [label]="data.validado ? data.lugar : 'Auto-registro'" size="xs"></app-badge>
                     }
-                                        
-                    <!-- <app-button variant="icon" icon="trash-can" size="xs" severity="neutral" (click)="openModal($event, data)"></app-button>    -->
+                    
                     <app-dropdown
                         [items]="getMenuItems(data)"
                         [position]="dropdownPosition"

@@ -14,28 +14,6 @@
           subtitle="Aquí comienza tu historia de Salud"
           [direction]="isMobile ? 'column' : 'row'"
         ></app-label>
-          <!-- Notificación -->
-          @if (isMobile) {
-            <app-card
-            size="lg"
-            direction="row"
-            [variant]="'fill'"
-            bottom="20px"
-            [severity]="'warning'"
-            [closable]="true"
-            [selectable]="false"
-          >
-          <app-label
-            size="xxs"
-            label="Versión de prueba"
-            subtitle="Evitá almacenar datos sensibles."
-            [icon]="'triangle-exclamation'"
-            variant="outline"
-            direction="row"
-            severity="warning"
-          ></app-label>
-        </app-card>
-          }
         <div type="wrap">
           <div class="form__input-wrapper--col flex--block">
             <app-required [label]="'Email'" [control]="'email'"></app-required>
@@ -157,28 +135,6 @@
           }
         </div>
         </section>
-        @if (!isMobile) {
-        <app-card
-            size="block"
-            direction="row"
-            [variant]="'fill'"
-            bottom="20px"
-            [severity]="'warning'"
-            [closable]="true"
-            [selectable]="false"
-          >
-          <app-label
-            size="xxs"
-            label="Versión de prueba"
-            subtitle="Evitá almacenar datos sensibles. Aún puede haber errores."
-            [icon]="'triangle-exclamation'"
-            variant="outline"
-            direction="row"
-            severity="warning"
-            [color]="'var(--warning)'"
-          ></app-label>
-        </app-card>
-        }
         <!-- disclaimer -->
         <section class="panel__prefooter">
           <small class="footer__text--sm">

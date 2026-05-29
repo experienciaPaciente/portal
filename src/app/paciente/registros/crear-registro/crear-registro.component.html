@@ -126,7 +126,7 @@
             [onLabel]="'Validado por equipo de Salud'"
             offLabel="No validado por equipo de Salud"
             labelPosition="right"
-            (toggle)="validateRecord()"
+            (toggle)="validateRecord($event)"
         ></app-switcher>
           @if (validado) {
             <div class="form__input-wrapper--col">
@@ -180,17 +180,16 @@
           ></app-button>
         }
         <app-button
-        [severity]="'success'"
-        type="submit"
-        [variant]="'fill'"
-        [label]="isMobile ? '' : 'Guardar'"
-        [direction]="isMobile ? 'none' : 'row'"
-        [icon]="'registroId' ? 'floppy-disk' : 'file-lines'"
-        [disabled]="form.invalid"
-        size="xs"
-        [path]="'item/' + registroId"
-      >
-      </app-button>
+          [severity]="'success'"
+          type="submit"
+          [variant]="'fill'"
+          [label]="isMobile ? '' : 'Guardar'"
+          [direction]="isMobile ? 'none' : 'row'"
+          [icon]="'registroId' ? 'floppy-disk' : 'file-lines'"
+          [disabled]="form.invalid"
+          size="xs"
+        >
+        </app-button>
       </div>
   </footer>
 </form>
