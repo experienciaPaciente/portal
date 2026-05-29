@@ -21,35 +21,17 @@
 
     .qr__wrapper {
         position: relative;
-        width: 100%;
-        max-width: 220px;
-        height: 160px;
-        max-height: 220px;
+        width: 240px;
+        height: 240px;
         background-color: var(--qr__background);
         overflow: hidden;
         outline: var(--qr__border);
         outline-offset: 8px;
 
-        .qr__line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--qr__line-height);
-            background-color: var(--qr__line-color);
-            animation: qr-scan var(--qr__animation-duration) infinite ease-in-out;
-            box-shadow: 0 0 10px var(--qr__glow-color), 0 0 20px var(--qr__glow-color);
-        }
-        
-        .qr__overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background-color: var(--qr__line-color);
-            mix-blend-mode: multiply;
-            animation: qr-overlay-grow var(--qr__animation-duration) infinite ease-in-out;
+        zxing-scanner {
+            > video {
+                height: 100%!important;  
+            }
         }
     }
     

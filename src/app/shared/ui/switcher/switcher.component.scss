@@ -3,7 +3,7 @@
     --switcher--color-off: var(--color-off, --neutralLight);
     --switcher__height: 36px;
     --switcher__width: 60px;
-
+    --panel__gap--col: 16px;
 
     position: relative;
     width: 100%;
@@ -22,6 +22,7 @@
         width: calc(var(--switcher__width) + 20px);
         height: var(--switcher__height);
         z-index: 1;
+        width: var(--switcher__width);
 
         & + .slider {
             position: absolute;

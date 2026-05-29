@@ -20,17 +20,12 @@
                         [tryHarder]="tryHarder" 
                         (permissionResponse)="onHasPermission($event)"
                         (camerasFound)="onCamerasFound($event)" 
-                        (torchCompatible)="onTorchCompatible($event)">
+                        (torchCompatible)="onTorchCompatible($event)"
+                        style="width: 320px; height: 320px; display: block;">
                     </zxing-scanner>
                     <div class="qr__overlay"></div>
                     <div class="qr__line"></div>
                 </span>
-                
-                @if (qrResultString) {
-                    <app-badge severity="success" label="Scaneo exitoso" size="xs"></app-badge>
-                } @else {
-                    <app-badge severity="warning" label="No se pudo leer el código" size="xs"></app-badge>
-                }
             }
 
         @if (!isMobile && noPermissions) {
